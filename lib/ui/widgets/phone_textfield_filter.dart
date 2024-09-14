@@ -19,14 +19,14 @@ class PhoneTextfieldFilter extends StatelessWidget {
     return TextField(
       style: TextStyle(
         color: Colors.black,
-        fontWeight: FontWeight.w500,
-        fontSize: screenHeight * 0.019,
+        fontWeight: FontWeight.w400,
+        fontSize: screenHeight * 17 / 852,
       ),
       controller: controller,
       inputFormatters: [phoneMaskFormatter],
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(left: screenWidth * 0.05),
+        contentPadding: EdgeInsets.only(left: screenWidth * 0.06),
         prefixIcon: Container(
           width: 60,
           alignment: Alignment.center,
@@ -34,8 +34,8 @@ class PhoneTextfieldFilter extends StatelessWidget {
             '+998',
             style: TextStyle(
               color: Colors.black,
-              fontWeight: FontWeight.w500,
-              fontSize: screenHeight * 0.019,
+              fontWeight: FontWeight.w400,
+              fontSize: screenHeight * 17 / 852,
             ),
           ),
         ),
@@ -43,7 +43,7 @@ class PhoneTextfieldFilter extends StatelessWidget {
         fillColor: Colors.white,
         hintText: '(00) 000-00-00',
         hintStyle:
-            TextStyle(color: Colors.grey, fontSize: screenHeight * 0.019),
+            TextStyle(color: Colors.grey, fontSize: screenHeight * 18 / 852),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(15),

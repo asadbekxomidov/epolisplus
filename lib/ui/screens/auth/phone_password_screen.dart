@@ -143,6 +143,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: screenHeight * 0.02),
               ],
             ),
           ),

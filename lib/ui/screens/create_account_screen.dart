@@ -58,7 +58,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   icon: Icon(
                     Icons.arrow_circle_left_outlined,
                     color: Color(0xFF00A070),
-                    size: screenHeight * 0.028,
+                    size: screenHeight * 24 / 852,
                   ),
                   onPressed: () {
                     Navigator.pop(context);
@@ -66,7 +66,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   label: Text(
                     AppStrings.back,
                     style: TextStyle(
-                      fontSize: screenHeight * 0.018,
+                      fontSize: screenHeight * 16 / 852,
                       color: Color(0xFF00A070),
                       fontWeight: FontWeight.w400,
                     ),
@@ -221,21 +221,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       ),
                     ),
                     onPressed: () {
-                      // final fullName = fullNameController.text;
-                      // final phone = phoneController.text;
-                      // final password = passwordController.text;
-                      // final confirmPassword = confirmPasswordController.text;
-
-                      // if (password == confirmPassword) {
-                      //   BlocProvider.of<AuthBloc>(context).add(
-                      //     RegisterEvent(fullName, phone, password),
-                      //   );
-                      // } else {
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     SnackBar(content: Text("Passwords do not match")),
-                      //   );
-                      // }
-
                       Navigator.pushNamed(context, '/verification');
                     },
                     child: Text(

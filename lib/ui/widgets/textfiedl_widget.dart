@@ -38,7 +38,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             hintText: widget.hintText,
             filled: true,
             fillColor: Colors.white,
-            contentPadding: EdgeInsets.only(left: widget.screenWidth * 0.05),
+            contentPadding: EdgeInsets.only(left: widget.screenWidth * 0.03),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(15),
@@ -63,8 +63,8 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           ),
           style: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.w500,
-            fontSize: widget.screenHeight * 0.019,
+            fontWeight: FontWeight.w400,
+            fontSize: widget.screenHeight * 16 / 852,
           ),
         ),
       ],

@@ -29,7 +29,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
           }
         },
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.022),
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/image.png'),
@@ -38,18 +38,20 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
           ),
           child: Column(
             children: [
-              SizedBox(height: screenHeight * 0.3),
-              Image.asset('assets/logo.png', height: screenHeight * 0.044),
+              SizedBox(height: screenHeight * 0.16),
+              Image.asset('assets/logo.png', height: screenHeight * 32 / 852),
               SizedBox(height: screenHeight * 0.02),
               Text(
                 AppStrings.loginWelcome,
                 style: TextStyle(
-                    fontSize: screenHeight * 0.03, fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: screenHeight * 24 / 852,
+                    fontWeight: FontWeight.bold),
               ),
               Text(
                 AppStrings.loginEnter,
                 style: TextStyle(
-                    fontSize: screenHeight * 0.017, color: Colors.black),
+                    fontSize: screenHeight * 16 / 852, color: Colors.black),
               ),
               SizedBox(height: screenHeight * 0.02),
               Row(
@@ -57,11 +59,13 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                 children: [
                   Text(
                     AppStrings.phoneNumberHint,
-                    style: TextStyle(color: Colors.grey.shade600),
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: screenHeight * 14 / 852,
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: screenHeight * 0.01),
               PhoneTextfieldFilter(controller: phoneController),
               SizedBox(height: screenHeight * 0.02),
               SizedBox(
@@ -86,11 +90,11 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                     children: [
                       Text(
                         AppStrings.loginButton,
-                        style: TextStyle(fontSize: screenHeight * 0.018),
+                        style: TextStyle(fontSize: screenHeight * 16 / 852),
                       ),
-                      SizedBox(width: screenWidth * 0.01),
+                      SizedBox(width: screenWidth * 0.02),
                       Icon(Icons.arrow_forward_outlined,
-                          size: screenHeight * 0.022),
+                          size: screenHeight * 20 / 852),
                     ],
                   ),
                 ),
