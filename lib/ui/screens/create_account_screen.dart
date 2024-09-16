@@ -28,12 +28,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
+          if (state is AuthSuccessState) {
             Navigator.pushNamed(context, '/verification');
-          } else if (state is AuthFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage)),
-            );
+          } else if (state is AuthFailureState) {
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(content: Text(state.errorMessage)),
+            // );
           }
         },
         child: Container(
@@ -50,7 +50,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: screenHeight * 0.04),
+                SizedBox(height: screenHeight * 0.06),
                 TextButton.icon(
                   style: IconButton.styleFrom(
                     highlightColor: Colors.transparent,

@@ -21,9 +21,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is PhoneNumberValidated) {
+          if (state is PhoneNumberValidatedState) {
             Navigator.pushNamed(context, '/phone-reset-password');
-          } else if (state is AuthFailure) {
+          } else if (state is AuthFailureState) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errorMessage)),
             );
@@ -40,7 +40,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: screenHeight * 0.04),
+              SizedBox(height: screenHeight * 0.07),
               TextButton.icon(
                   style:
                       IconButton.styleFrom(highlightColor: Colors.transparent),
@@ -60,7 +60,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       fontWeight: FontWeight.w400,
                     ),
                   )),
-              SizedBox(height: screenHeight * 0.025),
+              SizedBox(height: screenHeight * 0.01),
               Text(
                 AppStrings.resetPassword,
                 style: TextStyle(

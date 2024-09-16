@@ -30,4 +30,5 @@ class AppStrings {
   static const String phoneNumberCode =
       "Введите свой номер телефона, мы отправим код подтверждения";
   static const String minimumCharacters = "Минимум 8 символов";
+  static const String yourphonenumbernewpassword = "Введите код отправленный на Ваш номер телефона и введите новый пароль";
 }

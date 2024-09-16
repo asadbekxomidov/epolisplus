@@ -19,13 +19,13 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is PhoneNumberValidated) {
+          if (state is PhoneNumberValidatedState) {
             Navigator.pushNamed(context, '/login',
                 arguments: phoneController.text);
-          } else if (state is AuthFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage)),
-            );
+          } else if (state is AuthFailureState) {
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //   SnackBar(content: Text(state.errorMessage)),
+            // );
           }
         },
         child: Container(

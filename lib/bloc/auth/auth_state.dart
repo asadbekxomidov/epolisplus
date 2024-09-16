@@ -5,30 +5,30 @@ abstract class AuthState extends Equatable {
   List<Object?> get props => [];
 }
 
-class PhoneNumberValidated extends AuthState {
+class PhoneNumberValidatedState extends AuthState {
   final String phoneNumber;
 
-  PhoneNumberValidated(this.phoneNumber);
+  PhoneNumberValidatedState(this.phoneNumber);
 
   @override
   List<Object?> get props => [phoneNumber];
 }
 
-class AuthSuccess extends AuthState {
+class AuthSuccessState extends AuthState {
   final String message;
 
-  AuthSuccess(this.message);
+  AuthSuccessState(this.message);
 
   @override
   List<Object> get props => [message];
 }
 
-class AuthLoading extends AuthState {}
+class AuthLoadingState extends AuthState {}
 
-class AuthFailure extends AuthState {
+class AuthFailureState extends AuthState {
   final String errorMessage;
 
-  AuthFailure(this.errorMessage);
+  AuthFailureState(this.errorMessage);
 
   @override
   List<Object?> get props => [errorMessage];

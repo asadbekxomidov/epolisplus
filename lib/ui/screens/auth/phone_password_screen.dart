@@ -25,10 +25,10 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
       body: SingleChildScrollView(
         child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
-            if (state is PhoneNumberValidated) {
+            if (state is PhoneNumberValidatedState) {
               Navigator.pushNamed(context, '/home',
                   arguments: state.phoneNumber);
-            } else if (state is AuthFailure) {
+            } else if (state is AuthFailureState) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text('password invalid')),
               );
@@ -45,7 +45,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: screenHeight * 0.04),
+                SizedBox(height: screenHeight * 0.06),
                 TextButton.icon(
                     style: IconButton.styleFrom(
                         highlightColor: Colors.transparent),
@@ -64,16 +64,16 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     )),
                 SizedBox(height: screenHeight * 0.025),
                 Text(
-                  AppStrings.resetPassword,
+                  AppStrings.verification,
                   style: TextStyle(
                       fontSize: screenHeight * 0.036,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: screenHeight * 0.013),
                 Text(
-                  AppStrings.phoneNumberCode,
+                  AppStrings.yourphonenumbernewpassword,
                   style: TextStyle(
-                      fontSize: screenHeight * 0.018, color: Colors.black),
+                      fontSize: screenHeight * 0.02, color: Colors.black),
                 ),
                 SizedBox(height: screenHeight * 0.03),
                 Text(
@@ -113,12 +113,13 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                   screenWidth: screenWidth,
                 ),
                 SizedBox(height: screenHeight * 0.02),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.12,
-                      vertical: screenWidth * 0.01),
-                  child: PhonecodeTextfieldWidget(),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.symmetric(
+                //       horizontal: screenWidth * 0.12,
+                //       vertical: screenWidth * 0.01),
+                //   child: PhonecodeTextfieldWidget(),
+                // ),
+                PhonecodeTextfieldWidget(),
                 SizedBox(height: screenHeight * 0.016),
                 SizedBox(
                   width: double.infinity,
