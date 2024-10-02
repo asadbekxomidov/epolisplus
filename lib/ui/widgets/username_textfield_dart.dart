@@ -7,7 +7,7 @@ class UsernameTextfieldDart extends StatelessWidget {
   final double screenWidth;
   final TextInputType keyboardType;
 
-  UsernameTextfieldDart({ 
+  UsernameTextfieldDart({
     required this.controller,
     required this.hintText,
     required this.screenHeight,
