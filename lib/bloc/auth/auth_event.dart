@@ -31,7 +31,3 @@ class RegisterEvent extends AuthEvent {
   @override
   List<Object> get props => [fullName, phone, password];
 }
-
-class NavigateToCreateAccountEvent extends AuthEvent {}
-
-class NavigateToLoginEvent extends AuthEvent {}
