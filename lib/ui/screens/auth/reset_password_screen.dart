@@ -1,6 +1,7 @@
 import 'package:epolisplus/bloc/auth/auth_bloc.dart';
 import 'package:epolisplus/ui/widgets/phone_textfield_filter.dart';
 import 'package:epolisplus/utils/app_colors.dart';
+import 'package:epolisplus/utils/app_image.dart';
 import 'package:epolisplus/utils/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +35,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.022),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/image.png'),
+              image: AssetImage(AppImage.appmainImage),
               fit: BoxFit.cover,
             ),
           ),

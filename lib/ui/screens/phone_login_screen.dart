@@ -1,4 +1,5 @@
 import 'package:epolisplus/ui/widgets/phone_textfield_filter.dart';
+import 'package:epolisplus/utils/app_image.dart';
 import 'package:epolisplus/utils/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,14 +33,14 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
           padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.022),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/image.png'),
+              image: AssetImage(AppImage.appmainImage),
               fit: BoxFit.cover,
             ),
           ),
           child: Column(
             children: [
               SizedBox(height: screenHeight * 0.16),
-              Image.asset('assets/logo.png', height: screenHeight * 32 / 852),
+              Image.asset(AppImage.appImagelogo, height: screenHeight * 32 / 852),
               SizedBox(height: screenHeight * 0.02),
               Text(
                 AppStrings.loginWelcome,
