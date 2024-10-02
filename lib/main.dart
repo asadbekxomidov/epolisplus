@@ -1,13 +1,7 @@
-import 'package:epolisplus/ui/screens/auth/phone_password_screen.dart';
-import 'package:epolisplus/ui/screens/home/home_screen.dart';
+import 'package:epolisplus/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:epolisplus/bloc/auth/auth_bloc.dart';
-import 'package:epolisplus/ui/screens/auth/login_screen.dart';
-import 'package:epolisplus/ui/screens/phone_login_screen.dart';
-import 'package:epolisplus/ui/screens/auth/reset_password_screen.dart';
-import 'package:epolisplus/ui/screens/create_account_screen.dart';
-import 'package:epolisplus/ui/screens/verification_screen.dart';
+import 'ui/ui_export.dart';
 
 void main() {
   runApp(const MyApp());
