@@ -1,6 +1,7 @@
 import 'package:epolisplus/ui/widgets/phone_textfield_filter.dart';
 import 'package:epolisplus/ui/widgets/textfiedl_widget.dart';
 import 'package:epolisplus/ui/widgets/username_textfield_dart.dart';
+import 'package:epolisplus/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/bloc/auth/auth_bloc.dart';
@@ -57,7 +58,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                   icon: Icon(
                     Icons.arrow_circle_left_outlined,
-                    color: Color(0xFF00A070),
+                    color: AppColors.mainColor,
                     size: screenHeight * 24 / 852,
                   ),
                   onPressed: () {
@@ -67,7 +68,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     AppStrings.back,
                     style: TextStyle(
                       fontSize: screenHeight * 16 / 852,
-                      color: Color(0xFF00A070),
+                      color: AppColors.mainColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -180,7 +181,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             ? Icons.check_box
                             : Icons.check_box_outline_blank,
                         color:
-                            _isAgreeChecked ? Color(0xFF00A070) : Colors.grey,
+                            _isAgreeChecked ? AppColors.mainColor : Colors.grey,
                       ),
                     ),
                     Column(
@@ -198,7 +199,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           AppStrings.personalData,
                           style: TextStyle(
                             fontSize: screenHeight * 0.019,
-                            color: Color(0xFF00A070),
+                            color: AppColors.mainColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -211,7 +212,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   width: double.infinity,
                   child: FilledButton(
                     style: FilledButton.styleFrom(
-                      backgroundColor: Color(0xFF00A070),
+                      backgroundColor: AppColors.mainColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),

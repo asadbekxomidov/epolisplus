@@ -27,8 +27,53 @@ class HomeScreen extends StatelessWidget {
               ),
             )),
       ),
-      body: Center(
-        child: Text('Home'),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  colors: [
+                    Colors.grey.shade200,
+                    Colors.grey.shade300,
+                    Colors.grey.shade400,
+                    Colors.grey.shade500,
+                  ],
+                )),
+              ),
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  colors: [
+                    Colors.grey.shade200,
+                    Colors.grey.shade300,
+                    Colors.grey.shade400,
+                    Colors.grey.shade500,
+                  ],
+                )),
+              ),
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  colors: [
+                    Colors.grey.shade200,
+                    Colors.grey.shade300,
+                    Colors.grey.shade400,
+                    Colors.grey.shade500,
+                  ],
+                )),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

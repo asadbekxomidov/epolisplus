@@ -1,6 +1,7 @@
 import 'package:epolisplus/bloc/auth/auth_bloc.dart';
 import 'package:epolisplus/ui/widgets/phonecode_textfield_widget.dart';
 import 'package:epolisplus/ui/widgets/textfiedl_widget.dart';
+import 'package:epolisplus/utils/app_colors.dart';
 import 'package:epolisplus/utils/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     style: IconButton.styleFrom(
                         highlightColor: Colors.transparent),
                     icon: Icon(Icons.arrow_circle_left_outlined,
-                        color: Color(0xFF00A070), size: screenHeight * 0.028),
+                        color: AppColors.mainColor, size: screenHeight * 0.028),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -58,7 +59,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                       AppStrings.back,
                       style: TextStyle(
                         fontSize: screenHeight * 0.018,
-                        color: Color(0xFF00A070),
+                        color: AppColors.mainColor,
                         fontWeight: FontWeight.w400,
                       ),
                     )),
@@ -125,7 +126,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                   width: double.infinity,
                   child: FilledButton(
                     style: FilledButton.styleFrom(
-                      backgroundColor: Color(0xFF00A070),
+                      backgroundColor: AppColors.mainColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),
