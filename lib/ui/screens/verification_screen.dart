@@ -1,8 +1,6 @@
 import 'package:epolisplus/bloc/auth/auth_bloc.dart';
-import 'package:epolisplus/ui/widgets/phonecode_textfield_widget.dart';
-import 'package:epolisplus/utils/app_colors.dart';
-import 'package:epolisplus/utils/app_image.dart';
-import 'package:epolisplus/utils/app_text.dart';
+import 'package:epolisplus/ui/ui_export.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
