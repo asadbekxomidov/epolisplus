@@ -10,6 +10,6 @@ class AppColors {
   static Color greenLineColor = Color(0xFF000000);
   static Color greenLightColor = Color(0xFF000000);
 
-  static Color blackColor = Color(0xFF000000);
+  static Color blackColor = Colors.black;
   static Color redColor = Colors.red;
 }
