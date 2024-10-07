@@ -20,15 +20,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
   late Dimens dimens;
   late VerificationBloc verificationBloc;
-    final FocusNode otpFocusNode = FocusNode();
-
 
   @override
   void initState() {
     super.initState();
     startCountdown();
-        otpFocusNode.dispose();
-
   }
 
   @override
@@ -97,7 +93,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 Gap(dimens.height15),
                 Text(
                   AppStrings.verification,
-                  // style: dimens.titleStyle,
                   style: dimens.titleStyle.copyWith(
                     fontSize: dimens.font30,
                   ),
@@ -130,7 +125,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   children: [
                     PhonecodeTextfieldWidget(
                       controller: verificationBloc.otpController,
-                      focusNode: otpFocusNode,
                     ),
                   ],
                 ),

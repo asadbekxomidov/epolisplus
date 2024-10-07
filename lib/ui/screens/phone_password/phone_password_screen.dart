@@ -215,7 +215,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     children: [
                       PhonecodeTextfieldWidget(
                         controller: bloc.otpController,
-                        focusNode: otpFocusNode,
+                        // focusNode: otpFocusNode,
                       ),
                     ],
                   ),
