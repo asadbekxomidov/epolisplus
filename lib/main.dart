@@ -1,7 +1,7 @@
-import 'package:epolisplus/bloc/bloc.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'ui/screens/screns_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'ui/ui_export.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,20 +14,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => PhoneLoginBloc()),
+        BlocProvider(create: (context) => RegisterBloc()),
+        BlocProvider(create: (context) => VerificationBloc()),
+        BlocProvider(create: (context) => ResetPasswordBloc()),
+        BlocProvider(create: (context) => PhonePasswordBloc()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: PhoneLoginScreen(),
-        routes: {
-          '/phonelogin': (context) => PhoneLoginScreen(),
-          '/login': (context) => LoginScreen(),
-          '/create-account': (context) => CreateAccountScreen(),
-          '/verification': (context) => VerificationScreen(),
-          '/reset-password': (context) => ResetPasswordScreen(),
-          '/phone-reset-password': (context) => PhoneRasswordScreen(),
-          '/home': (context) => HomeScreen(),
-        },
       ),
     );
   }

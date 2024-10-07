@@ -5,6 +5,7 @@ class PasswordTextField extends StatefulWidget {
   final String hintText;
   final double screenHeight;
   final double screenWidth;
+  final FocusNode? focusNode;
 
   const PasswordTextField({
     Key? key,
@@ -12,6 +13,7 @@ class PasswordTextField extends StatefulWidget {
     required this.hintText,
     required this.screenHeight,
     required this.screenWidth,
+    this.focusNode,
   }) : super(key: key);
 
   @override

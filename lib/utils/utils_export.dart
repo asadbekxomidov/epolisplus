@@ -1,3 +1,9 @@
 export 'app_colors.dart';
 export 'app_image.dart';
 export 'app_text.dart';
+export 'decorations.dart';
+export 'dialogs.dart';
+export 'dimens.dart';
+export 'errors.dart';
+export 'my_function.dart';
+export 'shapes.dart';

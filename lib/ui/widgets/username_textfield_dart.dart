@@ -22,16 +22,11 @@ class UsernameTextfieldDart extends StatelessWidget {
       keyboardType: keyboardType,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(
-          fontSize: screenHeight * 0.018,
-          fontWeight: FontWeight.w400,
-          color: Colors.grey,
-        ),
         filled: true,
         fillColor: Colors.white,
         contentPadding: EdgeInsets.only(left: screenWidth * 0.04),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderSide: BorderSide(color: const Color.fromARGB(255, 19, 18, 18)),
           borderRadius: BorderRadius.circular(15),
         ),
         focusedBorder: OutlineInputBorder(
@@ -45,8 +40,11 @@ class UsernameTextfieldDart extends StatelessWidget {
       ),
       style: TextStyle(
         color: Colors.black,
-        fontWeight: FontWeight.w500,
-        fontSize: screenHeight * 0.019,
+        fontWeight: FontWeight.w400,
+        fontSize: screenHeight * 16 / 852,
+        // color: Colors.black,
+        // fontWeight: FontWeight.w500,
+        // fontSize: screenHeight * 0.019,
       ),
     );
   }
