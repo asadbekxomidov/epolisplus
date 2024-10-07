@@ -50,7 +50,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               borderRadius: BorderRadius.circular(15),
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.transparent),
+              borderSide: BorderSide(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(15),
             ),
             suffixIcon: IconButton(

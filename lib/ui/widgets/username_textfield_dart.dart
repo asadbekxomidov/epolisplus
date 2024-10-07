@@ -26,7 +26,7 @@ class UsernameTextfieldDart extends StatelessWidget {
         fillColor: Colors.white,
         contentPadding: EdgeInsets.only(left: screenWidth * 0.04),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: const Color.fromARGB(255, 19, 18, 18)),
+          borderSide: BorderSide(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(15),
         ),
         focusedBorder: OutlineInputBorder(
@@ -34,7 +34,7 @@ class UsernameTextfieldDart extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent),
+          borderSide: BorderSide(color: Colors.grey.shade300),
           borderRadius: BorderRadius.circular(15),
         ),
       ),
@@ -42,9 +42,6 @@ class UsernameTextfieldDart extends StatelessWidget {
         color: Colors.black,
         fontWeight: FontWeight.w400,
         fontSize: screenHeight * 16 / 852,
-        // color: Colors.black,
-        // fontWeight: FontWeight.w500,
-        // fontSize: screenHeight * 0.019,
       ),
     );
   }
