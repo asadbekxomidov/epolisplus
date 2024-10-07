@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
@@ -5,21 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../../../utils/masks.dart';
+
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  LoginBloc() : super(LoginSuccessState()) {
+  LoginBloc() : super(SuccessState()) {
     on<CheckLoginEvent>(login);
+    on<SetPhoneNumberEvent>(setData);
   }
 
-  login(
-    CheckLoginEvent event,
-    Emitter<LoginState> emit,
-  ) {
+  login(CheckLoginEvent event,
+      Emitter<LoginState> emit,) {
     var phoneNumber = phoneController.text.toString().trim();
     var password = passwordController.text.toString().trim();
     phoneNumber = clearPhoneMask(phoneNumber);
@@ -40,6 +44,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginErrorState(LoginFailure()));
     }
 
-    emit(LoginSuccessState());
+    emit(SuccessState());
+  }
+
+  FutureOr<void> setData(SetPhoneNumberEvent event, Emitter<LoginState> emit) {
+    phoneController.text = Masked.maskPhone
+        .formatEditUpdate(
+          TextEditingValue(text: ''),
+          TextEditingValue(text: event.number),
+        )
+        .text;
+    emit(SuccessState());
   }
 }

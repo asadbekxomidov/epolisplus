@@ -128,7 +128,6 @@ class PhoneRasswordScreen extends StatefulWidget {
 class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
   late PhonePasswordBloc bloc;
   late Dimens dimens;
-  late MyDecorations myDecorations;
 
   final FocusNode passwordFocusNode = FocusNode();
   final FocusNode confirmPasswordFocusNode = FocusNode();
@@ -144,7 +143,6 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    myDecorations = MyDecorations(context);
     dimens = Dimens(context);
     return Scaffold(
       body: BlocConsumer<PhonePasswordBloc, PhonePasswordState>(
@@ -160,7 +158,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
           bloc = BlocProvider.of<PhonePasswordBloc>(context);
           return Container(
             padding: EdgeInsets.symmetric(horizontal: dimens.width10),
-            decoration: myDecorations.mainDecarations,
+            decoration: mainDecorations(),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,11 +183,10 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     style: dimens.hintStyle,
                   ),
                   Gap(dimens.height6),
-                  PasswordTextField(
+                  PasswordWidget(
                     controller: bloc.passwordController,
                     hintText: AppStrings.passwordHint,
-                    screenHeight: dimens.screenHeight,
-                    screenWidth: dimens.screenWidth,
+
                     focusNode: passwordFocusNode,
                   ),
                   Text(
@@ -202,11 +199,9 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     style: dimens.hintStyle,
                   ),
                   Gap(dimens.height6),
-                  PasswordTextField(
+                  PasswordWidget(
                     controller: bloc.passwordConfirmController,
                     hintText: AppStrings.passwordHint,
-                    screenHeight: dimens.screenHeight,
-                    screenWidth: dimens.screenWidth,
                     focusNode: confirmPasswordFocusNode,
                   ),
                   Gap(dimens.height18),

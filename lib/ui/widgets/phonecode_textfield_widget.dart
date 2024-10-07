@@ -41,14 +41,16 @@ class _PhonecodeTextfieldWidgetState extends State<PhonecodeTextfieldWidget> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         border: Border.all(
-            color: const Color(0xFF00A070).withOpacity(0.6), width: 1),
+          color: const Color(0xFF00A070).withOpacity(0.6),
+          width: 1,
+        ),
         boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF00A070).withOpacity(0.2),
+          /*       BoxShadow(
+            color: const Color(0xFF00A070).withOpacity(0.1),
             blurRadius: 10,
-            offset: const Offset(0, 4),
+            offset: const Offset(0, 1),
             spreadRadius: 1,
-          ),
+          ),*/
         ],
       ),
     );

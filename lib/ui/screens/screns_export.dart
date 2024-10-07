@@ -6,7 +6,6 @@ export 'login/bloc/login_bloc.dart';
 export 'login/login_screen.dart';
 
 // ? phone_login
-export 'phone_login/bloc/phone_login_bloc.dart';
 export 'phone_login/phone_login_screen.dart';
 
 // ? phone_password

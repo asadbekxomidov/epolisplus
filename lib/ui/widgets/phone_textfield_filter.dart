@@ -1,59 +1,73 @@
-import 'package:epolisplus/utils/decorations.dart';
+import 'package:epolisplus/utils/app_colors.dart';
 import 'package:epolisplus/utils/dimens.dart';
+import 'package:epolisplus/utils/masks.dart';
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:gap/gap.dart';
 
-final phoneMaskFormatter = MaskTextInputFormatter(
-  mask: '(00) 000-00-00',
-  filter: {"0": RegExp(r'[0-9]')},
-);
+import '../../utils/app_text.dart';
 
-class PhoneTextfieldFilter extends StatelessWidget {
+class PhoneWidget extends StatelessWidget {
   final TextEditingController controller;
 
-  PhoneTextfieldFilter({Key? key, required this.controller}) : super(key: key);
+  PhoneWidget({Key? key, required this.controller}) : super(key: key);
+  late Dimens dimens;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      style: Dimens(context).myphonetextfieldStyle,
-      // style: TextStyle(
-      //   color: Colors.black,
-      //   fontWeight: FontWeight.w400,
-      //   fontSize: screenHeight * 17 / 852,
-      // ),
-      controller: controller,
-      inputFormatters: [phoneMaskFormatter],
-      keyboardType: TextInputType.phone,
-      decoration: MyDecorations(context).myTextfieldDecorations,
-      // decoration: InputDecoration(
-      //   contentPadding: EdgeInsets.only(left: screenWidth * 0.06),
-      //   prefixIcon: Container(
-      //     width: 60,
-      //     alignment: Alignment.center,
-      //     child: Text(
-      //       '+998',
-      //       style: TextStyle(
-      //         color: Colors.black,
-      //         fontWeight: FontWeight.w400,
-      //         fontSize: screenHeight * 17 / 852,
-      //       ),
-      //     ),
-      //   ),
-      //   filled: true,
-      //   fillColor: Colors.white,
-      //   hintText: '(00) 000-00-00',
-      //   hintStyle:
-      //       TextStyle(color: Colors.grey, fontSize: screenHeight * 18 / 852),
-      //   enabledBorder: OutlineInputBorder(
-      //     borderSide: BorderSide(color: Colors.grey.shade300),
-      //     borderRadius: BorderRadius.circular(15),
-      //   ),
-      //   focusedBorder: OutlineInputBorder(
-      //     borderSide: BorderSide(color: Colors.grey.shade300),
-      //     borderRadius: BorderRadius.circular(15),
-      //   ),
-      // ),
+    dimens = Dimens(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.phoneNumberHint,
+          style: dimens.textStyleSecondary,
+        ),
+        Gap(dimens.paddingVerticalItem2),
+        TextField(
+          style: dimens.myphonetextfieldStyle,
+          controller: controller,
+          inputFormatters: [
+            Masked.maskPhone,
+          ],
+          keyboardType: TextInputType.phone,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(
+              left: dimens.paddingHorizontalItem,
+            ),
+            prefixIcon: Container(
+              width: dimens.width20 * 3,
+              alignment: Alignment.center,
+              child: Text(
+                '+998',
+                style: dimens.textStyleBold,
+              ),
+            ),
+            filled: true,
+            fillColor: Colors.white,
+            hintText: Masked.hintPhoneNumber,
+            hintStyle: dimens.hintStyle.copyWith(
+              fontSize: dimens.font16,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.lineColor,
+              ),
+              borderRadius: BorderRadius.circular(
+                dimens.radius16,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.lineColor,
+                width: dimens.width10 / 10,
+              ),
+              borderRadius: BorderRadius.circular(
+                dimens.radius16,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

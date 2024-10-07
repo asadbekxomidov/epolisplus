@@ -12,7 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: PhoneLoginScreen(),
+    ); /*MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginBloc()),
         BlocProvider(create: (context) => PhoneLoginBloc()),
@@ -21,10 +24,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ResetPasswordBloc()),
         BlocProvider(create: (context) => PhonePasswordBloc()),
       ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: PhoneLoginScreen(),
-      ),
-    );
+      child: ,
+    );*/
   }
 }

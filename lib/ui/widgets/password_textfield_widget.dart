@@ -1,26 +1,23 @@
+import 'package:epolisplus/utils/dimens.dart';
 import 'package:flutter/material.dart';
 
-class PasswordTextField extends StatefulWidget {
+class PasswordWidget extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
-  final double screenHeight;
-  final double screenWidth;
   final FocusNode? focusNode;
 
-  const PasswordTextField({
+  const PasswordWidget({
     Key? key,
     required this.controller,
     required this.hintText,
-    required this.screenHeight,
-    required this.screenWidth,
     this.focusNode,
   }) : super(key: key);
 
   @override
-  _PasswordTextFieldState createState() => _PasswordTextFieldState();
+  _PasswordWidgetState createState() => _PasswordWidgetState();
 }
 
-class _PasswordTextFieldState extends State<PasswordTextField> {
+class _PasswordWidgetState extends State<PasswordWidget> {
   bool _isObscure = true;
 
   void _toggleVisibility() {
@@ -29,8 +26,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     });
   }
 
+  late Dimens dimens;
+
   @override
   Widget build(BuildContext context) {
+    dimens = Dimens(context);
     return Stack(
       children: [
         TextField(
@@ -40,7 +40,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
             hintText: widget.hintText,
             filled: true,
             fillColor: Colors.white,
-            contentPadding: EdgeInsets.only(left: widget.screenWidth * 0.03),
+            contentPadding: EdgeInsets.only(left: dimens.screenWidth * 0.03),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(15),
@@ -66,7 +66,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w400,
-            fontSize: widget.screenHeight * 16 / 852,
+            fontSize: dimens.screenHeight * 16 / 852,
           ),
         ),
       ],

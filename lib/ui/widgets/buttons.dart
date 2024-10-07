@@ -112,7 +112,7 @@ class RegisterPushButton extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: AppColors.mainColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderRadius: BorderRadius.all(Radius.circular(dimens.radius16)),
         ),
         padding: EdgeInsets.symmetric(
           horizontal: dimens.screenWidth * 0.03,

@@ -37,7 +37,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             padding: EdgeInsets.symmetric(horizontal: dimens.width10),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(AppImage.appmainImage),
+                image: AssetImage(AppImage.appMainImage),
                 fit: BoxFit.cover,
               ),
             ),
@@ -75,7 +75,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ],
                 ),
                 Gap(dimens.height5),
-                PhoneTextfieldFilter(
+                PhoneWidget(
                     controller: resetPasswordBloc.otpController),
                 Gap(dimens.height16),
                 SizedBox(
