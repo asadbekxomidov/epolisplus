@@ -10,11 +10,13 @@ class RightIconBtn extends StatelessWidget {
   Function onClick;
   String text;
   IconData? iconData;
+  bool isLoading;
 
   RightIconBtn({
     required this.onClick,
     required this.text,
     this.iconData,
+    this.isLoading = false,
   });
 
   late Dimens dimens;
@@ -44,10 +46,19 @@ class RightIconBtn extends StatelessWidget {
             ),
           ),
           Gap(dimens.paddingHorizontal13),
-          Icon(
-            iconData ?? AppImage.arrow_forward_outlined,
-            size: dimens.height20,
-          ),
+          isLoading
+              ? SizedBox(
+                  height: dimens.height10,
+                  width: dimens.height10,
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                    strokeWidth: dimens.width10 / 5,
+                  ),
+                )
+              : Icon(
+                  iconData ?? AppImage.arrow_forward_outlined,
+                  size: dimens.height20,
+                ),
         ],
       ),
     );

@@ -18,7 +18,10 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
   phonelogin(
     CheckAuthEvent event,
     Emitter<PhoneLoginState> emit,
-  ) {
+  ) async {
+    emit(LoadingState());
+    await Future.delayed(Duration(seconds: 10));
+
     var phoneNumber = phoneController.text.toString().trim();
     phoneNumber = clearPhoneMask(phoneNumber);
 
@@ -27,12 +30,11 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
       emit(ErrorState(InputPhoneFailure()));
       return;
     }
-
+    emit(SuccessState());
     if (phoneNumber == "900000000") {
       Get.to(() => LoginScreen(phoneNumber: phoneNumber));
     } else {
       Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
     }
-    emit(SuccessState());
   }
 }

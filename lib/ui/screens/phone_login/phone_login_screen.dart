@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
+import '../../widgets/progress_bar.dart';
 import 'bloc/phone_login_bloc.dart';
 
 class PhoneLoginScreen extends StatefulWidget {
@@ -22,58 +23,75 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
       resizeToAvoidBottomInset: false,
       body: BlocProvider(
         create: (context) => PhoneLoginBloc(),
-        child: BlocConsumer<PhoneLoginBloc, PhoneLoginState>(
-          listener: (context, state) {
-            if (state is ErrorState) {
-              showErrorMessageSnackBar(
-                context,
-                state.failure.getErrorMessage(context),
-              );
-            }
-          },
-          builder: (context, state) {
-            bloc = BlocProvider.of<PhoneLoginBloc>(context);
-            return Container(
-              padding:
-                  EdgeInsets.symmetric(horizontal: dimens.paddingHorizontal),
-              decoration: mainDecorations(),
-              child: Column(
-                children: [
-                  Gap(dimens.paddingVerticalItem137),
-                  Image.asset(
-                    AppImage.appImageLogo,
-                    height: dimens.height32,
-                  ),
-                  Gap(dimens.paddingVerticalItem44),
-                  Text(
-                    AppStrings.loginWelcome,
-                    style: dimens.titleStyle.copyWith(
-                      fontSize: dimens.font30,
-                    ),
-                  ),
-                  Gap(dimens.paddingVerticalItem7),
-                  Text(
-                    AppStrings.loginEnter,
-                    style: dimens.textStyle,
-                  ),
-                  Gap(dimens.paddingVerticalItem32),
-                  PhoneWidget(
-                    controller: bloc.phoneController,
-                    showStar: false,
-                  ),
-                  Gap(dimens.paddingVerticalItem16),
-                  RightIconBtn(
-                    onClick: () {
-                      bloc.add(CheckAuthEvent());
-                    },
-                    text: AppStrings.loginButton,
-                  ),
-                ],
-              ),
-            );
-          },
+        child: Stack(
+          children: [
+            ui(),
+            loading(),
+          ],
         ),
       ),
+    );
+  }
+
+  ui() {
+    return BlocConsumer<PhoneLoginBloc, PhoneLoginState>(
+      listener: (context, state) {
+        if (state is ErrorState) {
+          showErrorMessageSnackBar(
+            context,
+            state.failure.getErrorMessage(context),
+          );
+        }
+      },
+      builder: (context, state) {
+        bloc = BlocProvider.of<PhoneLoginBloc>(context);
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: dimens.paddingHorizontal),
+          decoration: mainDecorations(),
+          child: Column(
+            children: [
+              Gap(dimens.paddingVerticalItem137),
+              Image.asset(
+                AppImage.appImageLogo,
+                height: dimens.height32,
+              ),
+              Gap(dimens.paddingVerticalItem44),
+              Text(
+                AppStrings.loginWelcome,
+                style: dimens.titleStyle.copyWith(
+                  fontSize: dimens.font30,
+                ),
+              ),
+              Gap(dimens.paddingVerticalItem7),
+              Text(
+                AppStrings.loginEnter,
+                style: dimens.textStyle,
+              ),
+              Gap(dimens.paddingVerticalItem32),
+              PhoneWidget(
+                controller: bloc.phoneController,
+                showStar: true,
+              ),
+              Gap(dimens.paddingVerticalItem16),
+              RightIconBtn(
+                isLoading: state is LoadingState,
+                onClick: () {
+                  bloc.add(CheckAuthEvent());
+                },
+                text: AppStrings.loginButton,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  loading() {
+    return BlocBuilder<PhoneLoginBloc, PhoneLoginState>(
+      builder: (context, state) {
+        return state is LoadingState ? progressBar2(dimens) : Container();
+      },
     );
   }
 }

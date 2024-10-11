@@ -179,6 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Gap(dimens.paddingVerticalItem32),
                         PhoneWidget(
                           controller: bloc.phoneController,
+                          isActive: false,
                         ),
                         Gap(dimens.paddingVerticalItem16),
                         PasswordWidget(

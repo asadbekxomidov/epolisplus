@@ -7,6 +7,7 @@ class AppColors {
   static Color hintColor = Color(0xFFA3A3A3);
   static Color lineColor = Color(0xFFEFEFEF);
   static Color textColorsSecondary = Color(0xFF737373);
+  static Color neActiveColor = Color(0xFFF3F3F3);
 
   static Color greenColor = Color(0xFF000000);
   static Color greenLineColor = Color(0xFF000000);
