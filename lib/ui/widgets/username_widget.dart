@@ -1,46 +1,50 @@
-import 'package:epolisplus/utils/dimens.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
-class PasswordWidget extends StatefulWidget {
+class UserNameWidget extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final FocusNode? focusNode;
+  final double screenHeight;
+  final double screenWidth;
+  final TextInputType keyboardType;
+  final bool showStar;
 
-  const PasswordWidget({
-    Key? key,
+  UserNameWidget({
     required this.controller,
     required this.hintText,
-    this.focusNode,
-  }) : super(key: key);
-
-  @override
-  _PasswordWidgetState createState() => _PasswordWidgetState();
-}
-
-class _PasswordWidgetState extends State<PasswordWidget> {
-  bool _isObscure = true;
-
-  void _toggleVisibility() {
-    setState(() {
-      _isObscure = !_isObscure;
-    });
-  }
+    required this.screenHeight,
+    required this.screenWidth,
+    this.keyboardType = TextInputType.text,
+    this.showStar = false,
+  });
 
   late Dimens dimens;
 
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
-    return Stack(
+    return Column(
       children: [
+        Row(
+          children: [
+            Text(
+              AppStrings.yourname,
+              style: dimens.textStyleSecondary,
+            ),
+            Gap(dimens.paddingHorizontalItem5),
+            if (showStar) AppImage.starWidget(context),
+          ],
+        ),
+        Gap(dimens.paddingVerticalItem2),
         TextField(
-          controller: widget.controller,
-          obscureText: _isObscure,
+          controller: controller,
+          keyboardType: keyboardType,
           decoration: InputDecoration(
-            hintText: widget.hintText,
+            hintText: hintText,
             filled: true,
             fillColor: Colors.white,
-            contentPadding: EdgeInsets.only(left: dimens.screenWidth * 0.03),
+            contentPadding: EdgeInsets.only(left: dimens.paddingHorizontal13),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(15),
@@ -53,20 +57,11 @@ class _PasswordWidgetState extends State<PasswordWidget> {
               borderSide: BorderSide(color: Colors.grey.shade300),
               borderRadius: BorderRadius.circular(15),
             ),
-            suffixIcon: IconButton(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              icon: Icon(
-                _isObscure ? Icons.visibility_off : Icons.visibility,
-                color: Colors.grey,
-              ),
-              onPressed: _toggleVisibility,
-            ),
           ),
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.w400,
-            fontSize: dimens.screenHeight * 16 / 852,
+            fontSize: screenHeight * 16 / 852,
           ),
         ),
       ],

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
-
 import 'bloc/phone_login_bloc.dart';
 
 class PhoneLoginScreen extends StatefulWidget {
@@ -20,12 +19,13 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
     dimens = Dimens(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: BlocProvider(
         create: (context) => PhoneLoginBloc(),
         child: BlocConsumer<PhoneLoginBloc, PhoneLoginState>(
           listener: (context, state) {
             if (state is ErrorState) {
-              showErrorMessageDialog(
+              showErrorMessageSnackBar(
                 context,
                 state.failure.getErrorMessage(context),
               );
@@ -34,37 +34,34 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
           builder: (context, state) {
             bloc = BlocProvider.of<PhoneLoginBloc>(context);
             return Container(
-              padding: EdgeInsets.symmetric(horizontal: dimens.width10),
+              padding:
+                  EdgeInsets.symmetric(horizontal: dimens.paddingHorizontal),
               decoration: mainDecorations(),
               child: Column(
                 children: [
-                  Gap(dimens.height140),
-                  Image.asset(AppImage.appImageLogo, height: dimens.height32),
-                  Gap(dimens.height20),
+                  Gap(dimens.paddingVerticalItem137),
+                  Image.asset(
+                    AppImage.appImageLogo,
+                    height: dimens.height32,
+                  ),
+                  Gap(dimens.paddingVerticalItem44),
                   Text(
                     AppStrings.loginWelcome,
                     style: dimens.titleStyle.copyWith(
                       fontSize: dimens.font30,
                     ),
                   ),
+                  Gap(dimens.paddingVerticalItem7),
                   Text(
                     AppStrings.loginEnter,
                     style: dimens.textStyle,
                   ),
-                  Gap(dimens.height20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.phoneNumberHint,
-                        style: dimens.hintStyle,
-                      ),
-                    ],
-                  ),
+                  Gap(dimens.paddingVerticalItem32),
                   PhoneWidget(
                     controller: bloc.phoneController,
+                    showStar: false,
                   ),
-                  Gap(dimens.height20),
+                  Gap(dimens.paddingVerticalItem16),
                   RightIconBtn(
                     onClick: () {
                       bloc.add(CheckAuthEvent());

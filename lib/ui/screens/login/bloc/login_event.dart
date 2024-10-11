@@ -11,4 +11,8 @@ class SetPhoneNumberEvent extends LoginEvent {
   String number;
 
   SetPhoneNumberEvent(this.number);
+
+
+  @override
+  List<Object?> get props => [number];
 }

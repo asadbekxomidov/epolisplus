@@ -15,17 +15,14 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenState extends State<VerificationScreen> {
-  int _secondsRemaining = 60;
-  bool _isResendVisible = false;
-
   late Dimens dimens;
   late VerificationBloc verificationBloc;
 
-  @override
-  void initState() {
-    super.initState();
-    startCountdown();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   startCountdown();
+  // }
 
   @override
   void dispose() {
@@ -34,41 +31,19 @@ class _VerificationScreenState extends State<VerificationScreen> {
     super.dispose();
   }
 
-  void startCountdown() {
-    Future.delayed(Duration(seconds: 1), () {
-      if (_secondsRemaining > 0) {
-        setState(() {
-          _secondsRemaining--;
-        });
-        startCountdown();
-      } else {
-        setState(() {
-          _isResendVisible = true;
-        });
-      }
-    });
-  }
-
-  void resetTimer() {
-    setState(() {
-      _secondsRemaining = 60;
-      _isResendVisible = false;
-    });
-    startCountdown();
-  }
-
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: BlocProvider(
         create: (context) => VerificationBloc(),
         child: BlocConsumer<VerificationBloc, VerificationState>(
           listener: (context, state) {
             if (state is VerificationSuccessState) {
             } else if (state is VerificationErrorState) {
-              showErrorMessageDialog(
+              showErrorMessageSnackBar(
                 context,
                 state.failure.getErrorMessage(context),
               );
@@ -78,21 +53,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
             verificationBloc = BlocProvider.of<VerificationBloc>(context);
 
             return Container(
-              padding:
-                  EdgeInsets.symmetric(horizontal: dimens.screenWidth * 0.04),
-              height: dimens.screenHeight,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppImage.appMainImage),
-                  fit: BoxFit.cover,
-                ),
+              padding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingHorizontal,
               ),
+              decoration: mainDecorations(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Gap(dimens.height70),
+                  Gap(dimens.paddingVerticalItem69),
                   LeftBackIconBtn(),
-                  Gap(dimens.height15),
+                  Gap(dimens.paddingVerticalItem20),
                   Text(
                     AppStrings.verification,
                     style: dimens.titleStyle.copyWith(
@@ -139,29 +109,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                     ),
                   ),
                   Gap(dimens.height15),
-                  Center(
-                    child: _isResendVisible
-                        ? TextButton.icon(
-                            onPressed: resetTimer,
-                            icon: Icon(Icons.refresh,
-                                color: AppColors.mainColor,
-                                size: dimens.height28),
-                            label: Text(
-                              AppStrings.sendCodeAgain,
-                              style: TextStyle(
-                                  fontSize: dimens.height18,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.mainColor),
-                            ),
-                          )
-                        : Text(
-                            '00:${_secondsRemaining.toString().padLeft(2, '0')}',
-                            style: TextStyle(
-                                fontSize: dimens.height18,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400),
-                          ),
-                  ),
+                  SendCodeButton(),
                 ],
               ),
             );

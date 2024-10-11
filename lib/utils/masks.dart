@@ -6,5 +6,5 @@ class Masked {
     filter: {"0": RegExp(r'[0-9]')},
   );
 
-  static const hintPhoneNumber = "(90) 123-45-67";
+  static const hintPhoneNumber = "(90) 000-00-00";
 }
