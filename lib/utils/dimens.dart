@@ -11,6 +11,92 @@ class Dimens {
     screenWidth = MediaQuery.of(context).size.width;
   }
 
+  // ? PADDING BUTTONS
+
+  double get heightt15 {
+    return 15 * screenHeight / 852;
+  }
+
+  double get horizontalPadding {
+    return 0.03 * screenWidth;
+  }
+
+  double get verticalPadding {
+    return 0.013 * screenHeight;
+  }
+
+  // ?
+
+  double get paddingVerticalItem {
+    return height10 * 1.6;
+  }
+
+  double get paddingVerticalItem69 {
+    return height10 * 6.9;
+  }
+
+  double get paddingVerticalItem27 {
+    return height10 * 2.7;
+  }
+
+  double get paddingVerticalItem40 {
+    return height10 * 4.0;
+  }
+
+  double get paddingVerticalItem20 {
+    return height10 * 2.0;
+  }
+
+  double get paddingVerticalItem23 {
+    return height10 * 2.3;
+  }
+
+  // double get paddingVerticalItem8 {
+  //   return height10 * 0.8;
+  // }
+
+  double get paddingVerticalItem137 {
+    return 137 * screenHeight / 852;
+  }
+
+  double get paddingHorizontalItem5 {
+    return 5 * screenHeight / 852;
+  }
+
+  double get paddingVerticalItem44 {
+    return 44 * screenHeight / 852;
+  }
+
+  double get paddingVerticalItem32 {
+    return 32 * screenHeight / 852;
+  }
+
+  double get paddingVerticalItem16 {
+    return 16 * screenHeight / 852;
+  }
+
+  double get paddingVerticalItem7 {
+    return 7 * screenHeight / 852;
+  }
+
+  double get paddingVerticalItem2 {
+    return height10 * 0.3;
+  }
+
+  double get paddingHorizontalItem {
+    return screenWidth * 0.13;
+  }
+
+  double get paddingHorizontal {
+    return width10 * 1.5;
+  }
+
+  double get paddingHorizontal13 {
+    return width10 * 1.3;
+  }
+
+  // ! #################3
+
   double get height5 {
     return 5 * screenHeight / 852;
   }
@@ -75,6 +161,10 @@ class Dimens {
     return 20 * screenWidth / 392;
   }
 
+  double get width60 {
+    return 60 * screenWidth / 392;
+  }
+
   double get radius16 {
     return height10 * 1.6;
   }
@@ -128,6 +218,16 @@ class Dimens {
     );
   }
 
+  TextStyle get textStyleBold {
+    return TextStyle(
+      fontSize: font16,
+      fontWeight: FontWeight.w400,
+      color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
   TextStyle get textStyleGreen {
     return TextStyle(
       fontSize: font16,
@@ -139,11 +239,33 @@ class Dimens {
     );
   }
 
+  TextStyle get myTextFieldStyle {
+    return TextStyle(
+      fontSize: font16,
+      fontWeight: FontWeight.normal,
+      color: AppColors.blackColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get hintStyle {
     return TextStyle(
       fontSize: font14,
       fontWeight: FontWeight.normal,
       color: AppColors.hintColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get textStyleSecondary {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.normal,
+      color: AppColors.textColorsSecondary,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,

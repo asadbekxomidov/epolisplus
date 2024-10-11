@@ -1,4 +1,3 @@
-import 'package:epolisplus/ui/screens/login/login_screen.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
@@ -29,12 +28,10 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
       return;
     }
 
-    // serverdan telefon number bor yoki yo'qligini tekshirish kerak
-
     if (phoneNumber == "900000000") {
       Get.to(() => LoginScreen(phoneNumber: phoneNumber));
     } else {
-      Get.to(() => RegisterScreen());
+      Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
     }
     emit(SuccessState());
   }

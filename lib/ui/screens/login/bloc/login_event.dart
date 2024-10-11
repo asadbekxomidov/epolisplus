@@ -6,3 +6,13 @@ abstract class LoginEvent extends Equatable {
 }
 
 class CheckLoginEvent extends LoginEvent {}
+
+class SetPhoneNumberEvent extends LoginEvent {
+  String number;
+
+  SetPhoneNumberEvent(this.number);
+
+
+  @override
+  List<Object?> get props => [number];
+}

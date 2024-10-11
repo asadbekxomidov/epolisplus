@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/utils/masks.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +14,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  LoginBloc() : super(LoginSuccessState()) {
+  LoginBloc() : super(SuccessState()) {
     on<CheckLoginEvent>(login);
+    on<SetPhoneNumberEvent>(setData);
   }
 
   login(
@@ -40,6 +43,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginErrorState(LoginFailure()));
     }
 
-    emit(LoginSuccessState());
+    emit(SuccessState());
+  }
+
+  FutureOr<void> setData(SetPhoneNumberEvent event, Emitter<LoginState> emit) {
+    phoneController.text = Masked.maskPhone
+        .formatEditUpdate(
+          TextEditingValue(text: ''),
+          TextEditingValue(text: event.number),
+        )
+        .text;
+    emit(SuccessState());
   }
 }

@@ -6,6 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class RegisterScreen extends StatefulWidget {
+  final String phoneNumber;
+
+  RegisterScreen({super.key, required this.phoneNumber});
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -13,145 +16,91 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   late RegisterBloc bloc;
   late Dimens dimens;
-  bool _isAgreeChecked = false;
-  late MyDecorations myDecorations;
 
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
-    myDecorations = MyDecorations(context);
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: BlocConsumer<RegisterBloc, RegisterState>(
-        listener: (context, state) {
-          if (state is RegisterErrorState) {
-            showErrorMessageDialog(
-              context,
-              state.failure.getErrorMessage(context),
-            );
-          }
-        },
-        builder: (context, state) {
-          bloc = BlocProvider.of<RegisterBloc>(context);
+      resizeToAvoidBottomInset: true,
+      body: BlocProvider(
+        create: (context) => RegisterBloc()
+          ..add(
+            RegisterSetPhoneNumberEvent(widget.phoneNumber),
+          ),
+        child: BlocConsumer<RegisterBloc, RegisterState>(
+          listener: (context, state) {
+            if (state is RegisterErrorState) {
+              showErrorMessageSnackBar(
+                context,
+                state.failure.getErrorMessage(context),
+              );
+            }
+          },
+          builder: (context, state) {
+            bloc = BlocProvider.of<RegisterBloc>(context);
+            final isAgreeChecked = bloc.isAgreeChecked;
 
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              return ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: dimens.width10),
-                  decoration: myDecorations.mainDecarations,
-                  child: SingleChildScrollView(
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: dimens.paddingHorizontal,
+                    ),
+                    decoration: mainDecorations(),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Gap(dimens.screenHeight * 0.06),
+                        Gap(dimens.paddingVerticalItem69),
                         LeftBackIconBtn(),
-                        Gap(dimens.height20),
+                        Gap(dimens.paddingVerticalItem20),
+                        // Gap(dimens.paddingVerticalItem27),
                         Text(
                           AppStrings.createAccount,
                           style: dimens.titleStyle.copyWith(
                             fontSize: dimens.font30,
                           ),
                         ),
-                        Gap(dimens.height20),
-                        Row(
-                          children: [
-                            Text(
-                              AppStrings.yourname,
-                              style: dimens.hintStyle,
-                            ),
-                            Gap(dimens.width10),
-                            Text('*', style: dimens.starliteStyle),
-                          ],
-                        ),
-                        Gap(dimens.height6),
-                        UsernameTextfieldDart(
+                        Gap(dimens.paddingVerticalItem27),
+                        // Gap(dimens.paddingVerticalItem40),
+                        UserNameWidget(
                           controller: bloc.fullNameController,
                           hintText: AppStrings.theName,
                           screenHeight: dimens.screenHeight,
                           screenWidth: dimens.screenWidth,
+                          showStar: true,
                         ),
-                        Gap(dimens.height15),
-                        Row(
-                          children: [
-                            Text(
-                              AppStrings.phoneNumberHint,
-                              style: dimens.hintStyle,
-                            ),
-                            Gap(dimens.width10),
-                            Text('*', style: dimens.starliteStyle),
-                          ],
-                        ),
-                        Gap(dimens.height6),
-                        PhoneTextfieldFilter(
+                        Gap(dimens.paddingVerticalItem20),
+                        PhoneWidget(
                           controller: bloc.phoneController,
+                          showStar: true,
                         ),
-                        Gap(dimens.height15),
-                        Text(
-                          AppStrings.passwordHintP,
-                          style: dimens.hintStyle,
-                        ),
-                        Gap(dimens.height6),
-                        PasswordTextField(
+                        Gap(dimens.paddingVerticalItem20),
+                        PasswordWidget(
                           controller: bloc.passwordController,
                           hintText: AppStrings.passwordHint,
-                          screenHeight: dimens.screenHeight,
-                          screenWidth: dimens.screenWidth,
+                          text: AppStrings.passwordHintP,
                         ),
-                        Gap(dimens.height15),
-                        Text(
-                          AppStrings.confirmPassword,
-                          style: dimens.hintStyle,
-                        ),
-                        Gap(dimens.height6),
-                        PasswordTextField(
+                        Gap(dimens.paddingVerticalItem20),
+                        PasswordWidget(
+                          text: AppStrings.confirmPassword,
                           controller: bloc.confirmPasswordController,
                           hintText: AppStrings.confirmPasswordHint,
-                          screenHeight: screenHeight,
-                          screenWidth: screenWidth,
                         ),
-                        SizedBox(height: screenHeight * 0.02),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onPressed: () {
-                                setState(() {
-                                  _isAgreeChecked = !_isAgreeChecked;
-                                });
-                              },
-                              icon: Icon(
-                                _isAgreeChecked
-                                    ? Icons.check_box
-                                    : Icons.check_box_outline_blank,
-                                color: _isAgreeChecked
-                                    ? AppColors.mainColor
-                                    : Colors.grey,
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppStrings.agreeProcessing,
-                                  style: dimens.textStyle,
-                                ),
-                                Text(
-                                  AppStrings.personalData,
-                                  style: dimens.textStyleGreen,
-                                ),
-                              ],
-                            ),
-                          ],
+                        Gap(dimens.paddingVerticalItem23),
+                        IconsButtonWidget(
+                          onClick: () {
+                            bloc.add(ToggleAgreeEvent(!isAgreeChecked));
+                            // context
+                            //     .read<RegisterBloc>()
+                            //     .add(ToggleAgreeEvent(!isAgreeChecked));
+                          },
+                          isAgreeChecked: isAgreeChecked,
+                          dimens: dimens,
                         ),
-                        Gap(dimens.height15),
+                        Gap(dimens.paddingVerticalItem23),
                         SizedBox(
                           width: double.infinity,
                           child: RegisterPushButton(
@@ -161,15 +110,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             text: AppStrings.signUpbutton,
                           ),
                         ),
-                        Gap(dimens.height15),
+                        Gap(dimens.paddingVerticalItem23),
                       ],
                     ),
                   ),
-                ),
-              );
-            },
-          );
-        },
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

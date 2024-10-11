@@ -5,13 +5,23 @@ abstract class RegisterState extends Equatable {
   List<Object?> get props => [];
 }
 
+class RegisterInitialState extends RegisterState {}
+
 class RegisterSuccessState extends RegisterState {}
 
 class RegisterLoadingState extends RegisterState {}
 
-// ignore: must_be_immutable
 class RegisterErrorState extends RegisterState {
   Failure failure;
 
   RegisterErrorState(this.failure);
+}
+
+class RegisterAgreeCheckedState extends RegisterState {
+  final bool isAgreeChecked;
+
+  RegisterAgreeCheckedState(this.isAgreeChecked);
+
+  @override
+  List<Object?> get props => [isAgreeChecked];
 }

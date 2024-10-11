@@ -1,8 +1,7 @@
-import 'package:epolisplus/utils/app_colors.dart';
-import 'package:epolisplus/utils/app_text.dart';
-import 'package:epolisplus/utils/dimens.dart';
-import 'package:epolisplus/utils/shapes.dart';
+import 'package:epolisplus/ui/widgets/bloc/timer_bloc/timer_bloc.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 // ? Button Navigatsiya
@@ -25,11 +24,14 @@ class RightIconBtn extends StatelessWidget {
     dimens = Dimens(context);
     return FilledButton(
       style: FilledButton.styleFrom(
-        backgroundColor: Color(0xFF00A070),
-        shape: MyShapes().myButtonBordershape,
+        backgroundColor: AppColors.mainColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(dimens.radius16)),
+        ),
         padding: EdgeInsets.symmetric(
-            horizontal: dimens.screenWidth * 0.03,
-            vertical: dimens.screenHeight * 0.013),
+          horizontal: dimens.horizontalPadding,
+          vertical: dimens.verticalPadding,
+        ),
       ),
       onPressed: () => onClick(),
       child: Row(
@@ -38,13 +40,13 @@ class RightIconBtn extends StatelessWidget {
           Text(
             text,
             style: dimens.textStyle.copyWith(
-              color: Colors.white,
+              color: AppColors.whiteColor,
             ),
           ),
-          Gap(dimens.screenWidth * 0.02),
+          Gap(dimens.paddingHorizontal13),
           Icon(
-            iconData ?? Icons.arrow_forward_outlined,
-            size: dimens.height10 * 2,
+            iconData ?? AppImage.arrow_forward_outlined,
+            size: dimens.height20,
           ),
         ],
       ),
@@ -66,10 +68,10 @@ class LeftBackIconBtn extends StatelessWidget {
       children: [
         TextButton.icon(
           style: IconButton.styleFrom(
-            highlightColor: Colors.transparent,
+            highlightColor: AppColors.transparentColor,
           ),
           icon: Icon(
-            Icons.arrow_circle_left_outlined,
+            AppImage.arrow_circle_left_outlined,
             color: AppColors.mainColor,
             size: dimens.height24,
           ),
@@ -112,17 +114,157 @@ class RegisterPushButton extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: AppColors.mainColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8)),
+          borderRadius: BorderRadius.all(Radius.circular(dimens.radius16)),
         ),
         padding: EdgeInsets.symmetric(
-          horizontal: dimens.screenWidth * 0.03,
-          vertical: dimens.screenHeight * 0.013,
+          horizontal: dimens.horizontalPadding,
+          vertical: dimens.verticalPadding,
         ),
       ),
       onPressed: () => onClick(),
       child: Text(
         text,
-        style: dimens.textStyle.copyWith(color: Colors.white),
+        style: dimens.textStyle.copyWith(color: AppColors.whiteColor),
+      ),
+    );
+  }
+}
+
+// ? TextButton ResetPassword
+
+class ResetPasswordButton extends StatelessWidget {
+  Function onClick;
+  String text;
+  IconData? iconData;
+
+  ResetPasswordButton({
+    required this.onClick,
+    required this.text,
+    this.iconData,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        TextButton(
+          style: IconButton.styleFrom(
+            highlightColor: AppColors.transparentColor,
+            backgroundColor: AppColors.transparentColor,
+          ),
+          onPressed: () {},
+          child: Text(
+            text,
+            style: dimens.forgotPassword,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ? IconButton
+
+class IconsButtonWidget extends StatelessWidget {
+  final bool isAgreeChecked;
+  final Function onClick;
+  final Dimens dimens;
+
+  IconsButtonWidget({
+    required this.onClick,
+    required this.isAgreeChecked,
+    required this.dimens,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        IconButton(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: () {
+            onClick();
+          },
+          icon: Icon(
+            isAgreeChecked ? Icons.check_box : Icons.check_box_outline_blank,
+            color: isAgreeChecked ? AppColors.mainColor : Colors.grey,
+          ),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppStrings.agreeProcessing,
+              style: dimens.textStyle,
+            ),
+            Text(
+              AppStrings.personalData,
+              style: dimens.textStyleGreen,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+// ? SendCodeButton
+
+class SendCodeButton extends StatelessWidget {
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return BlocProvider(
+      create: (context) {
+        final bloc = TimerBloc();
+        bloc.add(StartCountdownEvent());
+        return bloc;
+      },
+      child: BlocBuilder<TimerBloc, TimerState>(
+        builder: (context, state) {
+          if (state is TimerCompletedState) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    context.read<TimerBloc>().add(ResetTimerEvent());
+                  },
+                  icon: Icon(Icons.refresh,
+                      color: AppColors.mainColor, size: dimens.height28),
+                  label: Text(
+                    AppStrings.sendCodeAgain,
+                    style: TextStyle(
+                        fontSize: dimens.height18,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.mainColor),
+                  ),
+                ),
+              ],
+            );
+          } else if (state is TimerRunningState) {
+            return Center(
+              child: Text(
+                '00:${state.secondsRemaining.toString().padLeft(2, '0')}',
+                style: TextStyle(
+                    fontSize: dimens.height18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400),
+              ),
+            );
+          }
+          return Container();
+        },
       ),
     );
   }
