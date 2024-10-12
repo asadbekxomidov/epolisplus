@@ -125,46 +125,61 @@ class PasswordWidget extends StatelessWidget {
                 style: dimens.textStyleSecondary,
               ),
               Gap(dimens.paddingVerticalItem2),
-              TextField(
-                controller: controller,
-                obscureText: isObscure,
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  filled: true,
-                  fillColor: AppColors.whiteColor,
-                  contentPadding: EdgeInsets.only(
-                    left: dimens.paddingHorizontal13,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.lineColor),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.lineColor),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.lineColor),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  suffixIcon: IconButton(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    icon: Icon(
-                      isObscure ? AppImage.in_visibility : AppImage.visibility,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      passwordBloc.add(TogglePasswordVisibility());
-                    },
-                  ),
+              Container(
+                padding: EdgeInsets.only(
+                  left: dimens.paddingHorizontal13,
                 ),
-                style: dimens.myTextFieldStyle,
-                // style: TextStyle(
-                //   color: Colors.black,
-                //   fontWeight: FontWeight.w400,
-                //   fontSize: dimens.screenHeight * 16 / 852,
-                // ),
+                decoration: inputDecorations(dimens),
+                child: TextField(
+                  controller: controller,
+                  obscureText: isObscure,
+                  decoration: InputDecoration(
+                    hintText: hintText,
+                    // filled: true,
+                    // fillColor: AppColors.whiteColor,
+                    filled: false,
+                    fillColor: AppColors.whiteColor,
+                    // hintStyle: dimens.hintStyle.copyWith(
+                    //   fontSize: dimens.font16,
+                    // ),
+                    border: InputBorder.none,
+                    // contentPadding: EdgeInsets.only(
+                    //   left: dimens.paddingHorizontal13,
+                    // ),
+                    // enabledBorder: OutlineInputBorder(
+                    //   borderSide: BorderSide(color: AppColors.lineColor),
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
+                    // focusedBorder: OutlineInputBorder(
+                    //   borderSide: BorderSide(color: AppColors.lineColor),
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
+                    // border: OutlineInputBorder(
+                    //   borderSide: BorderSide(color: AppColors.lineColor),
+                    //   borderRadius: BorderRadius.circular(15),
+                    // ),
+                    // border: InputBorder.none,
+                    suffixIcon: IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      icon: Icon(
+                        isObscure
+                            ? AppImage.in_visibility
+                            : AppImage.visibility,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        passwordBloc.add(TogglePasswordVisibility());
+                      },
+                    ),
+                  ),
+                  style: dimens.myTextFieldStyle,
+                  // style: TextStyle(
+                  //   color: Colors.black,
+                  //   fontWeight: FontWeight.w400,
+                  //   fontSize: dimens.screenHeight * 16 / 852,
+                  // ),
+                ),
               ),
             ],
           );

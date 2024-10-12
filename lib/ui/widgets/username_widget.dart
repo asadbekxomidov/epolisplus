@@ -37,31 +37,39 @@ class UserNameWidget extends StatelessWidget {
           ],
         ),
         Gap(dimens.paddingVerticalItem2),
-        TextField(
-          controller: controller,
-          keyboardType: keyboardType,
-          decoration: InputDecoration(
-            hintText: hintText,
-            filled: true,
-            fillColor: Colors.white,
-            contentPadding: EdgeInsets.only(left: dimens.paddingHorizontal13),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(15),
-            ),
+        Container(
+          padding: EdgeInsets.only(
+            left: dimens.paddingHorizontal13,
           ),
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-            fontSize: screenHeight * 16 / 852,
+          decoration: inputDecorations(dimens),
+          child: TextField(
+            controller: controller,
+            keyboardType: keyboardType,
+            decoration: InputDecoration(
+              hintText: hintText,
+              filled: false,
+              fillColor: AppColors.whiteColor,
+              // contentPadding: EdgeInsets.only(left: dimens.paddingHorizontal13),
+              // enabledBorder: OutlineInputBorder(
+              //   borderSide: BorderSide(color: Colors.grey.shade300),
+              //   borderRadius: BorderRadius.circular(15),
+              // ),
+              // focusedBorder: OutlineInputBorder(
+              //   borderSide: BorderSide(color: Colors.grey.shade300),
+              //   borderRadius: BorderRadius.circular(15),
+              // ),
+              // border: OutlineInputBorder(
+              //   borderSide: BorderSide(color: Colors.grey.shade300),
+              //   borderRadius: BorderRadius.circular(15),
+              // ),
+              border: InputBorder.none,
+            ),
+            // style: TextStyle(
+            //   color: Colors.black,
+            //   fontWeight: FontWeight.w400,
+            //   fontSize: screenHeight * 16 / 852,
+            // ),
+            style: dimens.myTextFieldStyle,
           ),
         ),
       ],

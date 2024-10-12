@@ -18,12 +18,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
   late Dimens dimens;
   late VerificationBloc verificationBloc;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   startCountdown();
-  // }
-
   @override
   void dispose() {
     verificationBloc.otpController.dispose();

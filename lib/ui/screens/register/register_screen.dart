@@ -50,11 +50,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     decoration: mainDecorations(),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Gap(dimens.paddingVerticalItem69),
                         LeftBackIconBtn(),
+
+                        // Stack(
+                        //   children: [
+                        //     Positioned(
+                        //       child: LeftBackIconBtn(),
+                        //     ),
+                        //   ],
+                        // ),
+
                         Gap(dimens.paddingVerticalItem20),
                         // Gap(dimens.paddingVerticalItem27),
                         Text(
@@ -76,6 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         PhoneWidget(
                           controller: bloc.phoneController,
                           showStar: true,
+                          isActive: false,
                         ),
                         Gap(dimens.paddingVerticalItem20),
                         PasswordWidget(

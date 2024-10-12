@@ -208,18 +208,23 @@ class IconsButtonWidget extends StatelessWidget {
             color: isAgreeChecked ? AppColors.mainColor : Colors.grey,
           ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              AppStrings.agreeProcessing,
+        Expanded(
+          child: RichText(
+            textAlign: TextAlign.left,
+            text: TextSpan(
+              text: AppStrings.agreeProcessing,
               style: dimens.textStyle,
+              children: [
+                TextSpan(
+                  text: '           ',
+                ),
+                TextSpan(
+                  text: AppStrings.personalData,
+                  style: dimens.textStyleGreen,
+                ),
+              ],
             ),
-            Text(
-              AppStrings.personalData,
-              style: dimens.textStyleGreen,
-            ),
-          ],
+          ),
         ),
       ],
     );
