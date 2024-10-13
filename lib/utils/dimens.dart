@@ -59,6 +59,10 @@ class Dimens {
     return 137 * screenHeight / 852;
   }
 
+  double get paddingVerticalItem120 {
+    return 120 * screenHeight / 852;
+  }
+
   double get paddingHorizontalItem5 {
     return 5 * screenHeight / 852;
   }

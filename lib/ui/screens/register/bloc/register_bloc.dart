@@ -1,5 +1,4 @@
 import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:epolisplus/utils/masks.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,10 +23,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<RegisterSetPhoneNumberEvent>(setData);
   }
 
-  register(
-    CheckRegisterEvent event,
-    Emitter<RegisterState> emit,
-  ) {
+  register(CheckRegisterEvent event, Emitter<RegisterState> emit) async {
+    emit(RegisterLoadingState());
+    await Future.delayed(Duration(seconds: 2));
+
     var phoneNumber = phoneController.text.toString().trim();
     var fullName = fullNameController.text.toString().trim();
     var password = passwordController.text.toString().trim();
@@ -48,17 +47,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       return;
     }
 
+    emit(RegisterSuccessState());
     if (phoneNumber == "908579552" &&
         password.length >= 8 &&
         password == confirmPassword &&
         fullName.length >= 5) {
-      print('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
       Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
     } else {
-      print('---------------------------------------------------------');
       emit(RegisterErrorState(InputRegisterFailure()));
     }
-    emit(RegisterSuccessState());
   }
 
   void toggleAgree(ToggleAgreeEvent event, Emitter<RegisterState> emit) {

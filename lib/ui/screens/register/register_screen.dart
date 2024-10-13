@@ -28,99 +28,120 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ..add(
             RegisterSetPhoneNumberEvent(widget.phoneNumber),
           ),
-        child: BlocConsumer<RegisterBloc, RegisterState>(
-          listener: (context, state) {
-            if (state is RegisterErrorState) {
-              showErrorMessageSnackBar(
-                context,
-                state.failure.getErrorMessage(context),
-              );
-            }
-          },
-          builder: (context, state) {
-            bloc = BlocProvider.of<RegisterBloc>(context);
-            final isAgreeChecked = bloc.isAgreeChecked;
-
-            return LayoutBuilder(
-              builder: (context, constraints) {
-                return Container(
-                  height: dimens.screenHeight,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: dimens.paddingHorizontal,
-                  ),
-                  decoration: mainDecorations(),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gap(dimens.paddingVerticalItem69),
-                        LeftBackIconBtn(),
-                        Gap(dimens.paddingVerticalItem20),
-                        // Gap(dimens.paddingVerticalItem27),
-                        Text(
-                          AppStrings.createAccount,
-                          style: dimens.titleStyle.copyWith(
-                            fontSize: dimens.font30,
-                          ),
-                        ),
-                        Gap(dimens.paddingVerticalItem27),
-                        // Gap(dimens.paddingVerticalItem40),
-                        UserNameWidget(
-                          controller: bloc.fullNameController,
-                          hintText: AppStrings.theName,
-                          screenHeight: dimens.screenHeight,
-                          screenWidth: dimens.screenWidth,
-                          showStar: true,
-                        ),
-                        Gap(dimens.paddingVerticalItem20),
-                        PhoneWidget(
-                          controller: bloc.phoneController,
-                          showStar: true,
-                          isActive: false,
-                        ),
-                        Gap(dimens.paddingVerticalItem20),
-                        PasswordWidget(
-                          controller: bloc.passwordController,
-                          hintText: AppStrings.passwordHint,
-                          text: AppStrings.passwordHintP,
-                        ),
-                        Gap(dimens.paddingVerticalItem20),
-                        PasswordWidget(
-                          text: AppStrings.confirmPassword,
-                          controller: bloc.confirmPasswordController,
-                          hintText: AppStrings.confirmPasswordHint,
-                        ),
-                        Gap(dimens.paddingVerticalItem23),
-                        IconsButtonWidget(
-                          onClick: () {
-                            bloc.add(ToggleAgreeEvent(!isAgreeChecked));
-                            // context
-                            //     .read<RegisterBloc>()
-                            //     .add(ToggleAgreeEvent(!isAgreeChecked));
-                          },
-                          isAgreeChecked: isAgreeChecked,
-                          dimens: dimens,
-                        ),
-                        Gap(dimens.paddingVerticalItem23),
-                        SizedBox(
-                          width: double.infinity,
-                          child: RegisterPushButton(
-                            onClick: () {
-                              bloc.add(CheckRegisterEvent());
-                            },
-                            text: AppStrings.signUpbutton,
-                          ),
-                        ),
-                        Gap(dimens.paddingVerticalItem23),
-                      ],
-                    ),
-                  ),
+        child: Stack(
+          children: [
+            ui(),
+            Positioned(
+              top: dimens.paddingVerticalItem69,
+              child: LeftBackIconBtn(),
+            ),
+            BlocBuilder<RegisterBloc, RegisterState>(
+              builder: (context, state) {
+                return LoadingIndicator(
+                  isLoading: state is RegisterLoadingState,
+                  dimens: dimens,
                 );
               },
-            );
-          },
+            )
+          ],
         ),
       ),
+    );
+  }
+
+  ui() {
+    return BlocConsumer<RegisterBloc, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterErrorState) {
+          showErrorMessageSnackBar(
+            context,
+            state.failure.getErrorMessage(context),
+          );
+        }
+      },
+      builder: (context, state) {
+        bloc = BlocProvider.of<RegisterBloc>(context);
+        final isAgreeChecked = bloc.isAgreeChecked;
+
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              height: dimens.screenHeight,
+              padding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingHorizontal,
+              ),
+              decoration: mainDecorations(),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gap(dimens.paddingVerticalItem120),
+                    // LeftBackIconBtn(),
+                    // Gap(dimens.paddingVerticalItem20),
+                    // Gap(dimens.paddingVerticalItem27),
+                    Text(
+                      AppStrings.createAccount,
+                      style: dimens.titleStyle.copyWith(
+                        fontSize: dimens.font30,
+                      ),
+                    ),
+                    Gap(dimens.paddingVerticalItem27),
+                    // Gap(dimens.paddingVerticalItem40),
+                    UserNameWidget(
+                      controller: bloc.fullNameController,
+                      hintText: AppStrings.theName,
+                      screenHeight: dimens.screenHeight,
+                      screenWidth: dimens.screenWidth,
+                      showStar: true,
+                    ),
+                    Gap(dimens.paddingVerticalItem20),
+                    PhoneWidget(
+                      controller: bloc.phoneController,
+                      showStar: true,
+                      isActive: false,
+                    ),
+                    Gap(dimens.paddingVerticalItem20),
+                    PasswordWidget(
+                      controller: bloc.passwordController,
+                      hintText: AppStrings.passwordHint,
+                      text: AppStrings.passwordHintP,
+                    ),
+                    Gap(dimens.paddingVerticalItem20),
+                    PasswordWidget(
+                      text: AppStrings.confirmPassword,
+                      controller: bloc.confirmPasswordController,
+                      hintText: AppStrings.confirmPasswordHint,
+                    ),
+                    Gap(dimens.paddingVerticalItem23),
+                    IconsButtonWidget(
+                      onClick: () {
+                        bloc.add(ToggleAgreeEvent(!isAgreeChecked));
+                        // context
+                        //     .read<RegisterBloc>()
+                        //     .add(ToggleAgreeEvent(!isAgreeChecked));
+                      },
+                      isAgreeChecked: isAgreeChecked,
+                      dimens: dimens,
+                    ),
+                    Gap(dimens.paddingVerticalItem23),
+                    SizedBox(
+                      width: double.infinity,
+                      child: RegisterPushButton(
+                        isLoading: state is RegisterLoadingState,
+                        onClick: () {
+                          bloc.add(CheckRegisterEvent());
+                        },
+                        text: AppStrings.signUpbutton,
+                      ),
+                    ),
+                    Gap(dimens.paddingVerticalItem23),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

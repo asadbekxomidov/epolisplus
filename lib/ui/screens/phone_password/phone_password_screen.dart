@@ -31,29 +31,16 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
-    // return Scaffold(
-    //   body: BlocProvider(
-    //     create: (context) => PhonePasswordBloc(),
-    //     child: Stack(
-    //       children: [
-    //         ui(),
-    // BlocBuilder<PhonePasswordBloc, PhonePasswordState>(
-    //   builder: (context, state) {
-    //     return LoadingIndicator(
-    //       isLoading: state is PhonePasswordLoadingState,
-    //       dimens: dimens,
-    //     );
-    //   },
-    // ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+
     return BlocProvider(
       create: (context) => PhonePasswordBloc(),
       child: Stack(
         children: [
           ui(),
+          Positioned(
+            top: dimens.paddingVerticalItem69,
+            child: LeftBackIconBtn(),
+          ),
           BlocBuilder<PhonePasswordBloc, PhonePasswordState>(
             builder: (context, state) {
               return LoadingIndicator(
@@ -94,9 +81,9 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Gap(dimens.paddingVerticalItem69),
-                        LeftBackIconBtn(),
-                        Gap(dimens.height20),
+                        Gap(dimens.paddingVerticalItem120),
+                        // LeftBackIconBtn(),
+                        // Gap(dimens.height20),
                         Text(
                           AppStrings.verification,
                           style: dimens.titleStyle.copyWith(
