@@ -17,9 +17,10 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
   }
 
   verification(
-    CheckVerificationEvent event,
-    Emitter<VerificationState> emit,
-  ) {
+      CheckVerificationEvent event, Emitter<VerificationState> emit) async {
+    emit(VerificationLoadingState());
+    await Future.delayed(Duration(seconds: 2));
+
     var phoneCode = otpController.text.toString().trim();
     phoneCode = clearPhoneMask(phoneCode);
 
@@ -28,15 +29,12 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
       return;
     }
 
-    // serverdan telefon number bor yoki yo'qligini tekshirish kerak
-
+    emit(VerificationSuccessState());
     if (phoneCode == "00000") {
       Get.to(() => ResetPasswordScreen());
     } else {
       emit(VerificationErrorState(InputPhoneCodeFailure()));
       // Get.to(() => ResetPasswordScreen());
     }
-
-    emit(VerificationSuccessState());
   }
 }

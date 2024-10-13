@@ -24,59 +24,79 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       resizeToAvoidBottomInset: true,
       body: BlocProvider(
         create: (context) => ResetPasswordBloc(),
-        child: BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
-          listener: (context, state) {
-            if (state is ResetPasswordErrorState) {
-              showErrorMessageSnackBar(
-                context,
-                state.failure.getErrorMessage(context),
-              );
-            }
-          },
-          builder: (context, state) {
-            resetPasswordBloc = BlocProvider.of<ResetPasswordBloc>(context);
-
-            return Container(
-              padding: EdgeInsets.symmetric(horizontal: dimens.width10),
-              decoration: mainDecorations(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Gap(dimens.paddingVerticalItem69),
-                  LeftBackIconBtn(),
-                  Gap(dimens.paddingVerticalItem20),
-                  Text(
-                    AppStrings.resetPassword,
-                    style: dimens.titleStyle.copyWith(
-                      fontSize: dimens.font30,
-                    ),
-                  ),
-                  Gap(dimens.height10),
-                  Text(
-                    AppStrings.phoneNumberCode,
-                    style: dimens.textStyle,
-                  ),
-                  Gap(dimens.height18),
-                  PhoneWidget(
-                    controller: resetPasswordBloc.otpController,
-                    showStar: true,
-                  ),
-                  Gap(dimens.height16),
-                  SizedBox(
-                    width: double.infinity,
-                    child: RegisterPushButton(
-                      onClick: () {
-                        resetPasswordBloc.add(CheckResetPasswordEvent());
-                      },
-                      text: AppStrings.sendSms,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
+        child: Stack(
+          children: [
+            ui(),
+            BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+              builder: (context, state) {
+                return LoadingIndicator(
+                  isLoading: state is ResetPasswordLoadingState,
+                  dimens: dimens,
+                );
+              },
+            )
+          ],
         ),
       ),
+    );
+  }
+
+  ui() {
+    return BlocConsumer<ResetPasswordBloc, ResetPasswordState>(
+      listener: (context, state) {
+        if (state is ResetPasswordErrorState) {
+          showErrorMessageSnackBar(
+            context,
+            state.failure.getErrorMessage(context),
+          );
+        }
+      },
+      builder: (context, state) {
+        resetPasswordBloc = BlocProvider.of<ResetPasswordBloc>(context);
+
+        return Container(
+          height: dimens.screenHeight,
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingHorizontal,
+          ),
+          decoration: mainDecorations(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gap(dimens.paddingVerticalItem69),
+              LeftBackIconBtn(),
+              Gap(dimens.paddingVerticalItem20),
+              Text(
+                AppStrings.resetPassword,
+                style: dimens.titleStyle.copyWith(
+                  fontSize: dimens.font30,
+                ),
+              ),
+              Gap(dimens.height10),
+              Text(
+                AppStrings.phoneNumberCode,
+                style: dimens.textStyle,
+              ),
+              Gap(dimens.height18),
+              PhoneWidget(
+                controller: resetPasswordBloc.otpController,
+                showStar: true,
+              ),
+              Gap(dimens.height16),
+              SizedBox(
+                width: double.infinity,
+                child: RegisterPushButton(
+                  isLoading: state is ResetPasswordLoadingState,
+                  onClick: () {
+                    resetPasswordBloc.add(CheckResetPasswordEvent());
+                  },
+                  text: AppStrings.sendSms,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

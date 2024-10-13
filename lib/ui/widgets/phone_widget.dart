@@ -42,7 +42,7 @@ class PhoneWidget extends StatelessWidget {
               Gap(dimens.paddingHorizontal13),
               Text(
                 "+998",
-                style: dimens.textStyle,
+                style: dimens.myphonetextfieldStyle,
               ),
               Gap(dimens.paddingHorizontal13),
               Expanded(

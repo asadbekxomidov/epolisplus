@@ -15,12 +15,9 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
     on<CheckAuthEvent>(phonelogin);
   }
 
-  phonelogin(
-    CheckAuthEvent event,
-    Emitter<PhoneLoginState> emit,
-  ) async {
+  phonelogin(CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
     emit(LoadingState());
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 2));
 
     var phoneNumber = phoneController.text.toString().trim();
     phoneNumber = clearPhoneMask(phoneNumber);

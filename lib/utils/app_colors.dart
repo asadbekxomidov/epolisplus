@@ -16,8 +16,7 @@ class AppColors {
   static Color blackColor = Colors.black;
   static Color redColor = Color(0xFFE70101);
 
-  // static Color shadowColor = Colors.grey.shade200;
-  static Color shadowColor = const Color.fromRGBO(247, 247, 247, 255);
+  static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
   static Color transparentColor = Colors.transparent;
 }

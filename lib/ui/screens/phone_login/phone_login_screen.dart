@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import '../../widgets/progress_bar.dart';
 import 'bloc/phone_login_bloc.dart';
 
 class PhoneLoginScreen extends StatefulWidget {
@@ -26,7 +25,15 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
         child: Stack(
           children: [
             ui(),
-            loading(),
+            BlocBuilder<PhoneLoginBloc, PhoneLoginState>(
+              builder: (context, state) {
+                return LoadingIndicator(
+                  isLoading: state is LoadingState,
+                  dimens: dimens,
+                );
+              },
+            ),
+            // loading(),
           ],
         ),
       ),
@@ -46,7 +53,10 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
       builder: (context, state) {
         bloc = BlocProvider.of<PhoneLoginBloc>(context);
         return Container(
-          padding: EdgeInsets.symmetric(horizontal: dimens.paddingHorizontal),
+          height: dimens.screenHeight,
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingHorizontal,
+          ),
           decoration: mainDecorations(),
           child: Column(
             children: [
@@ -87,11 +97,11 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
     );
   }
 
-  loading() {
-    return BlocBuilder<PhoneLoginBloc, PhoneLoginState>(
-      builder: (context, state) {
-        return state is LoadingState ? progressBar2(dimens) : Container();
-      },
-    );
-  }
+  // loading() {
+  //   return BlocBuilder<PhoneLoginBloc, PhoneLoginState>(
+  //     builder: (context, state) {
+  //       return state is LoadingState ? progressBar2(dimens) : Container();
+  //     },
+  //   );
+  // }
 }

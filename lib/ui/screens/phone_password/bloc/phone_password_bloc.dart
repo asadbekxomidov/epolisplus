@@ -18,9 +18,10 @@ class PhonePasswordBloc extends Bloc<PhonePasswordEvent, PhonePasswordState> {
   }
 
   phonepassword(
-    CheckPhonePasswordEvent event,
-    Emitter<PhonePasswordState> emit,
-  ) {
+      CheckPhonePasswordEvent event, Emitter<PhonePasswordState> emit) async {
+    emit(PhonePasswordLoadingState());
+    await Future.delayed(Duration(seconds: 2));
+
     var phoneCode = otpController.text.toString().trim();
     var password = passwordController.text.toString().trim();
     var passwordConfirm = passwordConfirmController.text.toString().trim();
@@ -36,6 +37,7 @@ class PhonePasswordBloc extends Bloc<PhonePasswordEvent, PhonePasswordState> {
       return;
     }
 
+    emit(PhonePasswordSuccessState());
     if (phoneCode == "00000" &&
         password == "asadbek2006" &&
         password == passwordConfirm) {
@@ -43,6 +45,5 @@ class PhonePasswordBloc extends Bloc<PhonePasswordEvent, PhonePasswordState> {
     } else {
       emit(PhonePasswordErrorState(PaaswordPhoneCodeFailure()));
     }
-    emit(PhonePasswordSuccessState());
   }
 }

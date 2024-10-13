@@ -47,6 +47,7 @@ class UserNameWidget extends StatelessWidget {
             keyboardType: keyboardType,
             decoration: InputDecoration(
               hintText: hintText,
+              hintStyle: dimens.hintStyle,
               filled: false,
               fillColor: AppColors.whiteColor,
               // contentPadding: EdgeInsets.only(left: dimens.paddingHorizontal13),

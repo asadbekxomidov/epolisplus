@@ -141,8 +141,16 @@ class Dimens {
     return 32 * screenHeight / 852;
   }
 
+  double get height40 {
+    return 42 * screenHeight / 852;
+  }
+
   double get height70 {
     return 70 * screenHeight / 852;
+  }
+
+  double get height78 {
+    return 78 * screenHeight / 852;
   }
 
   double get height100 {
@@ -155,6 +163,10 @@ class Dimens {
 
   double get width10 {
     return 10 * screenWidth / 392;
+  }
+
+  double get width16 {
+    return 16 * screenWidth / 392;
   }
 
   double get width20 {
@@ -252,7 +264,7 @@ class Dimens {
 
   TextStyle get hintStyle {
     return TextStyle(
-      fontSize: font14,
+      fontSize: font16,
       fontWeight: FontWeight.normal,
       color: AppColors.hintColor,
       fontFamily: "GeistVF",

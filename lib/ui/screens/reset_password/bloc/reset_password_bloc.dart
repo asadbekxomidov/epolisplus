@@ -16,9 +16,10 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   }
 
   resetpassword(
-    CheckResetPasswordEvent event,
-    Emitter<ResetPasswordState> emit,
-  ) {
+      CheckResetPasswordEvent event, Emitter<ResetPasswordState> emit) async {
+    emit(ResetPasswordLoadingState());
+    await Future.delayed(Duration(seconds: 2));
+
     var phoneCode = otpController.text.toString().trim();
     phoneCode = clearPhoneMask(phoneCode);
 
@@ -30,12 +31,12 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
     // serverdan telefon number bor yoki yo'qligini tekshirish kerak
 
+    emit(ResetPasswordSuccessState());
     if (phoneCode == "900000000") {
       Get.to(() => PhoneRasswordScreen());
     } else {
       emit(ResetPasswordErrorState(InputPhoneFailure()));
       // Get.to(() => PhoneRasswordScreen());
     }
-    emit(ResetPasswordSuccessState());
   }
 }

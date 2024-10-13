@@ -43,26 +43,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
             return LayoutBuilder(
               builder: (context, constraints) {
-                return SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: dimens.paddingHorizontal,
-                    ),
-                    decoration: mainDecorations(),
+                return Container(
+                  height: dimens.screenHeight,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: dimens.paddingHorizontal,
+                  ),
+                  decoration: mainDecorations(),
+                  child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Gap(dimens.paddingVerticalItem69),
                         LeftBackIconBtn(),
-
-                        // Stack(
-                        //   children: [
-                        //     Positioned(
-                        //       child: LeftBackIconBtn(),
-                        //     ),
-                        //   ],
-                        // ),
-
                         Gap(dimens.paddingVerticalItem20),
                         // Gap(dimens.paddingVerticalItem27),
                         Text(

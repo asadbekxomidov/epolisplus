@@ -126,6 +126,7 @@ class PasswordWidget extends StatelessWidget {
               ),
               Gap(dimens.paddingVerticalItem2),
               Container(
+                // height: dimens.height40,
                 padding: EdgeInsets.only(
                   left: dimens.paddingHorizontal13,
                 ),
@@ -135,6 +136,7 @@ class PasswordWidget extends StatelessWidget {
                   obscureText: isObscure,
                   decoration: InputDecoration(
                     hintText: hintText,
+                    hintStyle: dimens.hintStyle,
                     // filled: true,
                     // fillColor: AppColors.whiteColor,
                     filled: false,

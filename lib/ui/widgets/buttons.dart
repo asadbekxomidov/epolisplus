@@ -109,11 +109,13 @@ class RegisterPushButton extends StatelessWidget {
   Function onClick;
   String text;
   IconData? iconData;
+  bool isLoading;
 
   RegisterPushButton({
     required this.onClick,
     required this.text,
     this.iconData,
+    this.isLoading = false,
   });
 
   late Dimens dimens;
@@ -133,9 +135,27 @@ class RegisterPushButton extends StatelessWidget {
         ),
       ),
       onPressed: () => onClick(),
-      child: Text(
-        text,
-        style: dimens.textStyle.copyWith(color: AppColors.whiteColor),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: dimens.textStyle.copyWith(
+              color: AppColors.whiteColor,
+            ),
+          ),
+          Gap(dimens.paddingHorizontal13),
+          isLoading
+              ? SizedBox(
+                  height: dimens.height10,
+                  width: dimens.height10,
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                    strokeWidth: dimens.width10 / 5,
+                  ),
+                )
+              : SizedBox(),
+        ],
       ),
     );
   }
