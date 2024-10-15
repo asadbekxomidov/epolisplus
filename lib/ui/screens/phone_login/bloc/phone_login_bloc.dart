@@ -13,11 +13,12 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
 
   PhoneLoginBloc() : super(SuccessState()) {
     on<CheckAuthEvent>(phonelogin);
+    on<TogglePhoneWidgetActiveEvent>(onTogglePhoneWidgetActive);
   }
 
   phonelogin(CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
     emit(LoadingState());
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 100));
 
     var phoneNumber = phoneController.text.toString().trim();
     phoneNumber = clearPhoneMask(phoneNumber);
@@ -32,6 +33,14 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
       Get.to(() => LoginScreen(phoneNumber: phoneNumber));
     } else {
       Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
+    }
+  }
+
+  void onTogglePhoneWidgetActive(
+      TogglePhoneWidgetActiveEvent event, Emitter<PhoneLoginState> emit) {
+    final currentState = state;
+    if (currentState is PhoneSuccessState) {
+      emit(PhoneSuccessState(isActive: !currentState.isActive));
     }
   }
 }

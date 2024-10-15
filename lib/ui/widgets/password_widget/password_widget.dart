@@ -86,7 +86,7 @@
 //   }
 // }
 
-import 'package:epolisplus/ui/widgets/bloc/password_widget_bloc/password_widget_bloc.dart';
+import 'package:epolisplus/ui/widgets/password_widget/password_widget_bloc/password_widget_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

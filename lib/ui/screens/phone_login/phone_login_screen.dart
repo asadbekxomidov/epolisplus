@@ -81,12 +81,14 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
               PhoneWidget(
                 controller: bloc.phoneController,
                 showStar: true,
+                isActive: state.isActive,
               ),
               Gap(dimens.paddingVerticalItem16),
               RightIconBtn(
                 isLoading: state is LoadingState,
                 onClick: () {
                   bloc.add(CheckAuthEvent());
+                  bloc.add(TogglePhoneWidgetActiveEvent());
                 },
                 text: AppStrings.loginButton,
               ),

@@ -6,3 +6,5 @@ abstract class PhoneLoginEvent extends Equatable {
 }
 
 class CheckAuthEvent extends PhoneLoginEvent {}
+
+class TogglePhoneWidgetActiveEvent extends PhoneLoginEvent {}
