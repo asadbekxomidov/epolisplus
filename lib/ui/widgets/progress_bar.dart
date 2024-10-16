@@ -23,10 +23,9 @@ progressBar(Dimens dimens) {
 progressBar2(Dimens dimens) {
   return GestureDetector(
     onTap: () {
-      print("object");
     },
     child: Container(
-      color: AppColors.transparentColor2,
+      color: AppColors.transparentColor,
       height: dimens.screenHeight,
       width: dimens.screenWidth,
     ),

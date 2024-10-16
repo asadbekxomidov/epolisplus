@@ -32,7 +32,6 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                 );
               },
             ),
-            // loading(),
           ],
         ),
       ),
