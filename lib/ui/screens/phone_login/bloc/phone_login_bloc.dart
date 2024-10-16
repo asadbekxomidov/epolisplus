@@ -1,11 +1,13 @@
+import 'package:bloc/bloc.dart';
+import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 part 'phone_login_event.dart';
+
 part 'phone_login_state.dart';
 
 class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
@@ -17,10 +19,8 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
     on<TogglePhoneWidgetActiveEvent>(_onToggleActive);
   }
 
-  Future<void> _phonelogin(
-      CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
-
-  //  add(TogglePhoneWidgetActiveEvent(false));
+  Future<void> _phonelogin(CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
+    //  add(TogglePhoneWidgetActiveEvent(false));
     emit(LoadingState());
     await Future.delayed(Duration(seconds: 2));
 
@@ -35,17 +35,25 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
 
     emit(SuccessState());
 
-    if (phoneNumber == "900000000") {
-      Get.to(() => LoginScreen(phoneNumber: phoneNumber));
-    } else {
-      Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
+    var authRepository = AuthRepository();
+    var baseResponse = await authRepository.checkAuth(phoneNumber);
+
+    if (baseResponse.status == 200) {
+      var isAuthUser = baseResponse.response as bool;
+
+      if (isAuthUser) {
+        Get.to(() => LoginScreen(phoneNumber: phoneNumber));
+      } else {
+        Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
+      }
+      return;
     }
 
-    add(TogglePhoneWidgetActiveEvent(true));
+    emit(ErrorState(ServerFailure(message: baseResponse.message)));
+    return;
   }
 
-  void _onToggleActive(
-      TogglePhoneWidgetActiveEvent event, Emitter<PhoneLoginState> emit) {
+  void _onToggleActive(TogglePhoneWidgetActiveEvent event, Emitter<PhoneLoginState> emit) {
     isActive = event.isActive;
     emit(PhoneWidgetState(isActive: isActive));
   }

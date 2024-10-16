@@ -47,3 +47,12 @@ class PaaswordPhoneCodeFailure extends Failure {
   String getErrorMessage(BuildContext context) =>
       AppStrings.input_phoneCode_password_errors;
 }
+
+class ServerFailure extends Failure {
+  String message;
+
+  ServerFailure({required this.message}) : super();
+
+  @override
+  String getErrorMessage(BuildContext context) => message;
+}
