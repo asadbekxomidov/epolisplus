@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
@@ -19,19 +20,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   login(CheckLoginEvent event, Emitter<LoginState> emit) async {
-    emit(LoginLoadingtate());
-    await Future.delayed(Duration(seconds: 2));
-
     var phoneNumber = phoneController.text.toString().trim();
     var password = passwordController.text.toString().trim();
     phoneNumber = clearPhoneMask(phoneNumber);
     phoneNumber = clearPhoneMask(phoneNumber);
-
+    logger(phoneNumber);
     if (phoneNumber.length != 9 && password.length != 8) {
-      print(phoneNumber);
       emit(LoginErrorState(LoginFailure()));
       return;
     }
+
+    emit(LoginLoadingtate());
+    await Future.delayed(Duration(seconds: 2));
 
     // serverdan telefon number bor yoki yo'qligini tekshirish kerak
     emit(SuccessState());

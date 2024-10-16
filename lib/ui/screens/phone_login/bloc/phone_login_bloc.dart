@@ -22,7 +22,7 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
 
   //  add(TogglePhoneWidgetActiveEvent(false));
     emit(LoadingState());
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 2));
 
     var phoneNumber = phoneController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
