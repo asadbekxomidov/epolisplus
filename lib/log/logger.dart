@@ -3,12 +3,12 @@ import 'package:logger/logger.dart';
 
 void logger(
   String message, {
-  String errorMessage = "",
+  String error = "",
 }) {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
   if (IConstanta.IS_SHOW_LOGGER) {
-    logger.t(message, error: errorMessage == "" ? null : errorMessage);
+    logger.t(message, error: error == "" ? null : error);
   }
 }

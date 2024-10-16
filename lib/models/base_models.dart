@@ -1,13 +1,13 @@
 class BaseModels<T> {
-  int status;
-  bool code;
-  String message;
+  int? status;
+  bool? code;
+  String? message;
   T? response;
 
-  BaseModels(
-    this.status,
-    this.code,
-    this.message,
+  BaseModels({
+    required this.status,
+    required this.code,
+    required this.message,
     this.response,
-  );
+  });
 }

@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:logger/logger.dart';
+
+import '../log/logger.dart';
 
 class ApiService {
   late final Dio _dio;
-  late Logger logger;
+
+  // late Logger logger;
 
   ApiService(
     String baseUrl,
@@ -16,7 +18,7 @@ class ApiService {
       ),
     );
 
-    logger = Logger(
+/*    logger = Logger(
       filter: null,
       printer: PrettyPrinter(
           methodCount: 2,
@@ -32,7 +34,7 @@ class ApiService {
           printTime: false // Should each log print contain a timestamp
           ),
       output: null,
-    );
+    );*/
   }
 
   initializeInterceptors() {
@@ -68,7 +70,7 @@ class ApiService {
         'headers': headers,
         'response': response.data
       };
-      logger.t(myData);
+      logger(myData.toString());
     } on DioError catch (e) {
       if (e.response?.statusCode == 422) {
         return e.response;
@@ -87,8 +89,8 @@ class ApiService {
         'headers': headers,
         'errors': e.message
       };
-      logger.t(myData);
-      logger.e("Exception", error: e.message);
+      logger(myData.toString());
+      logger("Exception", error: e.message.toString());
       throw Exception(e.message);
     }
     return response;
@@ -114,7 +116,7 @@ class ApiService {
         'data': data,
         'response': response.data
       };
-      logger.t(myData);
+      logger(myData.toString());
     } on DioError catch (e) {
       Map<String, dynamic> myData = {
         'link': url,
@@ -124,7 +126,7 @@ class ApiService {
             "${e.response?.toString()}\n"
             "${e.message}\n"
       };
-      logger.t(myData);
+      logger(myData.toString());
       if (e.response?.statusCode == 422) {
         return e.response;
       }
@@ -142,7 +144,7 @@ class ApiService {
       }
 
       if (e.response?.statusCode == 500) {
-        logger.t(e.response);
+        logger(e.response.toString());
         return e.response;
       }
       throw Exception(e.message);

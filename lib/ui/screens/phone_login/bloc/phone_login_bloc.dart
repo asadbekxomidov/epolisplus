@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 part 'phone_login_event.dart';
-
 part 'phone_login_state.dart';
 
 class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
@@ -49,7 +48,7 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
       return;
     }
 
-    emit(ErrorState(ServerFailure(message: baseResponse.message)));
+    emit(ErrorState(ServerFailure(message: baseResponse.message!)));
     return;
   }
 
