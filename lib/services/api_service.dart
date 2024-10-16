@@ -70,7 +70,7 @@ class ApiService {
         'headers': headers,
         'response': response.data
       };
-      logger(myData.toString());
+      loggerMap(myData);
     } on DioError catch (e) {
       if (e.response?.statusCode == 422) {
         return e.response;
@@ -89,7 +89,7 @@ class ApiService {
         'headers': headers,
         'errors': e.message
       };
-      logger(myData.toString());
+      loggerMap(myData);
       logger("Exception", error: e.message.toString());
       throw Exception(e.message);
     }
@@ -116,7 +116,7 @@ class ApiService {
         'data': data,
         'response': response.data
       };
-      logger(myData.toString());
+      loggerMap(myData);
     } on DioError catch (e) {
       Map<String, dynamic> myData = {
         'link': url,
@@ -126,7 +126,7 @@ class ApiService {
             "${e.response?.toString()}\n"
             "${e.message}\n"
       };
-      logger(myData.toString());
+      loggerMap(myData);
       if (e.response?.statusCode == 422) {
         return e.response;
       }
