@@ -35,7 +35,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               builder: (context, state) {
                 return LoadingIndicator(
                   isLoading: state is ResetPasswordLoadingState,
-                  dimens: dimens,
                 );
               },
             )

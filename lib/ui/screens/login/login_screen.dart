@@ -37,7 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (context, state) {
               return LoadingIndicator(
                 isLoading: state is LoginLoadingtate,
-                dimens: dimens,
               );
             },
           ),

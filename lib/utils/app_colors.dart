@@ -19,4 +19,5 @@ class AppColors {
   static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
   static Color transparentColor = Colors.transparent;
+  static Color transparentColor2 = Color(0x3FFFFFF);
 }

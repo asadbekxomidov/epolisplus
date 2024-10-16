@@ -20,16 +20,16 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
   Future<void> _phonelogin(
       CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
 
-    add(TogglePhoneWidgetActiveEvent(false));
+  //  add(TogglePhoneWidgetActiveEvent(false));
     emit(LoadingState());
-    await Future.delayed(Duration(seconds: 100));
+    await Future.delayed(Duration(seconds: 10));
 
     var phoneNumber = phoneController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
 
     if (phoneNumber.length != 9) {
       emit(ErrorState(InputPhoneFailure()));
-      add(TogglePhoneWidgetActiveEvent(true));
+      //  add(TogglePhoneWidgetActiveEvent(true));
       return;
     }
 

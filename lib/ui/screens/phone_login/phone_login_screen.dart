@@ -29,7 +29,6 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
               builder: (context, state) {
                 return LoadingIndicator(
                   isLoading: state is LoadingState,
-                  dimens: dimens,
                 );
               },
             ),

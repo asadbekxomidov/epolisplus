@@ -44,7 +44,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
               builder: (context, state) {
                 return LoadingIndicator(
                   isLoading: state is VerificationLoadingState,
-                  dimens: dimens,
                 );
               },
             )

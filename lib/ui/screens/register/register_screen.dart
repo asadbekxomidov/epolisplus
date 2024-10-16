@@ -39,7 +39,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               builder: (context, state) {
                 return LoadingIndicator(
                   isLoading: state is RegisterLoadingState,
-                  dimens: dimens,
                 );
               },
             )

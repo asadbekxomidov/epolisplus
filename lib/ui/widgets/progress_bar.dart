@@ -26,7 +26,7 @@ progressBar2(Dimens dimens) {
       print("object");
     },
     child: Container(
-      color: AppColors.whiteColor.withOpacity(0),
+      color: AppColors.transparentColor2,
       height: dimens.screenHeight,
       width: dimens.screenWidth,
     ),

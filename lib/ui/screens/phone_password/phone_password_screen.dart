@@ -45,7 +45,6 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
             builder: (context, state) {
               return LoadingIndicator(
                 isLoading: state is PhonePasswordLoadingState,
-                dimens: dimens,
               );
             },
           ),
