@@ -10,37 +10,43 @@ part 'phone_login_state.dart';
 
 class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
   TextEditingController phoneController = TextEditingController();
+  bool isActive = true;
 
-  PhoneLoginBloc() : super(SuccessState()) {
-    on<CheckAuthEvent>(phonelogin);
-    on<TogglePhoneWidgetActiveEvent>(onTogglePhoneWidgetActive);
+  PhoneLoginBloc() : super(PhoneWidgetState(isActive: true)) {
+    on<CheckAuthEvent>(_phonelogin);
+    on<TogglePhoneWidgetActiveEvent>(_onToggleActive);
   }
 
-  phonelogin(CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
+  Future<void> _phonelogin(
+      CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
+
+    add(TogglePhoneWidgetActiveEvent(false));
     emit(LoadingState());
     await Future.delayed(Duration(seconds: 100));
 
-    var phoneNumber = phoneController.text.toString().trim();
+    var phoneNumber = phoneController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
 
     if (phoneNumber.length != 9) {
-      print(phoneNumber);
       emit(ErrorState(InputPhoneFailure()));
+      add(TogglePhoneWidgetActiveEvent(true));
       return;
     }
+
     emit(SuccessState());
+
     if (phoneNumber == "900000000") {
       Get.to(() => LoginScreen(phoneNumber: phoneNumber));
     } else {
       Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
     }
+
+    add(TogglePhoneWidgetActiveEvent(true));
   }
 
-  void onTogglePhoneWidgetActive(
+  void _onToggleActive(
       TogglePhoneWidgetActiveEvent event, Emitter<PhoneLoginState> emit) {
-    final currentState = state;
-    if (currentState is PhoneSuccessState) {
-      emit(PhoneSuccessState(isActive: !currentState.isActive));
-    }
+    isActive = event.isActive;
+    emit(PhoneWidgetState(isActive: isActive));
   }
 }

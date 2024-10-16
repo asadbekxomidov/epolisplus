@@ -52,6 +52,9 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
       },
       builder: (context, state) {
         bloc = BlocProvider.of<PhoneLoginBloc>(context);
+        final bool isActive = state is PhoneWidgetState ? state.isActive : true;
+        final bool isLoading = state is LoadingState;
+
         return Container(
           height: dimens.screenHeight,
           padding: EdgeInsets.symmetric(
@@ -81,14 +84,13 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
               PhoneWidget(
                 controller: bloc.phoneController,
                 showStar: true,
-                isActive: state.isActive,
+                isActive: isActive,
               ),
               Gap(dimens.paddingVerticalItem16),
               RightIconBtn(
-                isLoading: state is LoadingState,
+                isLoading: isLoading,
                 onClick: () {
                   bloc.add(CheckAuthEvent());
-                  bloc.add(TogglePhoneWidgetActiveEvent());
                 },
                 text: AppStrings.loginButton,
               ),

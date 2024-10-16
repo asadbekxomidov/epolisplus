@@ -7,4 +7,11 @@ abstract class PhoneLoginEvent extends Equatable {
 
 class CheckAuthEvent extends PhoneLoginEvent {}
 
-class TogglePhoneWidgetActiveEvent extends PhoneLoginEvent {}
+class TogglePhoneWidgetActiveEvent extends PhoneLoginEvent {
+  final bool isActive;
+
+  TogglePhoneWidgetActiveEvent(this.isActive);
+
+  @override
+  List<Object?> get props => [isActive];
+}

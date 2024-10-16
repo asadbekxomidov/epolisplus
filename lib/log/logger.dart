@@ -8,6 +8,6 @@ void main() {
   logger.d("Bu DEBUG xabari");
   logger.i("Bu INFO xabari");
   logger.w("Bu WARNING xabari");
-  logger.e("Bu ERROR xabari" + "StackTrace yoki istisno bilan");
+  logger.e("Bu ERROR xabari" "StackTrace yoki istisno bilan");
   logger.v("Bu VERBOSE xabari");
 }
