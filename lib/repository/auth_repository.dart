@@ -6,6 +6,10 @@ class AuthRepository extends AuthRepositoryIml {
 
   @override
   Future<BaseModels<bool>> checkAuth(String phoneNumber) async {
+
+
+
+
     return await BaseModels(200, true, "message", true);
   }
 
