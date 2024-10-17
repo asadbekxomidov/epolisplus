@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:epolisplus/log/logger.dart';
+import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
@@ -33,14 +34,25 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(LoginLoadingtate());
     await Future.delayed(Duration(seconds: 2));
 
-    // serverdan telefon number bor yoki yo'qligini tekshirish kerak
     emit(SuccessState());
-    if (phoneNumber == "900000000" && password == "asadbek2006") {
-      Get.to(() => VerificationScreen(phoneNumber: phoneController.text));
-      // Get.to(() => RegisterScreen());
-    } else {
-      emit(LoginErrorState(LoginFailure()));
+
+    var authRepository = AuthRepository();
+    var baseResponse = await authRepository.login(phoneNumber, password);
+
+    if (baseResponse.status == 200) {
+      var isLoginUser = baseResponse.response as bool;
+      if (isLoginUser) {
+        Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+      } else {
+        emit(LoginErrorState(LoginFailure()));
+      }
     }
+
+    // if (phoneNumber == "900000000" && password == "asadbek2006") {
+    //   Get.to(() => VerificationScreen(phoneNumber: phoneController.text));
+    // } else {
+    //   emit(LoginErrorState(LoginFailure()));
+    // }
   }
 
   FutureOr<void> setData(SetPhoneNumberEvent event, Emitter<LoginState> emit) {
