@@ -75,8 +75,7 @@ class AuthRepository extends AuthRepositoryIml {
       "password": password,
     };
 
-    var url = ApiConstanta.CHECK_AUTH;
-    // var url = ApiConstanta.LOGIN;
+    var url = ApiConstanta.SIGN_IN;
     Response? response;
 
     try {
