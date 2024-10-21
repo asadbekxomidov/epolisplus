@@ -14,11 +14,12 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
   bool isActive = true;
 
   PhoneLoginBloc() : super(PhoneWidgetState(isActive: true)) {
-    on<CheckAuthEvent>(_phonelogin);
-    on<TogglePhoneWidgetActiveEvent>(_onToggleActive);
+    on<CheckAuthEvent>(phonelogin);
+    on<TogglePhoneWidgetActiveEvent>(onToggleActive);
   }
 
-  Future<void> _phonelogin(CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
+  Future<void> phonelogin(
+      CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
     emit(LoadingState());
     await Future.delayed(Duration(seconds: 2));
 
@@ -50,7 +51,8 @@ class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
     return;
   }
 
-  void _onToggleActive(TogglePhoneWidgetActiveEvent event, Emitter<PhoneLoginState> emit) {
+  void onToggleActive(
+      TogglePhoneWidgetActiveEvent event, Emitter<PhoneLoginState> emit) {
     isActive = event.isActive;
     emit(PhoneWidgetState(isActive: isActive));
   }
