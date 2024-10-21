@@ -104,7 +104,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Gap(dimens.paddingVerticalItem16),
                         ResetPasswordButton(
-                          onClick: () {},
+                          onClick: () {
+                            bloc.add(LoginResetPasswordEvent());
+                          },
                           text: AppStrings.forgotPassword,
                         ),
                         Gap(dimens.paddingVerticalItem16),

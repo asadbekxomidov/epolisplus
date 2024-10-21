@@ -18,12 +18,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(SuccessState()) {
     on<CheckLoginEvent>(login);
     on<SetPhoneNumberEvent>(setData);
+    on<LoginResetPasswordEvent>(resetpassword);
   }
 
   login(CheckLoginEvent event, Emitter<LoginState> emit) async {
     var phoneNumber = phoneController.text.toString().trim();
     var password = passwordController.text.toString().trim();
-    phoneNumber = clearPhoneMask(phoneNumber);
     phoneNumber = clearPhoneMask(phoneNumber);
     logger(phoneNumber);
     if (phoneNumber.length != 9 && password.length != 8) {
@@ -40,10 +40,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     var baseResponse = await authRepository.login(phoneNumber, password);
 
     if (baseResponse.status == 200) {
-      Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+      Get.to(() => HomeScreen());
       var isLoginUser = baseResponse.response as bool;
       if (isLoginUser) {
-        Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+        Get.to(() => HomeScreen());
+        // Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
       } else {
         emit(LoginErrorState(LoginFailure()));
       }
@@ -57,6 +58,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           TextEditingValue(text: event.number),
         )
         .text;
+    emit(SuccessState());
+  }
+
+  resetpassword(LoginResetPasswordEvent event, Emitter<LoginState> emit) {
+    Get.to(() => ResetPasswordScreen());
     emit(SuccessState());
   }
 }

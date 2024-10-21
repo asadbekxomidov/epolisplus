@@ -187,7 +187,7 @@ class ResetPasswordButton extends StatelessWidget {
             highlightColor: AppColors.transparentColor,
             backgroundColor: AppColors.transparentColor,
           ),
-          onPressed: () {},
+          onPressed: () => onClick(),
           child: Text(
             text,
             style: dimens.forgotPassword,

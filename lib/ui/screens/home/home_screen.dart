@@ -26,6 +26,12 @@ class HomeScreen extends StatelessWidget {
                 fontWeight: FontWeight.w400,
               ),
             )),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Column(
         children: [],
