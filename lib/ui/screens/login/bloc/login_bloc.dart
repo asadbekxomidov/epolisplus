@@ -40,6 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     var baseResponse = await authRepository.login(phoneNumber, password);
 
     if (baseResponse.status == 200) {
+      Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
       var isLoginUser = baseResponse.response as bool;
       if (isLoginUser) {
         Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
@@ -47,12 +48,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginErrorState(LoginFailure()));
       }
     }
-
-    // if (phoneNumber == "900000000" && password == "asadbek2006") {
-    //   Get.to(() => VerificationScreen(phoneNumber: phoneController.text));
-    // } else {
-    //   emit(LoginErrorState(LoginFailure()));
-    // }
   }
 
   FutureOr<void> setData(SetPhoneNumberEvent event, Emitter<LoginState> emit) {

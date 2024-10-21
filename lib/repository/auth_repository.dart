@@ -64,8 +64,7 @@ class AuthRepository extends AuthRepositoryIml {
   Future<BaseModels<LoginResponse>> login(
       String phoneNumber, String password) async {
     var headers = {
-      'Content-type': 'application/json',
-      'Content': 'application/json',
+      'Content-Type': 'application/json',
       'Accept-Language': "uz-UZ",
       'Accept-Encoding': 'UTF-8',
     };
@@ -73,13 +72,16 @@ class AuthRepository extends AuthRepositoryIml {
     var data = {
       "phone": phoneNumber,
       "password": password,
+      "username": phoneNumber,
     };
 
     var url = ApiConstanta.SIGN_IN;
+
     Response? response;
 
     try {
       response = await service.getPostData(data, headers, url);
+
       if (response?.statusCode != 200) {
         return BaseModels(
           status: response!.statusCode,
@@ -89,7 +91,6 @@ class AuthRepository extends AuthRepositoryIml {
       } else {
         if (response?.data["status"] == 200) {
           var responseData = response?.data['response'];
-
           LoginResponse loginResponse = LoginResponse(
             responseData['access_token'],
             responseData['phone'],
