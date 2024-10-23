@@ -1,3 +1,4 @@
+import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     on<CheckVerificationEvent>(verification);
   }
 
-  verification(
+  Future<void> verification(
       CheckVerificationEvent event, Emitter<VerificationState> emit) async {
     emit(VerificationLoadingState());
     await Future.delayed(Duration(seconds: 2));
@@ -30,11 +31,25 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     }
 
     emit(VerificationSuccessState());
-    if (phoneCode == "00000") {
-      Get.to(() => ResetPasswordScreen());
-    } else {
-      emit(VerificationErrorState(InputPhoneCodeFailure()));
-      // Get.to(() => ResetPasswordScreen());
+
+    var authRepository = AuthRepository();
+    var baseResponse = await authRepository.forgotPassword(phoneCode);
+
+    if (baseResponse.status == 200) {
+      var forgotPassword = baseResponse.response as bool;
+
+      if (forgotPassword) {
+        Get.to(() => ResetPasswordScreen());
+      } else {
+        emit(VerificationErrorState(InputPhoneCodeFailure()));
+      }
     }
+
+    // if (phoneCode == "00000") {
+    //   Get.to(() => ResetPasswordScreen());
+    // } else {
+    //   emit(VerificationErrorState(InputPhoneCodeFailure()));
+    //   // Get.to(() => ResetPasswordScreen());
+    // }
   }
 }

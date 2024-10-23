@@ -1,8 +1,8 @@
 class RegisterResponse {
   String first_name;
-  String last_name;
+  String? last_name;
   String phone;
-  String email;
+  String? email;
   String password;
   String password_repeat;
 

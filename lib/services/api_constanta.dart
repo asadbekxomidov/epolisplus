@@ -1,7 +1,12 @@
 class ApiConstanta {
-  static String BASE_URL_EPOLIS_PLUS = "https://epolisplus.uz/";
-  static String CHECK_AUTH = "v3/user/check-auth";
-  static String SIGN_IN = "v2/user/sign-in";
+  static const BASE_URL_EPOLIS_PLUS = "https://epolisplus.uz/";
+  static const CHECK_AUTH = "v3/user/check-auth";
+  static const SIGN_IN = "v2/user/sign-in";
+  static const SIGN_UP = "v2/user/sign-up";
+  static const FORGET = "v1/user/forgot-password";
+  static const RESET = "v1/user/reset-password";
+  static const RESEND_SMS_CODE = "v1/user/resend-sms";
+  static const CONFIRM_ACCOUNT = "v1/user/confirm-account";
 }
 
 /*

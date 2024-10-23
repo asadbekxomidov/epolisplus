@@ -1,3 +1,4 @@
+import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
@@ -23,7 +24,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<RegisterSetPhoneNumberEvent>(setData);
   }
 
-  register(CheckRegisterEvent event, Emitter<RegisterState> emit) async {
+  Future<void> register(
+      CheckRegisterEvent event, Emitter<RegisterState> emit) async {
     emit(RegisterLoadingState());
     await Future.delayed(Duration(seconds: 2));
 
@@ -39,23 +41,34 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       //     confirmPassword.length != 8 ||
       //     password != confirmPassword ||
       //     fullName.length < 5) {
-      print(phoneNumber);
-      print(password);
-      print(confirmPassword);
-      print(fullName);
+
       emit(RegisterErrorState(InputRegisterFailure()));
       return;
     }
 
     emit(RegisterSuccessState());
-    if (phoneNumber == "908579552" &&
-        password.length >= 8 &&
-        password == confirmPassword &&
-        fullName.length >= 5) {
-      Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
-    } else {
-      emit(RegisterErrorState(InputRegisterFailure()));
+
+    var authRepository = AuthRepository();
+    var baseResponse = await authRepository.register(
+        fullName, phoneNumber, password, confirmPassword, '', '');
+
+    if (baseResponse.status == 200) {
+      var userSignIn = baseResponse.response as bool;
+      if (userSignIn) {
+        Get.to(() => HomeScreen());
+      } else {
+        emit(RegisterErrorState(InputRegisterFailure()));
+      }
     }
+
+    // if (phoneNumber == "908579552" &&
+    //     password.length >= 8 &&
+    //     password == confirmPassword &&
+    //     fullName.length >= 5) {
+    //   Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+    // } else {
+    //   emit(RegisterErrorState(InputRegisterFailure()));
+    // }
   }
 
   void toggleAgree(ToggleAgreeEvent event, Emitter<RegisterState> emit) {

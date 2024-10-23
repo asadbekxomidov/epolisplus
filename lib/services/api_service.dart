@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:epolisplus/log/logger.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../log/logger.dart';
 
 class ApiService {
   late final Dio _dio;

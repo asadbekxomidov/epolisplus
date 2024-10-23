@@ -1,3 +1,4 @@
+import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:get/get.dart';
@@ -20,11 +21,11 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     emit(ResetPasswordLoadingState());
     await Future.delayed(Duration(seconds: 2));
 
-    var phoneCode = otpController.text.toString().trim();
-    phoneCode = clearPhoneMask(phoneCode);
+    var phoneNumber = otpController.text.toString().trim();
+    phoneNumber = clearPhoneMask(phoneNumber);
 
-    if (phoneCode.length != 9) {
-      print(phoneCode);
+    if (phoneNumber.length != 9) {
+      print(phoneNumber);
       emit(ResetPasswordErrorState(InputPhoneFailure()));
       return;
     }
@@ -32,11 +33,26 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     // serverdan telefon number bor yoki yo'qligini tekshirish kerak
 
     emit(ResetPasswordSuccessState());
-    if (phoneCode == "900000000") {
-      Get.to(() => PhoneRasswordScreen());
-    } else {
-      emit(ResetPasswordErrorState(InputPhoneFailure()));
-      // Get.to(() => PhoneRasswordScreen());
+
+    var authRepository = AuthRepository();
+    var baseResponse = await authRepository.forgotPassword(phoneNumber);
+
+    if (baseResponse.status == 200) {
+      var isUser = baseResponse.response as bool;
+
+      if (isUser) {
+        Get.to(() => ResetPasswordScreen());
+      } else {
+        emit(ResetPasswordErrorState(InputPhoneFailure()));
+      }
+      return;
     }
+
+    // if (phoneNumber == "900000000") {
+    //   Get.to(() => PhoneRasswordScreen());
+    // } else {
+    //   emit(ResetPasswordErrorState(InputPhoneFailure()));
+    //   // Get.to(() => PhoneRasswordScreen());
+    // }
   }
 }
