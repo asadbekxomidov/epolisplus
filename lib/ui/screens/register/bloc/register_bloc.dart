@@ -36,12 +36,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     phoneNumber = clearPhoneMask(phoneNumber);
 
     if (phoneNumber.length != 9) {
-      // if (phoneNumber.length != 9 ||
-      //     password.length != 8 ||
-      //     confirmPassword.length != 8 ||
-      //     password != confirmPassword ||
-      //     fullName.length < 5) {
-
       emit(RegisterErrorState(InputRegisterFailure()));
       return;
     }
@@ -49,13 +43,24 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(RegisterSuccessState());
 
     var authRepository = AuthRepository();
+    // var baseResponse = await authRepository.register(
+    //     fullName, '', phoneNumber, '', password, confirmPassword);
+
     var baseResponse = await authRepository.register(
-        fullName, phoneNumber, password, confirmPassword, '', '');
+      fullNameController.text.split(' ').first, // first_name
+      fullNameController.text.split(' ').length > 1
+          ? fullNameController.text.split(' ').sublist(1).join(' ')
+          : '',
+      phoneNumber,
+      '',
+      password,
+      confirmPassword,
+    );
 
     if (baseResponse.status == 200) {
+      Get.to(() => HomeScreen());
       var userSignIn = baseResponse.response as bool;
       if (userSignIn) {
-        Get.to(() => HomeScreen());
       } else {
         emit(RegisterErrorState(InputRegisterFailure()));
       }

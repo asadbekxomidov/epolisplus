@@ -21,7 +21,7 @@ class LoginFailure extends Failure {
 
   @override
   String getErrorMessage(BuildContext context) =>
-      AppStrings.input_password_errors;
+      AppStrings.input_password_and_phone_errors;
 }
 
 class InputRegisterFailure extends Failure {

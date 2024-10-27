@@ -16,7 +16,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     on<CheckResetPasswordEvent>(resetpassword);
   }
 
-  resetpassword(
+  Future<void> resetpassword(
       CheckResetPasswordEvent event, Emitter<ResetPasswordState> emit) async {
     emit(ResetPasswordLoadingState());
     await Future.delayed(Duration(seconds: 2));
@@ -30,6 +30,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       return;
     }
 
+    Get.to(() => PhoneRasswordScreen());
     // serverdan telefon number bor yoki yo'qligini tekshirish kerak
 
     emit(ResetPasswordSuccessState());
@@ -37,11 +38,12 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     var authRepository = AuthRepository();
     var baseResponse = await authRepository.forgotPassword(phoneNumber);
 
+    Get.to(() => PhoneRasswordScreen());
     if (baseResponse.status == 200) {
       var isUser = baseResponse.response as bool;
 
       if (isUser) {
-        Get.to(() => ResetPasswordScreen());
+        Get.to(() => PhoneRasswordScreen());
       } else {
         emit(ResetPasswordErrorState(InputPhoneFailure()));
       }

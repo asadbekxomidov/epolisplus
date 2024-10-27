@@ -33,7 +33,7 @@ class AppStrings {
   static const String yourphonenumbernewpassword =
       "Введите код отправленный на Ваш номер телефона и введите новый пароль";
   static const String input_phone_errors = "Incorrect phone number!";
-  static const String input_password_errors = "Incorrect password";
+  static const String input_password_and_phone_errors = "Phone number or password entered incorrectly";
   static const String input_register_errors =
       "There is a mistake in the password or name or phone number";
   static const String input_phoneCode_errors = "Code error please try again";

@@ -44,7 +44,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       var isLoginUser = baseResponse.response as bool;
       if (isLoginUser) {
         Get.to(() => HomeScreen());
-        // Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
       } else {
         emit(LoginErrorState(LoginFailure()));
       }

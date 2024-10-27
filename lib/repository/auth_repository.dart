@@ -59,66 +59,133 @@ class AuthRepository extends AuthRepositoryIml {
     }
   }
 
+  // @override
+  // Future<BaseModels<LoginResponse>> login(
+  //     String phoneNumber, String password) async {
+  //   var headers = {
+  //     'Content-Type': 'application/json',
+  //     'Accept-Language': "uz-UZ",
+  //     'Accept-Encoding': 'UTF-8',
+  //   };
+
+  //   var data = {
+  //     "phone": phoneNumber,
+  //     "password": password,
+  //     "username": phoneNumber,
+  //   };
+
+  //   var url = ApiConstanta.SIGN_IN;
+
+  //   Response? response;
+
+  //   try {
+  //     response = await service.getPostData(data, headers, url);
+
+  //     if (response?.statusCode != 200) {
+  //       return BaseModels(
+  //         status: response!.statusCode,
+  //         message: response.statusMessage,
+  //         code: false,
+  //       );
+  //     } else {
+  //       if (response?.data["status"] == 200) {
+  //         var responseData = response?.data['response'];
+  //         LoginResponse loginResponse = LoginResponse(
+  //           responseData['access_token'],
+  //           responseData['phone'],
+  //           responseData['full_name'],
+  //         );
+
+  //         return BaseModels(
+  //           status: 200,
+  //           response: loginResponse,
+  //           code: true,
+  //           message: 'Login successful',
+  //         );
+  //       } else {
+  //         return BaseModels(
+  //           status: response?.data["status"],
+  //           message: response?.data["message"] ?? 'Unknown error',
+  //           code: false,
+  //         );
+  //       }
+  //     }
+  //   } on Exception catch (e) {
+  //     return BaseModels(
+  //       status: 123,
+  //       code: false,
+  //       message:
+  //           "Server vaqtincha ishlamayapti, iltimos qaytadan urinib ko'ring: $e",
+  //     );
+  //   }
+  // }
+
   @override
-  Future<BaseModels<LoginResponse>> login(
-      String phoneNumber, String password) async {
-    var headers = {
-      'Content-Type': 'application/json',
-      'Accept-Language': "uz-UZ",
-      'Accept-Encoding': 'UTF-8',
-    };
+Future<BaseModels<LoginResponse>> login(
+    String phoneNumber, String password) async {
+  var headers = {
+    'Content-Type': 'application/json',
+    'Accept-Language': "uz-UZ",
+    'Accept-Encoding': 'UTF-8',
+  };
 
-    var data = {
-      "phone": phoneNumber,
-      "password": password,
-      "username": phoneNumber,
-    };
+  var data = {
+    "phone": phoneNumber,
+    "password": password,
+    "username": phoneNumber,
+  };
 
-    var url = ApiConstanta.SIGN_IN;
+  var url = ApiConstanta.SIGN_IN;
+  Response? response;
 
-    Response? response;
+  try {
+    response = await service.getPostData(data, headers, url);
 
-    try {
-      response = await service.getPostData(data, headers, url);
+    if (response?.statusCode == 422) {
+      // 422 - Validatsiya xatosi uchun
+      String errorMessage = response?.data["response"]?["password"] ??
+          "Noto‘g‘ri telefon raqami yoki parol";
 
-      if (response?.statusCode != 200) {
-        return BaseModels(
-          status: response!.statusCode,
-          message: response.statusMessage,
-          code: false,
-        );
-      } else {
-        if (response?.data["status"] == 200) {
-          var responseData = response?.data['response'];
-          LoginResponse loginResponse = LoginResponse(
-            responseData['access_token'],
-            responseData['phone'],
-            responseData['full_name'],
-          );
-
-          return BaseModels(
-            status: 200,
-            response: loginResponse,
-            code: true,
-            message: 'Login successful',
-          );
-        } else {
-          return BaseModels(
-            status: response?.data["status"],
-            message: response?.data["message"] ?? 'Unknown error',
-            code: false,
-          );
-        }
-      }
-    } on Exception catch (e) {
       return BaseModels(
-        status: 123,
+        status: 422,
+        message: errorMessage,
         code: false,
-        message:
-            "Server vaqtincha ishlamayapti, iltimos qaytadan urinib ko'ring: $e",
+      );
+    } else if (response?.statusCode != 200) {
+      // Boshqa xatolar uchun
+      return BaseModels(
+        status: response!.statusCode,
+        message: response.statusMessage ?? "Xato yuz berdi",
+        code: false,
+      );
+    } else {
+      // Muvaffaqiyatli login uchun
+      var responseData = response?.data['response'];
+
+      LoginResponse loginResponse = LoginResponse(
+        responseData['access_token'],
+        responseData['phone'],
+        responseData['full_name'],
+      );
+
+      return BaseModels(
+        status: 200,
+        response: loginResponse,
+        code: true,
+        message: 'Login successful',
       );
     }
+  } on Exception catch (e) {
+    // Server bilan bog‘liq xatolar uchun
+    return BaseModels(
+      status: 123,
+      code: false,
+      message:
+          "Server vaqtincha ishlamayapti, iltimos qaytadan urinib ko'ring: $e",
+    );
   }
+}
+
 
   @override
   Future<BaseModels<RegisterResponse>> register(
@@ -135,10 +202,11 @@ class AuthRepository extends AuthRepositoryIml {
       'Accept-Encoding': 'UTF-8',
     };
 
-    // Agar nullable qiymatlar null bo‘lsa, bo‘sh string bilan almashtiramiz
+    // Agar first_name yoki last_name bo'lmasa, bo'sh string bilan almashtiramiz
+    String fullName = '${first_name ?? ''} ${last_name ?? ''}'.trim();
+
     var data = {
-      "first_name": first_name ?? "",
-      "last_name": last_name ?? "",
+      "full_name": fullName, // Serverga to‘liq ismni yuboramiz
       "phone": phone,
       "email": email ?? "",
       "password": password,
@@ -151,42 +219,77 @@ class AuthRepository extends AuthRepositoryIml {
     try {
       response = await service.getPostData(data, headers, url);
 
+      // if (response?.statusCode != 200) {
+      //   return BaseModels(
+      //     status: response!.statusCode,
+      //     message: response.statusMessage ?? 'Xato yuz berdi',
+      //     code: false,
+      //   );
+      // } else if (response?.data["status"] == 200) {
+      //   var responseData = response?.data['response'];
+
+      //   RegisterResponse registerResponse = RegisterResponse(
+      //     responseData['first_name'] ?? "",
+      //     responseData['last_name'] ?? "",
+      //     responseData['phone'] ?? "",
+      //     responseData['email'] ?? "",
+      //     password,
+      //     password_repeat,
+      //   );
+
+      //   return BaseModels(
+      //     status: 200,
+      //     response: registerResponse,
+      //     code: true,
+      //     message: 'Ro‘yxatdan muvaffaqiyatli o‘tdingiz',
+      //   );
+      // } else {
+      //   return BaseModels(
+      //     status: response?.data["status"],
+      //     message: response?.data["message"] ?? 'Noma\'lum xato',
+      //     code: false,
+      //   );
+      // }
       if (response?.statusCode != 200) {
-        // Xato status kodi bilan qaytadi
         return BaseModels(
           status: response!.statusCode,
           message: response.statusMessage ?? 'Xato yuz berdi',
           code: false,
         );
-      } else {
-        if (response?.data["status"] == 200) {
-          var responseData = response?.data['response'];
+      } else if (response?.data["status"] == 200) {
+        var responseData = response?.data['response'];
 
-          RegisterResponse registerResponse = RegisterResponse(
-            responseData['first_name'] ?? "", // Agar null bo‘lsa, bo‘sh string
-            responseData['last_name'] ?? "",
-            responseData['phone'] ?? "",
-            responseData['email'] ?? "",
-            password,
-            password_repeat,
-          );
-
+        if (responseData == null) {
           return BaseModels(
-            status: 200,
-            response: registerResponse,
-            code: true,
-            message: 'Ro‘yxatdan muvaffaqiyatli o‘tdingiz',
-          );
-        } else {
-          return BaseModels(
-            status: response?.data["status"],
-            message: response?.data["message"] ?? 'Noma\'lum xato',
+            status: 422,
+            message: 'Serverdan to‘liq ma’lumot kelmadi',
             code: false,
           );
         }
+
+        RegisterResponse registerResponse = RegisterResponse(
+          responseData['first_name'] ?? "",
+          responseData['last_name'] ?? "",
+          responseData['phone'] ?? "",
+          responseData['email'] ?? "",
+          password,
+          password_repeat,
+        );
+
+        return BaseModels(
+          status: 200,
+          response: registerResponse,
+          code: true,
+          message: 'Ro‘yxatdan muvaffaqiyatli o‘tdingiz',
+        );
+      } else {
+        return BaseModels(
+          status: response?.data["status"],
+          message: response?.data["message"] ?? 'Noma\'lum xato',
+          code: false,
+        );
       }
     } on Exception catch (e) {
-      // Server bilan bog‘liq xatolar uchun
       return BaseModels(
         status: 123,
         code: false,
@@ -194,6 +297,81 @@ class AuthRepository extends AuthRepositoryIml {
       );
     }
   }
+
+  // @override
+  // Future<BaseModels<RegisterResponse>> register(
+  //   String? first_name,
+  //   String? last_name,
+  //   String phone,
+  //   String? email,
+  //   String password,
+  //   String password_repeat,
+  // ) async {
+  //   var headers = {
+  //     'Content-Type': 'application/json',
+  //     'Accept-Language': "uz-UZ",
+  //     'Accept-Encoding': 'UTF-8',
+  //   };
+
+  //   // Agar nullable qiymatlar null bo‘lsa, bo‘sh string bilan almashtiramiz
+  //   var data = {
+  //     "first_name": first_name ?? "",
+  //     "last_name": last_name ?? "",
+  //     "phone": phone,
+  //     "email": email ?? "",
+  //     "password": password,
+  //     "password_repeat": password_repeat,
+  //   };
+
+  //   var url = ApiConstanta.SIGN_UP;
+  //   Response? response;
+
+  //   try {
+  //     response = await service.getPostData(data, headers, url);
+
+  //     if (response?.statusCode != 200) {
+  //       // Xato status kodi bilan qaytadi
+  //       return BaseModels(
+  //         status: response!.statusCode,
+  //         message: response.statusMessage ?? 'Xato yuz berdi',
+  //         code: false,
+  //       );
+  //     } else {
+  //       if (response?.data["status"] == 200) {
+  //         var responseData = response?.data['response'];
+
+  //         RegisterResponse registerResponse = RegisterResponse(
+  //           responseData['first_name'] ?? "", // Agar null bo‘lsa, bo‘sh string
+  //           responseData['last_name'] ?? "",
+  //           responseData['phone'] ?? "",
+  //           responseData['email'] ?? "",
+  //           password,
+  //           password_repeat,
+  //         );
+
+  //         return BaseModels(
+  //           status: 200,
+  //           response: registerResponse,
+  //           code: true,
+  //           message: 'Ro‘yxatdan muvaffaqiyatli o‘tdingiz',
+  //         );
+  //       } else {
+  //         return BaseModels(
+  //           status: response?.data["status"],
+  //           message: response?.data["message"] ?? 'Noma\'lum xato',
+  //           code: false,
+  //         );
+  //       }
+  //     }
+  //   } on Exception catch (e) {
+  //     // Server bilan bog‘liq xatolar uchun
+  //     return BaseModels(
+  //       status: 123,
+  //       code: false,
+  //       message: "Server vaqtincha ishlamayapti, qaytadan urinib ko‘ring: $e",
+  //     );
+  //   }
+  // }
 
   @override
   Future<BaseModels<ConfitmAccountResponse>> confirmAccount(
