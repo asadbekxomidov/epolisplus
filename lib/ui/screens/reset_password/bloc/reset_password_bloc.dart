@@ -50,11 +50,6 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       return;
     }
 
-    // if (phoneNumber == "900000000") {
-    //   Get.to(() => PhoneRasswordScreen());
-    // } else {
-    //   emit(ResetPasswordErrorState(InputPhoneFailure()));
-    //   // Get.to(() => PhoneRasswordScreen());
-    // }
+    
   }
 }

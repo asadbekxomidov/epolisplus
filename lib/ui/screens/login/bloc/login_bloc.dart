@@ -1,5 +1,145 @@
+// import 'dart:async';
+// import 'package:epolisplus/log/logger.dart';
+// import 'package:epolisplus/repository/auth_repository.dart';
+// import 'package:epolisplus/ui/screens/screns_export.dart';
+// import 'package:epolisplus/utils/utils_export.dart';
+// import 'package:equatable/equatable.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:get/get.dart';
+
+// part 'login_event.dart';
+// part 'login_state.dart';
+
+// class LoginBloc extends Bloc<LoginEvent, LoginState> {
+//   TextEditingController phoneController = TextEditingController();
+//   TextEditingController passwordController = TextEditingController();
+
+//   LoginBloc() : super(SuccessState()) {
+//     on<CheckLoginEvent>(login);
+//     on<SetPhoneNumberEvent>(setData);
+//     on<LoginResetPasswordEvent>(resetpassword);
+//   }
+
+//   login(CheckLoginEvent event, Emitter<LoginState> emit) async {
+//     var phoneNumber = phoneController.text.toString().trim();
+//     var password = passwordController.text.toString().trim();
+//     phoneNumber = clearPhoneMask(phoneNumber);
+//     logger(phoneNumber);
+//     if (phoneNumber.length != 9 && password.length != 8) {
+//       emit(LoginErrorState(LoginFailure()));
+//       return;
+//     }
+
+//     emit(LoginLoadingtate());
+//     await Future.delayed(Duration(seconds: 2));
+
+//     emit(SuccessState());
+
+//     var authRepository = AuthRepository();
+//     var baseResponse = await authRepository.login(phoneNumber, password);
+
+//     if (baseResponse.status == 200) {
+//       Get.to(() => HomeScreen());
+//       var isLoginUser = baseResponse.response as bool;
+//       if (isLoginUser) {
+//         Get.to(() => HomeScreen());
+//       } else {
+//         emit(LoginErrorState(LoginFailure()));
+//       }
+//     }
+//   }
+
+//   FutureOr<void> setData(SetPhoneNumberEvent event, Emitter<LoginState> emit) {
+//     phoneController.text = Masked.maskPhone
+//         .formatEditUpdate(
+//           TextEditingValue(text: ''),
+//           TextEditingValue(text: event.number),
+//         )
+//         .text;
+//     emit(SuccessState());
+//   }
+
+//   resetpassword(LoginResetPasswordEvent event, Emitter<LoginState> emit) {
+//     Get.to(() => ResetPasswordScreen());
+//     emit(SuccessState());
+//   }
+// }
+
+// import 'dart:async';
+// import 'package:epolisplus/repository/auth_repository.dart';
+// import 'package:epolisplus/ui/screens/screns_export.dart';
+// import 'package:epolisplus/utils/utils_export.dart';
+// import 'package:equatable/equatable.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:get/get.dart';
+
+// part 'login_event.dart';
+// part 'login_state.dart';
+
+// class LoginBloc extends Bloc<LoginEvent, LoginState> {
+//   TextEditingController phoneController = TextEditingController();
+//   TextEditingController passwordController = TextEditingController();
+
+//   final SharedPreferencesManager _prefsManager = SharedPreferencesManager();
+
+//   LoginBloc() : super(SuccessState()) {
+//     on<CheckLoginEvent>(login);
+//     on<SetPhoneNumberEvent>(setData);
+//     on<LoginResetPasswordEvent>(resetpassword);
+//   }
+
+//   Future<void> login(CheckLoginEvent event, Emitter<LoginState> emit) async {
+//     var phoneNumber = phoneController.text.trim();
+//     var password = passwordController.text.trim();
+//     phoneNumber = clearPhoneMask(phoneNumber);
+
+//     if (phoneNumber.length != 9 || password.length < 8) {
+//       emit(LoginErrorState(LoginFailure()));
+//       return;
+//     }
+
+//     emit(LoginLoadingtate());
+
+//     var authRepository = AuthRepository();
+//     var baseResponse = await authRepository.login(phoneNumber, password);
+
+//     if (baseResponse.status == 200) {
+//       Get.to(() => HomeScreen());
+//       emit(SuccessState());
+//     } else if (baseResponse.status == 401) {
+//       // Token muddati o'tgan bo'lsa, tokenni o‘chirib LoginScreen'ga qaytarish
+//       await _prefsManager.clearToken();
+//       Get.offAll(() => LoginScreen(phoneNumber: phoneNumber));
+//       emit(LoginErrorState(LoginFailure()));
+//       // emit(LoginErrorState(LoginFailure(
+//       //     errorMessage: "Token muddati o'tdi, qayta kiring.")));
+//     } else {
+//       emit(LoginErrorState(LoginFailure()));
+//       // emit(LoginErrorState(LoginFailure(
+//       //     errorMessage: baseResponse.message ?? 'Login xato!')));
+//     }
+//   }
+
+//   FutureOr<void> setData(SetPhoneNumberEvent event, Emitter<LoginState> emit) {
+//     phoneController.text = Masked.maskPhone
+//         .formatEditUpdate(
+//           TextEditingValue(text: ''),
+//           TextEditingValue(text: event.number),
+//         )
+//         .text;
+//     emit(SuccessState());
+//   }
+
+//   void resetpassword(LoginResetPasswordEvent event, Emitter<LoginState> emit) {
+//     Get.to(() => ResetPasswordScreen());
+//     emit(SuccessState());
+//   }
+// }
+
 import 'dart:async';
-import 'package:epolisplus/log/logger.dart';
+import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -12,41 +152,53 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final SharedPreferencesManager _prefsManager = SharedPreferencesManager();
 
   LoginBloc() : super(SuccessState()) {
     on<CheckLoginEvent>(login);
     on<SetPhoneNumberEvent>(setData);
-    on<LoginResetPasswordEvent>(resetpassword);
+    on<LoginResetPasswordEvent>(resetPassword);
   }
 
-  login(CheckLoginEvent event, Emitter<LoginState> emit) async {
-    var phoneNumber = phoneController.text.toString().trim();
-    var password = passwordController.text.toString().trim();
+  Future<void> login(CheckLoginEvent event, Emitter<LoginState> emit) async {
+    var phoneNumber = phoneController.text.trim();
+    var password = passwordController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
-    logger(phoneNumber);
-    if (phoneNumber.length != 9 && password.length != 8) {
+
+    // Validate phone number and password
+    if (phoneNumber.length != 9 || password.length < 8) {
       emit(LoginErrorState(LoginFailure()));
       return;
     }
 
     emit(LoginLoadingtate());
-    await Future.delayed(Duration(seconds: 2));
 
-    emit(SuccessState());
+    final authRepository = AuthRepository();
+    final baseResponse = await authRepository.login(phoneNumber, password);
 
-    var authRepository = AuthRepository();
-    var baseResponse = await authRepository.login(phoneNumber, password);
+    if (baseResponse.status == 200 && baseResponse.response != null) {
+      // Cast response to LoginResponse
+      final loginResponse = LoginResponse(
+        baseResponse.response!.access_token,
+        baseResponse.response!.phone,
+        baseResponse.response!.full_name,
+      );
 
-    if (baseResponse.status == 200) {
+      // Save token in Shared Preferences
+      await _prefsManager.saveToken(loginResponse.access_token);
+
+      // Navigate to HomeScreen
       Get.to(() => HomeScreen());
-      var isLoginUser = baseResponse.response as bool;
-      if (isLoginUser) {
-        Get.to(() => HomeScreen());
-      } else {
-        emit(LoginErrorState(LoginFailure()));
-      }
+      emit(SuccessState());
+    } else if (baseResponse.status == 401) {
+      // Token muddati o'tgan bo'lsa, tokenni o‘chirib LoginScreen'ga qaytarish
+      await _prefsManager.clearToken();
+      Get.offAll(() => LoginScreen(phoneNumber: phoneNumber));
+      emit(LoginErrorState(LoginFailure()));
+    } else {
+      emit(LoginErrorState(LoginFailure()));
     }
   }
 
@@ -60,7 +212,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(SuccessState());
   }
 
-  resetpassword(LoginResetPasswordEvent event, Emitter<LoginState> emit) {
+  void resetPassword(LoginResetPasswordEvent event, Emitter<LoginState> emit) {
     Get.to(() => ResetPasswordScreen());
     emit(SuccessState());
   }

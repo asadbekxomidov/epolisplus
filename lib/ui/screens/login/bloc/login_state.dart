@@ -6,6 +6,7 @@ abstract class LoginState extends Equatable {
 }
 
 class SuccessState extends LoginState {}
+
 class LoginLoadingtate extends LoginState {}
 
 class LoginErrorState extends LoginState {

@@ -6,14 +6,14 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-part 'phone_login_event.dart';
-part 'phone_login_state.dart';
+part 'check_auth_event.dart';
+part 'check_auth_state.dart';
 
-class PhoneLoginBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
+class CheckAuthBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
   TextEditingController phoneController = TextEditingController();
   bool isActive = true;
 
-  PhoneLoginBloc() : super(PhoneWidgetState(isActive: true)) {
+  CheckAuthBloc() : super(PhoneWidgetState(isActive: true)) {
     on<CheckAuthEvent>(phonelogin);
     on<TogglePhoneWidgetActiveEvent>(onToggleActive);
   }

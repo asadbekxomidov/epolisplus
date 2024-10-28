@@ -68,6 +68,16 @@ class RightIconBtn extends StatelessWidget {
 // ? TextButton Back
 
 class LeftBackIconBtn extends StatelessWidget {
+  Function? onClick;
+  String? text;
+  IconData? iconData;
+
+  LeftBackIconBtn({
+    this.onClick,
+    this.text,
+    this.iconData,
+  });
+
   late Dimens dimens;
 
   @override
@@ -302,6 +312,60 @@ class SendCodeButton extends StatelessWidget {
           return Container();
         },
       ),
+    );
+  }
+}
+
+// ? Logout Buttons
+
+class LogoutButtons extends StatelessWidget {
+  Function onClick;
+  String? text;
+  IconData? iconData;
+
+  LogoutButtons({
+    required this.onClick,
+    this.text,
+    this.iconData,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        IconButton(
+          onPressed: () {
+            onClick();
+          },
+          icon: Icon(iconData),
+        ),
+        // TextButton.icon(
+        //   style: IconButton.styleFrom(
+        //     highlightColor: AppColors.transparentColor,
+        //   ),
+        //   icon: Icon(
+        //     AppImage.arrow_circle_left_outlined,
+        //     color: AppColors.mainColor,
+        //     size: dimens.height24,
+        //   ),
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   label: Text(
+        //     AppStrings.back,
+        //     style: TextStyle(
+        //       fontSize: dimens.height16,
+        //       color: AppColors.mainColor,
+        //       fontWeight: FontWeight.w400,
+        //     ),
+        //   ),
+        // ),
+      ],
     );
   }
 }

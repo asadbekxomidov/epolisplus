@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'bloc/phone_login_bloc.dart';
+import 'bloc/check_auth_bloc.dart';
 
-class PhoneLoginScreen extends StatefulWidget {
+class CheckAuthScreen extends StatefulWidget {
   @override
-  _PhoneLoginScreenState createState() => _PhoneLoginScreenState();
+  _CheckAuthScreenState createState() => _CheckAuthScreenState();
 }
 
-class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
-  late PhoneLoginBloc bloc;
+class _CheckAuthScreenState extends State<CheckAuthScreen> {
+  late CheckAuthBloc bloc;
   late Dimens dimens;
 
   @override
@@ -21,11 +21,11 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocProvider(
-        create: (context) => PhoneLoginBloc(),
+        create: (context) => CheckAuthBloc(),
         child: Stack(
           children: [
             ui(),
-            BlocBuilder<PhoneLoginBloc, PhoneLoginState>(
+            BlocBuilder<CheckAuthBloc, PhoneLoginState>(
               builder: (context, state) {
                 return LoadingIndicator(
                   isLoading: state is LoadingState,
@@ -39,7 +39,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
   }
 
   ui() {
-    return BlocConsumer<PhoneLoginBloc, PhoneLoginState>(
+    return BlocConsumer<CheckAuthBloc, PhoneLoginState>(
       listener: (context, state) {
         if (state is ErrorState) {
           showErrorMessageSnackBar(
@@ -49,7 +49,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
         }
       },
       builder: (context, state) {
-        bloc = BlocProvider.of<PhoneLoginBloc>(context);
+        bloc = BlocProvider.of<CheckAuthBloc>(context);
         final bool isActive = state is PhoneWidgetState ? state.isActive : true;
         final bool isLoading = state is LoadingState;
 

@@ -20,4 +20,5 @@ class AppColors {
   static Color whiteColor = Colors.white;
   static Color transparentColor = Colors.transparent;
   static Color transparentColor2 = Color(0x66B90F0F);
+  static Color languageCardColor = Color(0xFFFFFF);
 }

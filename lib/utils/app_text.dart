@@ -12,6 +12,7 @@ class AppStrings {
   static const String createAccount = "Создать аккаунт";
   static const String fullNameHint = "Ваше имя и фамилия";
   static const String verificationTitle = "SMS-Верификация";
+  static const String selectLanguage = "Пожалуйста, выберите языка";
   static const String verificationSubtitle =
       "Введите код, отправленный на ваш номер телефона";
   static const String verifyAndProceed = "Подтвердить и продолжить";
@@ -30,6 +31,7 @@ class AppStrings {
   static const String phoneNumberCode =
       "Введите свой номер телефона, мы отправим код подтверждения";
   static const String minimumCharacters = "Минимум 8 символов";
+  static const String splashwelcomeText = "Страховой агрегатор, которой работает на вас!";
   static const String yourphonenumbernewpassword =
       "Введите код отправленный на Ваш номер телефона и введите новый пароль";
   static const String input_phone_errors = "Incorrect phone number!";

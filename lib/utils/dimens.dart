@@ -51,6 +51,14 @@ class Dimens {
     return height10 * 2.3;
   }
 
+  double get paddingVerticalItem64 {
+    return height10 * 6.4;
+  }
+
+  double get paddingVerticalItem225 {
+    return height10 * 22.5;
+  }
+
   // double get paddingVerticalItem8 {
   //   return height10 * 0.8;
   // }
@@ -149,6 +157,10 @@ class Dimens {
     return 42 * screenHeight / 852;
   }
 
+  double get height68 {
+    return 68 * screenHeight / 852;
+  }
+
   double get height70 {
     return 70 * screenHeight / 852;
   }
@@ -165,6 +177,10 @@ class Dimens {
     return 140 * screenHeight / 852;
   }
 
+  double get height154 {
+    return 154 * screenHeight / 852;
+  }
+
   double get width10 {
     return 10 * screenWidth / 392;
   }
@@ -175,6 +191,10 @@ class Dimens {
 
   double get width20 {
     return 20 * screenWidth / 392;
+  }
+
+  double get width30 {
+    return 30 * screenWidth / 392;
   }
 
   double get width60 {
@@ -221,6 +241,17 @@ class Dimens {
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get splashTextStyle {
+    return TextStyle(
+      fontSize: font18,
+      fontWeight: FontWeight.w400,
+      color: AppColors.titleColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      // overflow: TextOverflow.ellipsis,
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/auth_repository_iml.dart';
 import 'package:epolisplus/services/api_constanta.dart';
 import 'package:epolisplus/services/api_service.dart';
+import 'package:epolisplus/utils/sharedPreferencesManager.dart';
 
 class AuthRepository extends AuthRepositoryIml {
   late ApiService service;
@@ -59,6 +60,78 @@ class AuthRepository extends AuthRepositoryIml {
     }
   }
 
+  @override
+  Future<BaseModels<LoginResponse>> login(
+      String phoneNumber, String password) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept-Language': "uz-UZ",
+      'Accept-Encoding': 'UTF-8',
+    };
+
+    var data = {
+      "phone": phoneNumber,
+      "password": password,
+      "username": phoneNumber,
+    };
+
+    var url = ApiConstanta.SIGN_IN;
+    Response? response;
+
+    try {
+      response = await service.getPostData(data, headers, url);
+
+      if (response?.statusCode == 401) {
+        // 401 - Token muddati o'tgan bo'lsa
+        return BaseModels(
+          status: 401,
+          message: "Token muddati o'tdi, qayta kiring.",
+          code: false,
+        );
+      } else if (response?.statusCode == 422) {
+        String errorMessage = response?.data["response"]?["password"] ??
+            "Noto‘g‘ri telefon raqami yoki parol";
+
+        return BaseModels(
+          status: 422,
+          message: errorMessage,
+          code: false,
+        );
+      } else if (response?.statusCode != 200) {
+        return BaseModels(
+          status: response!.statusCode,
+          message: response.statusMessage ?? "Xato yuz berdi",
+          code: false,
+        );
+      } else {
+        var responseData = response?.data['response'];
+
+        LoginResponse loginResponse = LoginResponse(
+          responseData['access_token'],
+          responseData['phone'],
+          responseData['full_name'],
+        );
+
+        // Tokenni saqlash
+        final prefsManager = SharedPreferencesManager();
+        await prefsManager.saveToken(responseData['access_token']);
+
+        return BaseModels(
+          status: 200,
+          response: loginResponse,
+          code: true,
+          message: 'Login successful',
+        );
+      }
+    } on Exception catch (e) {
+      return BaseModels(
+        status: 123,
+        code: false,
+        message: "Server bilan muammo: $e",
+      );
+    }
+  }
+
   // @override
   // Future<BaseModels<LoginResponse>> login(
   //     String phoneNumber, String password) async {
@@ -75,42 +148,47 @@ class AuthRepository extends AuthRepositoryIml {
   //   };
 
   //   var url = ApiConstanta.SIGN_IN;
-
   //   Response? response;
 
   //   try {
   //     response = await service.getPostData(data, headers, url);
 
-  //     if (response?.statusCode != 200) {
+  //     if (response?.statusCode == 422) {
+  //       // 422 - Validatsiya xatosi uchun
+  //       String errorMessage = response?.data["response"]?["password"] ??
+  //           "Noto‘g‘ri telefon raqami yoki parol";
+
+  //       return BaseModels(
+  //         status: 422,
+  //         message: errorMessage,
+  //         code: false,
+  //       );
+  //     } else if (response?.statusCode != 200) {
+  //       // Boshqa xatolar uchun
   //       return BaseModels(
   //         status: response!.statusCode,
-  //         message: response.statusMessage,
+  //         message: response.statusMessage ?? "Xato yuz berdi",
   //         code: false,
   //       );
   //     } else {
-  //       if (response?.data["status"] == 200) {
-  //         var responseData = response?.data['response'];
-  //         LoginResponse loginResponse = LoginResponse(
-  //           responseData['access_token'],
-  //           responseData['phone'],
-  //           responseData['full_name'],
-  //         );
+  //       // Muvaffaqiyatli login uchun
+  //       var responseData = response?.data['response'];
 
-  //         return BaseModels(
-  //           status: 200,
-  //           response: loginResponse,
-  //           code: true,
-  //           message: 'Login successful',
-  //         );
-  //       } else {
-  //         return BaseModels(
-  //           status: response?.data["status"],
-  //           message: response?.data["message"] ?? 'Unknown error',
-  //           code: false,
-  //         );
-  //       }
+  //       LoginResponse loginResponse = LoginResponse(
+  //         responseData['access_token'],
+  //         responseData['phone'],
+  //         responseData['full_name'],
+  //       );
+
+  //       return BaseModels(
+  //         status: 200,
+  //         response: loginResponse,
+  //         code: true,
+  //         message: 'Login successful',
+  //       );
   //     }
   //   } on Exception catch (e) {
+  //     // Server bilan bog‘liq xatolar uchun
   //     return BaseModels(
   //       status: 123,
   //       code: false,
@@ -119,73 +197,6 @@ class AuthRepository extends AuthRepositoryIml {
   //     );
   //   }
   // }
-
-  @override
-Future<BaseModels<LoginResponse>> login(
-    String phoneNumber, String password) async {
-  var headers = {
-    'Content-Type': 'application/json',
-    'Accept-Language': "uz-UZ",
-    'Accept-Encoding': 'UTF-8',
-  };
-
-  var data = {
-    "phone": phoneNumber,
-    "password": password,
-    "username": phoneNumber,
-  };
-
-  var url = ApiConstanta.SIGN_IN;
-  Response? response;
-
-  try {
-    response = await service.getPostData(data, headers, url);
-
-    if (response?.statusCode == 422) {
-      // 422 - Validatsiya xatosi uchun
-      String errorMessage = response?.data["response"]?["password"] ??
-          "Noto‘g‘ri telefon raqami yoki parol";
-
-      return BaseModels(
-        status: 422,
-        message: errorMessage,
-        code: false,
-      );
-    } else if (response?.statusCode != 200) {
-      // Boshqa xatolar uchun
-      return BaseModels(
-        status: response!.statusCode,
-        message: response.statusMessage ?? "Xato yuz berdi",
-        code: false,
-      );
-    } else {
-      // Muvaffaqiyatli login uchun
-      var responseData = response?.data['response'];
-
-      LoginResponse loginResponse = LoginResponse(
-        responseData['access_token'],
-        responseData['phone'],
-        responseData['full_name'],
-      );
-
-      return BaseModels(
-        status: 200,
-        response: loginResponse,
-        code: true,
-        message: 'Login successful',
-      );
-    }
-  } on Exception catch (e) {
-    // Server bilan bog‘liq xatolar uchun
-    return BaseModels(
-      status: 123,
-      code: false,
-      message:
-          "Server vaqtincha ishlamayapti, iltimos qaytadan urinib ko'ring: $e",
-    );
-  }
-}
-
 
   @override
   Future<BaseModels<RegisterResponse>> register(

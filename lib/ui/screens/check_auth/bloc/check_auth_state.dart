@@ -1,4 +1,4 @@
-part of 'phone_login_bloc.dart';
+part of 'check_auth_bloc.dart';
 
 abstract class PhoneLoginState extends Equatable {
   @override
