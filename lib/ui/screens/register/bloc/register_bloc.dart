@@ -1,3 +1,4 @@
+import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -11,6 +12,7 @@ part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   bool isAgreeChecked = false;
+  // String phoneNumber;
 
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -27,57 +29,61 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Future<void> register(
       CheckRegisterEvent event, Emitter<RegisterState> emit) async {
     emit(RegisterLoadingState());
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
-    var phoneNumber = phoneController.text.toString().trim();
-    var fullName = fullNameController.text.toString().trim();
-    var password = passwordController.text.toString().trim();
-    var confirmPassword = confirmPasswordController.text.toString().trim();
+    var phoneNumber = phoneController.text.trim();
+    var fullName = fullNameController.text.trim();
+    var password = passwordController.text.trim();
+    var password_repeat = confirmPasswordController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
 
     if (phoneNumber.length != 9) {
+      print('object');
       emit(RegisterErrorState(InputRegisterFailure()));
       return;
     }
 
-    emit(RegisterSuccessState());
-
     var authRepository = AuthRepository();
     var baseResponse = await authRepository.register(
-      fullNameController.text.split(' ').first,
-      fullNameController.text.split(' ').length > 1
-          ? fullNameController.text.split(' ').sublist(1).join(' ')
+      fullName.split(' ').first,
+      fullName.split(' ').length > 1
+          ? fullName.split(' ').sublist(1).join(' ')
           : '',
       phoneNumber,
       '',
       password,
-      confirmPassword,
+      password_repeat,
     );
 
-    if (baseResponse.status == 200) {
-      Get.to(() => HomeScreen());
-      var userSignIn = baseResponse.response as bool;
-      if (userSignIn) {
-      } else {
-        emit(RegisterErrorState(InputRegisterFailure()));
-      }
-    }
+    print('object1');
 
-    // if (phoneNumber == "908579552" &&
-    //     password.length >= 8 &&
-    //     password == confirmPassword &&
-    //     fullName.length >= 5) {
-    //   Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
-    // } else {
-    //   emit(RegisterErrorState(InputRegisterFailure()));
-    // }
+    if (baseResponse.status == 200) {
+      print('object2');
+      final loginResponse = RegisterResponse(
+        baseResponse.response!.first_name as String? ?? '',
+        baseResponse.response!.phone as String? ?? '',
+        baseResponse.response!.password as String? ?? '',
+        baseResponse.response!.password_repeat as String? ?? '',
+        baseResponse.response!.email as String? ?? '',
+        baseResponse.response!.last_name as String? ?? '',
+      );
+      print('object3');
+
+      Get.to(() => VerificationScreen(phoneNumber: loginResponse.phone));
+      print('object4');
+      emit(RegisterSuccessState());
+      print('object5');
+    } else {
+      print('object6');
+      emit(RegisterErrorState(InputRegisterFailure()));
+    }
   }
 
   toggleAgree(ToggleAgreeEvent event, Emitter<RegisterState> emit) {
     print("object1");
     print(isAgreeChecked);
     isAgreeChecked = !isAgreeChecked;
-//    emit(RegisterLoadingState());
+    //  emit(RegisterLoadingState());
     emit(RegisterSuccessState());
   }
 

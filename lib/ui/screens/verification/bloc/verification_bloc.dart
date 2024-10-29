@@ -10,10 +10,12 @@ part 'verification_event.dart';
 part 'verification_state.dart';
 
 class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
+  final String phoneNumber;
+
   TextEditingController otpController = TextEditingController();
   FocusNode focusNode = FocusNode();
 
-  VerificationBloc() : super(VerificationSuccessState()) {
+  VerificationBloc(this.phoneNumber) : super(VerificationSuccessState()) {
     on<CheckVerificationEvent>(verification);
   }
 
@@ -33,7 +35,8 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     emit(VerificationSuccessState());
 
     var authRepository = AuthRepository();
-    var baseResponse = await authRepository.forgotPassword(phoneCode);
+    var baseResponse = await authRepository.confirmAccount(phoneNumber, phoneCode);
+    // var baseResponse = await authRepository.forgotPassword(phoneCode);
 
     if (baseResponse.status == 200) {
       var forgotPassword = baseResponse.response as bool;
@@ -44,12 +47,5 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
         emit(VerificationErrorState(InputPhoneCodeFailure()));
       }
     }
-
-    // if (phoneCode == "00000") {
-    //   Get.to(() => ResetPasswordScreen());
-    // } else {
-    //   emit(VerificationErrorState(InputPhoneCodeFailure()));
-    //   // Get.to(() => ResetPasswordScreen());
-    // }
   }
 }

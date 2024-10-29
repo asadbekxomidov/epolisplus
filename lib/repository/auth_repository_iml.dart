@@ -6,7 +6,7 @@ abstract class AuthRepositoryIml {
   Future<BaseModels<LoginResponse>> login(String phoneNumber, String password);
 
   Future<BaseModels<RegisterResponse>> register(
-    String? first_name,
+    String first_name,
     String? last_name,
     String phone,
     String? email,

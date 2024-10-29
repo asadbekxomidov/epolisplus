@@ -32,7 +32,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocProvider(
-        create: (context) => VerificationBloc(),
+        create: (context) => VerificationBloc(widget.phoneNumber),
         child: Stack(
           children: [
             ui(),

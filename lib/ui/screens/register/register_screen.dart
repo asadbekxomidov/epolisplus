@@ -3,7 +3,6 @@ import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-
 import 'bloc/register_bloc.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -27,9 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       resizeToAvoidBottomInset: true,
       body: BlocProvider(
         create: (context) => RegisterBloc()
-          ..add(
-            RegisterSetPhoneNumberEvent(widget.phoneNumber),
-          ),
+          ..add(RegisterSetPhoneNumberEvent(widget.phoneNumber)),
         child: Stack(
           children: [
             ui(),
