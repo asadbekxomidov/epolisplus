@@ -6,12 +6,9 @@ abstract class AuthRepositoryIml {
   Future<BaseModels<LoginResponse>> login(String phoneNumber, String password);
 
   Future<BaseModels<RegisterResponse>> register(
-    String first_name,
-    String? last_name,
+    String fullName,
     String phone,
-    String? email,
     String password,
-    String password_repeat,
   );
 
   Future<BaseModels<ConfitmAccountResponse>> confirmAccount(

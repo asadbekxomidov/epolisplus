@@ -1,4 +1,3 @@
-import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -12,6 +11,7 @@ part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   bool isAgreeChecked = false;
+
   // String phoneNumber;
 
   final TextEditingController fullNameController = TextEditingController();
@@ -43,22 +43,20 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       return;
     }
 
+    if (password != password_repeat) {
+      return;
+    }
+
     var authRepository = AuthRepository();
     var baseResponse = await authRepository.register(
-      fullName.split(' ').first,
-      fullName.split(' ').length > 1
-          ? fullName.split(' ').sublist(1).join(' ')
-          : '',
+      fullName.trim(),
       phoneNumber,
-      '',
       password,
-      password_repeat,
     );
 
-    print('object1');
-
+    emit(RegisterSuccessState());
     if (baseResponse.status == 200) {
-      print('object2');
+/*      print('object2');
       final loginResponse = RegisterResponse(
         baseResponse.response!.first_name as String? ?? '',
         baseResponse.response!.phone as String? ?? '',
@@ -66,10 +64,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         baseResponse.response!.password_repeat as String? ?? '',
         baseResponse.response!.email as String? ?? '',
         baseResponse.response!.last_name as String? ?? '',
-      );
+      );*/
       print('object3');
 
-      Get.to(() => VerificationScreen(phoneNumber: loginResponse.phone));
+      Get.to(
+        () => VerificationScreen(
+          phoneNumber: "",
+        ),
+      );
       print('object4');
       emit(RegisterSuccessState());
       print('object5');

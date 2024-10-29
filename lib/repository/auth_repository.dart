@@ -215,27 +215,23 @@ class AuthRepository extends AuthRepositoryIml {
 
   @override
   Future<BaseModels<RegisterResponse>> register(
-      String? firstName,
-      String? lastName,
-      String phone,
-      String? email,
-      String password,
-      String passwordRepeat) async {
+    String? fullName,
+    String phone,
+    String password,
+  ) async {
     var headers = {
       'Content-Type': 'application/json',
       'Accept-Language': "uz-UZ",
       'Accept-Encoding': 'UTF-8',
     };
 
-    // Combine first and last name into full name.
-    String fullName = '${firstName ?? ''} ${lastName ?? ''}'.trim();
 
     var data = {
       "full_name": fullName, // Ensure the full name is sent properly.
       "phone": phone,
-      "email": email ?? "",
+      "email":"",
       "password": password,
-      "password_repeat": passwordRepeat,
+      "password_repeat": password,
     };
 
     var url = ApiConstanta.SIGN_UP;
@@ -244,37 +240,39 @@ class AuthRepository extends AuthRepositoryIml {
     try {
       response = await service.getPostData(data, headers, url);
 
+      print("${response?.statusCode}");
       if (response?.statusCode != 200) {
         return BaseModels(
           status: response!.statusCode,
           message: response.statusMessage ?? 'Xato yuz berdi',
           code: false,
         );
-      } else if (response?.data["status"] == 200) {
+      } else if (response?.statusCode == 200) {
         var responseData = response?.data['response'];
+        //   print(responseData.toString());
 
-        if (responseData == null) {
+        /*       if (responseData == null) {
           return BaseModels(
             status: 422,
             message: 'Serverdan to‘liq ma’lumot kelmadi',
             code: false,
           );
-        }
+        }*/
 
-        RegisterResponse registerResponse = RegisterResponse(
+        /*  RegisterResponse registerResponse = RegisterResponse(
           responseData['first_name'] ?? "",
           responseData['last_name'] ?? "",
           responseData['phone'] ?? "",
           responseData['email'] ?? "",
           password,
           passwordRepeat,
-        );
+        );*/
 
         return BaseModels(
           status: 200,
-          response: registerResponse,
+          //    response: registerResponse,
           code: true,
-          message: 'Ro‘yxatdan muvaffaqiyatli o‘tdingiz',
+          message: 'Sms junatildi',
         );
       } else {
         return BaseModels(
