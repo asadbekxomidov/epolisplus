@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class PhoneRasswordScreen extends StatefulWidget {
-  const PhoneRasswordScreen({super.key});
+  final String phoneNumber;
+  const PhoneRasswordScreen(this.phoneNumber);
 
   @override
   State<PhoneRasswordScreen> createState() => _PhoneRasswordScreenState();
@@ -33,7 +34,7 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => PhonePasswordBloc(),
+      create: (context) => PhonePasswordBloc(widget.phoneNumber),
       child: Stack(
         children: [
           ui(),

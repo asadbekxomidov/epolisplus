@@ -7,7 +7,14 @@ abstract class PhonePasswordEvent extends Equatable {
 
 class CheckPhonePasswordEvent extends PhonePasswordEvent {}
 
-// class PhoneNumberChangedEvent extends PhonePasswordEvent {}
+class PhoneNumberEvent extends PhonePasswordEvent {
+  String number;
+
+  PhoneNumberEvent(this.number);
+
+  @override
+  List<Object?> get props => [number];
+}
 
 class PhonePasswordSuccsesEvent extends PhonePasswordEvent {
   final String phoneNumber;

@@ -30,26 +30,23 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
       return;
     }
 
-    Get.to(() => PhoneRasswordScreen());
-    // serverdan telefon number bor yoki yo'qligini tekshirish kerak
+    Get.to(() => PhoneRasswordScreen(phoneNumber));
 
     emit(ResetPasswordSuccessState());
 
     var authRepository = AuthRepository();
     var baseResponse = await authRepository.forgotPassword(phoneNumber);
 
-    Get.to(() => PhoneRasswordScreen());
+    Get.to(() => PhoneRasswordScreen(phoneNumber));
     if (baseResponse.status == 200) {
       var isUser = baseResponse.response as bool;
 
       if (isUser) {
-        Get.to(() => PhoneRasswordScreen());
+        Get.to(() => PhoneRasswordScreen(phoneNumber));
       } else {
         emit(ResetPasswordErrorState(InputPhoneFailure()));
       }
       return;
     }
-
-    
   }
 }

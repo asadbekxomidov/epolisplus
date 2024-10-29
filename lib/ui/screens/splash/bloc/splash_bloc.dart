@@ -23,10 +23,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     final token = await _prefsManager.getToken();
 
     if (token != null && token.isNotEmpty) {
-      Get.offAll(() => HomeScreen());
+      Get.off(() => HomeScreen());
       emit(SplashSuccessState());
     } else {
-      Get.offAll(() => CheckAuthScreen());
+      Get.off(() => CheckAuthScreen());
       emit(SplashAuthRequiredState());
     }
   }
