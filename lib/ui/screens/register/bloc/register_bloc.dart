@@ -43,11 +43,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     emit(RegisterSuccessState());
 
     var authRepository = AuthRepository();
-    // var baseResponse = await authRepository.register(
-    //     fullName, '', phoneNumber, '', password, confirmPassword);
-
     var baseResponse = await authRepository.register(
-      fullNameController.text.split(' ').first, // first_name
+      fullNameController.text.split(' ').first,
       fullNameController.text.split(' ').length > 1
           ? fullNameController.text.split(' ').sublist(1).join(' ')
           : '',
@@ -57,6 +54,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       confirmPassword,
     );
 
+    Get.to(() => HomeScreen());
     if (baseResponse.status == 200) {
       Get.to(() => HomeScreen());
       var userSignIn = baseResponse.response as bool;

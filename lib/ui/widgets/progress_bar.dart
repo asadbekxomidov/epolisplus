@@ -1,6 +1,5 @@
 import 'package:epolisplus/utils/app_colors.dart';
 import 'package:epolisplus/utils/dimens.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 progressBar(Dimens dimens) {
@@ -22,8 +21,7 @@ progressBar(Dimens dimens) {
 
 progressBar2(Dimens dimens) {
   return GestureDetector(
-    onTap: () {
-    },
+    onTap: () {},
     child: Container(
       color: AppColors.transparentColor,
       height: dimens.screenHeight,

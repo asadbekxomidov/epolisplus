@@ -126,7 +126,6 @@ class PasswordWidget extends StatelessWidget {
               ),
               Gap(dimens.paddingVerticalItem2),
               Container(
-                // height: dimens.height40,
                 padding: EdgeInsets.only(
                   left: dimens.paddingHorizontal13,
                 ),
@@ -137,30 +136,9 @@ class PasswordWidget extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: hintText,
                     hintStyle: dimens.hintStyle,
-                    // filled: true,
-                    // fillColor: AppColors.whiteColor,
                     filled: false,
                     fillColor: AppColors.whiteColor,
-                    // hintStyle: dimens.hintStyle.copyWith(
-                    //   fontSize: dimens.font16,
-                    // ),
                     border: InputBorder.none,
-                    // contentPadding: EdgeInsets.only(
-                    //   left: dimens.paddingHorizontal13,
-                    // ),
-                    // enabledBorder: OutlineInputBorder(
-                    //   borderSide: BorderSide(color: AppColors.lineColor),
-                    //   borderRadius: BorderRadius.circular(15),
-                    // ),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderSide: BorderSide(color: AppColors.lineColor),
-                    //   borderRadius: BorderRadius.circular(15),
-                    // ),
-                    // border: OutlineInputBorder(
-                    //   borderSide: BorderSide(color: AppColors.lineColor),
-                    //   borderRadius: BorderRadius.circular(15),
-                    // ),
-                    // border: InputBorder.none,
                     suffixIcon: IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
@@ -176,11 +154,6 @@ class PasswordWidget extends StatelessWidget {
                     ),
                   ),
                   style: dimens.myTextFieldStyle,
-                  // style: TextStyle(
-                  //   color: Colors.black,
-                  //   fontWeight: FontWeight.w400,
-                  //   fontSize: dimens.screenHeight * 16 / 852,
-                  // ),
                 ),
               ),
             ],

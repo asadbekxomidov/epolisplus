@@ -25,6 +25,7 @@ class UserNameWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -50,26 +51,8 @@ class UserNameWidget extends StatelessWidget {
               hintStyle: dimens.hintStyle,
               filled: false,
               fillColor: AppColors.whiteColor,
-              // contentPadding: EdgeInsets.only(left: dimens.paddingHorizontal13),
-              // enabledBorder: OutlineInputBorder(
-              //   borderSide: BorderSide(color: Colors.grey.shade300),
-              //   borderRadius: BorderRadius.circular(15),
-              // ),
-              // focusedBorder: OutlineInputBorder(
-              //   borderSide: BorderSide(color: Colors.grey.shade300),
-              //   borderRadius: BorderRadius.circular(15),
-              // ),
-              // border: OutlineInputBorder(
-              //   borderSide: BorderSide(color: Colors.grey.shade300),
-              //   borderRadius: BorderRadius.circular(15),
-              // ),
               border: InputBorder.none,
             ),
-            // style: TextStyle(
-            //   color: Colors.black,
-            //   fontWeight: FontWeight.w400,
-            //   fontSize: screenHeight * 16 / 852,
-            // ),
             style: dimens.myTextFieldStyle,
           ),
         ),
