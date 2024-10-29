@@ -1,9 +1,9 @@
 import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:flutter/material.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 part 'register_event.dart';
@@ -54,7 +54,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       confirmPassword,
     );
 
-    Get.to(() => HomeScreen());
     if (baseResponse.status == 200) {
       Get.to(() => HomeScreen());
       var userSignIn = baseResponse.response as bool;
@@ -74,9 +73,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     // }
   }
 
-  void toggleAgree(ToggleAgreeEvent event, Emitter<RegisterState> emit) {
-    isAgreeChecked = event.isAgreeChecked;
-    emit(RegisterAgreeCheckedState(isAgreeChecked));
+  toggleAgree(ToggleAgreeEvent event, Emitter<RegisterState> emit) {
+    print("object1");
+    print(isAgreeChecked);
+    isAgreeChecked = !isAgreeChecked;
+//    emit(RegisterLoadingState());
+    emit(RegisterSuccessState());
   }
 
   void setData(RegisterSetPhoneNumberEvent event, Emitter<RegisterState> emit) {

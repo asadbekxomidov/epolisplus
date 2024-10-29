@@ -16,12 +16,3 @@ class RegisterErrorState extends RegisterState {
 
   RegisterErrorState(this.failure);
 }
-
-class RegisterAgreeCheckedState extends RegisterState {
-  final bool isAgreeChecked;
-
-  RegisterAgreeCheckedState(this.isAgreeChecked);
-
-  @override
-  List<Object?> get props => [isAgreeChecked];
-}

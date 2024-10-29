@@ -28,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     phoneNumber = clearPhoneMask(phoneNumber);
 
     // Validate phone number and password
-    if (phoneNumber.length != 9 || password.length < 8) {
+    if (phoneNumber.length != 9 || password.length < 6) {
       emit(LoginErrorState(LoginFailure()));
       return;
     }
@@ -50,7 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await _prefsManager.saveToken(loginResponse.access_token);
 
       // Navigate to HomeScreen
-      Get.to(() => HomeScreen());
+      Get.offAll(() => HomeScreen());
       emit(SuccessState());
     } else if (baseResponse.status == 401) {
       // Token muddati o'tgan bo'lsa, tokenni o‘chirib LoginScreen'ga qaytarish
