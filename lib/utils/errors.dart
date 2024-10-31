@@ -32,12 +32,27 @@ class InputRegisterFailure extends Failure {
       AppStrings.input_register_errors;
 }
 
+class ButtonRegisterFailure extends Failure {
+  ButtonRegisterFailure() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) => AppStrings.button_agree;
+}
+
 class InputPhoneCodeFailure extends Failure {
   InputPhoneCodeFailure() : super();
 
   @override
   String getErrorMessage(BuildContext context) =>
       AppStrings.input_phoneCode_errors;
+}
+
+class PhoneCodeFailure extends Failure {
+  PhoneCodeFailure() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.phone_password_errors;
 }
 
 class PaaswordPhoneCodeFailure extends Failure {

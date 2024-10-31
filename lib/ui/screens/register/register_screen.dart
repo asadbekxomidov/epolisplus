@@ -107,6 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Gap(dimens.paddingVerticalItem23),
                 IconsButtonWidget(
                   onClick: () {
+                    print(bloc.isAgreeChecked);
                     print("object");
                     bloc.add(ToggleAgreeEvent());
                   },

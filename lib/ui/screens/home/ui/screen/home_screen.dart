@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            body: Container(
+            body: SizedBox(
               height: dimens.screenHeight,
               child: Column(
                 children: [

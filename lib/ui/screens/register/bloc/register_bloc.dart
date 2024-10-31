@@ -36,55 +36,92 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     var password_repeat = confirmPasswordController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
 
-    if (phoneNumber.length != 9) {
-      print('object');
-      emit(RegisterErrorState(InputRegisterFailure()));
-      return;
+    if (isAgreeChecked == true) {
+      if (phoneNumber.length != 9) {
+        print('object');
+        emit(RegisterErrorState(InputRegisterFailure()));
+        return;
+      }
+
+      if (password != password_repeat) {
+        return;
+      }
+
+      var authRepository = AuthRepository();
+      var baseResponse = await authRepository.register(
+        fullName.trim(),
+        phoneNumber,
+        password,
+      );
+
+      //  await _prefsManager.saveToken(loginResponse.access_token);
+
+      await _prefsManager.savePhone(phoneNumber);
+
+      emit(RegisterSuccessState());
+      // if (isAgreeChecked) {
+      //   print("if ${isAgreeChecked}");
+      //   if (baseResponse.status == 200) {
+      //     Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+      //     emit(RegisterSuccessState());
+      //   } else {
+      //     emit(RegisterErrorState(InputRegisterFailure()));
+      //   }
+      // } else {
+      //   print('else ${isAgreeChecked}');
+      //   emit(RegisterErrorState(InputRegisterFailure()));
+      // }
+      if (baseResponse.status == 200) {
+        Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+        emit(RegisterSuccessState());
+      } else {
+        emit(RegisterErrorState(InputRegisterFailure()));
+      }
+    } else {
+      emit(RegisterErrorState(ButtonRegisterFailure()));
     }
 
-    if (password != password_repeat) {
-      return;
-    }
+    // if (phoneNumber.length != 9) {
+    //   print('object');
+    //   emit(RegisterErrorState(InputRegisterFailure()));
+    //   return;
+    // }
 
-    var authRepository = AuthRepository();
-    var baseResponse = await authRepository.register(
-      fullName.trim(),
-      phoneNumber,
-      password,
-    );
+    // if (password != password_repeat) {
+    //   return;
+    // }
 
-    //  await _prefsManager.saveToken(loginResponse.access_token);
+    // var authRepository = AuthRepository();
+    // var baseResponse = await authRepository.register(
+    //   fullName.trim(),
+    //   phoneNumber,
+    //   password,
+    // );
 
-    await _prefsManager.savePhone(phoneNumber);
+    // //  await _prefsManager.saveToken(loginResponse.access_token);
 
-    emit(RegisterSuccessState());
-    // if (isAgreeChecked) {
-    //   print("if ${isAgreeChecked}");
-    //   if (baseResponse.status == 200) {
-    //     Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
-    //     emit(RegisterSuccessState());
-    //   } else {
-    //     emit(RegisterErrorState(InputRegisterFailure()));
-    //   }
+    // await _prefsManager.savePhone(phoneNumber);
+
+    // emit(RegisterSuccessState());
+    // // if (isAgreeChecked) {
+    // //   print("if ${isAgreeChecked}");
+    // //   if (baseResponse.status == 200) {
+    // //     Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+    // //     emit(RegisterSuccessState());
+    // //   } else {
+    // //     emit(RegisterErrorState(InputRegisterFailure()));
+    // //   }
+    // // } else {
+    // //   print('else ${isAgreeChecked}');
+    // //   emit(RegisterErrorState(InputRegisterFailure()));
+    // // }
+    // if (baseResponse.status == 200) {
+    //   Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+    //   emit(RegisterSuccessState());
     // } else {
-    //   print('else ${isAgreeChecked}');
     //   emit(RegisterErrorState(InputRegisterFailure()));
     // }
-    if (baseResponse.status == 200) {
-      Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
-      emit(RegisterSuccessState());
-    } else {
-      emit(RegisterErrorState(InputRegisterFailure()));
-    }
   }
-
-  // Future<void> toggleAgree(
-  //     ToggleAgreeEvent event, Emitter<RegisterState> emit) async {
-  //   print(isAgreeChecked);
-  //   isAgreeChecked = !isAgreeChecked;
-  //   //  emit(RegisterLoadingState());
-  //   emit(RegisterSuccessState());
-  // }
 
   Future<void> toggleAgree(
       ToggleAgreeEvent event, Emitter<RegisterState> emit) async {
