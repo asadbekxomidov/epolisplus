@@ -5,9 +5,15 @@ class BaseModels<T> {
   T? response;
 
   BaseModels({
-    required this.status,
-    required this.code,
-    required this.message,
+    this.status,
+    this.code,
+    this.message,
     this.response,
   });
+  // BaseModels({
+  //   required this.status,
+  //   required this.code,
+  //   required this.message,
+  //   this.response,
+  // });
 }

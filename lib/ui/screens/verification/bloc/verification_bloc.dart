@@ -35,8 +35,8 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     emit(VerificationSuccessState());
 
     var authRepository = AuthRepository();
-    var baseResponse = await authRepository.confirmAccount(phoneNumber, phoneCode);
-    // var baseResponse = await authRepository.forgotPassword(phoneCode);
+    var baseResponse =
+        await authRepository.confirmAccount(phoneNumber, phoneCode);
 
     if (baseResponse.status == 200) {
       var forgotPassword = baseResponse.response as bool;

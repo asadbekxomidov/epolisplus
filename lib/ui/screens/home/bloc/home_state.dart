@@ -5,11 +5,13 @@ abstract class HomeState extends Equatable {
   List<Object?> get props => [];
 }
 
-class HomeInitialState extends HomeState {} // Initial state
+class HomeInitialState extends HomeState {}
 
-class HomeLoadingState extends HomeState {} // Loading state
+class HomeLoadingState extends HomeState {}
 
-class LogoutSuccessState extends HomeState {} // Logout success state
+class LogoutSuccessState extends HomeState {}
+
+class HomeSuccessState extends HomeState {}
 
 class HomeErrorState extends HomeState {
   final String errorMessage;

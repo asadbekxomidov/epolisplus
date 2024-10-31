@@ -29,10 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Stack(
         children: [
           ui(),
-          Positioned(
-            top: dimens.paddingVerticalItem69,
-            child: LeftBackIconBtn(),
-          ),
           BlocBuilder<LoginBloc, LoginState>(
             builder: (context, state) {
               return LoadingIndicator(
@@ -71,9 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: Column(
                       children: [
-                        // Gap(dimens.paddingVerticalItem69),
-                        Gap(dimens.paddingVerticalItem120),
-                        // LeftBackIconBtn(),
+                        Gap(dimens.paddingVerticalItem69),
+                        // Gap(dimens.paddingVerticalItem120),
+                        LeftBackIconBtn(),
                         Gap(dimens.paddingVerticalItem20),
                         Image.asset(
                           AppImage.appImageLogo,

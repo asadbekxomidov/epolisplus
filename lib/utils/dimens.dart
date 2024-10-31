@@ -184,6 +184,9 @@ class Dimens {
   double get width10 {
     return 10 * screenWidth / 392;
   }
+  double get width5 {
+    return 5 * screenWidth / 392;
+  }
 
   double get width16 {
     return 16 * screenWidth / 392;

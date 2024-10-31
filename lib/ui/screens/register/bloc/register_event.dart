@@ -7,8 +7,7 @@ abstract class RegisterEvent extends Equatable {
 
 class CheckRegisterEvent extends RegisterEvent {}
 
-class ToggleAgreeEvent extends RegisterEvent {
-}
+class ToggleAgreeEvent extends RegisterEvent {}
 
 class RegisterSetPhoneNumberEvent extends RegisterEvent {
   String number;

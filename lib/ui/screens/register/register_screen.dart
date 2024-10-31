@@ -30,10 +30,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Stack(
           children: [
             ui(),
-            Positioned(
-              top: dimens.paddingVerticalItem69,
-              child: LeftBackIconBtn(),
-            ),
             BlocBuilder<RegisterBloc, RegisterState>(
               builder: (context, state) {
                 return LoadingIndicator(
@@ -55,6 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context,
             state.failure.getErrorMessage(context),
           );
+          print('listener');
         }
       },
       builder: (context, state) {
@@ -70,9 +67,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Gap(dimens.paddingVerticalItem120),
-                // LeftBackIconBtn(),
-                // Gap(dimens.paddingVerticalItem20),
+                Gap(dimens.paddingVerticalItem69),
+                LeftBackIconBtn(),
+                Gap(dimens.paddingVerticalItem20),
                 // Gap(dimens.paddingVerticalItem27),
                 Text(
                   AppStrings.createAccount,

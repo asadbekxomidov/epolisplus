@@ -49,6 +49,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       // Save token in Shared Preferences
       await _prefsManager.saveToken(loginResponse.access_token);
 
+      await _prefsManager.savePhone(phoneNumber);
+
       // Navigate to HomeScreen
       Get.offAll(() => HomeScreen());
       emit(SuccessState());

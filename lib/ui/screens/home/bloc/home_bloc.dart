@@ -1,3 +1,5 @@
+import 'package:epolisplus/log/logger.dart';
+import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(HomeInitialState()) {
     on<LogoutEvent>(_handleLogout);
+    on<DeleteAccountEvent>(deleteAccount);
   }
 
   Future<void> _handleLogout(LogoutEvent event, Emitter<HomeState> emit) async {
@@ -23,6 +26,35 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(LogoutSuccessState());
     } catch (e) {
       emit(HomeErrorState('Logout failed: $e'));
+    }
+  }
+
+  Future<void> deleteAccount(
+      DeleteAccountEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
+
+    String? token = await _prefsManager.getToken();
+    String? phone = await _prefsManager.getPhone();
+
+    if (token == null || phone == null) {
+      emit(HomeErrorState(""));
+      return;
+    }
+
+    final baseResponse = await AuthRepository().deleteAccount(
+      phone,
+      token,
+    );
+
+    if (baseResponse.status == 200) {
+      await _prefsManager.clearToken();
+      await _prefsManager.clearPhone();
+
+      Get.off(() => CheckAuthScreen());
+      emit(HomeSuccessState());
+    } else {
+      logger(baseResponse.message.toString());
+      emit(HomeErrorState(""));
     }
   }
 }

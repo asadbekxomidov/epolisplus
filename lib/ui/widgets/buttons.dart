@@ -84,22 +84,20 @@ class LeftBackIconBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        TextButton.icon(
-          style: IconButton.styleFrom(
-            highlightColor: AppColors.transparentColor,
-          ),
-          icon: Icon(
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
             AppImage.arrow_circle_left_outlined,
             color: AppColors.mainColor,
             size: dimens.height24,
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          label: Text(
+          Gap(dimens.width5),
+          Text(
             AppStrings.back,
             style: TextStyle(
               fontSize: dimens.height16,
@@ -107,8 +105,8 @@ class LeftBackIconBtn extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -265,6 +263,9 @@ class IconsButtonWidget extends StatelessWidget {
 
 class SendCodeButton extends StatelessWidget {
   late Dimens dimens;
+  final Function onClick;
+
+  SendCodeButton({super.key, required this.onClick});
 
   @override
   Widget build(BuildContext context) {

@@ -26,4 +26,6 @@ abstract class AuthRepositoryIml {
     String password,
     String password_repeat,
   );
+
+  Future<BaseModels> deleteAccount(String phone, String token);
 }

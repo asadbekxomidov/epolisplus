@@ -4,8 +4,14 @@ import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   late Dimens dimens;
+  late HomeBloc homeBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +24,13 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              // leadingWidth: dimens.width30,
-              // leading: LeftBackIconBtn(),
               actions: [
+                IconButton(
+                  onPressed: () {
+                    context.read<HomeBloc>().add(DeleteAccountEvent());
+                  },
+                  icon: Icon(Icons.delete, color: AppColors.redColor),
+                ),
                 LogoutButtons(
                   iconData: AppImage.logoutIcon,
                   onClick: () {
@@ -29,23 +39,18 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            body: BlocListener<HomeBloc, HomeState>(
-              listener: (context, state) {
-                if (state is HomeErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.errorMessage)),
-                  );
-                }
-              },
-              child: BlocBuilder<HomeBloc, HomeState>(
-                builder: (context, state) {
-                  if (state is HomeLoadingState) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return Column(
-                    children: [],
-                  );
-                },
+            body: Container(
+              height: dimens.screenHeight,
+              child: Column(
+                children: [
+                  Image(
+                    width: dimens.screenWidth,
+                    image: AssetImage(
+                      AppImage.homeBlueImage,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ],
               ),
             ),
           );

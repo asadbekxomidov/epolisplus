@@ -11,6 +11,8 @@ class RegisterSuccessState extends RegisterState {}
 
 class RegisterLoadingState extends RegisterState {}
 
+class RegisterToggleAgreeState extends RegisterState {}
+
 class RegisterErrorState extends RegisterState {
   Failure failure;
 

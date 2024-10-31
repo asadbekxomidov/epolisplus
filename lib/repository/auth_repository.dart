@@ -132,87 +132,6 @@ class AuthRepository extends AuthRepositoryIml {
     }
   }
 
-  // @override
-  // Future<BaseModels<RegisterResponse>> register(
-  //   String? first_name,
-  //   String? last_name,
-  //   String phone,
-  //   String? email,
-  //   String password,
-  //   String password_repeat,
-  // ) async {
-  //   var headers = {
-  //     'Content-Type': 'application/json',
-  //     'Accept-Language': "uz-UZ",
-  //     'Accept-Encoding': 'UTF-8',
-  //   };
-
-  //   // String fullName = '${first_name ?? ''} ${last_name ?? ''}'.trim();
-  //   String last_n = "";
-
-  //   var data = {
-  //     "first_name": first_name,
-  //     "last_name": last_n,
-  //     "phone": phone,
-  //     "email": email ?? "",
-  //     "password": password,
-  //     "password_repeat": password_repeat,
-  //   };
-
-  //   var url = ApiConstanta.SIGN_UP;
-  //   Response? response;
-
-  //   try {
-  //     response = await service.getPostData(data, headers, url);
-
-  //     if (response?.statusCode != 200) {
-  //       return BaseModels(
-  //         status: response!.statusCode,
-  //         message: response.statusMessage ?? 'Xato yuz berdi',
-  //         code: false,
-  //       );
-  //     } else if (response?.data["status"] == 200) {
-  //       var responseData = response?.data['response'];
-
-  //       if (responseData == null) {
-  //         return BaseModels(
-  //           status: 422,
-  //           message: 'Serverdan to‘liq ma’lumot kelmadi',
-  //           code: false,
-  //         );
-  //       }
-
-  //       RegisterResponse registerResponse = RegisterResponse(
-  //         responseData['first_name'] ?? "",
-  //         responseData['last_name'] ?? "",
-  //         responseData['phone'] ?? "",
-  //         responseData['email'] ?? "",
-  //         password,
-  //         password_repeat,
-  //       );
-
-  //       return BaseModels(
-  //         status: 200,
-  //         response: registerResponse,
-  //         code: true,
-  //         message: 'Ro‘yxatdan muvaffaqiyatli o‘tdingiz',
-  //       );
-  //     } else {
-  //       return BaseModels(
-  //         status: response?.data["status"],
-  //         message: response?.data["message"] ?? 'Noma\'lum xato',
-  //         code: false,
-  //       );
-  //     }
-  //   } on Exception catch (e) {
-  //     return BaseModels(
-  //       status: 123,
-  //       code: false,
-  //       message: "Server vaqtincha ishlamayapti, qaytadan urinib ko‘ring: $e",
-  //     );
-  //   }
-  // }
-
   @override
   Future<BaseModels<RegisterResponse>> register(
     String? fullName,
@@ -225,11 +144,10 @@ class AuthRepository extends AuthRepositoryIml {
       'Accept-Encoding': 'UTF-8',
     };
 
-
     var data = {
       "full_name": fullName, // Ensure the full name is sent properly.
       "phone": phone,
-      "email":"",
+      "email": "",
       "password": password,
       "password_repeat": password,
     };
@@ -535,6 +453,53 @@ class AuthRepository extends AuthRepositoryIml {
         message:
             "Server vaqtincha ishlamayapti, iltimos qaytadan urinib ko'ring: $e",
       );
+    }
+  }
+
+  Future<BaseModels> deleteAccount(
+    String phone,
+    String token,
+  ) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept-Language': "uz-UZ",
+      'Accept-Encoding': 'UTF-8',
+      'Authorization': 'Bearer $token',
+      // 'Content-type': 'application/json',
+      // 'Content': 'application/json',
+      // 'Accept-Language': '${PreferenceService().getLanguage()}',
+      // 'Accept-Encoding': 'UTF-8',
+    };
+
+    var data = {
+      "phone": phone,
+    };
+
+    var url = ApiConstanta.DELETE_ACCOUNT;
+    Response? response;
+    try {
+      response = await service.getPostData(data, headers, url);
+      if (response?.statusCode != 200) {
+        return BaseModels(
+          status: response?.statusCode,
+          // code: response?.statusCode,
+          message: response?.statusMessage,
+        );
+      } else {
+        if (response?.data["status"] == 200) {
+          return BaseModels(
+            status: 200
+            // code: 200,
+          );
+        } else {
+          return BaseModels(
+            code: response?.data["status"],
+            message: response?.statusMessage,
+          );
+        }
+      }
+    } on Exception {
+      return throw 'SERVER_NOT_WORKING';
     }
   }
 }

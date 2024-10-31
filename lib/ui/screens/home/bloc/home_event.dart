@@ -6,3 +6,10 @@ abstract class HomeEvent extends Equatable {
 }
 
 class LogoutEvent extends HomeEvent {}
+
+class DeleteAccountEvent extends HomeEvent {
+  DeleteAccountEvent();
+
+  @override
+  List<Object?> get props => [];
+}

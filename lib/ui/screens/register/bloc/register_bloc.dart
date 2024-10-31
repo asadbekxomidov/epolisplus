@@ -12,15 +12,14 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   bool isAgreeChecked = false;
 
-  // String phoneNumber;
-
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final SharedPreferencesManager _prefsManager = SharedPreferencesManager();
 
-  RegisterBloc() : super(RegisterInitialState()) {
+  RegisterBloc() : super(RegisterSuccessState()) {
     on<CheckRegisterEvent>(register);
     on<ToggleAgreeEvent>(toggleAgree);
     on<RegisterSetPhoneNumberEvent>(setData);
@@ -54,38 +53,42 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       password,
     );
 
-    emit(RegisterSuccessState());
-    if (baseResponse.status == 200) {
-/*      print('object2');
-      final loginResponse = RegisterResponse(
-        baseResponse.response!.first_name as String? ?? '',
-        baseResponse.response!.phone as String? ?? '',
-        baseResponse.response!.password as String? ?? '',
-        baseResponse.response!.password_repeat as String? ?? '',
-        baseResponse.response!.email as String? ?? '',
-        baseResponse.response!.last_name as String? ?? '',
-      );*/
-      print('object3');
+    //  await _prefsManager.saveToken(loginResponse.access_token);
 
-      Get.to(
-        () => VerificationScreen(
-          phoneNumber: "",
-        ),
-      );
-      print('object4');
+    await _prefsManager.savePhone(phoneNumber);
+
+    emit(RegisterSuccessState());
+    // if (isAgreeChecked) {
+    //   print("if ${isAgreeChecked}");
+    //   if (baseResponse.status == 200) {
+    //     Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
+    //     emit(RegisterSuccessState());
+    //   } else {
+    //     emit(RegisterErrorState(InputRegisterFailure()));
+    //   }
+    // } else {
+    //   print('else ${isAgreeChecked}');
+    //   emit(RegisterErrorState(InputRegisterFailure()));
+    // }
+    if (baseResponse.status == 200) {
+      Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
       emit(RegisterSuccessState());
-      print('object5');
     } else {
-      print('object6');
       emit(RegisterErrorState(InputRegisterFailure()));
     }
   }
 
-  toggleAgree(ToggleAgreeEvent event, Emitter<RegisterState> emit) {
-    print("object1");
-    print(isAgreeChecked);
+  // Future<void> toggleAgree(
+  //     ToggleAgreeEvent event, Emitter<RegisterState> emit) async {
+  //   print(isAgreeChecked);
+  //   isAgreeChecked = !isAgreeChecked;
+  //   //  emit(RegisterLoadingState());
+  //   emit(RegisterSuccessState());
+  // }
+
+  Future<void> toggleAgree(
+      ToggleAgreeEvent event, Emitter<RegisterState> emit) async {
     isAgreeChecked = !isAgreeChecked;
-    //  emit(RegisterLoadingState());
     emit(RegisterSuccessState());
   }
 

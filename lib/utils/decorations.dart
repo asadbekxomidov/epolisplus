@@ -13,6 +13,14 @@ mainDecorations() {
   );
 }
 
+homeBlueDecorations() {
+  return BoxDecoration(
+    image: DecorationImage(
+      image: AssetImage(AppImage.homeBlueImage),
+    ),
+  );
+}
+
 inputDecoration(Dimens dimens, {bool isActive = true}) {
   return BoxDecoration(
     color: isActive ? AppColors.whiteColor : AppColors.neActiveColor,
@@ -41,13 +49,5 @@ inputDecorations(Dimens dimens) {
         offset: Offset(0, 2),
       ),
     ],
-  );
-}
-
-splashLanguageCard(Dimens dimens) {
-  return BoxDecoration(
-    color: Colors.amber,
-    // color: AppColors.languageCardColor,
-    borderRadius: BorderRadius.circular(dimens.radius16),
   );
 }

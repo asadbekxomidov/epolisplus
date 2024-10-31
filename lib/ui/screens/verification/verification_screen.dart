@@ -36,10 +36,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
         child: Stack(
           children: [
             ui(),
-            Positioned(
-              top: dimens.paddingVerticalItem69,
-              child: LeftBackIconBtn(),
-            ),
             BlocBuilder<VerificationBloc, VerificationState>(
               builder: (context, state) {
                 return LoadingIndicator(
@@ -76,9 +72,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Gap(dimens.paddingVerticalItem69),
-              // LeftBackIconBtn(),
-              Gap(dimens.paddingVerticalItem120),
+              Gap(dimens.paddingVerticalItem69),
+              LeftBackIconBtn(),
+              Gap(dimens.paddingVerticalItem20),
               Text(
                 AppStrings.verification,
                 style: dimens.titleStyle.copyWith(
@@ -126,7 +122,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 ),
               ),
               Gap(dimens.height15),
-              SendCodeButton(),
+              SendCodeButton(
+                onClick: () {},
+              ),
             ],
           ),
         );
