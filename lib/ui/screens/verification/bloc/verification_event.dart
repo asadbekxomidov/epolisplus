@@ -7,6 +7,8 @@ abstract class VerificationEvent extends Equatable {
 
 class CheckVerificationEvent extends VerificationEvent {}
 
+class SendVerificationEvent extends VerificationEvent {}
+
 class PhoneNumberChangedEvent extends VerificationEvent {}
 
 class VerificationSigninEvent extends VerificationEvent {

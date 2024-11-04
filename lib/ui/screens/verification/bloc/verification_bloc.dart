@@ -1,3 +1,4 @@
+import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -17,6 +18,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
 
   VerificationBloc(this.phoneNumber) : super(VerificationSuccessState()) {
     on<CheckVerificationEvent>(verification);
+    on<SendVerificationEvent>(sendcode);
   }
 
   Future<void> verification(
@@ -41,6 +43,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
           await authRepository.confirmAccount(phoneNumber, phoneCode);
 
       if (baseResponse.status == 200) {
+        logger(baseResponse.response.toString(), error: "Verification Bloc");
         final forgotPassword = baseResponse.response as bool? ?? false;
 
         if (forgotPassword) {
@@ -53,6 +56,28 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
       }
     } else {
       emit(VerificationErrorState(PhoneCodeFailure()));
+    }
+  }
+
+  Future<void> sendcode(
+      SendVerificationEvent event, Emitter<VerificationState> emit) async {
+    emit(VerificationInitialState());
+
+    final authRepository = AuthRepository();
+
+    try {
+      print("send Code func");
+      final baseResponse = await authRepository.resendSms(phoneNumber);
+
+      if (baseResponse.status == 200) {
+        print("send Code func ${baseResponse.status}");
+        emit(VerificationSuccessState());
+        logger(baseResponse.response.toString(), error: "Verification Bloc");
+      } else {
+        emit(VerificationErrorState(SmsSendFailure()));
+      }
+    } catch (e) {
+      emit(VerificationErrorState(SmsSendFailure()));
     }
   }
 }

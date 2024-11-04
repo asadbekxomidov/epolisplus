@@ -55,6 +55,13 @@ class PhoneCodeFailure extends Failure {
       AppStrings.phone_password_errors;
 }
 
+class SmsSendFailure extends Failure {
+  SmsSendFailure() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) => AppStrings.error_sms_code;
+}
+
 class PaaswordPhoneCodeFailure extends Failure {
   PaaswordPhoneCodeFailure() : super();
 

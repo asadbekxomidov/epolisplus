@@ -123,7 +123,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
               ),
               Gap(dimens.height15),
               SendCodeButton(
-                onClick: () {},
+                onClick: () {
+                  verificationBloc.add(SendVerificationEvent());
+                },
               ),
             ],
           ),

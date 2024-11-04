@@ -286,6 +286,7 @@ class SendCodeButton extends StatelessWidget {
                 TextButton.icon(
                   onPressed: () {
                     context.read<TimerBloc>().add(ResetTimerEvent());
+                    onClick();
                   },
                   icon: Icon(Icons.refresh,
                       color: AppColors.mainColor, size: dimens.height28),

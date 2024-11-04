@@ -51,11 +51,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             context,
             state.failure.getErrorMessage(context),
           );
-          print('listener');
         }
       },
       builder: (context, state) {
-        print("builder");
         bloc = BlocProvider.of<RegisterBloc>(context);
         return Container(
           height: dimens.screenHeight,
@@ -107,8 +105,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Gap(dimens.paddingVerticalItem23),
                 IconsButtonWidget(
                   onClick: () {
-                    print(bloc.isAgreeChecked);
-                    print("object");
                     bloc.add(ToggleAgreeEvent());
                   },
                   isAgreeChecked: bloc.isAgreeChecked,

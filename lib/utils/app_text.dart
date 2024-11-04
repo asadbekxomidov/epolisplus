@@ -42,6 +42,7 @@ class AppStrings {
       "There is a mistake in the password or name or phone number";
   static const String input_phoneCode_errors = "Code error please try again";
   static const String phone_password_errors = "Telefon raqam yoki kod noto‘g‘ri";
+  static const String error_sms_code = "SMS code may be wrong";
   static const String input_phoneCode_password_errors =
       "There is an error in the code or password sent, or the password is not entered the same repeatedly";
   static const String button_agree =

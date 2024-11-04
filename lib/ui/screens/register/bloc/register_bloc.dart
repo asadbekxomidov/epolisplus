@@ -1,3 +1,4 @@
+import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/repository/auth_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -38,7 +39,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     if (isAgreeChecked == true) {
       if (phoneNumber.length != 9) {
-        print('object');
         emit(RegisterErrorState(InputRegisterFailure()));
         return;
       }
@@ -54,24 +54,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         password,
       );
 
-      //  await _prefsManager.saveToken(loginResponse.access_token);
-
       await _prefsManager.savePhone(phoneNumber);
 
       emit(RegisterSuccessState());
-      // if (isAgreeChecked) {
-      //   print("if ${isAgreeChecked}");
-      //   if (baseResponse.status == 200) {
-      //     Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
-      //     emit(RegisterSuccessState());
-      //   } else {
-      //     emit(RegisterErrorState(InputRegisterFailure()));
-      //   }
-      // } else {
-      //   print('else ${isAgreeChecked}');
-      //   emit(RegisterErrorState(InputRegisterFailure()));
-      // }
       if (baseResponse.status == 200) {
+        logger(baseResponse.response.toString(), error: "Register Bloc");
         Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
         emit(RegisterSuccessState());
       } else {
@@ -80,51 +67,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     } else {
       emit(RegisterErrorState(ButtonRegisterFailure()));
     }
-
-    // if (phoneNumber.length != 9) {
-    //   print('object');
-    //   emit(RegisterErrorState(InputRegisterFailure()));
-    //   return;
-    // }
-
-    // if (password != password_repeat) {
-    //   return;
-    // }
-
-    // var authRepository = AuthRepository();
-    // var baseResponse = await authRepository.register(
-    //   fullName.trim(),
-    //   phoneNumber,
-    //   password,
-    // );
-
-    // //  await _prefsManager.saveToken(loginResponse.access_token);
-
-    // await _prefsManager.savePhone(phoneNumber);
-
-    // emit(RegisterSuccessState());
-    // // if (isAgreeChecked) {
-    // //   print("if ${isAgreeChecked}");
-    // //   if (baseResponse.status == 200) {
-    // //     Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
-    // //     emit(RegisterSuccessState());
-    // //   } else {
-    // //     emit(RegisterErrorState(InputRegisterFailure()));
-    // //   }
-    // // } else {
-    // //   print('else ${isAgreeChecked}');
-    // //   emit(RegisterErrorState(InputRegisterFailure()));
-    // // }
-    // if (baseResponse.status == 200) {
-    //   Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
-    //   emit(RegisterSuccessState());
-    // } else {
-    //   emit(RegisterErrorState(InputRegisterFailure()));
-    // }
   }
 
   Future<void> toggleAgree(
       ToggleAgreeEvent event, Emitter<RegisterState> emit) async {
+    emit(RegisterLoadingState());
     isAgreeChecked = !isAgreeChecked;
     emit(RegisterSuccessState());
   }

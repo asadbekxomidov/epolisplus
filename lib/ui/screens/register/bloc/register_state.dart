@@ -13,6 +13,10 @@ class RegisterLoadingState extends RegisterState {}
 
 class RegisterToggleAgreeState extends RegisterState {}
 
+class RegisterFormValidState extends RegisterState {}
+
+class RegisterFormInvalidState extends RegisterState {}
+
 class RegisterErrorState extends RegisterState {
   Failure failure;
 
