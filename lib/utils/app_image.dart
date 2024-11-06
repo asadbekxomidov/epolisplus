@@ -6,6 +6,10 @@ class AppImage {
   static String appImageLogo = 'assets/images/logo.png';
   static String splashImage = 'assets/images/splash_image.png';
   static String homeBlueImage = 'assets/images/home/blue_image.png';
+  static String personIcon = 'assets/images/person_image.png';
+  static String settingsIcon = 'assets/images/settings_image.png';
+  static String shieldPlusIcon = 'assets/images/shield_plus_image.png';
+  static String notificationIcon = 'assets/images/notification_image.png';
 
   static IconData visibility = Icons.visibility;
   static IconData in_visibility = Icons.visibility_off;

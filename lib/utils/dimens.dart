@@ -103,6 +103,14 @@ class Dimens {
     return width10 * 1.5;
   }
 
+  double get paddingHorizontal8 {
+    return width10 * 0.8;
+  }
+
+  double get paddingHorizontal16 {
+    return width10 * 1.6;
+  }
+
   double get paddingHorizontal13 {
     return width10 * 1.3;
   }
@@ -181,9 +189,14 @@ class Dimens {
     return 154 * screenHeight / 852;
   }
 
+  double get height220 {
+    return 220 * screenHeight / 852;
+  }
+
   double get width10 {
     return 10 * screenWidth / 392;
   }
+
   double get width5 {
     return 5 * screenWidth / 392;
   }
@@ -202,6 +215,10 @@ class Dimens {
 
   double get width60 {
     return 60 * screenWidth / 392;
+  }
+
+  double get radius14 {
+    return height10 * 1.4;
   }
 
   double get radius16 {
@@ -263,6 +280,16 @@ class Dimens {
       fontSize: font16,
       fontWeight: FontWeight.normal,
       color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get homeStyle {
+    return TextStyle(
+      fontSize: font30,
+      fontWeight: FontWeight.w600,
+      color: AppColors.whiteColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
     );
