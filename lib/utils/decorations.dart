@@ -21,6 +21,15 @@ homeBlueDecorations() {
   );
 }
 
+homePageDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(
+      dimens.radius14,
+    ),
+  );
+}
+
 inputDecoration(Dimens dimens, {bool isActive = true}) {
   return BoxDecoration(
     color: isActive ? AppColors.whiteColor : AppColors.neActiveColor,

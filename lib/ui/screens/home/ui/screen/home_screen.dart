@@ -1,4 +1,5 @@
 import 'package:epolisplus/ui/screens/home/bloc/home_bloc.dart';
+import 'package:epolisplus/ui/widgets/buttons.dart';
 // import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: AppColors.whiteColor,
+            backgroundColor: Colors.grey.shade100,
+            // backgroundColor: AppColors.greyColor,
             // appBar: AppBar(
             //   actions: [
             //     IconButton(
@@ -59,10 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          AppStrings.myPolicies,
-                          style: dimens.homeStyle,
-                        ),
+                        Gap(dimens.paddingVerticalItem59),
                         // ?
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,52 +106,60 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20),
+                        Gap(dimens.paddingVerticalItem18),
+                        Text(
+                          AppStrings.myPolicies,
+                          style: dimens.homeStyle,
+                        ),
+                        Gap(dimens.paddingVerticalItem8),
                         // ! Scrolls
+
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: List.generate(8, (index) {
+                            children: List.generate(5, (index) {
                               final buttonLabels = [
-                                "Agree",
-                                "Accept",
-                                "Confirm",
-                                "Proceed",
-                                "Approve",
-                                "Allow",
-                                "Permit",
-                                "Authorize"
+                                "KACKO",
+                                "OSAGO",
+                                "Journey",
+                                "Additional services",
+                                "Warranty code",
                               ];
 
                               final buttonIcons = [
-                                Icons.check,
-                                Icons.done,
-                                Icons.thumb_up,
-                                Icons.arrow_forward,
-                                Icons.verified,
-                                Icons.check_circle,
-                                Icons.thumb_up_alt,
-                                Icons.security
+                                AppImage.kasko_icon,
+                                AppImage.osago_icon,
+                                AppImage.travel_icon,
+                                AppImage.additional_services_icon,
+                                AppImage.warranty_code_icon,
                               ];
 
                               return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 4.0,
-                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
                                 child: SizedBox(
-                                  child: TextButton.icon(
+                                  child: TextButton(
                                     onPressed: () {},
-                                    icon: Icon(buttonIcons[index],
-                                        color: Colors.white),
-                                    label: Text(
-                                      buttonLabels[index],
-                                      style: TextStyle(color: Colors.white),
-                                    ),
                                     style: TextButton.styleFrom(
                                       side: BorderSide(color: Colors.white),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(
+                                          buttonIcons[index],
+                                          width: 24,
+                                          height: 24,
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          buttonLabels[index],
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -160,18 +167,253 @@ class _HomeScreenState extends State<HomeScreen> {
                             }),
                           ),
                         ),
+                        Gap(dimens.paddingVerticalItem16),
                         // ! Scrol
                         Container(
                           height: dimens.height220,
                           width: dimens.screenWidth,
-                          decoration: BoxDecoration(
-                            color: AppColors.whiteColor,
-                            borderRadius: BorderRadius.circular(
-                              dimens.radius14,
+                          decoration: homePageDecorations(dimens),
+                        ),
+                        // Gap(dimens.paddingVerticalItem16),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Gap(dimens.paddingVerticalItem16),
+                                Text(
+                                  AppStrings.insurancePrograms,
+                                  style: dimens.insuranceProgramsSty,
+                                ),
+                                Gap(dimens.paddingVerticalItem16),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: dimens.paddingHorizontal16,
+                                  ),
+                                  height: dimens.height72,
+                                  width: dimens.screenWidth,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(dimens.radius14),
+                                    image: DecorationImage(
+                                      image: AssetImage(AppImage.kaskoImage),
+                                      alignment: Alignment.topLeft,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Image.asset(
+                                        AppImage.kaskolHomeIcon,
+                                        height: dimens.height40,
+                                      ),
+                                      ButtonWidgets(
+                                        onClick: () {},
+                                        dimens: dimens,
+                                        text: AppStrings.kasko,
+                                        iconData: AppImage.arrowcirclerightIcon,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Gap(dimens.paddingVerticalItem8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: dimens.paddingHorizontal16,
+                                  ),
+                                  height: dimens.height72,
+                                  width: dimens.screenWidth,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(dimens.radius14),
+                                    image: DecorationImage(
+                                      image: AssetImage(AppImage.osagoImage),
+                                      alignment: Alignment.topLeft,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Image.asset(
+                                        AppImage.osagoHomeIcon,
+                                        height: dimens.height40,
+                                      ),
+                                      ButtonWidgets(
+                                        onClick: () {},
+                                        dimens: dimens,
+                                        text: AppStrings.osago,
+                                        iconData: AppImage.arrowcirclerightIcon,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Gap(dimens.paddingVerticalItem8),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: dimens.paddingHorizontal16,
+                                  ),
+                                  height: dimens.height72,
+                                  width: dimens.screenWidth,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.circular(dimens.radius14),
+                                    image: DecorationImage(
+                                      image: AssetImage(AppImage.travelImage),
+                                      alignment: Alignment.topLeft,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Image.asset(
+                                        AppImage.travelHomeIcon,
+                                        height: dimens.height40,
+                                      ),
+                                      ButtonWidgets(
+                                        onClick: () {},
+                                        dimens: dimens,
+                                        text: AppStrings.travel,
+                                        iconData: AppImage.arrowcirclerightIcon,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                // ! ################
+                                Gap(dimens.paddingVerticalItem16),
+                                Container(
+                                  height: dimens.height48,
+                                  width: dimens.screenWidth,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.cardColor,
+                                    borderRadius: BorderRadius.circular(
+                                      dimens.radius14,
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        AppImage.warrantyHomeIcon,
+                                        height: dimens.height24,
+                                      ),
+                                      Gap(dimens.paddingHorizontal8),
+                                      Text(
+                                        AppStrings.warrantyCode,
+                                        style: dimens.warrantyCodeSty,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Gap(dimens.paddingVerticalItem16),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(
+                                        dimens.paddingHorizontal16,
+                                      ),
+                                      height: dimens.height132,
+                                      width: dimens.width176,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        borderRadius: BorderRadius.circular(
+                                          dimens.radius16,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            AppImage.additional_services_icon,
+                                            height: dimens.height36,
+                                          ),
+                                          Gap(dimens.paddingVerticalItem16),
+                                          Text(
+                                            AppStrings.additionalServices,
+                                            style: dimens.warrantyCodeSty,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Gap(dimens.paddingHorizontal8),
+                                    Container(
+                                      padding: EdgeInsets.all(
+                                        dimens.paddingHorizontal16,
+                                      ),
+                                      height: dimens.height132,
+                                      width: dimens.width176,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        borderRadius: BorderRadius.circular(
+                                          dimens.radius16,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            AppImage.emergencyservicesIcon,
+                                            height: dimens.height36,
+                                          ),
+                                          Gap(dimens.paddingVerticalItem16),
+                                          Text(
+                                            AppStrings.emergencyServices,
+                                            style: dimens.warrantyCodeSty,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            bottomNavigationBar: Container(
+              height: dimens.height60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    child: Image.asset(
+                      AppImage.homegreyIcon,
+                      height: dimens.height24,
+                      // AppImage.homeIcon,
+                    ),
+                  ),
+                  Container(
+                    child: Image.asset(
+                      AppImage.kabinetIcon,
+                      height: dimens.height24,
+                    ),
+                  ),
+                  Container(
+                    child: Image.asset(
+                      AppImage.sosIcon,
+                      height: dimens.height72,
+                    ),
+                  ),
+                  Container(
+                    child: Image.asset(
+                      AppImage.mypoliciesIcon,
+                      height: dimens.height24,
+                    ),
+                  ),
+                  Container(
+                    child: Image.asset(
+                      AppImage.partnersIcon,
+                      height: dimens.height24,
                     ),
                   ),
                 ],

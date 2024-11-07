@@ -19,8 +19,12 @@ class AppColors {
 
   static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
+  static Color greyColor = Colors.grey.shade400;
+  static Color rightIconColors = Colors.grey.shade500;
+  // static Color rightIconColor = Color(0xA3A3A3);
   static Color homecontainerColor = Color(0xFFFFFF);
   static Color transparentColor = Colors.transparent;
   static Color transparentColor2 = Color(0x66B90F0F);
   static Color languageCardColor = Color(0xFFFFFF);
+  static Color cardColor = Colors.grey.shade300;
 }

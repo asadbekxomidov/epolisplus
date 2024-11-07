@@ -59,10 +59,6 @@ class Dimens {
     return height10 * 22.5;
   }
 
-  // double get paddingVerticalItem8 {
-  //   return height10 * 0.8;
-  // }
-
   double get paddingVerticalItem137 {
     return 137 * screenHeight / 852;
   }
@@ -84,7 +80,7 @@ class Dimens {
   }
 
   double get paddingVerticalItem16 {
-    return 16 * screenHeight / 852;
+    return height10 * 1.6;
   }
 
   double get paddingVerticalItem7 {
@@ -93,6 +89,18 @@ class Dimens {
 
   double get paddingVerticalItem2 {
     return height10 * 0.3;
+  }
+
+  double get paddingVerticalItem59 {
+    return height10 * 5.9;
+  }
+
+  double get paddingVerticalItem18 {
+    return height10 * 1.8;
+  }
+
+  double get paddingVerticalItem8 {
+    return height10 * 0.8;
   }
 
   double get paddingHorizontalItem {
@@ -113,6 +121,10 @@ class Dimens {
 
   double get paddingHorizontal13 {
     return width10 * 1.3;
+  }
+
+  double get paddingHorizontal11 {
+    return width10 * 1.1;
   }
 
   // ! #################3
@@ -161,8 +173,20 @@ class Dimens {
     return 32 * screenHeight / 852;
   }
 
+  double get height36 {
+    return 36 * screenHeight / 852;
+  }
+
   double get height40 {
     return 42 * screenHeight / 852;
+  }
+
+  double get height48 {
+    return 48 * screenHeight / 852;
+  }
+
+  double get height60 {
+    return 60 * screenHeight / 852;
   }
 
   double get height68 {
@@ -173,12 +197,24 @@ class Dimens {
     return 70 * screenHeight / 852;
   }
 
+  double get height72 {
+    return 72 * screenHeight / 852;
+  }
+
   double get height78 {
     return 78 * screenHeight / 852;
   }
 
+  double get height94 {
+    return 94 * screenHeight / 852;
+  }
+
   double get height100 {
     return 100 * screenHeight / 852;
+  }
+
+  double get height132 {
+    return 132 * screenHeight / 852;
   }
 
   double get height140 {
@@ -217,6 +253,10 @@ class Dimens {
     return 60 * screenWidth / 392;
   }
 
+  double get width176 {
+    return 176 * screenWidth / 392;
+  }
+
   double get radius14 {
     return height10 * 1.4;
   }
@@ -243,6 +283,10 @@ class Dimens {
 
   double get font20 {
     return height10 * 2;
+  }
+
+  double get font24 {
+    return height10 * 2.4;
   }
 
   double get font30 {
@@ -279,6 +323,16 @@ class Dimens {
     return TextStyle(
       fontSize: font16,
       fontWeight: FontWeight.normal,
+      color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get warrantyCodeSty {
+    return TextStyle(
+      fontSize: font16,
+      fontWeight: FontWeight.w600,
       color: AppColors.textColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
@@ -338,6 +392,17 @@ class Dimens {
     );
   }
 
+  TextStyle get insuranceProgramsSty {
+    return TextStyle(
+      fontSize: font24,
+      fontWeight: FontWeight.w600,
+      color: AppColors.blackColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get textStyleSecondary {
     return TextStyle(
       fontSize: font14,
@@ -365,6 +430,17 @@ class Dimens {
       fontSize: font16,
       fontWeight: FontWeight.normal,
       color: AppColors.mainColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get buttonStyCon {
+    return TextStyle(
+      fontSize: font18,
+      fontWeight: FontWeight.w600,
+      color: AppColors.blackColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,

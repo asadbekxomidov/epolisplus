@@ -346,28 +346,46 @@ class LogoutButtons extends StatelessWidget {
           },
           icon: Icon(iconData),
         ),
-        // TextButton.icon(
-        //   style: IconButton.styleFrom(
-        //     highlightColor: AppColors.transparentColor,
-        //   ),
-        //   icon: Icon(
-        //     AppImage.arrow_circle_left_outlined,
-        //     color: AppColors.mainColor,
-        //     size: dimens.height24,
-        //   ),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        //   label: Text(
-        //     AppStrings.back,
-        //     style: TextStyle(
-        //       fontSize: dimens.height16,
-        //       color: AppColors.mainColor,
-        //       fontWeight: FontWeight.w400,
-        //     ),
-        //   ),
-        // ),
       ],
+    );
+  }
+}
+
+// ? Home_screen Button
+
+class ButtonWidgets extends StatelessWidget {
+  Dimens dimens;
+  Function onClick;
+  String? text;
+  IconData? iconData;
+
+  ButtonWidgets({
+    required this.onClick,
+    this.text,
+    this.iconData,
+    required this.dimens,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      splashColor: AppColors.transparentColor,
+      highlightColor: AppColors.transparentColor,
+      onTap: () => onClick,
+      child: Row(
+        children: [
+          Text(
+            text!,
+            style: dimens.buttonStyCon,
+          ),
+          Gap(dimens.paddingHorizontal11),
+          Icon(
+            iconData,
+            color: AppColors.rightIconColors,
+            size: dimens.height24,
+          ),
+        ],
+      ),
     );
   }
 }

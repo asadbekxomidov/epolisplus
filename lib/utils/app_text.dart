@@ -49,4 +49,14 @@ class AppStrings {
   static const String button_agree =
       "Agree to the terms of use of the application";
   static const String myPolicies = "Мои полисы";
+  static const String insurancePrograms = "Программы страхования";
+  static const String warrantyCode = "Активировать гарантийный код";
+  static const String additionalServices = "Дополнительные услуги";
+  static const String emergencyServices = "Экстренные услуги";
+
+  // ! home text
+
+  static const String kasko = "КАСКО";
+  static const String osago = "ОСАГО";
+  static const String travel = "Путешествия";
 }
