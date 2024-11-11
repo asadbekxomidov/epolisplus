@@ -60,3 +60,50 @@ inputDecorations(Dimens dimens) {
     ],
   );
 }
+
+// Home screen
+
+kaskoDecorationsCon(Dimens dimens) {
+  return BoxDecoration(
+    borderRadius: BorderRadius.circular(dimens.radius14),
+    image: DecorationImage(
+      image: AssetImage(AppImage.kaskoImage),
+      alignment: Alignment.topLeft,
+    ),
+  );
+}
+
+osagoDecorationsCon(Dimens dimens) {
+  return BoxDecoration(
+    borderRadius: BorderRadius.circular(dimens.radius14),
+    image: DecorationImage(
+      image: AssetImage(AppImage.osagoImage),
+      alignment: Alignment.topLeft,
+    ),
+  );
+}
+
+travelDecorationsCon(Dimens dimens) {
+  return BoxDecoration(
+    borderRadius: BorderRadius.circular(dimens.radius14),
+    image: DecorationImage(
+      image: AssetImage(AppImage.travelImage),
+      alignment: Alignment.topLeft,
+    ),
+  );
+}
+
+cardContainerDecoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.cardContainerColor,
+    borderRadius: BorderRadius.circular(dimens.radius16),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.blackColor.withOpacity(0.1),
+        spreadRadius: 2,
+        blurRadius: 6,
+        offset: Offset(0, 3),
+      ),
+    ],
+  );
+}

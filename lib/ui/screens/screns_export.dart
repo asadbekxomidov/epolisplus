@@ -27,3 +27,24 @@ export 'verification/verification_screen.dart';
 // ? splash
 
 export 'splash/ui/screens/splash_screen.dart';
+
+// ? settings
+
+export 'settings/ui/screen/settings_screen.dart';
+export 'settings/bloc/settings_bloc.dart';
+
+// ? notification
+export 'notification/ui/screen/notification_screen.dart';
+export 'notification/bloc/notification_bloc.dart';
+
+// ? kabinet
+export 'kabinet/ui/screen/kabinet_screen.dart';
+export '';
+
+// ? policies
+export 'policies/ui/screen/policies_screen.dart';
+export '';
+
+// ? partners
+export 'partners/ui/screen/partners_screen.dart';
+export 'partners/bloc/partners_bloc.dart';

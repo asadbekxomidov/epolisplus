@@ -59,4 +59,19 @@ class AppStrings {
   static const String kasko = "КАСКО";
   static const String osago = "ОСАГО";
   static const String travel = "Путешествия";
+  static const String pointText =
+      ".................................................................................................................................";
+
+  // ! Settings text
+
+  static const String settingsText = "Настройки";
+  static const String appVersion = "Версия приложения 1.0.25";
+  static const String logoutText = "Выйти из аккаунта";
+  static const String notifications = "Уведомления";
+  static const String languageText = "Выбор языка";
+  static const String helpdeskText = "Служба поддержки";
+  static const String questionsAnswerText = "Ворос-ответы";
+  static const String aboutApplicationText = "О приложении";
+  static const String notificationText = "Уведомления";
+  static const String pushNotifications = "Push-уведомления";
 }

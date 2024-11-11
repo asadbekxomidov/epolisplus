@@ -1,4 +1,5 @@
 import 'package:epolisplus/ui/screens/home/bloc/home_bloc.dart';
+import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
 import 'package:epolisplus/ui/widgets/buttons.dart';
 // import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -24,25 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {
+          homeBloc = BlocProvider.of<HomeBloc>(context);
+
           return Scaffold(
             backgroundColor: Colors.grey.shade100,
-            // backgroundColor: AppColors.greyColor,
-            // appBar: AppBar(
-            //   actions: [
-            //     IconButton(
-            //       onPressed: () {
-            //         context.read<HomeBloc>().add(DeleteAccountEvent());
-            //       },
-            //       icon: Icon(Icons.delete, color: AppColors.redColor),
-            //     ),
-            //     LogoutButtons(
-            //       iconData: AppImage.logoutIcon,
-            //       onClick: () {
-            //         context.read<HomeBloc>().add(LogoutEvent());
-            //       },
-            //     ),
-            //   ],
-            // ),
             body: SizedBox(
               height: dimens.screenHeight,
               child: Stack(
@@ -77,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text(
                                   'asadbek',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppColors.whiteColor,
                                     fontSize: dimens.font16,
                                   ),
                                 ),
@@ -85,22 +71,31 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Row(
                               children: [
-                                Image.asset(
-                                  AppImage.shieldPlusIcon,
-                                  height: dimens.height24,
-                                  // height: dimens.height18,
+                                InkWell(
+                                  child: Image.asset(
+                                    AppImage.shieldPlusIcon,
+                                    height: dimens.height24,
+                                    // height: dimens.height18,
+                                  ),
                                 ),
                                 Gap(dimens.paddingHorizontal16),
-                                Image.asset(
-                                  AppImage.notificationIcon,
-                                  height: dimens.height24,
-                                  // height: dimens.height18,
+                                InkWell(
+                                  child: Image.asset(
+                                    AppImage.notificationIcon,
+                                    height: dimens.height24,
+                                    // height: dimens.height18,
+                                  ),
                                 ),
                                 Gap(dimens.paddingHorizontal16),
-                                Image.asset(
-                                  AppImage.settingsIcon,
-                                  height: dimens.height24,
-                                  // height: dimens.height18,
+                                InkWell(
+                                  onTap: () {
+                                    homeBloc.add(PushScreensEvent());
+                                  },
+                                  child: Image.asset(
+                                    AppImage.settingsIcon,
+                                    height: dimens.height24,
+                                    // height: dimens.height18,
+                                  ),
                                 ),
                               ],
                             ),
@@ -180,6 +175,82 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Gap(dimens.paddingVerticalItem20),
+                                // Gap(dimens.paddingVerticalItem16),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: dimens.paddingHorizontal13,
+                                    vertical: dimens.paddingVerticalItem8,
+                                  ),
+                                  height: dimens.height100,
+                                  // height: dimens.height94,
+                                  // height: dimens.height48,
+                                  width: dimens.screenWidth,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.whiteColor,
+                                    borderRadius: BorderRadius.circular(
+                                      dimens.radius14,
+                                    ),
+                                    border: Border.all(
+                                      color: AppColors.cardColor,
+                                      width: dimens.height2,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      InkWell(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Image.asset(
+                                              AppImage.additional_services_icon,
+                                              height: dimens.height20,
+                                            ),
+                                            // Gap(dimens.paddingHorizontal8),s
+                                            Text(
+                                              AppStrings.warrantyCode,
+                                              style: dimens.containerTextSty,
+                                            ),
+                                            Icon(
+                                              Icons.navigate_next_outlined,
+                                              color: AppColors.blackColor,
+                                              size: dimens.height20,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Text(
+                                        AppStrings.pointText,
+                                        style: dimens.pointStyle,
+                                      ),
+                                      Gap(dimens.height5),
+                                      // ? !
+                                      InkWell(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Image.asset(
+                                              AppImage.warrantyHomeIcon,
+                                              height: dimens.height20,
+                                            ),
+                                            // Gap(dimens.paddingHorizontal8),
+                                            Text(
+                                              AppStrings.warrantyCode,
+                                              style: dimens.containerTextSty,
+                                            ),
+                                            Icon(
+                                              Icons.navigate_next_outlined,
+                                              color: AppColors.blackColor,
+                                              size: dimens.height20,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 Gap(dimens.paddingVerticalItem16),
                                 Text(
                                   AppStrings.insurancePrograms,
@@ -192,14 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   height: dimens.height72,
                                   width: dimens.screenWidth,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(dimens.radius14),
-                                    image: DecorationImage(
-                                      image: AssetImage(AppImage.kaskoImage),
-                                      alignment: Alignment.topLeft,
-                                    ),
-                                  ),
+                                  decoration: kaskoDecorationsCon(dimens),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -224,14 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   height: dimens.height72,
                                   width: dimens.screenWidth,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(dimens.radius14),
-                                    image: DecorationImage(
-                                      image: AssetImage(AppImage.osagoImage),
-                                      alignment: Alignment.topLeft,
-                                    ),
-                                  ),
+                                  decoration: osagoDecorationsCon(dimens),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -256,14 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   height: dimens.height72,
                                   width: dimens.screenWidth,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(dimens.radius14),
-                                    image: DecorationImage(
-                                      image: AssetImage(AppImage.travelImage),
-                                      alignment: Alignment.topLeft,
-                                    ),
-                                  ),
+                                  decoration: travelDecorationsCon(dimens),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -281,95 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ],
                                   ),
                                 ),
-
-                                // ! ################
                                 Gap(dimens.paddingVerticalItem16),
-                                Container(
-                                  height: dimens.height48,
-                                  width: dimens.screenWidth,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.cardColor,
-                                    borderRadius: BorderRadius.circular(
-                                      dimens.radius14,
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        AppImage.warrantyHomeIcon,
-                                        height: dimens.height24,
-                                      ),
-                                      Gap(dimens.paddingHorizontal8),
-                                      Text(
-                                        AppStrings.warrantyCode,
-                                        style: dimens.warrantyCodeSty,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Gap(dimens.paddingVerticalItem16),
-                                Row(
-                                  children: [
-                                    Container(
-                                      padding: EdgeInsets.all(
-                                        dimens.paddingHorizontal16,
-                                      ),
-                                      height: dimens.height132,
-                                      width: dimens.width176,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.shade200,
-                                        borderRadius: BorderRadius.circular(
-                                          dimens.radius16,
-                                        ),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            AppImage.additional_services_icon,
-                                            height: dimens.height36,
-                                          ),
-                                          Gap(dimens.paddingVerticalItem16),
-                                          Text(
-                                            AppStrings.additionalServices,
-                                            style: dimens.warrantyCodeSty,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Gap(dimens.paddingHorizontal8),
-                                    Container(
-                                      padding: EdgeInsets.all(
-                                        dimens.paddingHorizontal16,
-                                      ),
-                                      height: dimens.height132,
-                                      width: dimens.width176,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.shade200,
-                                        borderRadius: BorderRadius.circular(
-                                          dimens.radius16,
-                                        ),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            AppImage.emergencyservicesIcon,
-                                            height: dimens.height36,
-                                          ),
-                                          Gap(dimens.paddingVerticalItem16),
-                                          Text(
-                                            AppStrings.emergencyServices,
-                                            style: dimens.warrantyCodeSty,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ],
                             ),
                           ),
@@ -380,45 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            bottomNavigationBar: Container(
-              height: dimens.height60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: Image.asset(
-                      AppImage.homegreyIcon,
-                      height: dimens.height24,
-                      // AppImage.homeIcon,
-                    ),
-                  ),
-                  Container(
-                    child: Image.asset(
-                      AppImage.kabinetIcon,
-                      height: dimens.height24,
-                    ),
-                  ),
-                  Container(
-                    child: Image.asset(
-                      AppImage.sosIcon,
-                      height: dimens.height72,
-                    ),
-                  ),
-                  Container(
-                    child: Image.asset(
-                      AppImage.mypoliciesIcon,
-                      height: dimens.height24,
-                    ),
-                  ),
-                  Container(
-                    child: Image.asset(
-                      AppImage.partnersIcon,
-                      height: dimens.height24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            bottomNavigationBar: TabbarPage(),
           );
         },
       ),

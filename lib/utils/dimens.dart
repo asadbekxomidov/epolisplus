@@ -59,6 +59,18 @@ class Dimens {
     return height10 * 22.5;
   }
 
+  double get paddingVerticalItem250 {
+    return height10 * 25.0;
+  }
+
+  double get paddingVerticalItem300 {
+    return height10 * 30.0;
+  }
+
+  double get paddingVerticalItem320 {
+    return height10 * 32.0;
+  }
+
   double get paddingVerticalItem137 {
     return 137 * screenHeight / 852;
   }
@@ -69,6 +81,10 @@ class Dimens {
 
   double get paddingHorizontalItem5 {
     return 5 * screenHeight / 852;
+  }
+
+  double get paddingHorizontalItem3 {
+    return 3 * screenHeight / 852;
   }
 
   double get paddingVerticalItem44 {
@@ -88,6 +104,10 @@ class Dimens {
   }
 
   double get paddingVerticalItem2 {
+    return height10 * 0.2;
+  }
+
+  double get paddingVerticalItem3 {
     return height10 * 0.3;
   }
 
@@ -103,6 +123,14 @@ class Dimens {
     return height10 * 0.8;
   }
 
+  double get paddingVerticalItem10 {
+    return height10 * 1.0;
+  }
+
+  double get paddingVerticalItem12 {
+    return height10 * 1.2;
+  }
+
   double get paddingHorizontalItem {
     return screenWidth * 0.13;
   }
@@ -113,6 +141,10 @@ class Dimens {
 
   double get paddingHorizontal8 {
     return width10 * 0.8;
+  }
+
+  double get paddingHorizontal4 {
+    return width10 * 0.4;
   }
 
   double get paddingHorizontal16 {
@@ -128,6 +160,18 @@ class Dimens {
   }
 
   // ! #################3
+
+  double get height1 {
+    return 1 * screenHeight / 852;
+  }
+
+  double get height2 {
+    return 2 * screenHeight / 852;
+  }
+
+  double get height4 {
+    return 4 * screenHeight / 852;
+  }
 
   double get height5 {
     return 5 * screenHeight / 852;
@@ -229,6 +273,14 @@ class Dimens {
     return 220 * screenHeight / 852;
   }
 
+  double get height252 {
+    return 252 * screenHeight / 852;
+  }
+
+  double get height306 {
+    return 306 * screenHeight / 852;
+  }
+
   double get width10 {
     return 10 * screenWidth / 392;
   }
@@ -319,6 +371,27 @@ class Dimens {
     );
   }
 
+  TextStyle get logoutCardStyle {
+    return TextStyle(
+      color: AppColors.greyColor,
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get settingsStyle {
+    return TextStyle(
+      fontSize: font30,
+      fontFamily: "GeistVF",
+      color: AppColors.whiteColor,
+      fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get textStyle {
     return TextStyle(
       fontSize: font16,
@@ -331,11 +404,26 @@ class Dimens {
 
   TextStyle get warrantyCodeSty {
     return TextStyle(
-      fontSize: font16,
+      // fontSize: font16,
+      fontSize: font14,
       fontWeight: FontWeight.w600,
       color: AppColors.textColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get containerTextSty {
+    return TextStyle(
+      // fontSize: font16,
+      fontSize: font12,
+      // fontSize: font14,
+      fontWeight: FontWeight.w500,
+      // fontWeight: FontWeight.w600,
+      color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
     );
   }
 
@@ -458,15 +546,16 @@ class Dimens {
     );
   }
 
+  TextStyle get pointStyle {
+    return TextStyle(
+      overflow: TextOverflow.ellipsis,
+      color: AppColors.pointColor,
+      fontWeight: FontWeight.w300,
+      fontSize: font14,
+    );
+  }
+
   TextStyle get myphonetextfieldStyle {
-    // return TextStyle(
-    //   fontSize: starlite,
-    //   fontWeight: FontWeight.normal,
-    //   color: AppColors.redColor,
-    //   fontFamily: "GeistVF",
-    //   decoration: TextDecoration.none,
-    //   overflow: TextOverflow.ellipsis,
-    // );
     return TextStyle(
       color: AppColors.blackColor,
       fontWeight: FontWeight.w400,

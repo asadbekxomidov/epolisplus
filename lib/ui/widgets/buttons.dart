@@ -71,11 +71,13 @@ class LeftBackIconBtn extends StatelessWidget {
   Function? onClick;
   String? text;
   IconData? iconData;
+  Color? appColors;
 
   LeftBackIconBtn({
     this.onClick,
     this.text,
     this.iconData,
+    this.appColors,
   });
 
   late Dimens dimens;
@@ -93,7 +95,7 @@ class LeftBackIconBtn extends StatelessWidget {
         children: [
           Icon(
             AppImage.arrow_circle_left_outlined,
-            color: AppColors.mainColor,
+            color: appColors,
             size: dimens.height24,
           ),
           Gap(dimens.width5),
@@ -101,7 +103,7 @@ class LeftBackIconBtn extends StatelessWidget {
             AppStrings.back,
             style: TextStyle(
               fontSize: dimens.height16,
-              color: AppColors.mainColor,
+              color: appColors,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -385,6 +387,174 @@ class ButtonWidgets extends StatelessWidget {
             size: dimens.height24,
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ? LogoutButton
+
+class LogoutButton extends StatelessWidget {
+  Dimens dimens;
+  Function onClick;
+  String? text;
+  String? image;
+
+  LogoutButton({
+    required this.onClick,
+    this.text,
+    this.image,
+    required this.dimens,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      splashColor: AppColors.transparentColor,
+      highlightColor: AppColors.transparentColor,
+      onTap: () {
+        print('logout button');
+        onClick();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            image!,
+            height: dimens.height24,
+          ),
+          Gap(
+            dimens.paddingVerticalItem8,
+          ),
+          Text(text!),
+        ],
+      ),
+    );
+  }
+}
+
+// ? SettingFuncButton
+
+// class SettingFuncButton extends StatelessWidget {
+//   Dimens dimens;
+//   Function onClick;
+//   String? text;
+//   String? image;
+//   IconData? iconData;
+
+//   SettingFuncButton({
+//     required this.onClick,
+//     this.text,
+//     this.image,
+//     required this.dimens,
+//     this.iconData,
+//   });
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       splashColor: AppColors.transparentColor,
+//       highlightColor: AppColors.transparentColor,
+//       onTap: () {
+//         onClick;
+//       },
+//       child: Padding(
+//         padding: EdgeInsets.all(
+//           dimens.paddingHorizontal4,
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Row(
+//               children: [
+//                 Gap(dimens.paddingVerticalItem12),
+//                 Image.asset(
+//                   image!,
+//                   height: dimens.height20,
+//                 ),
+//                 Gap(dimens.paddingVerticalItem8),
+//                 Text(
+//                   text!,
+//                   style: TextStyle(
+//                     fontSize: dimens.font16,
+//                     fontWeight: FontWeight.w400,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             Row(
+//               children: [
+//                 Icon(
+//                   iconData,
+//                   size: dimens.height20,
+//                   color: AppColors.greyColor,
+//                 ),
+//                 Gap(dimens.paddingVerticalItem12),
+//               ],
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+class SettingFuncButton extends StatelessWidget {
+  final Dimens dimens;
+  final Function onClick;
+  final String? text;
+  final String? image;
+  final IconData? iconData;
+
+  SettingFuncButton({
+    required this.onClick,
+    this.text,
+    this.image,
+    required this.dimens,
+    this.iconData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      splashColor: AppColors.transparentColor,
+      highlightColor: AppColors.transparentColor,
+      onTap: () {
+        onClick(); // Correctly invoke the onClick function here
+      },
+      child: Padding(
+        padding: EdgeInsets.all(dimens.paddingHorizontal4),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Gap(dimens.paddingVerticalItem12),
+                Image.asset(
+                  image!,
+                  height: dimens.height20,
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Text(
+                  text!,
+                  style: TextStyle(
+                    fontSize: dimens.font16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(
+                  iconData,
+                  size: dimens.height20,
+                  color: AppColors.greyColor,
+                ),
+                Gap(dimens.paddingVerticalItem12),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

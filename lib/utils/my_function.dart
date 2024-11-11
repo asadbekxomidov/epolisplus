@@ -14,3 +14,11 @@ clearPhoneMask(String phoneNumber) {
   phoneNumber = phoneNumber.replaceAll(" ", "");
   return phoneNumber;
 }
+
+lineContainer(Dimens dimens) {
+  return Container(
+    height: dimens.height1,
+    width: dimens.screenWidth,
+    color: AppColors.cardColor,
+  );
+}
