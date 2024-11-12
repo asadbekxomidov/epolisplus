@@ -9,6 +9,14 @@ abstract class Failure implements LocalizedMessage {
   Failure();
 }
 
+class GetPartnersErrorclass extends Failure {
+  GetPartnersErrorclass() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.partnersGetErrorText;
+}
+
 class InputPhoneFailure extends Failure {
   InputPhoneFailure() : super();
 

@@ -13,7 +13,6 @@ analyzer:
     file_names: ignore
     library_private_types_in_public_api: ignore
     must_be_immutable: ignore
-    prefer_const_constructors: ignore
     prefer_const_constructors_in_immutables: ignore
     unused_field: ignore
     unused_local_variable: ignore

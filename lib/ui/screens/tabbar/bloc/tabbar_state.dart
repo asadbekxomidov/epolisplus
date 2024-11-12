@@ -24,3 +24,11 @@ class TabbarSelectionUpdated extends TabbarState {
   @override
   List<Object?> get props => [selectedIndex];
 }
+
+class TabbarSuccesState extends TabbarState {}
+
+class TabbarLoadingState extends TabbarState {}
+
+class TabbarLoadedState extends TabbarState {}
+
+class TabbarErrorState extends TabbarState {}

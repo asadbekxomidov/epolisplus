@@ -8,6 +8,7 @@ class ApiConstanta {
   static const RESEND_SMS_CODE = "v1/user/resend-sms";
   static const CONFIRM_ACCOUNT = "v1/user/confirm-account";
   static const DELETE_ACCOUNT = "v1/user/delete-phone-test";
+  static const GET_PARTNERS = "v1/references/get-partners";
 }
 
 
@@ -37,7 +38,7 @@ class ApiConstanta {
 //   static const ORDER_KASKO_POLICY = "v1/kasko/order-premium";
 //   static const LITRO_CREATE_ANKETA = "v1/litro/litro-form";
 //   static const KASKO_CREATE_ANKETA = "v1/kasko/create-anketa";
-//   static const GET_PARTNERS = "v1/references/get-partners";
+  // static const GET_PARTNERS = "v1/references/get-partners";
 //   static const GET_COMPANY = "v1/references/company-list";
 //   static const USER_TEST_TOKEN = "2bbe9c7f4c6b541e95385dc2ef411f61";
 //   static const String GET_RELATION = "v1/osgo/relations";

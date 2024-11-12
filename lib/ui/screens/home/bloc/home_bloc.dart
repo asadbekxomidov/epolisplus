@@ -1,5 +1,5 @@
 import 'package:epolisplus/log/logger.dart';
-import 'package:epolisplus/repository/auth_repository.dart';
+import 'package:epolisplus/repository/auth/auth_repository.dart';
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

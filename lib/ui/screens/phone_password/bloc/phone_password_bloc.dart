@@ -1,4 +1,4 @@
-import 'package:epolisplus/repository/auth_repository.dart';
+import 'package:epolisplus/repository/auth/auth_repository.dart';
 import 'package:epolisplus/ui/screens/home/ui/screen/home_screen.dart';
 import 'package:epolisplus/utils/errors.dart';
 import 'package:equatable/equatable.dart';

@@ -74,4 +74,5 @@ class AppStrings {
   static const String aboutApplicationText = "О приложении";
   static const String notificationText = "Уведомления";
   static const String pushNotifications = "Push-уведомления";
+  static const String partnersGetErrorText = "There was an error retrieving partner information";
 }

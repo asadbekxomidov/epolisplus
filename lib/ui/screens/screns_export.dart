@@ -43,7 +43,6 @@ export '';
 
 // ? policies
 export 'policies/ui/screen/policies_screen.dart';
-export '';
 
 // ? partners
 export 'partners/ui/screen/partners_screen.dart';
