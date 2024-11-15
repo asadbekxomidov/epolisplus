@@ -213,12 +213,14 @@ class ResetPasswordButton extends StatelessWidget {
 class IconsButtonWidget extends StatelessWidget {
   final bool isAgreeChecked;
   final Function onClick;
+  final Function onClickOferta;
   final Dimens dimens;
 
   IconsButtonWidget({
     required this.onClick,
     required this.isAgreeChecked,
     required this.dimens,
+    required this.onClickOferta,
   });
 
   @override
@@ -238,23 +240,46 @@ class IconsButtonWidget extends StatelessWidget {
             color: isAgreeChecked ? AppColors.mainColor : Colors.grey,
           ),
         ),
-        Expanded(
-          child: RichText(
-            textAlign: TextAlign.left,
-            text: TextSpan(
-              text: AppStrings.agreeProcessing,
+        // Expanded(
+        //   child: RichText(
+        //     textAlign: TextAlign.left,
+        //     text: TextSpan(
+        //       text: AppStrings.agreeProcessing,
+        //       style: dimens.textStyle,
+        //       children: [
+        //         TextSpan(
+        //           text: '           ',
+        //         ),
+        //         TextSpan(
+        //           onEnter: (event) {
+        //             onClickOferta();
+        //           },
+        //           text: AppStrings.personalData,
+        //           style: dimens.textStyleGreen,
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              AppStrings.agreeProcessing,
               style: dimens.textStyle,
-              children: [
-                TextSpan(
-                  text: '           ',
-                ),
-                TextSpan(
-                  text: AppStrings.personalData,
-                  style: dimens.textStyleGreen,
-                ),
-              ],
             ),
-          ),
+            InkWell(
+              highlightColor: AppColors.transparentColor,
+              splashColor: AppColors.transparentColor,
+              onTap: () {
+                onClickOferta();
+              },
+              child: Text(
+                AppStrings.personalData,
+                style: dimens.textStyleGreen,
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -434,70 +459,6 @@ class LogoutButton extends StatelessWidget {
 
 // ? SettingFuncButton
 
-// class SettingFuncButton extends StatelessWidget {
-//   Dimens dimens;
-//   Function onClick;
-//   String? text;
-//   String? image;
-//   IconData? iconData;
-
-//   SettingFuncButton({
-//     required this.onClick,
-//     this.text,
-//     this.image,
-//     required this.dimens,
-//     this.iconData,
-//   });
-//   @override
-//   Widget build(BuildContext context) {
-//     return InkWell(
-//       splashColor: AppColors.transparentColor,
-//       highlightColor: AppColors.transparentColor,
-//       onTap: () {
-//         onClick;
-//       },
-//       child: Padding(
-//         padding: EdgeInsets.all(
-//           dimens.paddingHorizontal4,
-//         ),
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             Row(
-//               children: [
-//                 Gap(dimens.paddingVerticalItem12),
-//                 Image.asset(
-//                   image!,
-//                   height: dimens.height20,
-//                 ),
-//                 Gap(dimens.paddingVerticalItem8),
-//                 Text(
-//                   text!,
-//                   style: TextStyle(
-//                     fontSize: dimens.font16,
-//                     fontWeight: FontWeight.w400,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             Row(
-//               children: [
-//                 Icon(
-//                   iconData,
-//                   size: dimens.height20,
-//                   color: AppColors.greyColor,
-//                 ),
-//                 Gap(dimens.paddingVerticalItem12),
-//               ],
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
 class SettingFuncButton extends StatelessWidget {
   final Dimens dimens;
   final Function onClick;
@@ -519,7 +480,7 @@ class SettingFuncButton extends StatelessWidget {
       splashColor: AppColors.transparentColor,
       highlightColor: AppColors.transparentColor,
       onTap: () {
-        onClick(); // Correctly invoke the onClick function here
+        onClick();
       },
       child: Padding(
         padding: EdgeInsets.all(dimens.paddingHorizontal4),
@@ -556,6 +517,41 @@ class SettingFuncButton extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+// ? ToggleButton
+
+class ToggleIconButton extends StatelessWidget {
+  late Dimens dimens;
+  final ValueNotifier<bool> _isToggled = ValueNotifier<bool>(false);
+
+  ToggleIconButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return ValueListenableBuilder<bool>(
+      valueListenable: _isToggled,
+      builder: (context, isToggled, child) {
+        return IconButton(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          icon: Icon(
+            isToggled ? Icons.toggle_off_outlined : Icons.toggle_on_sharp,
+            size: dimens.height24,
+            // size: dimens.width44,
+          ),
+          // icon: Icon(isToggled ? Icons.favorite : Icons.favorite_border),
+          color: isToggled ? Colors.grey.shade200 : Colors.green.shade600,
+          // color: isToggled ? Colors.green : Colors.grey.shade300,
+          onPressed: () {
+            _isToggled.value = !_isToggled.value;
+          },
+        );
+      },
     );
   }
 }

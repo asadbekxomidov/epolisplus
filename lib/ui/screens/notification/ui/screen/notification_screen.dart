@@ -1,4 +1,4 @@
-import 'package:epolisplus/ui/screens/notification/bloc/notification_bloc.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/ui/widgets/buttons.dart';
 import 'package:epolisplus/ui/widgets/greenbackground.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -15,91 +15,141 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   late NotificationBloc notificationBloc;
+  late SettingsBloc settingsBloc;
 
   @override
   Widget build(BuildContext context) {
-    final dimens = Dimens(context); // Initialize with context here
+    final dimens = Dimens(context);
 
-    return BlocProvider(
-      create: (context) => NotificationBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NotificationBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SettingsBloc(),
+        ),
+      ],
       child: Scaffold(
         body: GreenImageBackground(
           child: BlocConsumer<NotificationBloc, NotificationState>(
-            listener: (context, state) {
-              // Handle states if necessary
-            },
+            listener: (context, state) {},
             builder: (context, state) {
+              settingsBloc = BlocProvider.of<SettingsBloc>(context);
+              notificationBloc = BlocProvider.of<NotificationBloc>(context);
+
               return Container(
                 padding: EdgeInsets.all(
                   dimens.paddingHorizontal16,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Gap(dimens.paddingVerticalItem10),
-                    LeftBackIconBtn(
-                      appColors: AppColors.whiteColor,
-                    ),
-                    Gap(dimens.paddingVerticalItem10),
-                    Text(
-                      AppStrings.notificationText,
-                      style: dimens.settingsStyle,
-                    ),
-                    Gap(dimens.paddingVerticalItem8),
-                    Card(
-                      color: AppColors.cardContainerColor,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: dimens.paddingVerticalItem8,
-                          horizontal: dimens.paddingHorizontal4,
-                        ),
-                        height: dimens.height306,
-                        width: dimens.screenWidth,
-                        decoration: cardContainerDecoration(dimens),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  AppStrings.pushNotifications,
-                                  style: TextStyle(
-                                    fontSize: dimens.font16,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.blackColor,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Gap(dimens.paddingVerticalItem10),
+                      Gap(dimens.paddingVerticalItem69),
+                      LeftBackIconBtn(
+                        appColors: AppColors.whiteColor,
+                      ),
+                      Gap(dimens.paddingVerticalItem10),
+                      Text(
+                        AppStrings.notificationText,
+                        style: dimens.settingsStyle,
+                      ),
+                      Gap(dimens.paddingVerticalItem8),
+                      Card(
+                        color: AppColors.cardContainerColor,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: dimens.paddingVerticalItem16,
+                            horizontal: dimens.paddingHorizontal16,
+                          ),
+                          height: dimens.height306,
+                          width: dimens.screenWidth,
+                          decoration: cardContainerDecoration(dimens),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    AppStrings.pushNotifications,
+                                    style: dimens.notoficationsSty,
                                   ),
-                                ),
-                              ],
-                            ),
-                            SettingFuncButton(
-                              onClick: () {},
-                              dimens: dimens,
-                              image: AppImage.notificationSettingIcon,
-                              text: AppStrings.notifications,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                            lineContainer(dimens),
-                            SettingFuncButton(
-                              onClick: () {},
-                              dimens: dimens,
-                              image: AppImage.languageSettingIcon,
-                              text: AppStrings.languageText,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                            lineContainer(dimens),
-                            SettingFuncButton(
-                              onClick: () {},
-                              dimens: dimens,
-                              image: AppImage.helpdeskSettingIcon,
-                              text: AppStrings.helpdeskText,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                          ],
+                                  ToggleIconButton(),
+                                ],
+                              ),
+                              Text(
+                                AppStrings.allNotifications,
+                                style: dimens.allNotoficationsSty,
+                              ),
+                              lineContainer(dimens),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    AppStrings.smsNotifications,
+                                    style: dimens.notoficationsSty,
+                                  ),
+                                  ToggleIconButton(),
+                                ],
+                              ),
+                              Text(
+                                AppStrings.smsallNotifications,
+                                style: dimens.allNotoficationsSty,
+                              ),
+                              lineContainer(dimens),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    AppStrings.emailNotifications,
+                                    style: dimens.notoficationsSty,
+                                  ),
+                                  ToggleIconButton(),
+                                ],
+                              ),
+                              Text(
+                                AppStrings.emailallNotifications,
+                                style: dimens.allNotoficationsSty,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      Gap(dimens.paddingVerticalItem250),
+                      Card(
+                        color: AppColors.cardContainerColor,
+                        child: Container(
+                          height: dimens.height48,
+                          width: dimens.screenWidth,
+                          decoration: cardContainerDecoration(dimens),
+                          child: LogoutButton(
+                            image: AppImage.settingslogoutIcon,
+                            onClick: () {
+                              settingsBloc.add(LogoutEvent());
+                            },
+                            text: AppStrings.logoutText,
+                            dimens: dimens,
+                          ),
+                        ),
+                      ),
+                      Gap(dimens.paddingHorizontalItem3),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppStrings.appVersion,
+                            style: dimens.logoutCardStyle,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

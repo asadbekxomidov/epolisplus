@@ -1,6 +1,7 @@
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,6 +14,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(SettingsInitaialState()) {
     on<LogoutEvent>(logout);
     on<SettingsPushScreenEvent>(onPushScreen);
+    on<SettingsDilogEvent>(onSelectShowDilog);
   }
 
   Future<void> logout(LogoutEvent event, Emitter<SettingsState> emit) async {
@@ -27,16 +29,28 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-  // void pushScreen(SettingsPushScreenEvent event, Emitter<SettingsState> emit) {
-  //   emit(SettingsLoadingState());
-  //   Get.offAll(() => NotificationScreen());
-  //   emit(SettingsSuccesState());
-  // }
   void onPushScreen(
       SettingsPushScreenEvent event, Emitter<SettingsState> emit) {
     emit(SettingsLoadingState());
-    // Navigate to NotificationScreen
-    Get.offAll(() => NotificationScreen());
+    Get.to(() => const NotificationScreen());
     emit(SettingsSuccesState());
+  }
+
+  void onSelectShowDilog(
+      SettingsDilogEvent event, Emitter<SettingsState> emit) async {
+    emit(SettingsLoadingState());
+
+    final selectedLanguage = await showDialog<String>(
+      context: event.context,
+      builder: (BuildContext context) {
+        return LanguageSelectionDialog();
+      },
+    );
+
+    if (selectedLanguage != null) {
+      emit(SettingsSuccesState());
+    } else {
+      emit(SettingsErrorState('No language selected'));
+    }
   }
 }

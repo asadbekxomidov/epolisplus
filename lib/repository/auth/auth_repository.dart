@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/auth/auth_repository_iml.dart';
 import 'package:epolisplus/services/api_constanta.dart';
@@ -487,10 +488,9 @@ class AuthRepository extends AuthRepositoryIml {
         );
       } else {
         if (response?.data["status"] == 200) {
-          return BaseModels(
-            status: 200
-            // code: 200,
-          );
+          return BaseModels(status: 200
+              // code: 200,
+              );
         } else {
           return BaseModels(
             code: response?.data["status"],
@@ -500,6 +500,55 @@ class AuthRepository extends AuthRepositoryIml {
       }
     } on Exception {
       return throw 'SERVER_NOT_WORKING';
+    }
+  }
+
+  @override
+  Future<BaseModels<String>> ofertaGet(String oferta) async {
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept-Language': "uz-UZ",
+      'Accept-Encoding': 'UTF-8',
+    };
+
+    var url = ApiConstanta.OFERTA;
+    Response? response;
+    print('object1');
+
+    try {
+      print('object2');
+      response = await service.getGetData(headers, url);
+      print('------${response = await service.getGetData(headers, url)}-----');
+
+      if (response?.statusCode != 200) {
+        print('object3');
+        logger(response.toString(), error: "Repository");
+        print('object4');
+        return BaseModels(
+          status: response!.statusCode,
+          message: response.statusMessage ?? 'Xato yuz berdi',
+          code: false,
+        );
+      } else {
+        print('object5');
+        var ofertaContent = response?.data['content'];
+        print(
+            '1111111111111111111${response?.data['response']}11111111111111111111');
+        print('object6');
+        return BaseModels(
+          status: 200,
+          response: ofertaContent,
+          code: true,
+          message: 'Oferta muvaffaqiyatli yuklandi',
+        );
+      }
+    } on Exception catch (e) {
+      print('object7');
+      return BaseModels(
+        status: 123,
+        code: false,
+        message: "Server vaqtincha ishlamayapti, qaytadan urinib ko'ring: $e",
+      );
     }
   }
 }

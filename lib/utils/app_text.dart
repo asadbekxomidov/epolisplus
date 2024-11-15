@@ -72,7 +72,25 @@ class AppStrings {
   static const String helpdeskText = "Служба поддержки";
   static const String questionsAnswerText = "Ворос-ответы";
   static const String aboutApplicationText = "О приложении";
+
+  // ! Notifications
+
   static const String notificationText = "Уведомления";
   static const String pushNotifications = "Push-уведомления";
-  static const String partnersGetErrorText = "There was an error retrieving partner information";
+  static const String partnersGetErrorText =
+      "There was an error retrieving partner information";
+  static const String allNotifications =
+      "Все уведомления будут приходить на ваш телефон в виде всплывающего окна";
+  static const String smsNotifications = "СМС-уведомления";
+  static const String smsallNotifications =
+      "Все уведомления будут приходить на ваш телефон, даже если нет сети";
+  static const String emailNotifications = "Электронная почта";
+  static const String emailallNotifications =
+      "Все уведомления будут приходить на вашу электронную почту";
+
+
+  // ! Oferta
+
+
+  static const String ofertaScText = "О приложении";
 }

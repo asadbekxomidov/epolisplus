@@ -17,3 +17,5 @@ class RegisterSetPhoneNumberEvent extends RegisterEvent {
   @override
   List<Object?> get props => [number];
 }
+
+class OfertaPushEvent extends RegisterEvent {}

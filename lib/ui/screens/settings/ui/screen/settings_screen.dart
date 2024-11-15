@@ -29,111 +29,115 @@ class _SettingsScreenState extends State<SettingsScreen> {
             builder: (context, state) {
               settingsBloc = BlocProvider.of<SettingsBloc>(context);
               return Container(
-                padding: EdgeInsets.all(
-                  dimens.paddingHorizontal16,
+                padding: EdgeInsets.symmetric(
+                  horizontal: dimens.paddingHorizontal16,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Gap(dimens.paddingVerticalItem10),
-                    // Gap(dimens.paddingVerticalItem69),
-                    LeftBackIconBtn(
-                      appColors: AppColors.whiteColor,
-                    ),
-                    Gap(dimens.paddingVerticalItem10),
-                    Text(
-                      AppStrings.settingsText,
-                      style: dimens.settingsStyle,
-                    ),
-                    Gap(dimens.paddingVerticalItem8),
-                    Card(
-                      color: AppColors.cardContainerColor,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: dimens.paddingVerticalItem8,
-                          horizontal: dimens.paddingHorizontal4,
-                        ),
-                        height: dimens.height252,
-                        width: dimens.screenWidth,
-                        decoration: cardContainerDecoration(dimens),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SettingFuncButton(
-                              onClick: () {
-                                print('object');
-                                // settingsBloc.add(SettingsPushScreenEvent());
-                                settingsBloc.add(SettingsPushScreenEvent());
-                              },
-                              dimens: dimens,
-                              image: AppImage.notificationSettingIcon,
-                              text: AppStrings.notifications,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                            lineContainer(dimens),
-                            SettingFuncButton(
-                              onClick: () {},
-                              dimens: dimens,
-                              image: AppImage.languageSettingIcon,
-                              text: AppStrings.languageText,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                            lineContainer(dimens),
-                            SettingFuncButton(
-                              onClick: () {},
-                              dimens: dimens,
-                              image: AppImage.helpdeskSettingIcon,
-                              text: AppStrings.helpdeskText,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                            lineContainer(dimens),
-                            SettingFuncButton(
-                              onClick: () {},
-                              dimens: dimens,
-                              image: AppImage.questionsanswerSettingIcon,
-                              text: AppStrings.questionsAnswerText,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                            lineContainer(dimens),
-                            SettingFuncButton(
-                              onClick: () {},
-                              dimens: dimens,
-                              image: AppImage.aboutapplicationSettingIcon,
-                              text: AppStrings.aboutApplicationText,
-                              iconData: AppImage.navigatenextIcon,
-                            ),
-                          ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Gap(dimens.paddingVerticalItem10),
+                      Gap(dimens.paddingVerticalItem69),
+                      LeftBackIconBtn(
+                        appColors: AppColors.whiteColor,
+                      ),
+                      Gap(dimens.paddingVerticalItem10),
+                      Text(
+                        AppStrings.settingsText,
+                        style: dimens.settingsStyle,
+                      ),
+                      Gap(dimens.paddingVerticalItem8),
+                      Card(
+                        color: AppColors.cardContainerColor,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: dimens.paddingVerticalItem8,
+                            horizontal: dimens.paddingHorizontal4,
+                          ),
+                          height: dimens.height252,
+                          width: dimens.screenWidth,
+                          decoration: cardContainerDecoration(dimens),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SettingFuncButton(
+                                onClick: () {
+                                  print('object');
+                                  // settingsBloc.add(SettingsPushScreenEvent());
+                                  settingsBloc.add(SettingsPushScreenEvent());
+                                },
+                                dimens: dimens,
+                                image: AppImage.notificationSettingIcon,
+                                text: AppStrings.notifications,
+                                iconData: AppImage.navigatenextIcon,
+                              ),
+                              lineContainer(dimens),
+                              SettingFuncButton(
+                                onClick: () {
+                                  settingsBloc.add(SettingsDilogEvent(context));
+                                },
+                                dimens: dimens,
+                                image: AppImage.languageSettingIcon,
+                                text: AppStrings.languageText,
+                                iconData: AppImage.navigatenextIcon,
+                              ),
+                              lineContainer(dimens),
+                              SettingFuncButton(
+                                onClick: () {},
+                                dimens: dimens,
+                                image: AppImage.helpdeskSettingIcon,
+                                text: AppStrings.helpdeskText,
+                                iconData: AppImage.navigatenextIcon,
+                              ),
+                              lineContainer(dimens),
+                              SettingFuncButton(
+                                onClick: () {},
+                                dimens: dimens,
+                                image: AppImage.questionsanswerSettingIcon,
+                                text: AppStrings.questionsAnswerText,
+                                iconData: AppImage.navigatenextIcon,
+                              ),
+                              lineContainer(dimens),
+                              SettingFuncButton(
+                                onClick: () {},
+                                dimens: dimens,
+                                image: AppImage.aboutapplicationSettingIcon,
+                                text: AppStrings.aboutApplicationText,
+                                iconData: AppImage.navigatenextIcon,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Gap(dimens.paddingVerticalItem320),
-                    Card(
-                      color: AppColors.cardContainerColor,
-                      child: Container(
-                        height: dimens.height48,
-                        width: dimens.screenWidth,
-                        decoration: cardContainerDecoration(dimens),
-                        child: LogoutButton(
-                          image: AppImage.settingslogoutIcon,
-                          onClick: () {
-                            settingsBloc.add(LogoutEvent());
-                          },
-                          text: AppStrings.logoutText,
-                          dimens: dimens,
+                      Gap(dimens.paddingVerticalItem320),
+                      Card(
+                        color: AppColors.cardContainerColor,
+                        child: Container(
+                          height: dimens.height48,
+                          width: dimens.screenWidth,
+                          decoration: cardContainerDecoration(dimens),
+                          child: LogoutButton(
+                            image: AppImage.settingslogoutIcon,
+                            onClick: () {
+                              settingsBloc.add(LogoutEvent());
+                            },
+                            text: AppStrings.logoutText,
+                            dimens: dimens,
+                          ),
                         ),
                       ),
-                    ),
-                    Gap(dimens.paddingHorizontalItem3),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppStrings.appVersion,
-                          style: dimens.logoutCardStyle,
-                        ),
-                      ],
-                    ),
-                  ],
+                      Gap(dimens.paddingHorizontalItem3),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            AppStrings.appVersion,
+                            style: dimens.logoutCardStyle,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

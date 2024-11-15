@@ -8,3 +8,9 @@ abstract class SettingsEvent extends Equatable {
 class LogoutEvent extends SettingsEvent {}
 
 class SettingsPushScreenEvent extends SettingsEvent {}
+
+class SettingsDilogEvent extends SettingsEvent {
+  final BuildContext context;
+
+  SettingsDilogEvent(this.context);
+}

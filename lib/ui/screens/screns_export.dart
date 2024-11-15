@@ -47,3 +47,5 @@ export 'policies/ui/screen/policies_screen.dart';
 // ? partners
 export 'partners/ui/screen/partners_screen.dart';
 export 'partners/bloc/partners_bloc.dart';
+// ? oferta
+export 'oferta/screen/oferta_screen.dart';

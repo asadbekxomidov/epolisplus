@@ -23,11 +23,17 @@ class AppColors {
   static Color whiteColor = Colors.white;
   static Color greyColor = Colors.grey;
   static Color rightIconColors = Colors.grey.shade500;
-  // static Color rightIconColor = Color(0xA3A3A3);
+  static Color rightIconColor = Color(0xA3A3A3);
   static Color homecontainerColor = Color(0xFFFFFF);
   static Color transparentColor = Colors.transparent;
   static Color transparentColor2 = Color(0x66B90F0F);
   static Color languageCardColor = Color(0xFFFFFF);
   static Color cardColor = Colors.grey.shade300;
   static Color pointColor = Colors.grey.shade400;
+  static Color allNotificationsColor = Colors.grey.shade500;
+  // static Color allNotificationsColor = Color(0x737373);
+  // static Color dialogsColor = Color(0xFFFFFF);
+  static Color dialogsColor = Color(0x2D2D2D);
+  static Color snackbarColor = Color(0xFFBA2948);
+  static Color snackbarWhite = Color(0xFFF9DEE4);
 }

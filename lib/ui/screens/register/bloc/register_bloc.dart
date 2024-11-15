@@ -1,5 +1,6 @@
 import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/repository/auth/auth_repository.dart';
+// import 'package:epolisplus/ui/screens/check_auth/bloc/check_auth_bloc.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
@@ -24,6 +25,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<CheckRegisterEvent>(register);
     on<ToggleAgreeEvent>(toggleAgree);
     on<RegisterSetPhoneNumberEvent>(setData);
+    on<OfertaPushEvent>(ofertaPush);
   }
 
   Future<void> register(
@@ -83,6 +85,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           TextEditingValue(text: event.number),
         )
         .text;
+    emit(RegisterSuccessState());
+  }
+
+  Future<void> ofertaPush(
+      OfertaPushEvent event, Emitter<RegisterState> emit) async {
+    emit(RegisterLoadingState());
+    Get.to(() => OfertaScreen());
     emit(RegisterSuccessState());
   }
 }

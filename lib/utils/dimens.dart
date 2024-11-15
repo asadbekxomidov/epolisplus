@@ -281,6 +281,10 @@ class Dimens {
     return 306 * screenHeight / 852;
   }
 
+  double get height440 {
+    return 440 * screenHeight / 852;
+  }
+
   double get width10 {
     return 10 * screenWidth / 392;
   }
@@ -299,6 +303,10 @@ class Dimens {
 
   double get width30 {
     return 30 * screenWidth / 392;
+  }
+
+  double get width44 {
+    return 44 * screenWidth / 392;
   }
 
   double get width60 {
@@ -392,6 +400,17 @@ class Dimens {
     );
   }
 
+  TextStyle get languageStyle {
+    return TextStyle(
+      fontSize: font16,
+      fontFamily: "GeistVF",
+      color: AppColors.blackColor,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get textStyle {
     return TextStyle(
       fontSize: font16,
@@ -477,6 +496,28 @@ class Dimens {
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get allNotoficationsSty {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.allNotificationsColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get notoficationsSty {
+    return TextStyle(
+      fontSize: font16,
+      fontWeight: FontWeight.w400,
+      color: AppColors.blackColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      // overflow: TextOverflow.ellipsis,
     );
   }
 

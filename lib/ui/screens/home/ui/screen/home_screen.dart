@@ -1,7 +1,6 @@
 import 'package:epolisplus/ui/screens/home/bloc/home_bloc.dart';
-import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
+// import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
 import 'package:epolisplus/ui/widgets/buttons.dart';
-// import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +27,18 @@ class _HomeScreenState extends State<HomeScreen> {
           homeBloc = BlocProvider.of<HomeBloc>(context);
 
           return Scaffold(
+            appBar: AppBar(
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      homeBloc.add(DeleteAccountEvent());
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ))
+              ],
+            ),
             backgroundColor: Colors.grey.shade100,
             body: SizedBox(
               height: dimens.screenHeight,
@@ -342,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            bottomNavigationBar: TabbarPage(),
+            // bottomNavigationBar: TabbarPage(),
           );
         },
       ),
