@@ -66,7 +66,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(dimens.paddingVerticalItem69),
-                LeftBackIconBtn(),
+                LeftBackIconBtn(
+                  appColors: AppColors.mainColor,
+                ),
                 Gap(dimens.paddingVerticalItem20),
                 // Gap(dimens.paddingVerticalItem27),
                 Text(

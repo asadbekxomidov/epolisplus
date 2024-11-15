@@ -325,6 +325,10 @@ class Dimens {
     return height10 * 1.6;
   }
 
+  double get radius25 {
+    return height10 * 2.5;
+  }
+
   double get font12 {
     return height10 * 1.2;
   }
@@ -395,6 +399,17 @@ class Dimens {
       fontFamily: "GeistVF",
       color: AppColors.whiteColor,
       fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get homeButtonSty {
+    return TextStyle(
+      fontSize: font14,
+      fontFamily: "GeistVF",
+      color: AppColors.whiteColor,
+      fontWeight: FontWeight.w400,
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,
     );

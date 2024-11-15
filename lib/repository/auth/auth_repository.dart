@@ -146,7 +146,7 @@ class AuthRepository extends AuthRepositoryIml {
     };
 
     var data = {
-      "full_name": fullName, // Ensure the full name is sent properly.
+      "full_name": fullName,
       "phone": phone,
       "email": "",
       "password": password,
@@ -168,28 +168,9 @@ class AuthRepository extends AuthRepositoryIml {
         );
       } else if (response?.statusCode == 200) {
         var responseData = response?.data['response'];
-        //   print(responseData.toString());
-
-        /*       if (responseData == null) {
-          return BaseModels(
-            status: 422,
-            message: 'Serverdan to‘liq ma’lumot kelmadi',
-            code: false,
-          );
-        }*/
-
-        /*  RegisterResponse registerResponse = RegisterResponse(
-          responseData['first_name'] ?? "",
-          responseData['last_name'] ?? "",
-          responseData['phone'] ?? "",
-          responseData['email'] ?? "",
-          password,
-          passwordRepeat,
-        );*/
 
         return BaseModels(
           status: 200,
-          //    response: registerResponse,
           code: true,
           message: 'Sms junatildi',
         );
@@ -232,7 +213,6 @@ class AuthRepository extends AuthRepositoryIml {
       response = await service.getPostData(data, headers, url);
 
       if (response?.statusCode != 200) {
-        // Agar status kodi 200 bo'lmasa, xato xabari qaytariladi
         return BaseModels(
           status: response!.statusCode,
           message: response.statusMessage ?? 'Xato yuz berdi',

@@ -25,10 +25,12 @@ class TabScreenPushEvent extends TabbarEvent {
   List<Object?> get props => [index];
 }
 
-class TabHomeScreenPushEvent extends TabbarEvent {}
+class HomeScreenPushEvent extends TabbarEvent {}
 
-class TabKabinetScreenPushEvent extends TabbarEvent {}
+class KabinetScreenPushEvent extends TabbarEvent {}
 
-class TabPoliciesScreenPushEvent extends TabbarEvent {}
+class SosScreenPushEvent extends TabbarEvent {}
 
-class TabPartnersScreenPushEvent extends TabbarEvent {}
+class PoliciesScreenPushEvent extends TabbarEvent {}
+
+class PartnersScreenPushEvent extends TabbarEvent {}

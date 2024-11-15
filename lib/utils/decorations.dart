@@ -23,10 +23,17 @@ homeBlueDecorations() {
 
 homePageDecorations(Dimens dimens) {
   return BoxDecoration(
-    color: AppColors.whiteColor,
+    // color: AppColors.whiteColor,
     borderRadius: BorderRadius.circular(
       dimens.radius14,
     ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
   );
 }
 

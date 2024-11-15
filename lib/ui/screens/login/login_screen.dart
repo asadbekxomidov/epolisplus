@@ -69,7 +69,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Gap(dimens.paddingVerticalItem69),
                         // Gap(dimens.paddingVerticalItem120),
-                        LeftBackIconBtn(),
+                        LeftBackIconBtn(
+                          appColors: AppColors.mainColor,
+                        ),
                         Gap(dimens.paddingVerticalItem20),
                         Image.asset(
                           AppImage.appImageLogo,

@@ -73,7 +73,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(dimens.paddingVerticalItem69),
-              LeftBackIconBtn(),
+              LeftBackIconBtn(
+                appColors: AppColors.mainColor,
+              ),
               Gap(dimens.paddingVerticalItem20),
               Text(
                 AppStrings.verification,
