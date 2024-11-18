@@ -27,10 +27,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         child: Stack(
           children: [
             ui(),
-            Positioned(
-              top: dimens.paddingVerticalItem69,
-              child: LeftBackIconBtn(),
-            ),
             BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
               builder: (context, state) {
                 return LoadingIndicator(
@@ -66,9 +62,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Gap(dimens.paddingVerticalItem69),
+              Gap(dimens.paddingVerticalItem69),
               // LeftBackIconBtn(),
-              Gap(dimens.paddingVerticalItem120),
+              // Gap(dimens.paddingVerticalItem120),
+              LeftBackIconBtn(
+                appColors: AppColors.mainColor,
+              ),
+              Gap(dimens.paddingVerticalItem10),
               Text(
                 AppStrings.resetPassword,
                 style: dimens.titleStyle.copyWith(

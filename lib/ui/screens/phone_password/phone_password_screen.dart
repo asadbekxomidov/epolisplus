@@ -38,10 +38,6 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
       child: Stack(
         children: [
           ui(),
-          Positioned(
-            top: dimens.paddingVerticalItem69,
-            child: LeftBackIconBtn(),
-          ),
           BlocBuilder<PhonePasswordBloc, PhonePasswordState>(
             builder: (context, state) {
               return LoadingIndicator(
@@ -81,9 +77,11 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Gap(dimens.paddingVerticalItem120),
-                        // LeftBackIconBtn(),
-                        // Gap(dimens.height20),
+                        Gap(dimens.paddingVerticalItem69),
+                        LeftBackIconBtn(
+                          appColors: AppColors.mainColor,
+                        ),
+                        Gap(dimens.paddingVerticalItem10),
                         Text(
                           AppStrings.verification,
                           style: dimens.titleStyle.copyWith(

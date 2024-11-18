@@ -28,8 +28,8 @@ class PhonePasswordBloc extends Bloc<PhonePasswordEvent, PhonePasswordState> {
       var passwordConfirm = passwordConfirmController.text.trim();
 
       if (phoneCode.length != 5 ||
-          password.length < 8 ||
-          passwordConfirm.length < 8 ||
+          password.length < 6 ||
+          passwordConfirm.length < 6 ||
           password != passwordConfirm) {
         emit(PhonePasswordErrorState(PaaswordPhoneCodeFailure()));
         return;

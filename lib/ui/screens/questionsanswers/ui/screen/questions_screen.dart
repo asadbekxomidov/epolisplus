@@ -144,10 +144,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  AppStrings.questionsTextAnswer,
-                                  style: dimens.questionsCardTextSty,
-                                ),
+                                // Text(
+                                //   AppStrings.questionsTextAnswer,
+                                //   style: dimens.questionsCardTextSty,
+                                // ),
                               ],
                             ),
                             state is QuestionsLoadingState

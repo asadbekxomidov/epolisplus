@@ -115,7 +115,9 @@ class _TabbarPageState extends State<TabbarPage> {
         onclick!();
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: dimens.paddingHorizontal8),
+        padding: EdgeInsets.symmetric(
+          vertical: dimens.paddingHorizontal8,
+        ),
         width: dimens.height60,
         height: dimens.height78,
         child: Column(
@@ -136,6 +138,7 @@ class _TabbarPageState extends State<TabbarPage> {
               Text(
                 label,
                 style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
                   fontSize: dimens.font12,
                   color: isSelected ? AppColors.mainColor : AppColors.greyColor,
                 ),
