@@ -62,8 +62,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             children: [
                               SettingFuncButton(
                                 onClick: () {
-                                  print('object');
-                                  // settingsBloc.add(SettingsPushScreenEvent());
                                   settingsBloc.add(SettingsPushScreenEvent());
                                 },
                                 dimens: dimens,
@@ -83,7 +81,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                               lineContainer(dimens),
                               SettingFuncButton(
-                                onClick: () {},
+                                onClick: () {
+                                  settingsBloc
+                                      .add(SettingsHelpDeskDilogEvent(context));
+                                },
                                 dimens: dimens,
                                 image: AppImage.helpdeskSettingIcon,
                                 text: AppStrings.helpdeskText,
@@ -91,7 +92,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                               lineContainer(dimens),
                               SettingFuncButton(
-                                onClick: () {},
+                                onClick: () {
+                                  settingsBloc
+                                      .add(SettingsQuestionscreenEvent());
+                                },
                                 dimens: dimens,
                                 image: AppImage.questionsanswerSettingIcon,
                                 text: AppStrings.questionsAnswerText,

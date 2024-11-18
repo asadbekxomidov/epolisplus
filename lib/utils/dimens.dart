@@ -257,6 +257,10 @@ class Dimens {
     return 100 * screenHeight / 852;
   }
 
+  double get height105 {
+    return 105 * screenHeight / 852;
+  }
+
   double get height132 {
     return 132 * screenHeight / 852;
   }
@@ -401,6 +405,17 @@ class Dimens {
       fontWeight: FontWeight.w600,
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get questionsCardTextSty {
+    return TextStyle(
+      fontSize: font14,
+      fontFamily: "GeistVF",
+      color: AppColors.blackColor,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+      // overflow: TextOverflow.ellipsis,
     );
   }
 

@@ -10,6 +10,7 @@ class ApiConstanta {
   static const DELETE_ACCOUNT = "v1/user/delete-phone-test";
   static const GET_PARTNERS = "v1/references/get-partners";
   static const OFERTA = "v1/references/get-oferta";
+  static const FAQ = "v1/references/get-faq";
 }
 
 

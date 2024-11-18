@@ -60,6 +60,11 @@ class AppImage {
   static String aboutapplicationSettingIcon =
       'assets/images/home/icons/aboutapplication_icon.png';
 
+  static String telegramIcon =
+      "assets/images/settings/icons/telegram_icons.png";
+  static String callOperatorIcon =
+      "assets/images/settings/icons/call_operator.png";
+
   static Widget starWidget(BuildContext context) {
     return Text(
       "*",

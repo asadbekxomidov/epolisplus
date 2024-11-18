@@ -72,6 +72,8 @@ class AppStrings {
   static const String helpdeskText = "Служба поддержки";
   static const String questionsAnswerText = "Ворос-ответы";
   static const String aboutApplicationText = "О приложении";
+  static const String telegramBot = "Чат-бот Telegram";
+  static const String calltheOperators = "Позвонить опраторам";
 
   // ! Notifications
 
@@ -88,9 +90,12 @@ class AppStrings {
   static const String emailallNotifications =
       "Все уведомления будут приходить на вашу электронную почту";
 
-
   // ! Oferta
 
-
   static const String ofertaScText = "О приложении";
+
+  // ! Questions
+
+  static const String questionsText = "Вопрос ответы";
+  static const String questionsTextAnswer = "На какую сумму может быть заключен договор?";
 }

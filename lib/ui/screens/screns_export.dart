@@ -49,3 +49,5 @@ export 'partners/ui/screen/partners_screen.dart';
 export 'partners/bloc/partners_bloc.dart';
 // ? oferta
 export 'oferta/screen/oferta_screen.dart';
+// ? questions
+export 'questionsanswers/ui/screen/questions_screen.dart';

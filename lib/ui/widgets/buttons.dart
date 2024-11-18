@@ -555,3 +555,76 @@ class ToggleIconButton extends StatelessWidget {
     );
   }
 }
+
+
+// ? HomePageScroll Buttons
+
+
+class CustomHorizontalButton extends StatelessWidget {
+  final Dimens dimens;
+
+  const CustomHorizontalButton({Key? key, required this.dimens})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Ro'yxatlar widget ichida aniqlanadi
+    final buttonLabels = [
+      "KACKO",
+      "OSAGO",
+      "Journey",
+      "Additional services",
+      "Warranty code",
+    ];
+
+    final buttonIcons = [
+      AppImage.kasko_icon,
+      AppImage.osago_icon,
+      AppImage.travel_icon,
+      AppImage.additional_services_icon,
+      AppImage.warranty_code_icon,
+    ];
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(buttonLabels.length, (index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: SizedBox(
+              child: TextButton(
+                onPressed: () {
+                  // Bu yerda har bir tugma uchun kerakli funksiyalarni yozing
+                  print('${buttonLabels[index]} pressed');
+                },
+                style: TextButton.styleFrom(
+                  side: BorderSide(
+                    color: AppColors.whiteColor,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(dimens.radius25),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      buttonIcons[index],
+                      width: dimens.width20,
+                      height: dimens.height20,
+                      color: AppColors.whiteColor,
+                    ),
+                    SizedBox(width: dimens.width10),
+                    Text(
+                      buttonLabels[index],
+                      style: dimens.homeButtonSty,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}

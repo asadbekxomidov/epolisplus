@@ -14,7 +14,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc() : super(SettingsInitaialState()) {
     on<LogoutEvent>(logout);
     on<SettingsPushScreenEvent>(onPushScreen);
-    on<SettingsDilogEvent>(onSelectShowDilog);
+    on<SettingsQuestionscreenEvent>(onPushQuestion);
+    on<SettingsDilogEvent>(onSelectLanguageShowDilog);
+    on<SettingsHelpDeskDilogEvent>(onSelectShowDilog);
   }
 
   Future<void> logout(LogoutEvent event, Emitter<SettingsState> emit) async {
@@ -36,7 +38,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(SettingsSuccesState());
   }
 
-  void onSelectShowDilog(
+  void onPushQuestion(
+      SettingsQuestionscreenEvent event, Emitter<SettingsState> emit) {
+    emit(SettingsLoadingState());
+    Get.to(() => const QuestionsScreen());
+    emit(SettingsSuccesState());
+  }
+
+  void onSelectLanguageShowDilog(
       SettingsDilogEvent event, Emitter<SettingsState> emit) async {
     emit(SettingsLoadingState());
 
@@ -51,6 +60,24 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       emit(SettingsSuccesState());
     } else {
       emit(SettingsErrorState('No language selected'));
+    }
+  }
+
+  void onSelectShowDilog(
+      SettingsHelpDeskDilogEvent event, Emitter<SettingsState> emit) async {
+    emit(SettingsLoadingState());
+
+    final selectedLanguage = await showDialog<String>(
+      context: event.context,
+      builder: (BuildContext context) {
+        return HelpdeskSelectDialog();
+      },
+    );
+
+    if (selectedLanguage != null) {
+      emit(SettingsSuccesState());
+    } else {
+      emit(SettingsErrorState(''));
     }
   }
 }

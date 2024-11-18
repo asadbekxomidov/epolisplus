@@ -36,18 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
           homeBloc = BlocProvider.of<HomeBloc>(context);
 
           return Scaffold(
-            // appBar: AppBar(
-            //   actions: [
-            //     IconButton(
-            //         onPressed: () {
-            //           homeBloc.add(DeleteAccountEvent());
-            //         },
-            //         icon: Icon(
-            //           Icons.delete,
-            //           color: Colors.red,
-            //         ))
-            //   ],
-            // ),
+            appBar: AppBar(
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      homeBloc.add(DeleteAccountEvent());
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    ))
+              ],
+            ),
             body: Bluebackground(
               child: Container(
                 padding: EdgeInsets.all(
@@ -113,67 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: dimens.homeStyle,
                     ),
                     Gap(dimens.paddingVerticalItem8),
-                    // ! Scrolls
-
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: List.generate(5, (index) {
-                          final buttonLabels = [
-                            "KACKO",
-                            "OSAGO",
-                            "Journey",
-                            "Additional services",
-                            "Warranty code",
-                          ];
-
-                          final buttonIcons = [
-                            AppImage.kasko_icon,
-                            AppImage.osago_icon,
-                            AppImage.travel_icon,
-                            AppImage.additional_services_icon,
-                            AppImage.warranty_code_icon,
-                          ];
-
-                          return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
-                            child: SizedBox(
-                              child: TextButton(
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  side: BorderSide(
-                                    color: AppColors.whiteColor,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                      dimens.radius25,
-                                    ),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      buttonIcons[index],
-                                      width: dimens.width20,
-                                      height: dimens.height20,
-                                      color: AppColors.whiteColor,
-                                    ),
-                                    Gap(dimens.width10),
-                                    Text(
-                                      buttonLabels[index],
-                                      style: dimens.homeButtonSty,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-                    ),
+                    CustomHorizontalButton(dimens: dimens),
                     Gap(dimens.paddingVerticalItem16),
-                    // ! Scrol
                     Card(
                       child: Container(
                         height: dimens.height220,
@@ -181,33 +122,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: homePageDecorations(dimens),
                       ),
                     ),
-                    // Gap(dimens.paddingVerticalItem16),
+                    Gap(dimens.paddingVerticalItem16),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Gap(dimens.paddingVerticalItem20),
-                            // Gap(dimens.paddingVerticalItem16),
                             Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal: dimens.paddingHorizontal13,
                                 vertical: dimens.paddingVerticalItem8,
                               ),
                               height: dimens.height100,
-                              // height: dimens.height94,
-                              // height: dimens.height48,
                               width: dimens.screenWidth,
-                              decoration: BoxDecoration(
-                                color: AppColors.whiteColor,
-                                borderRadius: BorderRadius.circular(
-                                  dimens.radius14,
-                                ),
-                                border: Border.all(
-                                  color: AppColors.cardColor,
-                                  width: dimens.height2,
-                                ),
-                              ),
+                              decoration: homepageButtonsDecoration(dimens),
                               child: Column(
                                 children: [
                                   InkWell(
@@ -219,7 +148,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           AppImage.additional_services_icon,
                                           height: dimens.height20,
                                         ),
-                                        // Gap(dimens.paddingHorizontal8),s
                                         Text(
                                           AppStrings.warrantyCode,
                                           style: dimens.containerTextSty,
@@ -247,7 +175,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           AppImage.warrantyHomeIcon,
                                           height: dimens.height20,
                                         ),
-                                        // Gap(dimens.paddingHorizontal8),
                                         Text(
                                           AppStrings.warrantyCode,
                                           style: dimens.containerTextSty,

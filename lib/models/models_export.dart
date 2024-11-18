@@ -9,3 +9,7 @@ export 'base_models.dart';
 
 // ? partners
 export 'partners/partners_model/response/partners_response.dart';
+
+// ? question_answer
+
+export 'question_answer_model/question_answer_response.dart';

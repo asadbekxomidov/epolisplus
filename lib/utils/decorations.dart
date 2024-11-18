@@ -114,3 +114,16 @@ cardContainerDecoration(Dimens dimens) {
     ],
   );
 }
+
+homepageButtonsDecoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(
+      dimens.radius14,
+    ),
+    border: Border.all(
+      color: AppColors.cardColor,
+      width: dimens.height2,
+    ),
+  );
+}

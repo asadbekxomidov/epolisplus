@@ -4,7 +4,7 @@ import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/auth/auth_repository_iml.dart';
 import 'package:epolisplus/services/api_constanta.dart';
 import 'package:epolisplus/services/api_service.dart';
-import 'package:epolisplus/utils/sharedPreferencesManager.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 
 class AuthRepository extends AuthRepositoryIml {
   late ApiService service;

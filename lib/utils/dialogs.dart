@@ -188,3 +188,133 @@ class _LanguageOption extends StatelessWidget {
     );
   }
 }
+
+// ? HelpdeskSelectDialog
+
+class HelpdeskSelectDialog extends StatelessWidget {
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+    return Dialog(
+      backgroundColor: AppColors.dialogsColor,
+      insetPadding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          dimens.radius14,
+        ),
+      ),
+      child: Stack(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                  dimens.paddingHorizontal16,
+                ),
+                child: Card(
+                  child: Container(
+                    height: dimens.height105,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        dimens.radius16,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        HelpdeskOptions(
+                          image: AppImage.telegramIcon,
+                          text: AppStrings.telegramBot,
+                          icon: AppImage.navigatenextIcon,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        lineContainer(dimens),
+                        HelpdeskOptions(
+                          image: AppImage.callOperatorIcon,
+                          text: AppStrings.calltheOperators,
+                          icon: AppImage.navigatenextIcon,
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HelpdeskOptions extends StatelessWidget {
+  late Dimens dimens;
+
+  final String image;
+  final String text;
+  final IconData icon;
+  final VoidCallback onTap;
+
+  HelpdeskOptions({
+    required this.image,
+    required this.text,
+    required this.icon,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.paddingHorizontal4,
+          vertical: dimens.paddingVerticalItem8,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              width: dimens.height20,
+              height: dimens.width20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.cardColor,
+                  width: dimens.height1,
+                ),
+                image: DecorationImage(
+                  image: AssetImage(
+                    image,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: dimens.paddingHorizontal8),
+            Text(
+              text,
+              style: dimens.languageStyle,
+            ),
+            Spacer(),
+            Icon(
+              icon,
+              color: AppColors.greyColor,
+              size: dimens.height20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
