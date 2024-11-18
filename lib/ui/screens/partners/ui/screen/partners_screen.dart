@@ -1,9 +1,9 @@
-import 'package:epolisplus/ui/screens/partners/bloc/partners_bloc.dart';
-import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
-import 'package:epolisplus/ui/widgets/greenbackground.dart';
-import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/widgets/greenbackground.dart';
+import 'package:epolisplus/ui/screens/partners/bloc/partners_bloc.dart';
+import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
 
 class PartnersScreen extends StatefulWidget {
   @override
@@ -12,15 +12,6 @@ class PartnersScreen extends StatefulWidget {
 
 class _PartnersScreenState extends State<PartnersScreen> {
   late Dimens dimens;
-
-  @override
-  void initState() {
-    super.initState();
-    // partnersBloc o'rnatilmagan bo'lsa, BlocProvider orqali faqat mavjud bo'lishi kerak
-    // partnersBloc = BlocProvider.of<PartnersBloc>(context);
-    // Yangi partnerlarni olish uchun event yuboramiz
-    // partnersBloc.add(PartnersEvent());
-  }
 
   @override
   Widget build(BuildContext context) {

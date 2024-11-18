@@ -36,18 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
           homeBloc = BlocProvider.of<HomeBloc>(context);
 
           return Scaffold(
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      homeBloc.add(DeleteAccountEvent());
-                    },
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ))
-              ],
-            ),
+            // appBar: AppBar(
+            //   actions: [
+            //     IconButton(
+            //         onPressed: () {
+            //           homeBloc.add(DeleteAccountEvent());
+            //         },
+            //         icon: Icon(
+            //           Icons.delete,
+            //           color: Colors.red,
+            //         ))
+            //   ],
+            // ),
             body: Bluebackground(
               child: Container(
                 padding: EdgeInsets.all(
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Gap(dimens.paddingVerticalItem16),
+                    Gap(dimens.paddingVerticalItem10),
                     // ?
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

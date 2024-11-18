@@ -92,10 +92,13 @@ class AppStrings {
 
   // ! Oferta
 
-  static const String ofertaScText = "О приложении";
+  static const String aboutappText = "О приложении";
+  static const String aboutappCardText = "about_app_text";
+
 
   // ! Questions
 
   static const String questionsText = "Вопрос ответы";
-  static const String questionsTextAnswer = "На какую сумму может быть заключен договор?";
+  static const String questionsTextAnswer =
+      "На какую сумму может быть заключен договор?";
 }

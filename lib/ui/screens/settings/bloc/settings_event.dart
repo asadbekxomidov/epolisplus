@@ -22,3 +22,5 @@ class SettingsHelpDeskDilogEvent extends SettingsEvent {
 
   SettingsHelpDeskDilogEvent(this.context);
 }
+
+class SettingsAboutAppEvent extends SettingsEvent {}

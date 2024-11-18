@@ -1,4 +1,5 @@
 import 'package:epolisplus/utils/dimens.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppImage {
@@ -42,6 +43,7 @@ class AppImage {
   static IconData arrow_circle_left_outlined = Icons.arrow_circle_left_outlined;
   static IconData logoutIcon = Icons.logout;
   static IconData navigatenextIcon = Icons.navigate_next;
+  static IconData infocircleIcon = CupertinoIcons.info_circle;
 
   // ! HomeIcon
 

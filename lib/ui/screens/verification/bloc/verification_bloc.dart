@@ -24,10 +24,8 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
   Future<void> verification(
       CheckVerificationEvent event, Emitter<VerificationState> emit) async {
     emit(VerificationLoadingState());
-    await Future.delayed(Duration(seconds: 2));
 
     var phoneCode = otpController.text.toString().trim();
-    phoneCode = clearPhoneMask(phoneCode);
 
     if (phoneCode.length != 5) {
       emit(VerificationErrorState(InputPhoneCodeFailure()));
@@ -44,17 +42,12 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
 
       if (baseResponse.status == 200) {
         logger(baseResponse.response.toString(), error: "Verification Bloc");
-        final forgotPassword = baseResponse.response as bool? ?? false;
-
-        if (forgotPassword) {
-          Get.to(() => ResetPasswordScreen());
-        } else {
-          emit(VerificationErrorState(InputPhoneCodeFailure()));
-        }
+        Get.to(() => HomeScreen());
       } else {
         emit(VerificationErrorState(InputPhoneCodeFailure()));
       }
     } else {
+      print('else Verficatsiya Bloc else');
       emit(VerificationErrorState(PhoneCodeFailure()));
     }
   }

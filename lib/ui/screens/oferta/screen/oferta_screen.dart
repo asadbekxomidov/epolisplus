@@ -126,7 +126,7 @@ class _OfertaScreenState extends State<OfertaScreen> {
                     LeftBackIconBtn(appColors: AppColors.whiteColor),
                     Gap(dimens.paddingVerticalItem10),
                     Text(
-                      AppStrings.ofertaScText,
+                      AppStrings.aboutappText,
                       style: dimens.settingsStyle,
                     ),
                     Gap(dimens.paddingVerticalItem8),

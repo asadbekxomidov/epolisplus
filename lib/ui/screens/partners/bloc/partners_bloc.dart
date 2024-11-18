@@ -28,6 +28,7 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
         event.image,
       );
       print('object2, Bloc');
+      emit(PartnersSuccessState());
 
       if (partnersResponse.status == 200) {
         print('object3, Bloc');
@@ -36,9 +37,11 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
 
         emit(PartnersLoadedState(partners: partnersResponse.response!));
         print('object5, Bloc');
+        emit(PartnersSuccessState());
       } else {
         emit(PartnersErrorState(GetPartnersErrorclass()));
       }
+      emit(PartnersSuccessState());
     } catch (e) {
       emit(PartnersErrorState(GetPartnersErrorclass()));
     }

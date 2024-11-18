@@ -51,3 +51,5 @@ export 'partners/bloc/partners_bloc.dart';
 export 'oferta/screen/oferta_screen.dart';
 // ? questions
 export 'questionsanswers/ui/screen/questions_screen.dart';
+// ? aboutapp
+export 'about_app/screen/about_app_screen.dart';

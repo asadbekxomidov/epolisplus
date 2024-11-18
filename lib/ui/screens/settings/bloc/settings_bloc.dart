@@ -17,6 +17,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SettingsQuestionscreenEvent>(onPushQuestion);
     on<SettingsDilogEvent>(onSelectLanguageShowDilog);
     on<SettingsHelpDeskDilogEvent>(onSelectShowDilog);
+    on<SettingsAboutAppEvent>(onPushAboutAppScreen);
   }
 
   Future<void> logout(LogoutEvent event, Emitter<SettingsState> emit) async {
@@ -35,6 +36,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       SettingsPushScreenEvent event, Emitter<SettingsState> emit) {
     emit(SettingsLoadingState());
     Get.to(() => const NotificationScreen());
+    emit(SettingsSuccesState());
+  }
+
+  void onPushAboutAppScreen(
+      SettingsAboutAppEvent event, Emitter<SettingsState> emit) {
+    emit(SettingsLoadingState());
+    Get.to(() => const AboutAppScreen());
     emit(SettingsSuccesState());
   }
 

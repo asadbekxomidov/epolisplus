@@ -103,7 +103,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                               lineContainer(dimens),
                               SettingFuncButton(
-                                onClick: () {},
+                                onClick: () {
+                                  settingsBloc.add(SettingsAboutAppEvent());
+                                },
                                 dimens: dimens,
                                 image: AppImage.aboutapplicationSettingIcon,
                                 text: AppStrings.aboutApplicationText,
