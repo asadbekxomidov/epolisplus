@@ -1,7 +1,7 @@
 import 'package:epolisplus/models/models_export.dart';
 
 abstract class QuestionAnswerRepositoryIml {
-  Future<BaseModels<QuestionAnswerResponse>> questionAnswerGet(
+  Future<BaseModels<List>> questionAnswerGet(
     String title,
     String summary,
   );

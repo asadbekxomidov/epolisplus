@@ -487,6 +487,7 @@ class AuthRepository extends AuthRepositoryIml {
   Future<BaseModels<String>> ofertaGet(String oferta) async {
     var headers = {
       'Content-Type': 'application/json',
+      "Content": "application/json",
       'Accept-Language': "uz-UZ",
       'Accept-Encoding': 'UTF-8',
     };

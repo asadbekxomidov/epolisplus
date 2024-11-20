@@ -40,6 +40,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     //   emit(SplashSuccessState());
     // }
     if (token != null && token.isNotEmpty) {
+      print('${token} SplashSplashSplashSplashSplash');
       Get.off(() => HomeScreen());
       emit(SplashSuccessState());
     } else {

@@ -46,10 +46,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(SettingsSuccesState());
   }
 
-  void onPushQuestion(
-      SettingsQuestionscreenEvent event, Emitter<SettingsState> emit) {
+  Future<void> onPushQuestion(
+      SettingsQuestionscreenEvent event, Emitter<SettingsState> emit) async {
     emit(SettingsLoadingState());
-    Get.to(() => const QuestionsScreen());
+    await Future.delayed(Duration(milliseconds: 500));
+    Get.to(() => QuestionsScreen());
     emit(SettingsSuccesState());
   }
 

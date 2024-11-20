@@ -10,6 +10,4 @@ class QuestionAnswerResponse {
       summary: json['summary'],
     );
   }
-
-  get length => null;
 }

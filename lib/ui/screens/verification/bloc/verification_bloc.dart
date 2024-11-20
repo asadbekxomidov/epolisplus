@@ -37,6 +37,8 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     final authRepository = AuthRepository();
 
     if (phoneNumber.isNotEmpty && phoneCode.isNotEmpty) {
+      print(phoneNumber);
+      print(phoneCode);
       final baseResponse =
           await authRepository.confirmAccount(phoneNumber, phoneCode);
 

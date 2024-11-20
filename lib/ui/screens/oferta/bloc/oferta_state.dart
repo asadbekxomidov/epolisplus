@@ -8,15 +8,14 @@ abstract class OfertaState extends Equatable {
 }
 
 class OfertaInitialState extends OfertaState {
-
   final String response;
 
   const OfertaInitialState(this.response);
 
   @override
   List<Object> get props => [response];
-
 }
+
 class OfertaLoadingState extends OfertaState {}
 
 class OfertaLoadedState extends OfertaState {

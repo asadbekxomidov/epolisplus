@@ -15,16 +15,17 @@ class QuestionAnswerRepository extends QuestionAnswerRepositoryIml {
   }
 
   @override
-  Future<BaseModels<QuestionAnswerResponse>> questionAnswerGet(
+  Future<BaseModels<List<QuestionAnswerResponse>>> questionAnswerGet(
     String title,
     String summary,
   ) async {
     final prefsManager = SharedPreferencesManager();
-    final token = prefsManager.getToken();
+    final token = await prefsManager.getToken();
+
     var headers = {
       'Content-Type': 'application/json',
       'Content': 'application/json',
-      'Accept-Language': 'ru-RU', // Tilni kerak bo'lsa "uz-UZ" ga o'zgartiring
+      'Accept-Language': 'ru-RU',
       'Accept-Encoding': 'UTF-8',
       'Authorization': 'Bearer $token',
     };
@@ -33,54 +34,70 @@ class QuestionAnswerRepository extends QuestionAnswerRepositoryIml {
     Response? response;
 
     try {
-      // API chaqiruvi
       var response = await service.getGetData(headers, url);
-      logger(response.toString(), error: 'QuestionAnswerRepository');
+      logger('${response?.data}', error: 'QuestionAnswerRepository');
+      print('${response?.data}');
+      print('111111111111111111111111');
 
-      // Javobni tekshirish
-      if (response?.statusCode == 200 && response?.data != null) {
-        final data = response?.data['response'] as List;
+      if (response?.statusCode == 200) {
+        var data = response?.data['response'];
+        print(data.toString());
+        print('222222222222222222222222');
 
-        logger(response?.data, error: 'QuestionAnswerRepository');
-        // JSONni modellashtirish
-        List<QuestionAnswerResponse> questionAnswers =
-            data.map((item) => QuestionAnswerResponse.fromJson(item)).toList();
+        if (data != null) {
+          print(data);
+          print('33333333333333333333');
+          print(data.runtimeType);
+          print('44444444444444444444');
+          print(data.toString());
+          print('5555555555555555555555');
 
-        // Kiritilgan title va summary asosida qidiruv
-        final filteredAnswers = questionAnswers.where((qa) {
-          return qa.title.contains(title) && qa.summary.contains(summary);
-        }).toList();
-
-        if (filteredAnswers.isNotEmpty) {
-          // Birinchi topilgan natijani qaytarish
-          return BaseModels<QuestionAnswerResponse>(
-            status: response?.statusCode,
-            code: true,
-            message: "Data fetched successfully",
-            response: filteredAnswers.first,
-          );
+          if (data.isNotEmpty) {
+            print('${data}');
+            print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+            print(response?.statusCode);
+            print('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+            print(response.runtimeType);
+            print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
+            print(data);
+            print('IIIIIIIIIIIIIIIIIIIIIIIIIIIiIIIIIIII');
+            print(response?.data);
+            return BaseModels<List<QuestionAnswerResponse>>(
+              status: response?.statusCode,
+              code: false,
+              message: response?.statusMessage,
+              response: response?.data,
+            );
+          } else {
+            print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+            return BaseModels<List<QuestionAnswerResponse>>(
+              status: response?.statusCode,
+              code: false,
+              message: response?.statusMessage,
+              response: null,
+            );
+          }
         } else {
-          // Mos keladigan natija topilmasa
-          return BaseModels<QuestionAnswerResponse>(
+          print('666666666666666666666666');
+          return BaseModels<List<QuestionAnswerResponse>>(
             status: response?.statusCode,
             code: false,
-            message: "No matching data found",
+            message: "Invalid data format",
             response: null,
           );
         }
       } else {
-        // Xato yoki bo'sh javob qaytsa
-        return BaseModels<QuestionAnswerResponse>(
+        print('7777777777777777777777777777');
+        return BaseModels<List<QuestionAnswerResponse>>(
           status: response?.statusCode,
           code: false,
-          message: response?.statusMessage,
-          response: null,
+          message: response?.statusMessage ?? 'Unknown error',
         );
       }
     } catch (e) {
-      // Istisno yuzaga kelganda
-      return BaseModels<QuestionAnswerResponse>(
-        status: 500, // Xato kod, masalan, server xatosi
+      // logger('Error occurred: $e', error: 'QuestionAnswerRepository');
+      return BaseModels<List<QuestionAnswerResponse>>(
+        status: 500,
         code: false,
         message: "Error occurred: $e",
         response: null,
