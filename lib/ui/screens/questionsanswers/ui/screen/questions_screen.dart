@@ -175,7 +175,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                 Gap(Dimens(context).paddingVerticalItem8),
                 Card(
                   child: Container(
-                    height: Dimens(context).height60,
+                    height: Dimens(context).height306,
                     width: Dimens(context).screenWidth,
                     padding: EdgeInsets.symmetric(
                       vertical: Dimens(context).paddingVerticalItem8,

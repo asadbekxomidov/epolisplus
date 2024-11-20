@@ -1,4 +1,3 @@
-import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/ui/widgets/showdialog_widget.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -9,31 +8,34 @@ part 'tabbar_event.dart';
 part 'tabbar_state.dart';
 
 class TabbarBloc extends Bloc<TabbarEvent, TabbarState> {
+  int currentIndex = 0;
+
   TabbarBloc() : super(const TabbarInitialState(0)) {
-    on<HomeScreenPushEvent>(homePush);
-    on<KabinetScreenPushEvent>(kabinetPush);
-    on<PoliciesScreenPushEvent>(policiesPush);
-    on<PartnersScreenPushEvent>(partnersPush);
-    on<SosScreenPushEvent>(sosDilog);
+    //   on<HomeScreenPushEvent>(homePush);
+    //   on<KabinetScreenPushEvent>(kabinetPush);
+    //   on<PoliciesScreenPushEvent>(policiesPush);
+    //   on<PartnersScreenPushEvent>(partnersPush);
+    //   on<SosScreenPushEvent>(sosDilog);
+    on<TabSelectedEvent>(onTap);
   }
 
-  Future<void> homePush(
+/*  Future<void> homePush(
       HomeScreenPushEvent event, Emitter<TabbarState> emit) async {
-    emit(TabbarLoadedState());
-    Get.to(() => HomeScreen());
-    emit(TabbarSuccesState());
+    */ /* emit(TabbarLoadedState());
+    Get.to(() => HomeScreen());*/ /*
+    emit(HomeState2());
   }
 
   Future<void> kabinetPush(
       KabinetScreenPushEvent event, Emitter<TabbarState> emit) async {
-    emit(TabbarLoadedState());
-    Get.to(() => KabinetScreen());
-    emit(TabbarSuccesState());
+*/ /*    emit(TabbarLoadedState());
+    Get.to(() => KabinetScreen());*/ /*
+    emit(CabinetState());
   }
 
   Future<void> sosDilog(
       SosScreenPushEvent event, Emitter<TabbarState> emit) async {
-    emit(TabbarLoadedState());
+    // emit(TabbarLoadedState());
     showDialog(
       context: Get.context!,
       barrierDismissible: true,
@@ -41,21 +43,21 @@ class TabbarBloc extends Bloc<TabbarEvent, TabbarState> {
         return ShowdialogWidget();
       },
     );
-    emit(TabbarSuccesState());
+    emit(SosState());
   }
 
   Future<void> policiesPush(
       PoliciesScreenPushEvent event, Emitter<TabbarState> emit) async {
-    emit(TabbarLoadedState());
-    Get.to(() => PoliciesScreen());
-    emit(TabbarSuccesState());
+*/ /*    emit(TabbarLoadedState());
+    Get.to(() => PoliciesScreen());*/ /*
+    emit(PolicyState());
   }
 
   Future<void> partnersPush(
       PartnersScreenPushEvent event, Emitter<TabbarState> emit) async {
-    emit(TabbarLoadedState());
-    Get.to(() => PartnersScreen());
-    emit(TabbarSuccesState());
+*/ /*    emit(TabbarLoadedState());
+    Get.to(() => PartnersScreen());*/ /*
+    emit(PartnerState());
   }
 
   // Future<void> pushScreen(
@@ -83,5 +85,43 @@ class TabbarBloc extends Bloc<TabbarEvent, TabbarState> {
   //       Get.to(() => PartnersScreen());
   //       break;
   //   }
-  // }
+  // }*/
+
+  onTap(TabSelectedEvent event, Emitter<TabbarState> emit) {
+    currentIndex = event.index;
+    switch (currentIndex) {
+      case 0:
+        {
+          emit(HomeState2());
+          return;
+        }
+      case 1:
+        {
+          emit(CabinetState());
+          return;
+        }
+      case 2:
+        {
+          showDialog(
+            context: Get.context!,
+            barrierDismissible: true,
+            builder: (context) {
+              return ShowdialogWidget();
+            },
+          );
+          emit(SosState());
+          return;
+        }
+      case 3:
+        {
+          emit(PolicyState());
+          return;
+        }
+      case 4:
+        {
+          emit(PartnerState());
+          return;
+        }
+    }
+  }
 }

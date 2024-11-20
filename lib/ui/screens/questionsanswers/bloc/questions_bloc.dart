@@ -110,7 +110,6 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
 
     final result =
         await repository.questionAnswerGet(event.title, event.summary);
-    logger(result.response.toString(), error: 'Q Bloc');
 
     print('NNNNNNNNNNNNNNNNNNNNNNNNNNNNN');
     print(result.response);
@@ -118,17 +117,17 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
 
     if (result.status == 200) {
       print(result);
-      if (result.response != null && result.response!.isNotEmpty) {
-        print('${result.response} RESPONSE');
-        
-        // Cast or map the result.response to List<QuestionAnswerResponse>
-        List<QuestionAnswerResponse> questionAnswerList = (result.response as List)
-            .map<QuestionAnswerResponse>((e) => QuestionAnswerResponse.fromJson(e))
-            .toList();
 
-        // Emit the loaded state with the properly typed list
-        emit(QuestionsLoadedState(questionAnswerList: questionAnswerList));
-      } else {
+        if (result.response != null && result.response!.isNotEmpty) {
+        print('${result.response} RESPONSE');
+
+          // Cast or map the result.response to List<QuestionAnswerResponse>
+          List<QuestionAnswerResponse> questionAnswerList =
+              result.response as List<QuestionAnswerResponse>;
+
+          // Emit the loaded state with the properly typed list
+          emit(QuestionsLoadedState(questionAnswerList: questionAnswerList));
+        } else {
         emit(QuestionsErrorState(message: "No data found"));
       }
     } else {

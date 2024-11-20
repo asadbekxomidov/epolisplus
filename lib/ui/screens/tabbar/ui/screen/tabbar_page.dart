@@ -36,7 +36,7 @@ class _TabbarPageState extends State<TabbarPage> {
             height: dimens.height78,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+           /*   children: [
                 buildTabItem(
                   onclick: () {
                     tabbarBloc.add(HomeScreenPushEvent());
@@ -92,7 +92,7 @@ class _TabbarPageState extends State<TabbarPage> {
                   dimens: dimens,
                   isSelected: selectedIndex == 4,
                 ),
-              ],
+              ],*/
             ),
           );
         },

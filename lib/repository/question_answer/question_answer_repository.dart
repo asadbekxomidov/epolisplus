@@ -43,7 +43,16 @@ class QuestionAnswerRepository extends QuestionAnswerRepositoryIml {
         var data = response?.data['response'];
         print(data.toString());
         print('222222222222222222222222');
-
+        var responseData = response?.data['response'];
+        List<QuestionAnswerResponse> qaList = (responseData as List)
+            .map((partner) => QuestionAnswerResponse.fromJson(partner))
+            .toList();
+        return BaseModels(
+          status: response?.statusCode,
+          code: false,
+          message: response?.statusMessage,
+          response: qaList,
+        );
         if (data != null) {
           print(data);
           print('33333333333333333333');

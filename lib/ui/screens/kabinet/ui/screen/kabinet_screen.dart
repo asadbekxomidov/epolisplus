@@ -5,12 +5,12 @@ import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class KabinetScreen extends StatefulWidget {
+class CabinetScreen extends StatefulWidget {
   @override
-  State<KabinetScreen> createState() => _KabinetScreenState();
+  State<CabinetScreen> createState() => _CabinetScreenState();
 }
 
-class _KabinetScreenState extends State<KabinetScreen> {
+class _CabinetScreenState extends State<CabinetScreen> {
   late Dimens dimens;
   late KabinetBloc kabinetBloc;
 

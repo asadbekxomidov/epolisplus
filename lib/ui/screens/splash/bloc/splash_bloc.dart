@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
+import '../../tabbar/ui/bottom_navigation_view.dart';
+
 part 'splash_event.dart';
 part 'splash_state.dart';
 
@@ -41,7 +43,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     // }
     if (token != null && token.isNotEmpty) {
       print('${token} SplashSplashSplashSplashSplash');
-      Get.off(() => HomeScreen());
+      Get.off(() => BottomWidget());
       emit(SplashSuccessState());
     } else {
       Get.off(() => CheckAuthScreen());

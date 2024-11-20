@@ -279,10 +279,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            bottomNavigationBar: BlocProvider(
+    /*        bottomNavigationBar: BlocProvider(
               create: (context) => TabbarBloc(),
               child: TabbarPage(),
-            ),
+            ),*/
           );
         },
       ),
