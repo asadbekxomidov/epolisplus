@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/greenbackground.dart';
 import 'package:epolisplus/ui/screens/partners/bloc/partners_bloc.dart';
-import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
 
 class PartnersScreen extends StatefulWidget {
   @override
@@ -92,7 +91,6 @@ class _PartnersScreenState extends State<PartnersScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: TabbarPage(),
     );
   }
 }

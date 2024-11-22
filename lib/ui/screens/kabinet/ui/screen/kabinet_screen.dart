@@ -1,5 +1,4 @@
 import 'package:epolisplus/ui/screens/kabinet/bloc/kabinet_bloc.dart';
-import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
 import 'package:epolisplus/ui/widgets/greenbackground.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +24,6 @@ class _CabinetScreenState extends State<CabinetScreen> {
             body: GreenImageBackground(
               child: Container(),
             ),
-            bottomNavigationBar: TabbarPage(),
           );
         },
       ),

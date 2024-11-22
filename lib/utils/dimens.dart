@@ -261,6 +261,10 @@ class Dimens {
     return 105 * screenHeight / 852;
   }
 
+  double get height124 {
+    return 124 * screenHeight / 852;
+  }
+
   double get height132 {
     return 132 * screenHeight / 852;
   }
@@ -376,6 +380,26 @@ class Dimens {
     );
   }
 
+  TextStyle get questionsTitleSty {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.titleColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get questionsSummarySty {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.pointColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
   TextStyle get splashTextStyle {
     return TextStyle(
       fontSize: font18,
@@ -446,6 +470,17 @@ class Dimens {
       fontSize: font16,
       fontWeight: FontWeight.normal,
       color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get sosCardTextSty {
+    return TextStyle(
+      // height: height20,
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.whiteColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
     );

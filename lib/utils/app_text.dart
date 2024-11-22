@@ -95,6 +95,10 @@ class AppStrings {
   static const String aboutappText = "О приложении";
   static const String aboutappCardText = "about_app_text";
 
+  // ! Sos
+
+  static const String sosCallCardText = "Позвонить\nоператорам";
+  static const String sosTelegramCardText = "Чат-бот\nТелеграм";
 
   // ! Questions
 

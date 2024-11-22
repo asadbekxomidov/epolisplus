@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-import '../../tabbar/ui/bottom_navigation_view.dart';
+import '../../tabbar/ui/screen/bottom_navigation_view.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';

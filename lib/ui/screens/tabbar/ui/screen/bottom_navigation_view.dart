@@ -1,11 +1,9 @@
-import 'package:epolisplus/ui/screens/kabinet/ui/screen/kabinet_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../home/ui/screen/home_screen.dart';
-import '../../partners/ui/screen/partners_screen.dart';
-import '../../policies/ui/screen/policies_screen.dart';
-import '../bloc/tabbar_bloc.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/ui/screens/tabbar/bloc/tabbar_bloc.dart';
 
 class BottomWidget extends StatefulWidget {
   const BottomWidget({super.key});
@@ -16,15 +14,14 @@ class BottomWidget extends StatefulWidget {
 
 class _BottomNavigationViewState extends State<BottomWidget> {
   late TabbarBloc bloc;
+  late Dimens dimens;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TabbarBloc(),
       child: BlocConsumer<TabbarBloc, TabbarState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           bloc = BlocProvider.of<TabbarBloc>(context);
           return Scaffold(
@@ -39,14 +36,21 @@ class _BottomNavigationViewState extends State<BottomWidget> {
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.home,
-                    color: Colors.teal,
+                    CupertinoIcons.home,
+                    color: AppColors.greenColor,
                   ),
                   activeIcon: Icon(
                     Icons.home_outlined,
-                    color: Colors.amber,
+                    color: AppColors.mainColor,
                   ),
-                  label: "",
+                  label: "Home",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    CupertinoIcons.person_circle,
+                    color: Colors.teal,
+                  ),
+                  label: "Kabinet",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
@@ -57,24 +61,17 @@ class _BottomNavigationViewState extends State<BottomWidget> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.home,
+                    Icons.file_copy_outlined,
                     color: Colors.teal,
                   ),
-                  label: "",
+                  label: "Policies",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.home,
                     color: Colors.teal,
                   ),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                    color: Colors.teal,
-                  ),
-                  label: "",
+                  label: "Partners",
                 ),
               ],
             ),

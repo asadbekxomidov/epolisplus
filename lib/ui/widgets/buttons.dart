@@ -1,4 +1,5 @@
 import 'package:epolisplus/ui/widgets/bloc/timer_bloc/timer_bloc.dart';
+import 'package:epolisplus/ui/widgets/button/cubit/toggle_cubit.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -556,9 +557,7 @@ class ToggleIconButton extends StatelessWidget {
   }
 }
 
-
 // ? HomePageScroll Buttons
-
 
 class CustomHorizontalButton extends StatelessWidget {
   final Dimens dimens;
@@ -624,6 +623,36 @@ class CustomHorizontalButton extends StatelessWidget {
             ),
           );
         }),
+      ),
+    );
+  }
+}
+
+// ? ToogleButton Class
+
+class ToggleButtonWidget extends StatelessWidget {
+  final VoidCallback? onToggle; // Optional callback for external events
+
+  const ToggleButtonWidget({Key? key, this.onToggle}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => ToggleButtonCubit(), // Provide the ToggleCubit
+      child: BlocBuilder<ToggleButtonCubit, bool>(
+        builder: (context, isExpanded) {
+          return IconButton(
+            icon: Icon(
+              isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+            ),
+            onPressed: () {
+              context.read<ToggleButtonCubit>().toggle(); // Toggle the state
+              if (onToggle != null) {
+                onToggle!(); // Trigger the external callback if provided
+              }
+            },
+          );
+        },
       ),
     );
   }

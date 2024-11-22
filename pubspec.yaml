@@ -78,6 +78,7 @@ flutter:
     - assets/images/home/
     - assets/images/home/icons/
     - assets/images/home/tapbar/
+    - assets/images/home/sos/
     - assets/images/settings/images/
     - assets/images/settings/icons/
 

@@ -43,6 +43,8 @@ class AppImage {
   static IconData arrow_circle_left_outlined = Icons.arrow_circle_left_outlined;
   static IconData logoutIcon = Icons.logout;
   static IconData navigatenextIcon = Icons.navigate_next;
+  static IconData keyboardarrowupIcon = Icons.keyboard_arrow_up;
+  static IconData keyboardarrowdownIcon = Icons.keyboard_arrow_down;
   static IconData infocircleIcon = CupertinoIcons.info_circle;
 
   // ! HomeIcon
@@ -66,6 +68,9 @@ class AppImage {
       "assets/images/settings/icons/telegram_icons.png";
   static String callOperatorIcon =
       "assets/images/settings/icons/call_operator.png";
+  static String sosCallIcon = "assets/images/home/sos/sos_call_icon.png";
+  static String sosTelegramIoon =
+      "assets/images/home/sos/sos_telegram_icon.png";
 
   static Widget starWidget(BuildContext context) {
     return Text(

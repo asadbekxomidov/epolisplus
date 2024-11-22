@@ -36,4 +36,7 @@ class AppColors {
   static Color dialogsColor = Color(0x2D2D2D);
   static Color snackbarColor = Color(0xFFBA2948);
   static Color snackbarWhite = Color(0xFFF9DEE4);
+  static Color sosCallCardColor = Color.fromRGBO(220, 48, 85, 1);
+  static Color sosTelegramCardColor = Color.fromRGBO(36, 161, 222, 1);
+  // static Color sosCallCardColor = Color.fromRGBO(215, 47, 83, 255);
 }

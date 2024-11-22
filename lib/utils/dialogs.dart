@@ -318,3 +318,136 @@ class HelpdeskOptions extends StatelessWidget {
     );
   }
 }
+
+// ? SosDilog
+
+class SosDilogaScreen extends StatelessWidget {
+  late Dimens dimens;
+  SosDilogaScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+    return Dialog(
+      backgroundColor: AppColors.dialogsColor,
+      insetPadding: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          dimens.radius14,
+        ),
+      ),
+      child: Stack(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                  dimens.paddingHorizontal16,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            color: AppColors.whiteColor,
+                            size: dimens.height20,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SosDilogOPtions(
+                          color: AppColors.sosCallCardColor,
+                          image: AppImage.sosCallIcon,
+                          isSelected: false,
+                          text: AppStrings.sosCallCardText,
+                          onTap: () {},
+                        ),
+                        Gap(dimens.paddingHorizontal8),
+                        SosDilogOPtions(
+                          color: AppColors.sosTelegramCardColor,
+                          image: AppImage.sosTelegramIoon,
+                          isSelected: true,
+                          text: AppStrings.sosTelegramCardText,
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SosDilogOPtions extends StatelessWidget {
+  late Dimens dimens;
+
+  final String image;
+  final Color color;
+  final String text;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  SosDilogOPtions({
+    required this.image,
+    required this.color,
+    required this.text,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return InkWell(
+      splashColor: AppColors.transparentColor,
+      highlightColor: AppColors.transparentColor,
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(
+              dimens.radius16,
+            )),
+        height: dimens.height124,
+        width: dimens.width176,
+        // padding: EdgeInsets.symmetric(
+        //   horizontal: dimens.paddingHorizontal16,
+        //   vertical: dimens.paddingVerticalItem20,
+        // ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              image,
+              height: dimens.height24,
+            ),
+            Gap(dimens.paddingHorizontal8),
+            Text(
+              text,
+              style: dimens.sosCardTextSty,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

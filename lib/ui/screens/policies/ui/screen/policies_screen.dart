@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/policies/bloc/policies_bloc.dart';
-import 'package:epolisplus/ui/screens/tabbar/ui/screen/tabbar_page.dart';
 
 class PoliciesScreen extends StatefulWidget {
   @override
@@ -29,7 +28,6 @@ class _PoliciesScreenState extends State<PoliciesScreen> {
                 ),
               ),
             ),
-            bottomNavigationBar: TabbarPage(),
           );
         },
       ),

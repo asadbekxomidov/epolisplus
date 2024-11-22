@@ -9,18 +9,18 @@ abstract class PartnersEvent extends Equatable {
 
 // Partnerlar olish uchun event
 class PartnersGetEvent extends PartnersEvent {
-  final int id;
-  final String site;
-  final String phone;
-  final String image;
+  final int? id;
+  final String? site;
+  final String? phone;
+  final String? image;
 
   const PartnersGetEvent({
-    required this.id,
-    required this.site,
-    required this.phone,
-    required this.image,
+     this.id,
+     this.site,
+     this.phone,
+     this.image,
   });
 
   @override
-  List<Object> get props => [id, site, phone, image];
+  List<Object> get props => [id!, site!, phone!, image!];
 }
