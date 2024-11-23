@@ -47,6 +47,8 @@ dependencies:
   dio: ^5.4.1
   json_serializable: ^6.7.1
   shared_preferences: ^2.3.2
+  flutter_svg: ^2.0.15
+  flutter_html: ^3.0.0-beta.2
 
 dev_dependencies:
   flutter_test:

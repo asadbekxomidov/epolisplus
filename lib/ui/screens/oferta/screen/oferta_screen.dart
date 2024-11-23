@@ -1,6 +1,7 @@
 import 'package:epolisplus/ui/screens/oferta/bloc/oferta_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:gap/gap.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -22,8 +23,8 @@ class _OfertaScreenState extends State<OfertaScreen> {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => OfertaBloc(widget.ofertaText ?? "")
-        ..add(OfertaGetEvent()),
+      create: (context) =>
+          OfertaBloc(widget.ofertaText ?? "")..add(OfertaGetEvent()),
       child: Scaffold(
         body: GreenImageBackground(
           child: BlocConsumer<OfertaBloc, OfertaState>(
@@ -43,24 +44,25 @@ class _OfertaScreenState extends State<OfertaScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gap(dimens.paddingVerticalItem69),
-                    LeftBackIconBtn(appColors: AppColors.whiteColor),
+                    LeftBackIconBtn(
+                      appColors: AppColors.whiteColor,
+                    ),
                     Gap(dimens.paddingVerticalItem10),
-                    // Text(
-                    //   AppStrings.aboutappText,
-                    //   style: dimens.settingsStyle,
-                    // ),
                     Gap(dimens.paddingVerticalItem8),
-                    Card(
-                      color: AppColors.cardContainerColor,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: dimens.paddingVerticalItem8,
-                          horizontal: dimens.paddingHorizontal4,
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Card(
+                          color: AppColors.cardContainerColor,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: dimens.paddingVerticalItem8,
+                              horizontal: dimens.paddingHorizontal4,
+                            ),
+                            width: dimens.screenWidth,
+                            decoration: cardContainerDecoration(dimens),
+                            child: buildCardContent(state),
+                          ),
                         ),
-                        height: dimens.height440,
-                        width: dimens.screenWidth,
-                        decoration: cardContainerDecoration(dimens),
-                        child: _buildCardContent(state),
                       ),
                     ),
                   ],
@@ -73,16 +75,29 @@ class _OfertaScreenState extends State<OfertaScreen> {
     );
   }
 
-  Widget _buildCardContent(OfertaState state) {
+  Widget buildCardContent(OfertaState state) {
     if (state is OfertaLoadingState) {
+      // return dialogsCircle(context);
       return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (state is OfertaInitialState) {
       return SingleChildScrollView(
-        child: Text(
-          state.response,
-          style: dimens.textStyle,
+        child: Html(
+          data: state.response,
+          style: {
+            "body": Style(
+              fontSize:
+                  FontSize(dimens.ofertaTextSty.fontSize ?? dimens.font14),
+              color: AppColors.blackColor,
+            ),
+            // "p": Style(
+            //   margin: Margins.all(8),
+            // ),
+            // "strong": Style(
+            //   fontWeight: FontWeight.w400,
+            // ),
+          },
         ),
       );
     } else if (state is OfertaErrorState) {

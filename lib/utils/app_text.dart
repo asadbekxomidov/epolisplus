@@ -89,6 +89,7 @@ class AppStrings {
   static const String emailNotifications = "Электронная почта";
   static const String emailallNotifications =
       "Все уведомления будут приходить на вашу электронную почту";
+  static const String partnersaText = "Партнеры";
 
   // ! Oferta
 

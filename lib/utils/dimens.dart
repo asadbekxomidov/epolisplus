@@ -285,6 +285,10 @@ class Dimens {
     return 252 * screenHeight / 852;
   }
 
+  double get height268 {
+    return 268 * screenHeight / 852;
+  }
+
   double get height306 {
     return 306 * screenHeight / 852;
   }
@@ -335,6 +339,10 @@ class Dimens {
 
   double get radius25 {
     return height10 * 2.5;
+  }
+
+  double get font10 {
+    return height10 * 1.0;
   }
 
   double get font12 {
@@ -469,6 +477,26 @@ class Dimens {
     return TextStyle(
       fontSize: font16,
       fontWeight: FontWeight.normal,
+      color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get tabbarTextSty {
+    return TextStyle(
+      fontSize: font10,
+      fontWeight: FontWeight.w400,
+      color: AppColors.tabbarTextColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get ofertaTextSty {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
       color: AppColors.textColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,

@@ -90,11 +90,16 @@ class AppImage {
 
   // ! Home TapBar image
 
-  static String homeIcon = 'assets/images/home/tapbar/home_icon.png';
-  static String kabinetIcon = 'assets/images/home/tapbar/kabinet_icon.png';
-  static String sosIcon = 'assets/images/home/tapbar/sos_image.png';
-  static String mypoliciesIcon =
+  static String homeTabbarIcon = 'assets/images/home/tapbar/home_icon.png'; 
+  static String homeTabbarGreyIcon = 'assets/images/home/tapbar/home_grey_icon.png'; 
+  static String kabinetTabbarIcon = 'assets/images/home/tapbar/kabinet_icon.png';
+  static String sosTabbarIcon = 'assets/images/home/tapbar/sos_image.png';
+  static String mypoliciesTabbarIcon =
       'assets/images/home/tapbar/my_policies_icon.png';
-  static String partnersIcon = 'assets/images/home/tapbar/partners_icon.png';
-  static String homegreyIcon = 'assets/images/home/tapbar/home_grey_icon.png';
+  static String partnersTabbarIcon = 'assets/images/home/tapbar/partners_icon.png';
+
+  // ! svg image
+
+  static String ingoUzbSvg = 'assets/svg/ingo_uzb_image_scg.svg';
+  static String capitalSugurtaSvg = 'assets/svg/capital_sugurta_image_svg.svg';
 }

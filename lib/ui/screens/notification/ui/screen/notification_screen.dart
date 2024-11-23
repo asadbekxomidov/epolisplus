@@ -47,7 +47,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Gap(dimens.paddingVerticalItem10),
-                      Gap(dimens.paddingVerticalItem69),
+                      Gap(dimens.paddingVerticalItem59),
                       LeftBackIconBtn(
                         appColors: AppColors.whiteColor,
                       ),

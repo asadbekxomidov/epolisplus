@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'package:epolisplus/models/models_export.dart';
-import 'package:epolisplus/repository/auth/auth_repository.dart';
-import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:epolisplus/utils/utils_export.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/repository/auth/auth_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -52,7 +52,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await _prefsManager.savePassword(password);
 
       // Navigate to HomeScreen
-      Get.offAll(() => HomeScreen());
+      Get.offAll(() => BottomWidget());
       emit(SuccessState());
     } else if (baseResponse.status == 401) {
       // Token muddati o'tgan bo'lsa, tokenni o‘chirib LoginScreen'ga qaytarish

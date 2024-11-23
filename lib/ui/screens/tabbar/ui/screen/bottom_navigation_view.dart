@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
@@ -18,6 +17,8 @@ class _BottomNavigationViewState extends State<BottomWidget> {
 
   @override
   Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
     return BlocProvider(
       create: (context) => TabbarBloc(),
       child: BlocConsumer<TabbarBloc, TabbarState>(
@@ -30,46 +31,48 @@ class _BottomNavigationViewState extends State<BottomWidget> {
               onTap: (index) {
                 bloc.add(TabSelectedEvent(index));
               },
+              selectedLabelStyle: dimens.tabbarTextSty,
+              unselectedLabelStyle: dimens.tabbarTextSty,
               currentIndex: bloc.currentIndex,
-              backgroundColor: Colors.white,
+              backgroundColor: AppColors.whiteColor,
               type: BottomNavigationBarType.fixed,
               items: [
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    CupertinoIcons.home,
-                    color: AppColors.greenColor,
+                  icon: Image.asset(
+                    AppImage.homeTabbarGreyIcon,
+                    height: dimens.height24,
                   ),
-                  activeIcon: Icon(
-                    Icons.home_outlined,
-                    color: AppColors.mainColor,
+                  activeIcon: Image.asset(
+                    AppImage.homeTabbarIcon,
+                    height: dimens.height24,
                   ),
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    CupertinoIcons.person_circle,
-                    color: Colors.teal,
+                  icon: Image.asset(
+                    AppImage.kabinetTabbarIcon,
+                    height: dimens.height24,
                   ),
                   label: "Kabinet",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                    color: Colors.teal,
+                  icon: Image.asset(
+                    AppImage.sosTabbarIcon,
+                    height: dimens.height68,
                   ),
                   label: "",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.file_copy_outlined,
-                    color: Colors.teal,
+                  icon: Image.asset(
+                    AppImage.mypoliciesTabbarIcon,
+                    height: dimens.height24,
                   ),
                   label: "Policies",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                    color: Colors.teal,
+                  icon: Image.asset(
+                    AppImage.partnersTabbarIcon,
+                    height: dimens.height24,
                   ),
                   label: "Partners",
                 ),

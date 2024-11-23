@@ -1,5 +1,4 @@
 import 'package:epolisplus/ui/screens/home/bloc/home_bloc.dart';
-import 'package:epolisplus/ui/screens/tabbar/bloc/tabbar_bloc.dart';
 import 'package:epolisplus/ui/widgets/bluebackground.dart';
 import 'package:epolisplus/ui/widgets/buttons.dart';
 import 'package:epolisplus/utils/utils_export.dart';
@@ -20,15 +19,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => HomeBloc(),
-        ),
-        BlocProvider(
-          create: (context) => TabbarBloc(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => HomeBloc(),
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -38,25 +30,22 @@ class _HomeScreenState extends State<HomeScreen> {
             // appBar: AppBar(
             //   actions: [
             //     IconButton(
-            //         onPressed: () {
-            //           homeBloc.add(DeleteAccountEvent());
-            //         },
-            //         icon: Icon(
-            //           Icons.delete,
-            //           color: Colors.red,
-            //         ))
+            //       onPressed: () {
+            //         homeBloc.add(DeleteAccountEvent());
+            //       },
+            //       icon: const Icon(Icons.delete),
+            //     ),
             //   ],
             // ),
             body: Bluebackground(
               child: Container(
-                padding: EdgeInsets.all(
-                  dimens.paddingHorizontal16,
+                padding: EdgeInsets.symmetric(
+                  horizontal: dimens.paddingHorizontal16,
                 ),
-                height: dimens.screenHeight,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Gap(dimens.paddingVerticalItem10),
+                    Gap(dimens.paddingVerticalItem59),
                     // ?
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -278,10 +267,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-    /*        bottomNavigationBar: BlocProvider(
-              create: (context) => TabbarBloc(),
-              child: TabbarPage(),
-            ),*/
           );
         },
       ),

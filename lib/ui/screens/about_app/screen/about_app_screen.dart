@@ -37,7 +37,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Gap(dimens.paddingVerticalItem69),
+                      Gap(dimens.paddingVerticalItem59),
                       // Gap(dimens.paddingVerticalItem10),
                       LeftBackIconBtn(
                         appColors: AppColors.whiteColor,

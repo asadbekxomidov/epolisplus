@@ -1,12 +1,10 @@
-import 'package:epolisplus/log/logger.dart';
-import 'package:epolisplus/repository/auth/auth_repository.dart';
-// import 'package:epolisplus/ui/screens/check_auth/bloc/check_auth_bloc.dart';
-import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:epolisplus/utils/utils_export.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/repository/auth/auth_repository.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -60,7 +58,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
       emit(RegisterSuccessState());
       if (baseResponse.status == 200) {
-        logger(baseResponse.response.toString(), error: "Register Bloc");
         Get.to(() => VerificationScreen(phoneNumber: phoneNumber));
         emit(RegisterSuccessState());
       } else {

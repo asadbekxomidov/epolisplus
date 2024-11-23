@@ -22,6 +22,7 @@ class AppColors {
   static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
   static Color greyColor = Colors.grey;
+  static Color tabbarTextColor = const Color.fromRGBO(115, 115, 115, 1);
   static Color rightIconColors = Colors.grey.shade500;
   static Color rightIconColor = Color(0xA3A3A3);
   static Color homecontainerColor = Color(0xFFFFFF);
@@ -38,5 +39,6 @@ class AppColors {
   static Color snackbarWhite = Color(0xFFF9DEE4);
   static Color sosCallCardColor = Color.fromRGBO(220, 48, 85, 1);
   static Color sosTelegramCardColor = Color.fromRGBO(36, 161, 222, 1);
+  static Color partnersCardColor = Color.fromRGBO(255, 255, 255, 1);
   // static Color sosCallCardColor = Color.fromRGBO(215, 47, 83, 255);
 }

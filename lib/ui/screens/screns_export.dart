@@ -53,3 +53,5 @@ export 'oferta/screen/oferta_screen.dart';
 export 'questionsanswers/ui/screen/questions_screen.dart';
 // ? aboutapp
 export 'about_app/screen/about_app_screen.dart';
+// ? bottomWidget
+export 'tabbar/ui/screen/bottom_navigation_view.dart';

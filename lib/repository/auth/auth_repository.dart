@@ -437,6 +437,7 @@ class AuthRepository extends AuthRepositoryIml {
     }
   }
 
+  @override
   Future<BaseModels> deleteAccount(
     String phone,
     String token,
@@ -484,7 +485,7 @@ class AuthRepository extends AuthRepositoryIml {
   }
 
   @override
-  Future<BaseModels<String>> ofertaGet(String oferta) async {
+  Future<BaseModels<String>> ofertaGet() async {
     var headers = {
       'Content-Type': 'application/json',
       "Content": "application/json",
@@ -494,37 +495,34 @@ class AuthRepository extends AuthRepositoryIml {
 
     var url = ApiConstanta.OFERTA;
     Response? response;
-    print('object1');
 
     try {
-      print('object2');
       response = await service.getGetData(headers, url);
-      print('------${response = await service.getGetData(headers, url)}-----');
 
       if (response?.statusCode != 200) {
-        print('object3');
-        logger(response.toString(), error: "Repository");
-        print('object4');
         return BaseModels(
-          status: response!.statusCode,
-          message: response.statusMessage ?? 'Xato yuz berdi',
-          code: false,
+          status: response?.statusCode,
+          message: response?.statusMessage,
         );
       } else {
-        print('object5');
-        var ofertaContent = response?.data['content'];
-        print(
-            '1111111111111111111${response?.data['response']}11111111111111111111');
-        print('object6');
-        return BaseModels(
-          status: 200,
-          response: ofertaContent,
-          code: true,
-          message: 'Oferta muvaffaqiyatli yuklandi',
-        );
+        var ofertaContent = response?.data['response'];
+        logger(response?.data, error: 'Oferta Repository');
+
+        if (ofertaContent is String) {
+          return BaseModels(
+            status: 200,
+            response: ofertaContent,
+            code: false,
+            message: response?.statusMessage,
+          );
+        } else {
+          return BaseModels(
+            status: 500,
+            message: "Kutilmagan ma'lumot turi qaytdi",
+          );
+        }
       }
     } on Exception catch (e) {
-      print('object7');
       return BaseModels(
         status: 123,
         code: false,

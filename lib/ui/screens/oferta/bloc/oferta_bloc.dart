@@ -19,9 +19,8 @@ class OfertaBloc extends Bloc<OfertaEvent, OfertaState> {
 
     try {
       final authRepository = AuthRepository();
-      final result = await authRepository.ofertaGet(ofertaText);
-
-      logger(result.toString(), error: "Oferta Bloc");
+      final result = await authRepository.ofertaGet();
+      logger(result.response.toString(), error: 'Oferta Bloc');
 
       if (result.status == 200 && result.response != null) {
         emit(OfertaInitialState(result.response!));
@@ -30,7 +29,6 @@ class OfertaBloc extends Bloc<OfertaEvent, OfertaState> {
             message: result.message ?? 'Xato: Ma’lumot topilmadi'));
       }
     } catch (e) {
-      logger("Error: $e", error: "Oferta Bloc");
       emit(OfertaErrorState(message: 'Server bilan muammo: $e'));
     }
   }

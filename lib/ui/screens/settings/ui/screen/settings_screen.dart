@@ -36,8 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Gap(dimens.paddingVerticalItem10),
-                      Gap(dimens.paddingVerticalItem69),
+                      Gap(dimens.paddingVerticalItem59),
                       LeftBackIconBtn(
                         appColors: AppColors.whiteColor,
                       ),
