@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static Color mainColor = Color(0xFF00A070);
+  static Color textGrenn = Color.fromRGBO(0, 160, 112, 1);
   static Color homeColors = Color(0xFFAFAFA);
   static Color titleColor = Color(0xFF000000);
   static Color textColor = Color(0xFF000000);
@@ -15,6 +16,7 @@ class AppColors {
   static Color greenLightColor = Color(0xFF000000);
 
   static Color blackColor = Colors.black;
+  static Color textBlackColor = const Color.fromRGBO(10, 10, 10, 0);
   static Color redColor = Color(0xFFE70101);
   static Color cardContainerColor = Color.fromARGB(252, 252, 252, 255);
   // static Color cardContainerColor = Color(0xFCFCFC);
@@ -22,6 +24,7 @@ class AppColors {
   static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
   static Color greyColor = Colors.grey;
+  static Color partnersButtonColor = const Color.fromRGBO(239, 239, 239, 1);
   static Color tabbarTextColor = const Color.fromRGBO(115, 115, 115, 1);
   static Color rightIconColors = Colors.grey.shade500;
   static Color rightIconColor = Color(0xA3A3A3);

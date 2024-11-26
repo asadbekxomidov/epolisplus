@@ -42,7 +42,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     //   emit(SplashSuccessState());
     // }
     if (token != null && token.isNotEmpty) {
-      print('${token} SplashSplashSplashSplashSplash');
+      // print('${token} SplashSplashSplashSplashSplash');
       Get.off(() => BottomWidget());
       emit(SplashSuccessState());
     } else {

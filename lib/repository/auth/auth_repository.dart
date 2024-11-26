@@ -201,6 +201,8 @@ class AuthRepository extends AuthRepositoryIml {
       'Accept-Encoding': 'UTF-8',
     };
 
+    final prefMeneger = SharedPreferencesManager();
+
     var data = {
       "phone": phone,
       "code": code,
@@ -223,9 +225,10 @@ class AuthRepository extends AuthRepositoryIml {
           var responseData = response?.data['response'];
 
           ConfitmAccountResponse confirmResponse = ConfitmAccountResponse(
-            responseData['phone'],
-            responseData['code'],
+            responseData['access_token'],
           );
+
+          await prefMeneger.saveToken(responseData['access_token']);
 
           return BaseModels(
             status: 200,

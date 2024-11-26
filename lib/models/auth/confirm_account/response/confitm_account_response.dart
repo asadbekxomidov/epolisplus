@@ -1,9 +1,9 @@
 class ConfitmAccountResponse {
-  String phone;
-  String code;
+  String access_token;
+  // String code;
 
   ConfitmAccountResponse(
-    this.phone,
-    this.code,
+    this.access_token,
+    // this.code,
   );
 }

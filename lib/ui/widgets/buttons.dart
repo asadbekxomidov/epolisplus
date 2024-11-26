@@ -1,5 +1,6 @@
 import 'package:epolisplus/ui/widgets/bloc/timer_bloc/timer_bloc.dart';
 import 'package:epolisplus/ui/widgets/button/cubit/toggle_cubit.dart';
+import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -653,6 +654,52 @@ class ToggleButtonWidget extends StatelessWidget {
             },
           );
         },
+      ),
+    );
+  }
+}
+
+// ? PartneresButton
+
+class PartnersButton extends StatelessWidget {
+  late Dimens dimens;
+  Function onclick;
+  final String text;
+  final String image;
+
+  PartnersButton({
+    required this.image,
+    required this.text,
+    required this.onclick,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+    return SizedBox(
+      height: dimens.height40,
+      width: dimens.width150,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          shadowColor: AppColors.partnersButtonColor,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: AppColors.partnersButtonColor,
+              width: dimens.width1,
+            ),
+            borderRadius: BorderRadius.circular(
+              dimens.radius12,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          // backgroundColor: AppColors.whiteColor,
+          foregroundColor: AppColors.blackColor,
+        ),
+        onPressed: () => onclick(),
+        child: MyRowWidget(
+          image: image,
+          text: text,
+        ),
       ),
     );
   }

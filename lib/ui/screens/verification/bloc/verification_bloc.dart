@@ -44,7 +44,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
 
       if (baseResponse.status == 200) {
         logger(baseResponse.response.toString(), error: "Verification Bloc");
-        Get.to(() => HomeScreen());
+        Get.offAll(() => BottomWidget());
       } else {
         emit(VerificationErrorState(InputPhoneCodeFailure()));
       }

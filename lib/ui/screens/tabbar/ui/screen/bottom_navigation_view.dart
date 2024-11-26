@@ -32,7 +32,7 @@ class _BottomNavigationViewState extends State<BottomWidget> {
                 bloc.add(TabSelectedEvent(index));
               },
               selectedLabelStyle: dimens.tabbarTextSty,
-              unselectedLabelStyle: dimens.tabbarTextSty,
+              unselectedLabelStyle: dimens.tabbarSelectTextSty,
               currentIndex: bloc.currentIndex,
               backgroundColor: AppColors.whiteColor,
               type: BottomNavigationBarType.fixed,
@@ -53,6 +53,10 @@ class _BottomNavigationViewState extends State<BottomWidget> {
                     AppImage.kabinetTabbarIcon,
                     height: dimens.height24,
                   ),
+                  activeIcon: Image.asset(
+                    AppImage.kabinetTabbarGreenIcon,
+                    height: dimens.height24,
+                  ),
                   label: "Kabinet",
                 ),
                 BottomNavigationBarItem(
@@ -67,11 +71,19 @@ class _BottomNavigationViewState extends State<BottomWidget> {
                     AppImage.mypoliciesTabbarIcon,
                     height: dimens.height24,
                   ),
+                  activeIcon: Image.asset(
+                    AppImage.mypoliciesTabbarGreenIcon,
+                    height: dimens.height24,
+                  ),
                   label: "Policies",
                 ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
                     AppImage.partnersTabbarIcon,
+                    height: dimens.height24,
+                  ),
+                  activeIcon: Image.asset(
+                    AppImage.partnersTabbarGreenIcon,
                     height: dimens.height24,
                   ),
                   label: "Partners",

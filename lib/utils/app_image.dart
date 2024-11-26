@@ -90,16 +90,38 @@ class AppImage {
 
   // ! Home TapBar image
 
-  static String homeTabbarIcon = 'assets/images/home/tapbar/home_icon.png'; 
-  static String homeTabbarGreyIcon = 'assets/images/home/tapbar/home_grey_icon.png'; 
-  static String kabinetTabbarIcon = 'assets/images/home/tapbar/kabinet_icon.png';
+  static String homeTabbarIcon =
+      'assets/images/home/tapbar/home_green_icon.png.png';
+  static String homeTabbarGreyIcon =
+      'assets/images/home/tapbar/home_grey_icon.png';
+  static String kabinetTabbarIcon =
+      'assets/images/home/tapbar/kabinet_icon.png';
+  static String kabinetTabbarGreenIcon =
+      'assets/images/home/tapbar/kabinet_green_icon.png';
   static String sosTabbarIcon = 'assets/images/home/tapbar/sos_image.png';
   static String mypoliciesTabbarIcon =
       'assets/images/home/tapbar/my_policies_icon.png';
-  static String partnersTabbarIcon = 'assets/images/home/tapbar/partners_icon.png';
+  static String mypoliciesTabbarGreenIcon =
+      'assets/images/home/tapbar/my_policies_green.png';
+  static String partnersTabbarIcon =
+      'assets/images/home/tapbar/partners_icon.png';
+  static String partnersTabbarGreenIcon =
+      'assets/images/home/tapbar/partners_green_icon.png';
 
   // ! svg image
 
   static String ingoUzbSvg = 'assets/svg/ingo_uzb_image_scg.svg';
   static String capitalSugurtaSvg = 'assets/svg/capital_sugurta_image_svg.svg';
+
+  // ! partners
+  static String partnersOsagoIcon =
+      'assets/images/partners/images/osago_grey_icon.png';
+  static String partnersKaskoIcon =
+      'assets/images/partners/images/kasko_grey_icon.png';
+  static String partnersTravelIcon =
+      'assets/images/partners/images/travel_grey_icon.png';
+  static String partnersCallOpercon =
+      'assets/images/partners/images/call_opertator_icon.png';
+  static String partnersVebSaytcon =
+      'assets/images/partners/images/veb_sayt_icon.png';
 }

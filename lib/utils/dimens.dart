@@ -139,6 +139,14 @@ class Dimens {
     return width10 * 1.5;
   }
 
+  double get paddingHorizontal2 {
+    return width10 * 0.2;
+  }
+
+  double get paddingHorizontal6 {
+    return width10 * 0.6;
+  }
+
   double get paddingHorizontal8 {
     return width10 * 0.8;
   }
@@ -297,6 +305,10 @@ class Dimens {
     return 440 * screenHeight / 852;
   }
 
+  double get width1 {
+    return 1 * screenWidth / 392;
+  }
+
   double get width10 {
     return 10 * screenWidth / 392;
   }
@@ -325,8 +337,20 @@ class Dimens {
     return 60 * screenWidth / 392;
   }
 
+  double get width150 {
+    return 150 * screenWidth / 392;
+  }
+
+  double get width156 {
+    return 156 * screenWidth / 392;
+  }
+
   double get width176 {
     return 176 * screenWidth / 392;
+  }
+
+  double get radius12 {
+    return height10 * 1.2;
   }
 
   double get radius14 {
@@ -493,6 +517,16 @@ class Dimens {
     );
   }
 
+  TextStyle get tabbarSelectTextSty {
+    return TextStyle(
+      fontSize: font10,
+      fontWeight: FontWeight.w400,
+      color: AppColors.textGrenn,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
   TextStyle get ofertaTextSty {
     return TextStyle(
       fontSize: font14,
@@ -509,6 +543,16 @@ class Dimens {
       fontSize: font14,
       fontWeight: FontWeight.w400,
       color: AppColors.whiteColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get partnersTextSty {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.tabbarTextColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
     );
@@ -674,6 +718,29 @@ class Dimens {
       fontSize: starlite,
       fontWeight: FontWeight.normal,
       color: AppColors.redColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get partnersButtonTextSty {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.blackColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get partnersCardTextSty {
+    return TextStyle(
+      fontSize: font16,
+      fontWeight: FontWeight.w400,
+      color: AppColors.blackColor,
+      // color: AppColors.textBlackColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,

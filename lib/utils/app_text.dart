@@ -106,4 +106,8 @@ class AppStrings {
   static const String questionsText = "Вопрос ответы";
   static const String questionsTextAnswer =
       "На какую сумму может быть заключен договор?";
+  // ! Partners
+
+  static const String servicesText = "Услуги";
+
 }
