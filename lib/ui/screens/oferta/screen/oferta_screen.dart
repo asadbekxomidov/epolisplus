@@ -29,6 +29,11 @@ class _OfertaScreenState extends State<OfertaScreen> {
         body: GreenImageBackground(
           child: BlocConsumer<OfertaBloc, OfertaState>(
             listener: (context, state) {
+              // if (state is OfertaErrorState) {
+              //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //     content: Text(state.message),
+              //   ));
+              // }
               if (state is OfertaErrorState) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(state.message),

@@ -81,6 +81,8 @@ class AppStrings {
   static const String pushNotifications = "Push-уведомления";
   static const String partnersGetErrorText =
       "There was an error retrieving partner information";
+  static const String partnersPushWeberrortext =
+      "The website information is missing or there is a system error.";
   static const String allNotifications =
       "Все уведомления будут приходить на ваш телефон в виде всплывающего окна";
   static const String smsNotifications = "СМС-уведомления";

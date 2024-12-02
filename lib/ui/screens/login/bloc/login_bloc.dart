@@ -51,7 +51,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await _prefsManager.savePhone(phoneNumber);
       await _prefsManager.savePassword(password);
 
-      // Navigate to HomeScreen
+      // Navigate to BottomWidget
       Get.offAll(() => BottomWidget());
       emit(SuccessState());
     } else if (baseResponse.status == 401) {

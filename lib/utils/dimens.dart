@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
@@ -521,7 +522,8 @@ class Dimens {
     return TextStyle(
       fontSize: font10,
       fontWeight: FontWeight.w400,
-      color: AppColors.textGrenn,
+      color: Colors.teal,
+      // color: AppColors.mainColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
     );

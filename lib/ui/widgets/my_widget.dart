@@ -18,7 +18,7 @@ class MyRowWidget extends StatelessWidget {
     dimens = Dimens(context);
 
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
           image,

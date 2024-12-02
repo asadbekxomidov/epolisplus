@@ -1,6 +1,6 @@
 import 'package:epolisplus/models/models_export.dart';
-import 'package:epolisplus/services/api_constanta.dart';
 import 'package:epolisplus/services/api_service.dart';
+import 'package:epolisplus/services/api_constanta.dart';
 
 class PartnersRepository {
   final ApiService _service;
@@ -43,7 +43,8 @@ class PartnersRepository {
       return BaseModels<List<PartnersResponse>>(
         status: 500,
         code: false,
-        message: 'Server error: $e',
+        message: "Server ma'lumotlari uzgartirilmoqda",
+        // message: 'Server error: $e',
         response: [],
       );
     }

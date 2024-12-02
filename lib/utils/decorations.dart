@@ -127,3 +127,14 @@ homepageButtonsDecoration(Dimens dimens) {
     ),
   );
 }
+
+partnersPageButtonDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(dimens.radius12),
+    border: Border.all(
+      color: AppColors.partnersButtonColor,
+      width: dimens.width1,
+    ),
+  );
+}

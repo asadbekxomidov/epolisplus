@@ -508,13 +508,23 @@ class AuthRepository extends AuthRepositoryIml {
           message: response?.statusMessage,
         );
       } else {
+        // response?.data['response'] ning turini tekshiramiz
         var ofertaContent = response?.data['response'];
-        logger(response?.data, error: 'Oferta Repository');
 
         if (ofertaContent is String) {
+          logger(ofertaContent, error: 'Ogerta Functions');
           return BaseModels(
             status: 200,
             response: ofertaContent,
+            code: false,
+            message: response?.statusMessage,
+          );
+        } else if (ofertaContent is Map<String, dynamic>) {
+          // Agar qiymat Map bo‘lsa, uni JSON formatiga aylantiramiz
+          var jsonString = ofertaContent.toString();
+          return BaseModels(
+            status: 200,
+            response: jsonString,
             code: false,
             message: response?.statusMessage,
           );

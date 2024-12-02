@@ -632,14 +632,14 @@ class CustomHorizontalButton extends StatelessWidget {
 // ? ToogleButton Class
 
 class ToggleButtonWidget extends StatelessWidget {
-  final VoidCallback? onToggle; // Optional callback for external events
+  final VoidCallback? onToggle;
 
   const ToggleButtonWidget({Key? key, this.onToggle}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ToggleButtonCubit(), // Provide the ToggleCubit
+      create: (_) => ToggleButtonCubit(),
       child: BlocBuilder<ToggleButtonCubit, bool>(
         builder: (context, isExpanded) {
           return IconButton(
@@ -647,9 +647,9 @@ class ToggleButtonWidget extends StatelessWidget {
               isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
             ),
             onPressed: () {
-              context.read<ToggleButtonCubit>().toggle(); // Toggle the state
+              context.read<ToggleButtonCubit>().toggle();
               if (onToggle != null) {
-                onToggle!(); // Trigger the external callback if provided
+                onToggle!();
               }
             },
           );
@@ -663,7 +663,7 @@ class ToggleButtonWidget extends StatelessWidget {
 
 class PartnersButton extends StatelessWidget {
   late Dimens dimens;
-  Function onclick;
+  final Function onclick;
   final String text;
   final String image;
 
@@ -679,26 +679,17 @@ class PartnersButton extends StatelessWidget {
     return SizedBox(
       height: dimens.height40,
       width: dimens.width150,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shadowColor: AppColors.partnersButtonColor,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(
-              color: AppColors.partnersButtonColor,
-              width: dimens.width1,
-            ),
-            borderRadius: BorderRadius.circular(
-              dimens.radius12,
+      child: InkWell(
+        onTap: () => onclick(),
+        borderRadius: BorderRadius.circular(dimens.radius12),
+        child: Container(
+          decoration: partnersPageButtonDecorations(dimens),
+          child: Center(
+            child: MyRowWidget(
+              image: image,
+              text: text,
             ),
           ),
-          backgroundColor: Colors.white,
-          // backgroundColor: AppColors.whiteColor,
-          foregroundColor: AppColors.blackColor,
-        ),
-        onPressed: () => onclick(),
-        child: MyRowWidget(
-          image: image,
-          text: text,
         ),
       ),
     );

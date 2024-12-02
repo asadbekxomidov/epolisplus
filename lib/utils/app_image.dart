@@ -91,7 +91,7 @@ class AppImage {
   // ! Home TapBar image
 
   static String homeTabbarIcon =
-      'assets/images/home/tapbar/home_green_icon.png.png';
+      'assets/images/home/tapbar/home_green_icon.png';
   static String homeTabbarGreyIcon =
       'assets/images/home/tapbar/home_grey_icon.png';
   static String kabinetTabbarIcon =

@@ -16,3 +16,15 @@ class PartnersGetEvent extends PartnersEvent {
   @override
   List<Object?> get props => [id, site, phone, image];
 }
+
+class PartnerPushWebEvent extends PartnersEvent {
+  final String url;
+
+  PartnerPushWebEvent(this.url);
+}
+
+class PartnerPushPhoneEvent extends PartnersEvent {
+  final String phone;
+
+  PartnerPushPhoneEvent(this.phone);
+}

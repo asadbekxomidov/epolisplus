@@ -1,60 +1,9 @@
-// // import 'package:epolisplus/log/logger.dart';
-// import 'package:epolisplus/repository/partners/partners_repository.dart';
-// import 'package:epolisplus/utils/errors.dart';
-// import 'package:equatable/equatable.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:epolisplus/models/models_export.dart';
-// part 'partners_event.dart';
-// part 'partners_state.dart';
-
-// class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
-//   PartnersBloc() : super(PartnersSuccessState()) {
-//     on<PartnersGetEvent>(partnersGet);
-//   }
-
-//   // Method to fetch partner data
-//   Future<void> partnersGet(
-//       PartnersGetEvent event, Emitter<PartnersState> emit) async {
-//     print('partnersGet called');
-//     emit(PartnersLoadingState());
-//     try {
-//       final partnersRepository = PartnersRepository();
-//       print('Calling repository to fetch partners...'); // Debugging print
-
-//       // Fetch the partners data from the repository
-//       final partnersResponse = await partnersRepository.getPartners(
-//         event.id!,
-//         event.site!,
-//         event.phone!,
-//         event.image!,
-//       );
-//       print('Repository call complete.'); // Debugging print
-
-//       if (partnersResponse.status == 200) {
-//         print('Partners data fetched successfully.'); // Debugging print
-//         emit(PartnersLoadedState(partners: partnersResponse.response!));
-//       } else {
-//         print(
-//             'Error fetching partners: ${partnersResponse.message}'); // Debugging print
-//         emit(PartnersErrorState(GetPartnersErrorclass()));
-//       }
-//     } catch (e) {
-//       print('Error in fetching partners: $e'); // Debugging print
-//       emit(PartnersErrorState(GetPartnersErrorclass()));
-//     }
-//   }
-// }
-
-
-
-
-
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:epolisplus/utils/errors.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/partners/partners_repository.dart';
-import 'package:epolisplus/utils/errors.dart';
 
 part 'partners_event.dart';
 part 'partners_state.dart';
@@ -62,11 +11,15 @@ part 'partners_state.dart';
 class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
   final PartnersRepository _partnersRepository;
 
-  PartnersBloc() : _partnersRepository = PartnersRepository(), super(PartnersInitialState()) {
-    on<PartnersGetEvent>(_onPartnersGetEvent);
+  PartnersBloc()
+      : _partnersRepository = PartnersRepository(),
+        super(PartnersInitialState()) {
+    on<PartnersGetEvent>(onPartnersGetEvent);
+    on<PartnerPushWebEvent>(pushVeb);
+    on<PartnerPushPhoneEvent>(pushPhone);
   }
 
-  Future<void> _onPartnersGetEvent(
+  Future<void> onPartnersGetEvent(
       PartnersGetEvent event, Emitter<PartnersState> emit) async {
     emit(PartnersLoadingState());
     try {
@@ -83,6 +36,46 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
       }
     } catch (error) {
       emit(PartnersErrorState(GetPartnersErrorclass()));
+    }
+  }
+
+  Future<void> pushVeb(
+      PartnerPushWebEvent event, Emitter<PartnersState> emit) async {
+    try {
+      if (event.url.isEmpty) {
+        emit(PartnersErrorState(PartnersPushWebErrorclass()));
+        return;
+      }
+
+      final Uri url = Uri.parse(event.url);
+
+      bool launched = await launchUrl(url);
+
+      if (!launched) {
+        emit(PartnersErrorState(PartnersPushWebErrorclass()));
+      } else {}
+    } catch (e) {
+      emit(PartnersErrorState(PartnersPushWebErrorclass()));
+    }
+  }
+
+  Future<void> pushPhone(
+      PartnerPushPhoneEvent event, Emitter<PartnersState> emit) async {
+    try {
+      if (event.phone.isEmpty) {
+        emit(PartnersErrorState(PartnersPushWebErrorclass()));
+        return;
+      }
+
+      final Uri phone = Uri.parse('tel:${event.phone}');
+
+      bool launched = await launchUrl(phone);
+
+      if (!launched) {
+        emit(PartnersErrorState(PartnersPushWebErrorclass()));
+      } else {}
+    } catch (e) {
+      emit(PartnersErrorState(PartnersPushWebErrorclass()));
     }
   }
 }
