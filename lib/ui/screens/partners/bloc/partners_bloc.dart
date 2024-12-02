@@ -1,6 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
 import 'package:epolisplus/utils/errors.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/partners/partners_repository.dart';
@@ -31,6 +34,13 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
       );
       if (response.status == 200 && response.response != null) {
         emit(PartnersLoadedState(partners: response.response!));
+      } else if (response.status == 401) {
+        final token = SharedPreferencesManager();
+
+        token.clearToken();
+        token.clearPhone();
+        token.clearPassword();
+        Get.offAll(() => CheckAuthScreen());
       } else {
         emit(PartnersErrorState(GetPartnersErrorclass()));
       }
