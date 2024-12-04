@@ -11,29 +11,35 @@ class OfertaBloc extends Bloc<OfertaEvent, OfertaState> {
 
   OfertaBloc(this.ofertaText) : super(OfertaLoadingState()) {
     on<OfertaGetEvent>(_onGetOferta);
+    on<OfertaPartnersGetEvent>(_partnersOfertaGet);
   }
 
-  // Future<void> _onGetOferta(
-  //     OfertaGetEvent event, Emitter<OfertaState> emit) async {
-  //   emit(OfertaLoadingState());
-
-  //   try {
-  //     final authRepository = AuthRepository();
-  //     final result = await authRepository.ofertaGet();
-  //     logger(result.response.toString(), error: 'Oferta Bloc');
-
-  //     if (result.status == 200 && result.response != null) {
-  //       emit(OfertaInitialState(result.response!));
-  //     } else {
-  //       emit(OfertaErrorState(
-  //           message: result.message ?? 'Xato: Ma’lumot topilmadi'));
-  //     }
-  //   } catch (e) {
-  //     emit(OfertaErrorState(message: 'Server bilan muammo: $e'));
-  //   }
-  // }
   Future<void> _onGetOferta(
       OfertaGetEvent event, Emitter<OfertaState> emit) async {
+    emit(OfertaLoadingState());
+
+    try {
+      final authRepository = AuthRepository();
+      final result = await authRepository.partnersOferta();
+      logger(result.response.toString(), error: 'Oferta Bloc');
+
+      if (result.status == 200 && result.response != null) {
+        emit(OfertaInitialState(result.response!));
+      } else {
+        emit(OfertaErrorState(
+            message: result.message ?? 'Xato: Ma’lumot topilmadi'));
+      }
+    } catch (e, stackTrace) {
+      logger(e.toString(), error: 'Oferta Bloc Error');
+      logger(stackTrace.toString(), error: 'Stack Trace');
+      emit(OfertaErrorState(
+        message: 'Server bilan muammo: ${e.toString()}',
+      ));
+    }
+  }
+
+  Future<void> _partnersOfertaGet(
+      OfertaPartnersGetEvent event, Emitter<OfertaState> emit) async {
     emit(OfertaLoadingState());
 
     try {

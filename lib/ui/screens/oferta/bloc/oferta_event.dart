@@ -6,3 +6,5 @@ abstract class OfertaEvent extends Equatable {
 }
 
 class OfertaGetEvent extends OfertaEvent {}
+
+class OfertaPartnersGetEvent extends OfertaEvent {}

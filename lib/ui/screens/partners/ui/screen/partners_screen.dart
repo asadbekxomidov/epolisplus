@@ -55,6 +55,9 @@ class _PartnersScreenState extends State<PartnersScreen> {
                             style: dimens.settingsStyle,
                           ),
                           InkWell(
+                            onTap: () {
+                              partnersBloc.add(PartnerPushScreenEvent());
+                            },
                             child: Icon(
                               AppImage.infocircleIcon,
                               size: dimens.height24,
@@ -83,10 +86,15 @@ class _PartnersScreenState extends State<PartnersScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // buildImage(partner.image),
-                                    SvgPicture.network(
-                                      partner.image,
-                                    ),
+                                    partner.image.endsWith('.svg')
+                                        ? SvgPicture.network(
+                                            partner.image,
+                                            height: dimens.height20,
+                                          )
+                                        : Image.network(
+                                            partner.image,
+                                            height: dimens.height20,
+                                          ),
                                     Text(
                                       AppStrings.servicesText,
                                       style: dimens.partnersTextSty,

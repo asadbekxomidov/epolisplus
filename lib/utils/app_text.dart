@@ -1,6 +1,7 @@
 class AppStrings {
   static const String loginWelcome = "Добро пожаловать";
   static const String theName = "Напишите имя";
+  static const String name = "Имя";
   static const String loginEnter = "Войти в личный кабинет";
   static const String phoneNumberHint = "Номер телефона";
   static const String passwordHint = "Ваш пароль";
@@ -24,6 +25,7 @@ class AppStrings {
   static const String agreeProcessing = "Я согласен на обработку";
   static const String personalData = "Персональных данных";
   static const String back = "Назад";
+  static const String closeText = "Отмена";
   static const String verification = "Верификация";
   static const String phoneNumbercode =
       "Введите код отправленный на ваш номер телефона";
@@ -97,6 +99,7 @@ class AppStrings {
 
   static const String aboutappText = "О приложении";
   static const String aboutappCardText = "about_app_text";
+  static const String aboutappCardTextApp = "Наше приложение для страхового сервиса создано, чтобы сделать процесс страхования проще, удобнее и доступнее. С помощью нашего приложения вы можете легко оформить страховку, управлять своими полисами, отслеживать выплаты и подавать заявки на возмещение ущерба прямо со своего смартфона. Мы обеспечиваем максимальную прозрачность и безопасность ваших данных, предоставляя вам круглосуточный доступ к информации и поддержку в любое время. Оставайтесь спокойны и уверены в защите с нашим страховым сервисом.";
 
   // ! Sos
 
@@ -111,5 +114,12 @@ class AppStrings {
   // ! Partners
 
   static const String servicesText = "Услуги";
+  // ! Kabinet
+
+  static const String cabientText = "Кабинет";
+  static const String personalInformation = "Личная информация";
+  static const String saveChanges = "Cохранить изменения";
+  static const String deleteAccountText = "Удалить аккаунт";
+
 
 }

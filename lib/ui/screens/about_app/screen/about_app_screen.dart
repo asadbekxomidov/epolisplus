@@ -65,18 +65,16 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                         child: Container(
                           padding: EdgeInsets.symmetric(
                             vertical: dimens.paddingVerticalItem8,
-                            horizontal: dimens.paddingHorizontal4,
+                            horizontal: dimens.paddingHorizontal8,
                           ),
-                          // height: dimens.height252,
-                          // width: dimens.screenWidth,
                           decoration: cardContainerDecoration(dimens),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                AppStrings.aboutappCardText,
-                                style: dimens.splashTextStyle,
+                                AppStrings.aboutappCardTextApp,
+                                style: dimens.aboutpagesCardText,
                               ),
                             ],
                           ),

@@ -96,6 +96,7 @@ class LeftBackIconBtn extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Icon(
+            // iconData,
             AppImage.arrow_circle_left_outlined,
             color: appColors,
             size: dimens.height24,
@@ -103,6 +104,56 @@ class LeftBackIconBtn extends StatelessWidget {
           Gap(dimens.width5),
           Text(
             AppStrings.back,
+            style: TextStyle(
+              fontSize: dimens.height16,
+              color: appColors,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? ButtonPages
+
+class ButtonPagesBtn extends StatelessWidget {
+  Function? onClick;
+  String? text;
+  IconData? iconData;
+  Color? appColors;
+
+  ButtonPagesBtn({
+    this.onClick,
+    this.text,
+    this.iconData,
+    this.appColors,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            iconData,
+            // AppImage.arrow_circle_left_outlined,
+            color: appColors,
+            size: dimens.height24,
+          ),
+          Gap(dimens.width5),
+          Text(
+            text!,
+            // AppStrings.back,
             style: TextStyle(
               fontSize: dimens.height16,
               color: appColors,
@@ -452,7 +503,51 @@ class LogoutButton extends StatelessWidget {
           Gap(
             dimens.paddingVerticalItem8,
           ),
-          Text(text!),
+          Text(
+            text!,
+            style: dimens.pagesDeleteButtonSty,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DeleteAccountButton extends StatelessWidget {
+  Dimens dimens;
+  Function onClick;
+  String? text;
+  String? image;
+
+  DeleteAccountButton({
+    required this.onClick,
+    this.text,
+    this.image,
+    required this.dimens,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      splashColor: AppColors.transparentColor,
+      highlightColor: AppColors.transparentColor,
+      onTap: () {
+        print('logout button');
+        onClick();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            image!,
+            height: dimens.height24,
+          ),
+          Gap(
+            dimens.paddingVerticalItem8,
+          ),
+          Text(
+            text!,
+            style: dimens.pagesDeleteButtonSty,
+          ),
         ],
       ),
     );
@@ -643,8 +738,11 @@ class ToggleButtonWidget extends StatelessWidget {
       child: BlocBuilder<ToggleButtonCubit, bool>(
         builder: (context, isExpanded) {
           return IconButton(
+            splashColor: AppColors.transparentColor,
+            highlightColor: AppColors.transparentColor,
             icon: Icon(
-              isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+              Icons.keyboard_arrow_down,
+              // isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
             ),
             onPressed: () {
               context.read<ToggleButtonCubit>().toggle();
@@ -690,6 +788,158 @@ class PartnersButton extends StatelessWidget {
               text: text,
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+// ? PagesPushButton
+
+class PagesPushButton extends StatelessWidget {
+  Function onClick;
+  String text;
+  IconData? iconData;
+  bool isLoading;
+
+  PagesPushButton({
+    required this.onClick,
+    required this.text,
+    this.iconData,
+    this.isLoading = false,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return FilledButton(
+      style: FilledButton.styleFrom(
+        backgroundColor: AppColors.mainColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(dimens.radius16)),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.horizontalPadding,
+          vertical: dimens.verticalPadding,
+        ),
+      ),
+      onPressed: () => onClick(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(text, style: dimens.pagesButtonText),
+          Gap(dimens.paddingHorizontal13),
+          isLoading
+              ? SizedBox(
+                  height: dimens.height10,
+                  width: dimens.height10,
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                    strokeWidth: dimens.width10 / 5,
+                  ),
+                )
+              : SizedBox(),
+        ],
+      ),
+    );
+  }
+}
+
+// ? HomePage
+
+class HomePageButtons extends StatelessWidget {
+  late Dimens dimens;
+  Function onClick;
+  final IconData iconData;
+  String image;
+  String text;
+  HomePageButtons({
+    required this.iconData,
+    required this.image,
+    required this.text,
+    required this.onClick,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return InkWell(
+      onTap: () {
+        onClick();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Image.asset(
+            image,
+            // AppImage.warrantyHomeIcon,
+            height: dimens.height20,
+          ),
+          Text(
+            text,
+            // AppStrings.warrantyCode,
+            style: dimens.containerTextSty,
+          ),
+          Icon(
+            iconData,
+            // Icons.navigate_next_outlined,
+            color: AppColors.blackColor,
+            size: dimens.height20,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? HomePageMainButton
+
+class HomePageButtonMain extends StatelessWidget {
+  late Dimens dimens;
+  final String image;
+  final IconData iconData;
+  final String text;
+  Decoration decoration;
+  HomePageButtonMain({
+    required this.decoration,
+    required this.image,
+    required this.iconData,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Card(
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.paddingHorizontal16,
+        ),
+        height: dimens.height72,
+        width: dimens.screenWidth,
+        decoration: decoration,
+        // decoration: kaskoDecorationsCon(dimens),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              image,
+              // AppImage.kaskolHomeIcon,
+              height: dimens.height40,
+            ),
+            ButtonWidgets(
+              onClick: () {},
+              dimens: dimens,
+              text: text,
+              // text: AppStrings.kasko,
+              iconData: iconData,
+              // iconData: AppImage.arrowcirclerightIcon,
+            ),
+          ],
         ),
       ),
     );

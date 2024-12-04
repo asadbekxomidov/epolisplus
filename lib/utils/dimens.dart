@@ -124,6 +124,10 @@ class Dimens {
     return height10 * 0.8;
   }
 
+  double get paddingVerticalItem4 {
+    return height10 * 0.4;
+  }
+
   double get paddingVerticalItem10 {
     return height10 * 1.0;
   }
@@ -286,6 +290,10 @@ class Dimens {
     return 154 * screenHeight / 852;
   }
 
+  double get height208 {
+    return 208 * screenHeight / 852;
+  }
+
   double get height220 {
     return 220 * screenHeight / 852;
   }
@@ -444,6 +452,17 @@ class Dimens {
     );
   }
 
+  TextStyle get aboutpagesCardText {
+    return TextStyle(
+      fontSize: font14,
+      fontWeight: FontWeight.w400,
+      color: AppColors.blackPagesTextColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get logoutCardStyle {
     return TextStyle(
       color: AppColors.greyColor,
@@ -460,6 +479,61 @@ class Dimens {
       fontFamily: "GeistVF",
       color: AppColors.whiteColor,
       fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pagesTitleSty {
+    return TextStyle(
+      fontSize: font30,
+      fontFamily: "GeistVF",
+      color: AppColors.whiteColor,
+      fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pagesBlackTitleSty {
+    return TextStyle(
+      fontSize: font30,
+      fontFamily: "GeistVF",
+      color: AppColors.blackPagesTextColor,
+      fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pagesTextSty {
+    return TextStyle(
+      fontSize: font14,
+      fontFamily: "GeistVF",
+      color: AppColors.pagesTextSty,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pagesYourNameSty {
+    return TextStyle(
+      fontSize: font20,
+      fontFamily: "GeistVF",
+      color: AppColors.pagesTextSty,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pagesDeleteButtonSty {
+    return TextStyle(
+      fontSize: font16,
+      fontFamily: "GeistVF",
+      color: AppColors.blackPagesTextColor,
+      fontWeight: FontWeight.w400,
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,
     );
@@ -503,6 +577,16 @@ class Dimens {
       fontSize: font16,
       fontWeight: FontWeight.normal,
       color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get pagesButtonText {
+    return TextStyle(
+      fontSize: font16,
+      fontWeight: FontWeight.w600,
+      color: AppColors.whiteColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
     );

@@ -543,4 +543,61 @@ class AuthRepository extends AuthRepositoryIml {
       );
     }
   }
+
+  @override
+  Future<BaseModels<String>> partnersOferta() async {
+    var headers = {
+      'Content-Type': 'application/json',
+      "Content": "application/json",
+      'Accept-Language': "uz-UZ",
+      'Accept-Encoding': 'UTF-8',
+    };
+
+    var url = ApiConstanta.PARTNERS_OFERTA;
+    Response? response;
+
+    try {
+      response = await service.getGetData(headers, url);
+
+      if (response?.statusCode != 200) {
+        return BaseModels(
+          status: response?.statusCode,
+          message: response?.statusMessage,
+        );
+      } else {
+        // response?.data['response'] ning turini tekshiramiz
+        var ofertaContent = response?.data['response'];
+
+        if (ofertaContent is String) {
+          logger(ofertaContent, error: 'Ogerta Functions');
+          return BaseModels(
+            status: 200,
+            response: ofertaContent,
+            code: false,
+            message: response?.statusMessage,
+          );
+        } else if (ofertaContent is Map<String, dynamic>) {
+          // Agar qiymat Map bo‘lsa, uni JSON formatiga aylantiramiz
+          var jsonString = ofertaContent.toString();
+          return BaseModels(
+            status: 200,
+            response: jsonString,
+            code: false,
+            message: response?.statusMessage,
+          );
+        } else {
+          return BaseModels(
+            status: 500,
+            message: "Kutilmagan ma'lumot turi qaytdi",
+          );
+        }
+      }
+    } on Exception catch (e) {
+      return BaseModels(
+        status: 123,
+        code: false,
+        message: "Server vaqtincha ishlamayapti, qaytadan urinib ko'ring: $e",
+      );
+    }
+  }
 }

@@ -20,9 +20,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return BlocProvider<QuestionsBloc>( 
+    return BlocProvider<QuestionsBloc>(
       create: (context) =>
-          QuestionsBloc()..add(QuestionsGetEvent(title: '', summary: '')),
+          QuestionsBloc()..add(const QuestionsGetEvent(title: '', summary: '')),
       child: Scaffold(
         body: GreenImageBackground(
           child: Padding(
@@ -33,13 +33,15 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(dimens.paddingVerticalItem69),
-                LeftBackIconBtn(appColors: AppColors.whiteColor),
+                LeftBackIconBtn(
+                  appColors: AppColors.whiteColor,
+                ),
                 Gap(dimens.paddingVerticalItem10),
                 Text(
                   AppStrings.questionsText,
-                  style: Dimens(context).settingsStyle,
+                  style: dimens.settingsStyle,
                 ),
-                Gap(Dimens(context).paddingVerticalItem8),
+                // Gap(dimens.paddingVerticalItem8),
                 BlocConsumer<QuestionsBloc, QuestionsState>(
                   listener: (context, state) {},
                   builder: (context, state) {
@@ -64,55 +66,65 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                               create: (_) => ToggleButtonCubit(),
                               child: BlocBuilder<ToggleButtonCubit, bool>(
                                 builder: (context, isExpanded) {
-                                  return Card(
-                                    child: Container(
-                                      width: dimens.screenWidth,
-                                      decoration:
-                                          cardContainerDecoration(dimens),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(
-                                                    dimens.paddingHorizontal8,
-                                                  ),
-                                                  child: Text(
-                                                    question.title,
-                                                    style: dimens
-                                                        .questionsTitleSty,
+                                  return InkWell(
+                                    splashColor: AppColors.transparentColor,
+                                    highlightColor: AppColors.transparentColor,
+                                    onTap: () {
+                                      context
+                                          .read<ToggleButtonCubit>()
+                                          .toggle();
+                                    },
+                                    child: Card(
+                                      child: Container(
+                                        width: dimens.screenWidth,
+                                        decoration:
+                                            cardContainerDecoration(dimens),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding: EdgeInsets.all(
+                                                      dimens.paddingHorizontal8,
+                                                    ),
+                                                    child: Text(
+                                                      question.title,
+                                                      style: dimens
+                                                          .questionsTitleSty,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              ToggleButtonWidget(
-                                                onToggle: () {
-                                                  context
-                                                      .read<ToggleButtonCubit>()
-                                                      .toggle();
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                          if (isExpanded)
-                                            Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal:
-                                                    dimens.paddingHorizontal8,
-                                                vertical:
-                                                    dimens.paddingVerticalItem2,
-                                              ),
-                                              child: Text(
-                                                question.summary,
-                                                style:
-                                                    dimens.questionsSummarySty,
-                                              ),
+                                                ToggleButtonWidget(
+                                                  onToggle: () {
+                                                    context
+                                                        .read<
+                                                            ToggleButtonCubit>()
+                                                        .toggle();
+                                                  },
+                                                ),
+                                              ],
                                             ),
-                                        ],
+                                            if (isExpanded)
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      dimens.paddingHorizontal8,
+                                                  vertical: dimens
+                                                      .paddingVerticalItem2,
+                                                ),
+                                                child: Text(
+                                                  question.summary,
+                                                  style: dimens
+                                                      .questionsSummarySty,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   );

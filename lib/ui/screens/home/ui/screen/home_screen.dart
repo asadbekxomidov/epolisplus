@@ -27,16 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
           homeBloc = BlocProvider.of<HomeBloc>(context);
 
           return Scaffold(
-            // appBar: AppBar(
-            //   actions: [
-            //     IconButton(
-            //       onPressed: () {
-            //         homeBloc.add(DeleteAccountEvent());
-            //       },
-            //       icon: const Icon(Icons.delete),
-            //     ),
-            //   ],
-            // ),
             body: Bluebackground(
               child: Container(
                 padding: EdgeInsets.symmetric(
@@ -107,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Container(
                         height: dimens.height220,
                         width: dimens.screenWidth,
-                        decoration: homePageDecorations(dimens),
+                        decoration: cardContainerDecoration(dimens),
                       ),
                     ),
                     Gap(dimens.paddingVerticalItem16),
@@ -126,54 +116,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               width: dimens.screenWidth,
                               decoration: homepageButtonsDecoration(dimens),
                               child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  InkWell(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset(
-                                          AppImage.additional_services_icon,
-                                          height: dimens.height20,
-                                        ),
-                                        Text(
-                                          AppStrings.warrantyCode,
-                                          style: dimens.containerTextSty,
-                                        ),
-                                        Icon(
-                                          Icons.navigate_next_outlined,
-                                          color: AppColors.blackColor,
-                                          size: dimens.height20,
-                                        ),
-                                      ],
-                                    ),
+                                  HomePageButtons(
+                                    iconData: AppImage.navigatenextIcon,
+                                    image: AppImage.additional_services_icon,
+                                    text: AppStrings.warrantyCode,
+                                    onClick: () {},
                                   ),
                                   Text(
                                     AppStrings.pointText,
                                     style: dimens.pointStyle,
                                   ),
                                   Gap(dimens.height5),
-                                  // ? !
-                                  InkWell(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset(
-                                          AppImage.warrantyHomeIcon,
-                                          height: dimens.height20,
-                                        ),
-                                        Text(
-                                          AppStrings.warrantyCode,
-                                          style: dimens.containerTextSty,
-                                        ),
-                                        Icon(
-                                          Icons.navigate_next_outlined,
-                                          color: AppColors.blackColor,
-                                          size: dimens.height20,
-                                        ),
-                                      ],
-                                    ),
+                                  HomePageButtons(
+                                    iconData: AppImage.navigatenextIcon,
+                                    image: AppImage.warrantyHomeIcon,
+                                    text: AppStrings.warrantyCode,
+                                    onClick: () {},
                                   ),
                                 ],
                               ),
@@ -184,79 +145,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: dimens.insuranceProgramsSty,
                             ),
                             Gap(dimens.paddingVerticalItem16),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: dimens.paddingHorizontal16,
-                              ),
-                              height: dimens.height72,
-                              width: dimens.screenWidth,
+                            HomePageButtonMain(
                               decoration: kaskoDecorationsCon(dimens),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.asset(
-                                    AppImage.kaskolHomeIcon,
-                                    height: dimens.height40,
-                                  ),
-                                  ButtonWidgets(
-                                    onClick: () {},
-                                    dimens: dimens,
-                                    text: AppStrings.kasko,
-                                    iconData: AppImage.arrowcirclerightIcon,
-                                  ),
-                                ],
-                              ),
+                              iconData: AppImage.arrowcirclerightIcon,
+                              image: AppImage.kaskolHomeIcon,
+                              text: AppStrings.kasko,
                             ),
                             Gap(dimens.paddingVerticalItem8),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: dimens.paddingHorizontal16,
-                              ),
-                              height: dimens.height72,
-                              width: dimens.screenWidth,
+                            HomePageButtonMain(
                               decoration: osagoDecorationsCon(dimens),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.asset(
-                                    AppImage.osagoHomeIcon,
-                                    height: dimens.height40,
-                                  ),
-                                  ButtonWidgets(
-                                    onClick: () {},
-                                    dimens: dimens,
-                                    text: AppStrings.osago,
-                                    iconData: AppImage.arrowcirclerightIcon,
-                                  ),
-                                ],
-                              ),
+                              iconData: AppImage.arrowcirclerightIcon,
+                              image: AppImage.osagoHomeIcon,
+                              text: AppStrings.osago,
                             ),
                             Gap(dimens.paddingVerticalItem8),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: dimens.paddingHorizontal16,
-                              ),
-                              height: dimens.height72,
-                              width: dimens.screenWidth,
+                            HomePageButtonMain(
                               decoration: travelDecorationsCon(dimens),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Image.asset(
-                                    AppImage.travelHomeIcon,
-                                    height: dimens.height40,
-                                  ),
-                                  ButtonWidgets(
-                                    onClick: () {},
-                                    dimens: dimens,
-                                    text: AppStrings.travel,
-                                    iconData: AppImage.arrowcirclerightIcon,
-                                  ),
-                                ],
-                              ),
+                              iconData: AppImage.arrowcirclerightIcon,
+                              image: AppImage.travelHomeIcon,
+                              text: AppStrings.travel,
                             ),
                             Gap(dimens.paddingVerticalItem16),
                           ],

@@ -14,7 +14,7 @@ class Bluebackground extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          color: AppColors.whiteColor,
+          color: AppColors.backroundColorPages,
         ),
         Positioned(
           top: 0,

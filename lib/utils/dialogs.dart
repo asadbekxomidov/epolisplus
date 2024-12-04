@@ -58,58 +58,65 @@ class LanguageSelectionDialog extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(
-                  dimens.paddingHorizontal16,
-                ),
-                child: Card(
-                  child: Container(
-                    height: dimens.height154,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        dimens.radius16,
+          InkWell(
+            splashColor: AppColors.transparentColor,
+            highlightColor: AppColors.transparentColor,
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(
+                    dimens.paddingHorizontal16,
+                  ),
+                  child: Card(
+                    child: Container(
+                      height: dimens.height154,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          dimens.radius16,
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _LanguageOption(
-                          flag: "🇺🇿",
-                          language: "O'zbekcha",
-                          isSelected: false,
-                          onTap: () {
-                            Navigator.pop(context, 'uz');
-                          },
-                        ),
-                        lineContainer(dimens),
-                        _LanguageOption(
-                          flag: "🇷🇺",
-                          language: "Русский",
-                          isSelected: true,
-                          onTap: () {
-                            Navigator.pop(context, 'ru');
-                          },
-                        ),
-                        lineContainer(dimens),
-                        _LanguageOption(
-                          flag: "🇬🇧",
-                          language: "English",
-                          isSelected: false,
-                          onTap: () {
-                            Navigator.pop(context, 'en');
-                          },
-                        ),
-                      ],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _LanguageOption(
+                            flag: "🇺🇿",
+                            language: "O'zbekcha",
+                            isSelected: false,
+                            onTap: () {
+                              Navigator.pop(context, 'uz');
+                            },
+                          ),
+                          lineContainer(dimens),
+                          _LanguageOption(
+                            flag: "🇷🇺",
+                            language: "Русский",
+                            isSelected: true,
+                            onTap: () {
+                              Navigator.pop(context, 'ru');
+                            },
+                          ),
+                          lineContainer(dimens),
+                          _LanguageOption(
+                            flag: "🇬🇧",
+                            language: "English",
+                            isSelected: false,
+                            onTap: () {
+                              Navigator.pop(context, 'en');
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -146,21 +153,10 @@ class _LanguageOption extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-              width: dimens.height20,
-              height: dimens.width20,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.grey.shade300,
-                  width: 1,
-                ),
-                // image: DecorationImage(
-                //   image: AssetImage(
-                //     flag,
-                //   ),
-                // ),
-              ),
+            SizedBox(
+              // width: dimens.height20,
+              // height: dimens.width20,
+
               child: Center(
                 child: Text(
                   flag,
@@ -206,49 +202,56 @@ class HelpdeskSelectDialog extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(
-                  dimens.paddingHorizontal16,
-                ),
-                child: Card(
-                  child: Container(
-                    height: dimens.height105,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        dimens.radius16,
+          InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            splashColor: AppColors.transparentColor,
+            highlightColor: AppColors.transparentColor,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(
+                    dimens.paddingHorizontal16,
+                  ),
+                  child: Card(
+                    child: Container(
+                      height: dimens.height105,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          dimens.radius16,
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        HelpdeskOptions(
-                          image: AppImage.telegramIcon,
-                          text: AppStrings.telegramBot,
-                          icon: AppImage.navigatenextIcon,
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        lineContainer(dimens),
-                        HelpdeskOptions(
-                          image: AppImage.callOperatorIcon,
-                          text: AppStrings.calltheOperators,
-                          icon: AppImage.navigatenextIcon,
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          HelpdeskOptions(
+                            image: AppImage.telegramIcon,
+                            text: AppStrings.telegramBot,
+                            icon: AppImage.navigatenextIcon,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          lineContainer(dimens),
+                          HelpdeskOptions(
+                            image: AppImage.callOperatorIcon,
+                            text: AppStrings.calltheOperators,
+                            icon: AppImage.navigatenextIcon,
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -289,11 +292,6 @@ class HelpdeskOptions extends StatelessWidget {
               width: dimens.height20,
               height: dimens.width20,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.cardColor,
-                  width: dimens.height1,
-                ),
                 image: DecorationImage(
                   image: AssetImage(
                     image,

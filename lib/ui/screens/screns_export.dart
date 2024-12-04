@@ -49,9 +49,12 @@ export 'partners/ui/screen/partners_screen.dart';
 export 'partners/bloc/partners_bloc.dart';
 // ? oferta
 export 'oferta/screen/oferta_screen.dart';
+export 'oferta/screen/partners_oferta.dart';
 // ? questions
 export 'questionsanswers/ui/screen/questions_screen.dart';
 // ? aboutapp
 export 'about_app/screen/about_app_screen.dart';
 // ? bottomWidget
 export 'tabbar/ui/screen/bottom_navigation_view.dart';
+// ? bottomWidget
+export 'edit_profil/ui/screens/edit_profil_screen.dart';

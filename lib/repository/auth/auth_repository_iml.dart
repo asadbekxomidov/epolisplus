@@ -30,4 +30,6 @@ abstract class AuthRepositoryIml {
   Future<BaseModels> deleteAccount(String phone, String token);
 
   Future<BaseModels<String>> ofertaGet();
+
+  Future<BaseModels<String>> partnersOferta();
 }

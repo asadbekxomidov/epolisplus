@@ -6,3 +6,10 @@ abstract class KabinetEvent extends Equatable {
 }
 
 class KabinetGetEvent extends KabinetEvent {}
+
+class KabinetPushScreenEvent extends KabinetEvent {
+  final String userName;
+
+
+  KabinetPushScreenEvent(this.userName);
+}

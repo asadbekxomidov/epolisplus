@@ -80,6 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Gap(dimens.paddingVerticalItem27),
                 // Gap(dimens.paddingVerticalItem40),
                 UserNameWidget(
+                  titleText: AppStrings.yourname,
                   controller: bloc.fullNameController,
                   hintText: AppStrings.theName,
                   screenHeight: dimens.screenHeight,

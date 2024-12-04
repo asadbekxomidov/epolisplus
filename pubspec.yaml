@@ -85,6 +85,8 @@ flutter:
     - assets/images/settings/images/
     - assets/images/settings/icons/
     - assets/images/partners/images/
+    - assets/images/kabinet/images/
+    - assets/images/kabinet/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

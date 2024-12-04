@@ -124,4 +124,7 @@ class AppImage {
       'assets/images/partners/images/call_opertator_icon.png';
   static String partnersVebSaytcon =
       'assets/images/partners/images/veb_sayt_icon.png';
+  // ! kabinet
+  static String cabinetEditIcon = 'assets/images/kabinet/icons/edit_icon.png';
+  static String deleteEditIcon = 'assets/images/kabinet/icons/delete_icon.png';
 }

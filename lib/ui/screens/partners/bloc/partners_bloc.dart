@@ -20,6 +20,7 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
     on<PartnersGetEvent>(onPartnersGetEvent);
     on<PartnerPushWebEvent>(pushVeb);
     on<PartnerPushPhoneEvent>(pushPhone);
+    on<PartnerPushScreenEvent>(pushScreen);
   }
 
   Future<void> onPartnersGetEvent(
@@ -87,5 +88,10 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
     } catch (e) {
       emit(PartnersErrorState(PartnersPushWebErrorclass()));
     }
+  }
+
+  Future<void> pushScreen(
+      PartnerPushScreenEvent event, Emitter<PartnersState> emit) async {
+    Get.to(() => PartnersOferta());
   }
 }

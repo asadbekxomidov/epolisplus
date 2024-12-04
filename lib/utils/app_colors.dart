@@ -23,8 +23,11 @@ class AppColors {
 
   static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
+  static Color backroundColorPages = const Color.fromRGBO(248, 248, 248, 255);
+  static Color blackPagesTextColor = const Color.fromRGBO(10, 10, 10, 1);
   static Color greyColor = Colors.grey;
   static Color partnersButtonColor = const Color.fromRGBO(239, 239, 239, 1);
+  static Color pagesTextSty = const Color.fromRGBO(255, 255, 255, 1);
   static Color tabbarTextColor = const Color.fromRGBO(115, 115, 115, 1);
   static Color rightIconColors = Colors.grey.shade500;
   static Color rightIconColor = Color(0xA3A3A3);

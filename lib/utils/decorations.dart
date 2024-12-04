@@ -72,6 +72,7 @@ inputDecorations(Dimens dimens) {
 
 kaskoDecorationsCon(Dimens dimens) {
   return BoxDecoration(
+    color: AppColors.whiteColor,
     borderRadius: BorderRadius.circular(dimens.radius14),
     image: DecorationImage(
       image: AssetImage(AppImage.kaskoImage),
@@ -82,6 +83,7 @@ kaskoDecorationsCon(Dimens dimens) {
 
 osagoDecorationsCon(Dimens dimens) {
   return BoxDecoration(
+    color: AppColors.whiteColor,
     borderRadius: BorderRadius.circular(dimens.radius14),
     image: DecorationImage(
       image: AssetImage(AppImage.osagoImage),
@@ -92,6 +94,7 @@ osagoDecorationsCon(Dimens dimens) {
 
 travelDecorationsCon(Dimens dimens) {
   return BoxDecoration(
+    color: AppColors.whiteColor,
     borderRadius: BorderRadius.circular(dimens.radius14),
     image: DecorationImage(
       image: AssetImage(AppImage.travelImage),
@@ -123,7 +126,7 @@ homepageButtonsDecoration(Dimens dimens) {
     ),
     border: Border.all(
       color: AppColors.cardColor,
-      width: dimens.height2,
+      width: dimens.height1,
     ),
   );
 }

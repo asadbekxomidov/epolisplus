@@ -28,3 +28,5 @@ class PartnerPushPhoneEvent extends PartnersEvent {
 
   PartnerPushPhoneEvent(this.phone);
 }
+
+class PartnerPushScreenEvent extends PartnersEvent {}

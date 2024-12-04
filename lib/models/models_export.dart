@@ -13,3 +13,7 @@ export 'partners/partners_model/response/partners_response.dart';
 // ? question_answer
 
 export 'question_answer_model/question_answer_response.dart';
+// ? profil
+
+export 'profil/profil_response/carinforesponse/car_info_response.dart';
+export 'profil/profil_response/profil_response.dart';

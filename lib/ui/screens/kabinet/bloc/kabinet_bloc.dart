@@ -1,9 +1,46 @@
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/repository/profil/profil_repository.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/utils/sharedPreferencesManager.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 part 'kabinet_event.dart';
 part 'kabinet_state.dart';
 
 class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
-  KabinetBloc() : super(KabinetInitialState()) {}
+  KabinetBloc() : super(KabinetInitialState()) {
+    on<KabinetGetEvent>(userGetInformation);
+    on<KabinetPushScreenEvent>(editpushScreen);
+  }
+
+  Future<void> userGetInformation(
+      KabinetGetEvent event, Emitter<KabinetState> emit) async {
+    emit(KabinetLoadingState());
+
+    try {
+      final profilRepository = ProfilRepository();
+      final response = await profilRepository.getProfile();
+
+      if (response.status == 200 && response.response != null) {
+        emit(KabinetInformationGetState(profilResponse: response.response!));
+      } else if (response.status == 401) {
+        final prefsManager = SharedPreferencesManager();
+        await prefsManager.clearPassword();
+        await prefsManager.clearPhone();
+        await prefsManager.clearToken();
+        Get.offAll(() => CheckAuthScreen());
+      } else {
+        emit(KabinetErrorState(message: response.message ?? "Unknown error"));
+      }
+    } catch (e) {
+      emit(KabinetErrorState(message: e.toString()));
+    }
+  }
+
+  Future<void> editpushScreen(
+      KabinetPushScreenEvent event, Emitter<KabinetState> emit) async {
+    Get.to(() => EditProfilScreen(event.userName));
+  }
 }
