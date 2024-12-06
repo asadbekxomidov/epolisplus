@@ -1,3 +1,4 @@
+import 'package:epolisplus/services/api_constanta.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -88,11 +89,11 @@ class _PartnersScreenState extends State<PartnersScreen> {
                                   children: [
                                     partner.image.endsWith('.svg')
                                         ? SvgPicture.network(
-                                            partner.image,
+                                            "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
                                             height: dimens.height20,
                                           )
                                         : Image.network(
-                                            partner.image,
+                                      "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
                                             height: dimens.height20,
                                           ),
                                     Text(

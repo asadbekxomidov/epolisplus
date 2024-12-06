@@ -103,31 +103,18 @@ class EditProfilScreen extends StatefulWidget {
 
 class _EditProfilScreenState extends State<EditProfilScreen> {
   late Dimens dimens;
-  late TextEditingController userNameController;
-
-  @override
-  void initState() {
-    super.initState();
-    userNameController = TextEditingController(text: widget.userName);
-  }
-
-  @override
-  void dispose() {
-    userNameController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => EditProfilBloc(),
+      create: (context) => EditProfilBloc(widget.userName),
       child: BlocConsumer<EditProfilBloc, EditProfilState>(
         listener: (context, state) {
           if (state is EditProfileErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('')),
+              const SnackBar(content: Text('')),
             );
           }
         },
@@ -160,7 +147,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                         style: dimens.pagesBlackTitleSty,
                       ),
                       PagesTextFieldProfil(
-                        controller: userNameController,
+                        controller: editProfilBloc.userNameController,
                         titleText: AppStrings.name,
                         showStar: true,
                         screenHeight: dimens.screenHeight,
@@ -174,8 +161,7 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                       PagesPushButton(
                         isLoading: state is EditProfileLoadingState,
                         onClick: () {
-                          editProfilBloc.add(
-                              EditProfilUpdateEvent(userNameController.text));
+                          editProfilBloc.add(EditProfilUpdateEvent());
                         },
                         text: AppStrings.saveChanges,
                       ),

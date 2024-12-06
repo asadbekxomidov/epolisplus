@@ -17,6 +17,19 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
 
   Future<void> userGetInformation(
       KabinetGetEvent event, Emitter<KabinetState> emit) async {
+    await getData();
+  }
+
+  Future<void> editpushScreen(
+    KabinetPushScreenEvent event,
+    Emitter<KabinetState> emit,
+  ) async {
+    await Get.to(() => EditProfilScreen(event.userName));
+    await getData();
+  }
+
+  getData() async {
+    // ignore: invalid_use_of_visible_for_testing_member
     emit(KabinetLoadingState());
 
     try {
@@ -24,6 +37,7 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
       final response = await profilRepository.getProfile();
 
       if (response.status == 200 && response.response != null) {
+        // ignore: invalid_use_of_visible_for_testing_member
         emit(KabinetInformationGetState(profilResponse: response.response!));
       } else if (response.status == 401) {
         final prefsManager = SharedPreferencesManager();
@@ -32,15 +46,12 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
         await prefsManager.clearToken();
         Get.offAll(() => CheckAuthScreen());
       } else {
+        // ignore: invalid_use_of_visible_for_testing_member
         emit(KabinetErrorState(message: response.message ?? "Unknown error"));
       }
     } catch (e) {
+      // ignore: invalid_use_of_visible_for_testing_member
       emit(KabinetErrorState(message: e.toString()));
     }
-  }
-
-  Future<void> editpushScreen(
-      KabinetPushScreenEvent event, Emitter<KabinetState> emit) async {
-    Get.to(() => EditProfilScreen(event.userName));
   }
 }

@@ -1,21 +1,24 @@
 import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/repository/auth/auth_repository.dart';
-import 'package:epolisplus/utils/utils_export.dart';
-import 'package:get/get.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/repository/profil/profil_repository.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 part 'edit_profil_event.dart';
+
 part 'edit_profil_state.dart';
 
 class EditProfilBloc extends Bloc<EditProfilEvent, EditProfilState> {
   final SharedPreferencesManager _prefsManager = SharedPreferencesManager();
+  TextEditingController userNameController = TextEditingController();
 
-  EditProfilBloc() : super(EditProfileInitialState()) {
+  EditProfilBloc(String userName) : super(EditProfileInitialState()) {
+    userNameController.text = userName;
     on<EditProfilUpdateEvent>(_onEditUser);
-    on<EditProfilTextChangedEvent>(_onTextChanged);
     on<DeleteAccountEvent>(_ondeleteAccount);
   }
 
@@ -25,11 +28,13 @@ class EditProfilBloc extends Bloc<EditProfilEvent, EditProfilState> {
 
     try {
       final repository = ProfilRepository();
-      final response = await repository.updateProfil(event.userName);
+      final response =
+          await repository.updateProfil(userNameController.text.toString());
 
       if (response.status == 200) {
         // emit(EditProfileLoadingState());
-        Get.to(() => CabinetScreen());
+        Get.back();
+        return;
         // emit(EditProfileInitialState());
       } else {
         emit(EditProfileErrorState());
@@ -37,11 +42,6 @@ class EditProfilBloc extends Bloc<EditProfilEvent, EditProfilState> {
     } catch (e) {
       emit(EditProfileErrorState());
     }
-  }
-
-  void _onTextChanged(
-      EditProfilTextChangedEvent event, Emitter<EditProfilState> emit) {
-    emit(EditProfilTextChangedState(event.userName));
   }
 
   Future<void> _ondeleteAccount(
