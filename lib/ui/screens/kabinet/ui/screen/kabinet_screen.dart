@@ -1,9 +1,12 @@
-import 'package:gap/gap.dart';
+import 'package:epolisplus/models/profil/profil_response/profil_response.dart';
+import 'package:epolisplus/ui/screens/kabinet/bloc/kabinet_bloc.dart';
+import 'package:epolisplus/ui/widgets/buttons.dart';
 import 'package:epolisplus/ui/widgets/greenbackground.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:epolisplus/ui/screens/kabinet/bloc/kabinet_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:gap/gap.dart';
 
 class CabinetScreen extends StatefulWidget {
   @override
@@ -93,18 +96,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                           style: dimens.pagesYourNameSty,
                         ),
                         Gap(dimens.paddingVerticalItem16),
-                        Card(
-                          color: AppColors.cardContainerColor,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: dimens.paddingVerticalItem8,
-                              horizontal: dimens.paddingHorizontal4,
-                            ),
-                            height: dimens.height208,
-                            width: dimens.screenWidth,
-                            decoration: cardContainerDecoration(dimens),
-                          ),
-                        ),
+                        my_car_widget(profil),
                       ],
                     ),
                   ),
@@ -120,6 +112,71 @@ class _CabinetScreenState extends State<CabinetScreen> {
           }
         },
       ),
+    );
+  }
+
+  my_car_widget(ProfilResponse profil) {
+    return profil.carInfo.length == 0
+        ? GestureDetector(
+            onTap: () {
+              kabinetBloc.add(AddMyCarEvent());
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: dimens.height208,
+              width: dimens.screenWidth,
+              decoration: cardContainerDecoration(dimens),
+              child: Text(
+                "add my car",
+                style: dimens.textStyle,
+              ),
+            ),
+          )
+        : Column(
+            children: [
+              car_list(),
+              add_my_car_btn(),
+            ],
+          );
+  }
+
+  car_list() {
+    return Column(
+      children: [
+        Card(
+          color: AppColors.cardContainerColor,
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              vertical: dimens.paddingVerticalItem8,
+              horizontal: dimens.paddingHorizontal4,
+            ),
+            height: dimens.height208,
+            width: dimens.screenWidth,
+            decoration: cardContainerDecoration(dimens),
+          ),
+        ),
+        Card(
+          color: AppColors.cardContainerColor,
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              vertical: dimens.paddingVerticalItem8,
+              horizontal: dimens.paddingHorizontal4,
+            ),
+            height: dimens.height208,
+            width: dimens.screenWidth,
+            decoration: cardContainerDecoration(dimens),
+          ),
+        ),
+      ],
+    );
+  }
+
+  add_my_car_btn() {
+    return RegisterPushButton(
+      onClick: () {
+        kabinetBloc.add(AddMyCarEvent());
+      },
+      text: "add my car",
     );
   }
 }

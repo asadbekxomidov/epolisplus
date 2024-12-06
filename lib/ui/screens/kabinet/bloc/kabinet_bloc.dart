@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/profil/profil_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
@@ -13,17 +15,15 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
   KabinetBloc() : super(KabinetInitialState()) {
     on<KabinetGetEvent>(userGetInformation);
     on<KabinetPushScreenEvent>(editpushScreen);
+    on<AddMyCarEvent>(addCar);
   }
 
-  Future<void> userGetInformation(
-      KabinetGetEvent event, Emitter<KabinetState> emit) async {
+  Future<void> userGetInformation(KabinetGetEvent event, Emitter<KabinetState> emit) async {
     await getData();
   }
 
-  Future<void> editpushScreen(
-    KabinetPushScreenEvent event,
-    Emitter<KabinetState> emit,
-  ) async {
+  Future<void> editpushScreen(KabinetPushScreenEvent event,
+      Emitter<KabinetState> emit,) async {
     await Get.to(() => EditProfilScreen(event.userName));
     await getData();
   }
@@ -53,5 +53,10 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
       // ignore: invalid_use_of_visible_for_testing_member
       emit(KabinetErrorState(message: e.toString()));
     }
+  }
+
+  FutureOr<void> addCar(AddMyCarEvent event, Emitter<KabinetState> emit) async {
+    await Get.to(() => AddCarPage());
+    await getData();
   }
 }
