@@ -1,9 +1,9 @@
 import 'package:epolisplus/services/api_constanta.dart';
+import 'package:epolisplus/ui/screens/partners/bloc/partners_bloc.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:epolisplus/utils/utils_export.dart';
-import 'package:epolisplus/ui/screens/partners/bloc/partners_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
@@ -93,7 +93,7 @@ class _PartnersScreenState extends State<PartnersScreen> {
                                             height: dimens.height20,
                                           )
                                         : Image.network(
-                                      "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
+                                            "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
                                             height: dimens.height20,
                                           ),
                                     Text(
@@ -101,20 +101,7 @@ class _PartnersScreenState extends State<PartnersScreen> {
                                       style: dimens.partnersTextSty,
                                     ),
                                     Gap(dimens.paddingVerticalItem8),
-                                    MyPartnersRowWidget(
-                                      image: AppImage.partnersKaskoIcon,
-                                      text: AppStrings.kasko,
-                                    ),
-                                    Gap(dimens.paddingVerticalItem8),
-                                    MyPartnersRowWidget(
-                                      image: AppImage.partnersOsagoIcon,
-                                      text: AppStrings.osago,
-                                    ),
-                                    Gap(dimens.paddingVerticalItem8),
-                                    MyPartnersRowWidget(
-                                      image: AppImage.partnersTravelIcon,
-                                      text: AppStrings.travel,
-                                    ),
+                                    partner_product_list(),
                                     // Gap(dimens.paddingVerticalItem8),
                                     Text(
                                       AppStrings.pointText,
@@ -177,6 +164,27 @@ class _PartnersScreenState extends State<PartnersScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  partner_product_list() {
+    return Column(
+      children: [
+        MyPartnersRowWidget(
+          image: AppImage.partnersKaskoIcon,
+          text: AppStrings.kasko,
+        ),
+        Gap(dimens.paddingVerticalItem8),
+        MyPartnersRowWidget(
+          image: AppImage.partnersOsagoIcon,
+          text: AppStrings.osago,
+        ),
+        Gap(dimens.paddingVerticalItem8),
+        MyPartnersRowWidget(
+          image: AppImage.partnersTravelIcon,
+          text: AppStrings.travel,
+        ),
+      ],
     );
   }
 }
