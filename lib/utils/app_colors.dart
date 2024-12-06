@@ -23,8 +23,9 @@ class AppColors {
 
   static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
-  static Color backroundColorPages = const Color.fromRGBO(248, 248, 248, 255);
+  static Color backroundColorPages = const Color.fromRGBO(250, 250, 250, 1);
   static Color blackPagesTextColor = const Color.fromRGBO(10, 10, 10, 1);
+  static Color blackPagesTextColor2 = const Color.fromRGBO(10, 10, 10, 1);
   static Color greyColor = Colors.grey;
   static Color partnersButtonColor = const Color.fromRGBO(239, 239, 239, 1);
   static Color pagesTextSty = const Color.fromRGBO(255, 255, 255, 1);
