@@ -28,7 +28,7 @@ class EditProfilBloc extends Bloc<EditProfilEvent, EditProfilState> {
       final response = await repository.updateProfil(event.userName);
 
       if (response.status == 200) {
-        emit(EditProfileLoadingState());
+        // emit(EditProfileLoadingState());
         Get.to(() => CabinetScreen());
         // emit(EditProfileInitialState());
       } else {

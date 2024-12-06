@@ -1,6 +1,8 @@
+import 'package:epolisplus/utils/cubit/language_widget_cubit.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void showErrorMessageSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(
@@ -37,152 +39,6 @@ void showErrorMessageSnackBar(BuildContext context, String message) {
   );
 
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-}
-
-// ? LanguageDialog
-
-class LanguageSelectionDialog extends StatelessWidget {
-  late Dimens dimens;
-  LanguageSelectionDialog({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    dimens = Dimens(context);
-    return Dialog(
-      backgroundColor: AppColors.dialogsColor,
-      insetPadding: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          dimens.radius14,
-        ),
-      ),
-      child: Stack(
-        children: [
-          InkWell(
-            splashColor: AppColors.transparentColor,
-            highlightColor: AppColors.transparentColor,
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(
-                    dimens.paddingHorizontal16,
-                  ),
-                  child: Card(
-                    child: Container(
-                      height: dimens.height154,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          dimens.radius16,
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _LanguageOption(
-                            flag: "🇺🇿",
-                            language: "O'zbekcha",
-                            isSelected: false,
-                            onTap: () {
-                              Navigator.pop(context, 'uz');
-                            },
-                          ),
-                          lineContainer(dimens),
-                          _LanguageOption(
-                            flag: "🇷🇺",
-                            language: "Русский",
-                            isSelected: true,
-                            onTap: () {
-                              Navigator.pop(context, 'ru');
-                            },
-                          ),
-                          lineContainer(dimens),
-                          _LanguageOption(
-                            flag: "🇬🇧",
-                            language: "English",
-                            isSelected: false,
-                            onTap: () {
-                              Navigator.pop(context, 'en');
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _LanguageOption extends StatelessWidget {
-  late Dimens dimens;
-
-  final String flag;
-  final String language;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  _LanguageOption({
-    required this.flag,
-    required this.language,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    dimens = Dimens(context);
-
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: dimens.paddingHorizontal4,
-          vertical: dimens.paddingVerticalItem8,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              // width: dimens.height20,
-              // height: dimens.width20,
-
-              child: Center(
-                child: Text(
-                  flag,
-                  style: TextStyle(
-                    fontSize: dimens.font20,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(width: dimens.paddingHorizontal8),
-            Text(
-              language,
-              style: dimens.languageStyle,
-            ),
-            Spacer(),
-            if (isSelected)
-              Icon(
-                Icons.check,
-                color: AppColors.mainColor,
-                size: dimens.height20,
-              ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 // ? HelpdeskSelectDialog
@@ -279,6 +135,8 @@ class HelpdeskOptions extends StatelessWidget {
     dimens = Dimens(context);
 
     return InkWell(
+      splashColor: AppColors.transparentColor,
+      highlightColor: AppColors.transparentColor,
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -443,6 +301,154 @@ class SosDilogOPtions extends StatelessWidget {
               style: dimens.sosCardTextSty,
               textAlign: TextAlign.center,
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ? LanguageDialog
+
+class LanguageSelectionDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final dimens = Dimens(context);
+
+    return BlocProvider(
+      create: (context) => LanguageCubit(),
+      child: Dialog(
+        backgroundColor: AppColors.dialogsColor,
+        insetPadding: EdgeInsets.zero,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(dimens.radius14),
+        ),
+        child: BlocBuilder<LanguageCubit, String>(
+          builder: (context, selectedLanguage) {
+            return InkWell(
+              splashColor: AppColors.transparentColor,
+              highlightColor: AppColors.transparentColor,
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(dimens.paddingHorizontal16),
+                    child: Card(
+                      child: Container(
+                        height: dimens.height154,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(dimens.radius16),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _LanguageOption(
+                              flag: "🇺🇿",
+                              language: "O'zbekcha",
+                              isSelected: selectedLanguage == 'uz',
+                              onTap: () {
+                                context
+                                    .read<LanguageCubit>()
+                                    .selectLanguage('uz');
+                                Navigator.pop(context, 'uz');
+                              },
+                            ),
+                            lineContainer(dimens),
+                            _LanguageOption(
+                              flag: "🇷🇺",
+                              language: "Русский",
+                              isSelected: selectedLanguage == 'ru',
+                              onTap: () {
+                                context
+                                    .read<LanguageCubit>()
+                                    .selectLanguage('ru');
+                                Navigator.pop(context, 'ru');
+                              },
+                            ),
+                            lineContainer(dimens),
+                            _LanguageOption(
+                              flag: "🇬🇧",
+                              language: "English",
+                              isSelected: selectedLanguage == 'en',
+                              onTap: () {
+                                context
+                                    .read<LanguageCubit>()
+                                    .selectLanguage('en');
+                                Navigator.pop(context, 'en');
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _LanguageOption extends StatelessWidget {
+  late Dimens dimens;
+
+  final String flag;
+  final String language;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  _LanguageOption({
+    required this.flag,
+    required this.language,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return InkWell(
+      splashColor: AppColors.transparentColor,
+      highlightColor: AppColors.transparentColor,
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.paddingHorizontal4,
+          vertical: dimens.paddingVerticalItem8,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            SizedBox(
+              child: Center(
+                child: Text(
+                  flag,
+                  style: TextStyle(
+                    fontSize: dimens.font20,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: dimens.paddingHorizontal8),
+            Text(
+              language,
+              style: dimens.languageStyle,
+            ),
+            Spacer(),
+            if (isSelected)
+              Icon(
+                Icons.check,
+                color: AppColors.mainColor,
+                size: dimens.height20,
+              ),
           ],
         ),
       ),

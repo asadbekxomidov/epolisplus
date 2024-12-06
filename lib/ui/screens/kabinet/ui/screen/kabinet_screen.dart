@@ -32,8 +32,10 @@ class _CabinetScreenState extends State<CabinetScreen> {
           kabinetBloc = BlocProvider.of<KabinetBloc>(context);
 
           if (state is KabinetLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return GreenImageBackground(
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           } else if (state is KabinetInformationGetState) {
             final profil = state.profilResponse;
