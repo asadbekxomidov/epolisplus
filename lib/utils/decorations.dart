@@ -68,6 +68,26 @@ inputDecorations(Dimens dimens) {
   );
 }
 
+carNumberDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(
+      dimens.radius8,
+    ),
+    border: Border.all(
+      color: AppColors.carNumberLine,
+      width: dimens.width3,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
+  );
+}
+
 // Home screen
 
 kaskoDecorationsCon(Dimens dimens) {
@@ -139,5 +159,55 @@ partnersPageButtonDecorations(Dimens dimens) {
       color: AppColors.partnersButtonColor,
       width: dimens.width1,
     ),
+  );
+}
+
+carleftNumberDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.only(
+      bottomLeft: Radius.circular(
+        dimens.radius8,
+      ),
+      topLeft: Radius.circular(
+        dimens.radius8,
+      ),
+    ),
+    border: Border.all(
+      color: AppColors.carNumberLine,
+      width: dimens.width3,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
+  );
+}
+
+carrightNumberDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.only(
+      bottomRight: Radius.circular(
+        dimens.radius8,
+      ),
+      topRight: Radius.circular(
+        dimens.radius8,
+      ),
+    ),
+    border: Border.all(
+      color: AppColors.carNumberLine,
+      width: dimens.width3,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
   );
 }

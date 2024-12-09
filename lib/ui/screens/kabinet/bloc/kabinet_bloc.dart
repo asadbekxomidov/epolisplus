@@ -18,12 +18,15 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
     on<AddMyCarEvent>(addCar);
   }
 
-  Future<void> userGetInformation(KabinetGetEvent event, Emitter<KabinetState> emit) async {
+  Future<void> userGetInformation(
+      KabinetGetEvent event, Emitter<KabinetState> emit) async {
     await getData();
   }
 
-  Future<void> editpushScreen(KabinetPushScreenEvent event,
-      Emitter<KabinetState> emit,) async {
+  Future<void> editpushScreen(
+    KabinetPushScreenEvent event,
+    Emitter<KabinetState> emit,
+  ) async {
     await Get.to(() => EditProfilScreen(event.userName));
     await getData();
   }
@@ -56,7 +59,7 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
   }
 
   FutureOr<void> addCar(AddMyCarEvent event, Emitter<KabinetState> emit) async {
-    await Get.to(() => AddCarPage());
+    await Get.to(() => AddCarScreen());
     await getData();
   }
 }

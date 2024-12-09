@@ -58,3 +58,5 @@ export 'about_app/screen/about_app_screen.dart';
 export 'tabbar/ui/screen/bottom_navigation_view.dart';
 // ? bottomWidget
 export 'edit_profil/ui/screens/edit_profil_screen.dart';
+// ? add_car
+export 'add_car/ui/screen/add_car_screen.dart';

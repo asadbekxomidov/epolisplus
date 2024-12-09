@@ -8,6 +8,7 @@ class AppColors {
   static Color textColor = Color(0xFF000000);
   static Color hintColor = Color(0xFFA3A3A3);
   static Color lineColor = Color(0xFFEFEFEF);
+  static Color carNumberLine = Color.fromRGBO(10, 10, 10, 1);
   static Color textColorsSecondary = Color(0xFF737373);
   static Color neActiveColor = Color(0xFFF3F3F3);
 
