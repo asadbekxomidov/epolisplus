@@ -20,7 +20,21 @@ class SettingsDilogEvent extends SettingsEvent {
 class SettingsHelpDeskDilogEvent extends SettingsEvent {
   final BuildContext context;
 
-  SettingsHelpDeskDilogEvent(this.context);
+  SettingsHelpDeskDilogEvent(
+    this.context,
+  );
 }
 
 class SettingsAboutAppEvent extends SettingsEvent {}
+
+// class SettingsPushPhoneEvent extends SettingsEvent {
+//   final String phone;
+
+//   SettingsPushPhoneEvent(this.phone);
+// }
+
+// class SettingsPushTelegramEvent extends SettingsEvent {
+//   final String url;
+
+//   SettingsPushTelegramEvent(this.url);
+// }

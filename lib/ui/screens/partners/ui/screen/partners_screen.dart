@@ -118,7 +118,8 @@ class _PartnersScreenState extends State<PartnersScreen> {
                                           onclick: () {
                                             partnersBloc.add(
                                               PartnerPushPhoneEvent(
-                                                  partner.phone),
+                                                partner.phone,
+                                              ),
                                             );
                                           },
                                         ),

@@ -5,7 +5,7 @@ import 'package:epolisplus/ui/widgets/greenbackground.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
+// import 'package:flutter_html/flutter_html.dart';
 import 'package:gap/gap.dart';
 
 class CabinetScreen extends StatefulWidget {
@@ -64,7 +64,8 @@ class _CabinetScreenState extends State<CabinetScreen> {
                             InkWell(
                               onTap: () {
                                 kabinetBloc.add(
-                                    KabinetPushScreenEvent(profil.fullName));
+                                  KabinetPushScreenEvent(profil.fullName),
+                                );
                               },
                               splashColor: AppColors.transparentColor,
                               highlightColor: AppColors.transparentColor,
@@ -122,15 +123,33 @@ class _CabinetScreenState extends State<CabinetScreen> {
               kabinetBloc.add(AddMyCarEvent());
             },
             child: Container(
-              alignment: Alignment.center,
-              height: dimens.height208,
-              width: dimens.screenWidth,
-              decoration: cardContainerDecoration(dimens),
-              child: Text(
-                "add my car",
-                style: dimens.textStyle,
-              ),
-            ),
+                padding: EdgeInsets.all(
+                  dimens.paddingVerticalItem36,
+                ),
+                height: dimens.height208,
+                width: dimens.screenWidth,
+                decoration: cardContainerDecoration(dimens),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      AppImage.carNotIcon,
+                      height: dimens.height58,
+                    ),
+                    Gap(dimens.paddingVerticalItem4),
+                    Text(
+                      AppStrings.savedCarsText,
+                      style: dimens.pagesCardTextSty,
+                    ),
+                    Gap(dimens.paddingVerticalItem12),
+                    PagesRowButtons(
+                      image: AppImage.addIcon,
+                      text: AppStrings.addCarButtonText,
+                      onClick: () {
+                        kabinetBloc.add(AddMyCarEvent());
+                      },
+                    ),
+                  ],
+                )),
           )
         : Column(
             children: [

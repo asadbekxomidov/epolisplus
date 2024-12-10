@@ -26,6 +26,7 @@ class AppStrings {
   static const String personalData = "Персональных данных";
   static const String back = "Назад";
   static const String closeText = "Отмена";
+  static const String closeZText = "Закрыть";
   static const String verification = "Верификация";
   static const String phoneNumbercode =
       "Введите код отправленный на ваш номер телефона";
@@ -125,4 +126,13 @@ class AppStrings {
   // ? Add Car
   static const String stateNumber = "Гос номер";
   static const String addCatText = "Добавить авто";
+  static const String savedCarsText = "У вас нет сохраненных автомобилей.";
+  static const String addCarButtonText = "Добавить автомобиль";
+  static const String technicalPassportText = "Серия и номер тех. паспорта";
+  static const String certificateNumberText = "Откуда взять номер техпаспорта?";
+  static const String addcaraff = "AAF";
+  static const String addcar00 = "0000000";
+  static const String loadDataText = "Загрузить данные";
+  static const String registrationCarcertificate = "Номер и серия\nтех. паспорта авто";
+  static const String registrationCarcertificateText = "Номер и серия тех. паспорта авто находится на тыльной стороне справа в углу, как показано ниже на картинке.";
 }

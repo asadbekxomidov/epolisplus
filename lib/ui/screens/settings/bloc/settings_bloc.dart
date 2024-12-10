@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
@@ -16,8 +17,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<SettingsPushScreenEvent>(onPushScreen);
     on<SettingsQuestionscreenEvent>(onPushQuestion);
     on<SettingsDilogEvent>(onSelectLanguageShowDilog);
-    on<SettingsHelpDeskDilogEvent>(onSelectShowDilog);
+    on<SettingsHelpDeskDilogEvent>(onSelectShowDialog);
     on<SettingsAboutAppEvent>(onPushAboutAppScreen);
+    // on<SettingsPushPhoneEvent>(onpushPhone);
+    // on<SettingsPushTelegramEvent>(onpushtelegramBot);
   }
 
   Future<void> logout(LogoutEvent event, Emitter<SettingsState> emit) async {
@@ -72,21 +75,53 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
   }
 
-  void onSelectShowDilog(
+  Future<void> onSelectShowDialog(
       SettingsHelpDeskDilogEvent event, Emitter<SettingsState> emit) async {
     emit(SettingsLoadingState());
+    try {
+      const String phone = '+998558081515'; // Telefon raqam
+      const String url = 'https://t.me/epolisplus_bot'; // Telegram bot URL
 
-    final selectedLanguage = await showDialog<String>(
+      // Telefon raqamiga o'tish
+      final Uri phoneUri = Uri.parse('tel:$phone');
+      bool phoneLaunched = await launchUrl(phoneUri);
+      if (!phoneLaunched) {
+        emit(SettingsErrorState('Telefon raqamga o\'ta olmadi.'));
+        return;
+      }
+
+      // Telegram botga o'tish
+      final Uri telegramUri = Uri.parse(url);
+      bool telegramLaunched = await launchUrl(telegramUri);
+      if (!telegramLaunched) {
+        emit(SettingsErrorState('Telegram botga o\'ta olmadi.'));
+        return;
+      }
+    } catch (e) {
+      emit(SettingsErrorState('Xatolik yuz berdi: $e'));
+      return;
+    }
+
+    final selectedOption = await showDialog<String>(
       context: event.context,
       builder: (BuildContext context) {
-        return HelpdeskSelectDialog();
+        return HelpdeskSelectDialog(
+          onPhoneClick: () async {
+            final Uri phoneUri = Uri.parse('tel:+998558081515');
+            await launchUrl(phoneUri);
+          },
+          onTelegramClick: () async {
+            final Uri telegramUri = Uri.parse('https://t.me/epolisplus_bot');
+            await launchUrl(telegramUri);
+          },
+        );
       },
     );
 
-    if (selectedLanguage != null) {
+    if (selectedOption != null) {
       emit(SettingsSuccesState());
     } else {
-      emit(SettingsErrorState(''));
+      emit(SettingsErrorState('Hech narsa tanlanmadi.'));
     }
   }
 }

@@ -26,9 +26,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
         BlocProvider(
           create: (context) => NotificationBloc(),
         ),
-        BlocProvider(
-          create: (context) => SettingsBloc(),
-        ),
+        // BlocProvider(
+        //   create: (context) => SettingsBloc(),
+        // ),
       ],
       child: Scaffold(
         body: GreenImageBackground(

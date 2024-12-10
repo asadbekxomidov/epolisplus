@@ -6,8 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
-
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
@@ -81,8 +79,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               lineContainer(dimens),
                               SettingFuncButton(
                                 onClick: () {
-                                  settingsBloc
-                                      .add(SettingsHelpDeskDilogEvent(context));
+                                  settingsBloc.add(SettingsHelpDeskDilogEvent(
+                                    context,
+
+                                    
+                                  ));
                                 },
                                 dimens: dimens,
                                 image: AppImage.helpdeskSettingIcon,

@@ -96,6 +96,10 @@ class Dimens {
     return 32 * screenHeight / 852;
   }
 
+  double get paddingVerticalItem36 {
+    return 36 * screenHeight / 852;
+  }
+
   double get paddingVerticalItem16 {
     return height10 * 1.6;
   }
@@ -242,6 +246,10 @@ class Dimens {
     return 48 * screenHeight / 852;
   }
 
+  double get height58 {
+    return 58 * screenHeight / 852;
+  }
+
   double get height60 {
     return 60 * screenHeight / 852;
   }
@@ -300,6 +308,10 @@ class Dimens {
 
   double get height220 {
     return 220 * screenHeight / 852;
+  }
+
+  double get height227 {
+    return 227.51 * screenHeight / 852;
   }
 
   double get height252 {
@@ -374,8 +386,16 @@ class Dimens {
     return 220 * screenWidth / 392;
   }
 
+  double get width202 {
+    return 202 * screenWidth / 392;
+  }
+
   double get width284 {
     return 284 * screenWidth / 392;
+  }
+
+  double get width289 {
+    return 289 * screenWidth / 392;
   }
 
   double get radius8 {
@@ -530,11 +550,33 @@ class Dimens {
     );
   }
 
+  TextStyle get pagesBlackTitleStymin {
+    return TextStyle(
+      fontSize: font16,
+      fontFamily: "GeistVF",
+      color: AppColors.blackPagesTextColor,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get pagesTextSty {
     return TextStyle(
       fontSize: font14,
       fontFamily: "GeistVF",
       color: AppColors.pagesTextSty,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pagesCardTextSty {
+    return TextStyle(
+      fontSize: font14,
+      fontFamily: "GeistVF",
+      color: AppColors.pagesCardGreySty,
       fontWeight: FontWeight.w400,
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,

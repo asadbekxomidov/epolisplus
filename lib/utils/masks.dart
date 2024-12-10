@@ -7,4 +7,15 @@ class Masked {
   );
 
   static const hintPhoneNumber = "(90) 000-00-00";
+
+  static final carNumberMask = MaskTextInputFormatter(
+    mask: '',
+    filter: {
+      "0": RegExp(r'[0-9]'),
+      "A": RegExp(r'[A-Za-z]') 
+    },
+  );
+
+  static const String carHintNumber = "01 A 001 AA";
+  static const String carHintNumber2 = "01 001 AAA";
 }

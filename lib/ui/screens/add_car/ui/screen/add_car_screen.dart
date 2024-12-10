@@ -1,4 +1,5 @@
 import 'package:epolisplus/ui/screens/add_car/bloc/my_car_bloc.dart';
+import 'package:epolisplus/ui/screens/add_car/ui/screen/add_car_less_widget.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class AddCarScreen extends StatefulWidget {
-  const AddCarScreen({super.key});
+  TextEditingController carNumber = TextEditingController();
+  AddCarScreen({super.key});
 
   @override
   State<AddCarScreen> createState() => _AddCarScreenState();
@@ -22,7 +24,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => MyCarBloc(),
+      create: (context) => MyCarBloc(carNumber: widget.carNumber),
       child: BlocConsumer<MyCarBloc, MyCarState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -46,11 +48,15 @@ class _AddCarScreenState extends State<AddCarScreen> {
                     AppStrings.addCatText,
                     style: dimens.pagesBlackTitleSty,
                   ),
-                  AddCarTextfield(
-                    showStar: true,
-                    titleText: AppStrings.stateNumber,
-                    screenHeight: dimens.screenHeight,
-                    screenWidth: dimens.screenWidth,
+                  Gap(dimens.paddingVerticalItem16),
+                  AddCarLessWidget(),
+                  Gap(dimens.paddingVerticalItem16),
+                  LoadDataButtons(
+                    color: AppColors.lightGreenColor,
+                    isLoading: bool.fromEnvironment('name'),
+                    text: AppStrings.loadDataText,
+                    onClick: () {},
+                    iconData: AppImage.searchIcon,
                   ),
                 ],
               ),

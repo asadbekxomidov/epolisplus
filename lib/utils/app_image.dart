@@ -124,7 +124,13 @@ class AppImage {
       'assets/images/partners/images/call_opertator_icon.png';
   static String partnersVebSaytcon =
       'assets/images/partners/images/veb_sayt_icon.png';
+
   // ! kabinet
   static String cabinetEditIcon = 'assets/images/kabinet/icons/edit_icon.png';
   static String deleteEditIcon = 'assets/images/kabinet/icons/delete_icon.png';
+  static String carNotIcon = 'assets/images/kabinet/icons/car_not_icon.png';
+  static String addIcon = 'assets/images/kabinet/icons/add_icon.png';
+  static String searchIcon = 'assets/images/search_icon.png';
+  static String creditCardIcon = 'assets/images/card_icon.png';
+  static String paswordCardImage = 'assets/images/password_card_image.png';
 }

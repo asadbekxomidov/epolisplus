@@ -1,10 +1,11 @@
 import 'package:epolisplus/ui/widgets/bloc/timer_bloc/timer_bloc.dart';
-import 'package:epolisplus/ui/widgets/button/cubit/toggle_cubit.dart';
+// import 'package:epolisplus/ui/widgets/button/cubit/toggle_cubit.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+// import 'package:json_serializable/type_helper.dart';
 
 // ? Button Navigatsiya
 
@@ -140,6 +141,7 @@ class ButtonPagesBtn extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
+        // onClick!();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -156,6 +158,56 @@ class ButtonPagesBtn extends StatelessWidget {
             // AppStrings.back,
             style: TextStyle(
               fontSize: dimens.height16,
+              color: appColors,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? ButtonPages
+
+class ButtonPagesMin extends StatelessWidget {
+  Function? onClick;
+  String? text;
+  IconData? iconData;
+  Color? appColors;
+
+  ButtonPagesMin({
+    this.onClick,
+    this.text,
+    this.iconData,
+    this.appColors,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () {
+        // Navigator.pop(context);
+        onClick!();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            iconData,
+            // AppImage.arrow_circle_left_outlined,
+            color: appColors,
+            size: dimens.height16,
+          ),
+          Gap(dimens.width5),
+          Text(
+            text!,
+            style: TextStyle(
+              fontSize: dimens.font14,
               color: appColors,
               fontWeight: FontWeight.w400,
             ),
@@ -941,6 +993,105 @@ class HomePageButtonMain extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ? PagesRowButtons
+
+class PagesRowButtons extends StatelessWidget {
+  final String? text;
+  final String? image;
+  final Function onClick;
+
+  PagesRowButtons({
+    this.text,
+    this.image,
+    required this.onClick,
+  });
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () => onClick(),
+      child: Container(
+        height: dimens.height40,
+        width: dimens.width202,
+        decoration: partnersPageButtonDecorations(dimens),
+        child: MyRowWidget(
+          image: image!,
+          text: text!,
+        ),
+      ),
+    );
+  }
+}
+
+// ? LoadDataButtons
+
+class LoadDataButtons extends StatelessWidget {
+  final Function onClick;
+  late Dimens dimens;
+  String text;
+  String? iconData;
+  bool isLoading;
+  Color color;
+
+  LoadDataButtons({
+    required this.isLoading,
+    required this.color,
+    required this.text,
+    required this.onClick,
+    this.iconData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      height: dimens.height40,
+      width: dimens.screenWidth,
+      decoration: BoxDecoration(
+        color: color,
+        border: Border.all(
+          color: AppColors.lightGreenborderColor,
+          // color: AppColors.mainColor,
+          width: dimens.width1,
+        ),
+        borderRadius: BorderRadius.circular(
+          dimens.radius12,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            iconData!,
+            height: dimens.height20,
+          ),
+          Gap(dimens.paddingHorizontal13),
+          Text(
+            text,
+            style: dimens.textStyle.copyWith(
+              color: AppColors.mainColor,
+            ),
+          ),
+          // isLoading
+          //     ? SizedBox(
+          //         height: dimens.height10,
+          //         width: dimens.height10,
+          //         child: CircularProgressIndicator(
+          //           color: Colors.red,
+          //           strokeWidth: dimens.width10 / 5,
+          //         ),
+          //       )
+          //     : SizedBox(),
+        ],
       ),
     );
   }

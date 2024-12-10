@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static Color mainColor = Color(0xFF00A070);
+  static Color lightGreenColor = Color.fromRGBO(240, 249, 246, 1);
+  static Color lightGreenborderColor = Color.fromRGBO(214, 240, 232, 1);
   static Color textGrenn = Color.fromRGBO(0, 160, 112, 1);
   static Color homeColors = Color(0xFFAFAFA);
   static Color titleColor = Color(0xFF000000);
@@ -30,6 +32,7 @@ class AppColors {
   static Color greyColor = Colors.grey;
   static Color partnersButtonColor = const Color.fromRGBO(239, 239, 239, 1);
   static Color pagesTextSty = const Color.fromRGBO(255, 255, 255, 1);
+  static Color pagesCardGreySty = const Color.fromRGBO(163, 163, 163, 1);
   static Color tabbarTextColor = const Color.fromRGBO(115, 115, 115, 1);
   static Color rightIconColors = Colors.grey.shade500;
   static Color rightIconColor = Color(0xA3A3A3);

@@ -60,3 +60,4 @@ export 'tabbar/ui/screen/bottom_navigation_view.dart';
 export 'edit_profil/ui/screens/edit_profil_screen.dart';
 // ? add_car
 export 'add_car/ui/screen/add_car_screen.dart';
+export 'add_car/ui/screen/registercertnumber_screen.dart';

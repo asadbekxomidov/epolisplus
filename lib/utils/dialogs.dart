@@ -44,6 +44,13 @@ void showErrorMessageSnackBar(BuildContext context, String message) {
 // ? HelpdeskSelectDialog
 
 class HelpdeskSelectDialog extends StatelessWidget {
+  Function onTelegramClick;
+  Function onPhoneClick;
+
+  HelpdeskSelectDialog({
+    required this.onPhoneClick,
+    required this.onTelegramClick,
+  });
   late Dimens dimens;
   @override
   Widget build(BuildContext context) {
@@ -89,7 +96,7 @@ class HelpdeskSelectDialog extends StatelessWidget {
                             text: AppStrings.telegramBot,
                             icon: AppImage.navigatenextIcon,
                             onTap: () {
-                              Navigator.pop(context);
+                              onTelegramClick();
                             },
                           ),
                           lineContainer(dimens),
@@ -98,7 +105,7 @@ class HelpdeskSelectDialog extends StatelessWidget {
                             text: AppStrings.calltheOperators,
                             icon: AppImage.navigatenextIcon,
                             onTap: () {
-                              Navigator.pop(context);
+                              onPhoneClick();
                             },
                           ),
                         ],
