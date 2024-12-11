@@ -45,6 +45,49 @@ class AddCarLessWidget extends StatelessWidget {
                 },
                 text: AppStrings.certificateNumberText,
               ),
+              Gap(dimens.paddingVerticalItem12),
+              Text(
+                AppStrings.carOwnerText,
+                style: dimens.textStyleSecondary,
+              ),
+              MyContainerWidget(
+                text: "Asadbek Xomidov",
+              ),
+              Gap(dimens.paddingVerticalItem14),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppStrings.carBrandText,
+                        style: dimens.textStyleSecondary,
+                      ),
+                      MyContainerRowWidget(
+                        text: "Spark",
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppStrings.yearofManufactureText,
+                        style: dimens.textStyleSecondary,
+                      ),
+                      MyContainerRowWidget(
+                        text: "2020",
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Gap(dimens.paddingVerticalItem14),
+              RegisterPushButton(
+                onClick: () {},
+                text: AppStrings.addCarButtonText,
+              ),
             ],
           );
         },

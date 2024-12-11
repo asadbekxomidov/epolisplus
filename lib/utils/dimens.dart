@@ -140,6 +140,14 @@ class Dimens {
     return height10 * 1.2;
   }
 
+  double get paddingVerticalItem13 {
+    return height10 * 1.3;
+  }
+
+  double get paddingVerticalItem14 {
+    return height10 * 1.4;
+  }
+
   double get paddingHorizontalItem {
     return screenWidth * 0.13;
   }
@@ -376,6 +384,10 @@ class Dimens {
 
   double get width156 {
     return 156 * screenWidth / 392;
+  }
+
+  double get width172 {
+    return 172 * screenWidth / 392;
   }
 
   double get width176 {

@@ -65,3 +65,71 @@ class MyPartnersRowWidget extends StatelessWidget {
     );
   }
 }
+
+// ? MyContainer
+
+class MyContainerWidget extends StatelessWidget {
+  String text;
+
+  MyContainerWidget({
+    required this.text,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      // width: dimens.screenWidth,
+      height: dimens.height40,
+      padding: EdgeInsets.only(
+        left: dimens.paddingHorizontal13,
+      ),
+      decoration: myContainerGreyDEcoration(dimens),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Text(
+            text,
+            style: dimens.hintStyle,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyContainerRowWidget extends StatelessWidget {
+  String text;
+
+  MyContainerRowWidget({
+    required this.text,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      width: dimens.width172,
+      height: dimens.height40,
+      padding: EdgeInsets.only(
+        left: dimens.paddingHorizontal13,
+      ),
+      decoration: myContainerGreyDEcoration(dimens),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Text(
+            text,
+            style: dimens.hintStyle,
+          ),
+        ],
+      ),
+    );
+  }
+}

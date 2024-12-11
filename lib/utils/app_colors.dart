@@ -52,4 +52,7 @@ class AppColors {
   static Color sosTelegramCardColor = Color.fromRGBO(36, 161, 222, 1);
   static Color partnersCardColor = Color.fromRGBO(255, 255, 255, 1);
   // static Color sosCallCardColor = Color.fromRGBO(215, 47, 83, 255);
+  static Color myContainerGreyBorderColor = Color.fromRGBO(221, 221, 221, 1);
+  static Color myContainerGreyBackgroundColor =
+      Color.fromRGBO(250, 250, 250, 1);
 }

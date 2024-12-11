@@ -1,3 +1,4 @@
+import 'package:epolisplus/models/partners/partners_model/response/product_list.dart';
 import 'package:epolisplus/services/api_constanta.dart';
 import 'package:epolisplus/ui/screens/partners/bloc/partners_bloc.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
@@ -101,7 +102,8 @@ class _PartnersScreenState extends State<PartnersScreen> {
                                       style: dimens.partnersTextSty,
                                     ),
                                     Gap(dimens.paddingVerticalItem8),
-                                    partner_product_list(),
+                                    // partner_product_list(),
+                                    partnerProductList(partner.productList),
                                     // Gap(dimens.paddingVerticalItem8),
                                     Text(
                                       AppStrings.pointText,
@@ -156,10 +158,8 @@ class _PartnersScreenState extends State<PartnersScreen> {
                   ),
                 );
               }
-              return const Center(
-                child: Text(
-                  'No partners found.',
-                ),
+              return GreenImageBackground(
+                child: Container(),
               );
             },
           ),
@@ -168,24 +168,56 @@ class _PartnersScreenState extends State<PartnersScreen> {
     );
   }
 
-  partner_product_list() {
+  Widget partnerProductList(List<Product>? productList) {
+    if (productList == null || productList.isEmpty) {
+      return const SizedBox();
+    }
+
     return Column(
-      children: [
-        MyPartnersRowWidget(
-          image: AppImage.partnersKaskoIcon,
-          text: AppStrings.kasko,
-        ),
-        Gap(dimens.paddingVerticalItem8),
-        MyPartnersRowWidget(
-          image: AppImage.partnersOsagoIcon,
-          text: AppStrings.osago,
-        ),
-        Gap(dimens.paddingVerticalItem8),
-        MyPartnersRowWidget(
-          image: AppImage.partnersTravelIcon,
-          text: AppStrings.travel,
-        ),
-      ],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: productList.map((product) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            product.icon.endsWith('.svg')
+                ? SvgPicture.network(
+                    "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${product.icon}",
+                    height: dimens.height20,
+                  )
+                : Image.network(
+                    "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${product.icon}",
+                    height: dimens.height20,
+                  ),
+            Gap(dimens.paddingVerticalItem8),
+            Text(
+              product.name,
+              style: dimens.partnersTextSty,
+            ),
+            // Gap(dimens.paddingVerticalItem8),
+          ],
+        );
+      }).toList(),
     );
   }
+
+  // partner_product_list() {
+  //   return Column(
+  //     children: [
+  //       MyPartnersRowWidget(
+  //         image: AppImage.partnersKaskoIcon,
+  //         text: AppStrings.kasko,
+  //       ),
+  //       Gap(dimens.paddingVerticalItem8),
+  //       MyPartnersRowWidget(
+  //         image: AppImage.partnersOsagoIcon,
+  //         text: AppStrings.osago,
+  //       ),
+  //       Gap(dimens.paddingVerticalItem8),
+  //       MyPartnersRowWidget(
+  //         image: AppImage.partnersTravelIcon,
+  //         text: AppStrings.travel,
+  //       ),
+  //     ],
+  //   );
+  // }
 }

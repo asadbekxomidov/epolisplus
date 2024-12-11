@@ -135,4 +135,8 @@ class AppStrings {
   static const String loadDataText = "Загрузить данные";
   static const String registrationCarcertificate = "Номер и серия\nтех. паспорта авто";
   static const String registrationCarcertificateText = "Номер и серия тех. паспорта авто находится на тыльной стороне справа в углу, как показано ниже на картинке.";
+  static const String carOwnerText = "Владелец автомобиля";
+  static const String carBrandText = "Марка автомобилия";
+  static const String yearofManufactureText = "Год выпуска";
+  // static const String addCarButtonText = "Добавить автомобиль";
 }

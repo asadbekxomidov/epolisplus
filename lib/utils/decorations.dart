@@ -68,6 +68,24 @@ inputDecorations(Dimens dimens) {
   );
 }
 
+myContainerGreyDEcoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.myContainerGreyBackgroundColor,
+    borderRadius: BorderRadius.circular(dimens.radius16),
+    border: Border.all(
+      color: AppColors.myContainerGreyBorderColor,
+      width: dimens.width1,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
+  );
+}
+
 carNumberDecorations(Dimens dimens) {
   return BoxDecoration(
     color: AppColors.whiteColor,
