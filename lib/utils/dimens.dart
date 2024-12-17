@@ -342,6 +342,10 @@ class Dimens {
     return 1 * screenWidth / 392;
   }
 
+  double get width2 {
+    return 2 * screenWidth / 392;
+  }
+
   double get width3 {
     return 3 * screenWidth / 392;
   }
@@ -460,6 +464,14 @@ class Dimens {
 
   double get font30 {
     return height10 * 3;
+  }
+
+  double get font35 {
+    return height10 * 3.5;
+  }
+
+  double get font40 {
+    return height10 * 4;
   }
 
   double get starlite {
@@ -660,6 +672,16 @@ class Dimens {
     );
   }
 
+  TextStyle get cardUzFlagSty {
+    return TextStyle(
+      fontSize: font10,
+      fontWeight: FontWeight.normal,
+      color: AppColors.textColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
   TextStyle get pagesButtonText {
     return TextStyle(
       fontSize: font16,
@@ -789,10 +811,33 @@ class Dimens {
     );
   }
 
+  TextStyle get carTextfieldCursorSty {
+    return TextStyle(
+      fontSize: font40,
+      fontWeight: FontWeight.normal,
+      color: AppColors.blackColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get hintStyle {
     return TextStyle(
       fontSize: font16,
       fontWeight: FontWeight.normal,
+      color: AppColors.hintColor,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get carNumberTextFieldSty {
+    return TextStyle(
+      fontSize: font40,
+      fontWeight: FontWeight.w400,
+      // color: AppColors.hintTextFieldColor,
       color: AppColors.hintColor,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,

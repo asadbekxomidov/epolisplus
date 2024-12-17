@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class AddCarLessWidget extends StatelessWidget {
-  TextEditingController myCarNumber = TextEditingController();
   late Dimens dimens;
   late MyCarBloc myCarBloc;
 
@@ -15,27 +14,35 @@ class AddCarLessWidget extends StatelessWidget {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => MyCarBloc(carNumber: myCarNumber),
+      create: (context) => MyCarBloc(),
       child: BlocConsumer<MyCarBloc, MyCarState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is CarErrorState) {
+            showErrorMessageSnackBar(
+              context,
+              state.error,
+            );
+          }
+        },
         builder: (context, state) {
           myCarBloc = BlocProvider.of<MyCarBloc>(context);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AddCarTextfield(
-                controller: TextEditingController(),
-                // controller: myCarBloc.carNumber,
-                showStar: true,
-                titleText: AppStrings.stateNumber,
-              ),
-              Gap(dimens.paddingVerticalItem16),
-              AddCarRowTextField(
-                hintText1: AppStrings.addcaraff,
-                hintText: AppStrings.addcar00,
-                titleText: AppStrings.technicalPassportText,
-                showStar: true,
-              ),
+              // AddCarTextfield(
+              //   controller: myCarBloc.carNumberController,
+              //   showStar: true,
+              //   titleText: AppStrings.stateNumber,
+              // ),
+              // Gap(dimens.paddingVerticalItem16),
+              // AddCarRowTextField(
+              //   controller: myCarBloc.teachSeriaController,
+              //   controller2: myCarBloc.teachPassportNumberController,
+              //   hintText1: AppStrings.addcaraff,
+              //   hintText: AppStrings.addcar00,
+              //   titleText: AppStrings.technicalPassportText,
+              //   showStar: true,
+              // ),
               Gap(dimens.paddingVerticalItem7),
               ButtonPagesMin(
                 appColors: AppColors.mainColor,

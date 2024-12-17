@@ -1,5 +1,108 @@
+// import 'package:epolisplus/utils/utils_export.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:gap/gap.dart';
+
+// class AddCarTextfield extends StatelessWidget {
+//   final TextEditingController? controller;
+//   final String? hintText;
+//   final String? titleText;
+//   final TextInputType keyboardType;
+//   final bool showStar;
+
+//   AddCarTextfield({
+//     required this.titleText,
+//     this.controller,
+//     this.hintText,
+//     this.keyboardType = TextInputType.text,
+//     this.showStar = false,
+//   });
+
+//   late Dimens dimens;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     dimens = Dimens(context);
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Row(
+//           children: [
+//             Text(
+//               titleText!,
+//               style: dimens.textStyleSecondary,
+//             ),
+//             Gap(dimens.paddingHorizontalItem5),
+//             if (showStar) AppImage.starWidget(context),
+//           ],
+//         ),
+//         Gap(dimens.paddingVerticalItem2),
+//         Row(
+//           children: [
+//             Container(
+//               alignment: Alignment.center,
+//               width: dimens.width284,
+//               height: dimens.height64,
+//               padding: EdgeInsets.symmetric(
+//                 horizontal: dimens.paddingHorizontal13,
+//               ),
+//               decoration: carNumberDecorations(dimens),
+//               child: Row(
+//                 children: [
+//                   Expanded(
+//                     child: TextField(
+//                       controller: controller,
+//                       keyboardType: keyboardType,
+//                       textAlign: TextAlign.center,
+//                       textAlignVertical: TextAlignVertical.center,
+//                       inputFormatters: [
+//                         // CarNumberInputFormatter(),
+//                         UpperCaseFormatter(),
+//                         DualCarNumberInputFormatter(),
+//                         // LengthLimitingTextInputFormatter(11),
+//                       ],
+//                       cursorColor: AppColors.hintColor,
+//                       cursorWidth: dimens.width2,
+//                       cursorHeight: dimens.height40,
+//                       decoration: InputDecoration(
+//                         hintText: hintText,
+//                         hintStyle: dimens.carNumberTextFieldSty,
+//                         filled: false,
+//                         fillColor: AppColors.whiteColor,
+//                         border: InputBorder.none,
+//                         contentPadding: EdgeInsets.zero,
+//                       ),
+//                       style: dimens.carTextfieldCursorSty,
+//                     ),
+//                   ),
+//                   SizedBox(
+//                     child: Column(
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       children: [
+//                         Image.asset(
+//                           AppImage.uzbFlagIcon,
+//                           height: dimens.height10,
+//                         ),
+//                         Text(
+//                           AppStrings.uzflagText,
+//                           style: dimens.cardUzFlagSty,
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ],
+//     );
+//   }
+// }
+
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 
 class AddCarTextfield extends StatelessWidget {
@@ -39,26 +142,55 @@ class AddCarTextfield extends StatelessWidget {
         Row(
           children: [
             Container(
+              alignment: Alignment.center,
               width: dimens.width284,
               height: dimens.height64,
-              padding: EdgeInsets.only(
-                left: dimens.paddingHorizontal13,
+              padding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingHorizontal13,
               ),
               decoration: carNumberDecorations(dimens),
-              child: TextField(
-                controller: controller,
-                keyboardType: keyboardType,
-                inputFormatters: [
-                  Masked.carNumberMask,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: controller,
+                      keyboardType: keyboardType,
+                      textAlign: TextAlign.center,
+                      textAlignVertical: TextAlignVertical.center,
+                      inputFormatters: [
+                        UpperCaseFormatter(),
+                        DualCarNumberInputFormatter(), // Custom formatter for both formats
+                      ],
+                      cursorColor: AppColors.hintColor,
+                      cursorWidth: dimens.width2,
+                      cursorHeight: dimens.height40,
+                      decoration: InputDecoration(
+                        hintText: hintText,
+                        hintStyle: dimens.carNumberTextFieldSty,
+                        filled: false,
+                        fillColor: AppColors.whiteColor,
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                      style: dimens.carTextfieldCursorSty,
+                    ),
+                  ),
+                  SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          AppImage.uzbFlagIcon,
+                          height: dimens.height10,
+                        ),
+                        Text(
+                          AppStrings.uzflagText,
+                          style: dimens.cardUzFlagSty,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: dimens.hintStyle,
-                  filled: false,
-                  fillColor: AppColors.whiteColor,
-                  border: InputBorder.none,
-                ),
-                style: dimens.myTextFieldStyle,
               ),
             ),
           ],
@@ -68,8 +200,11 @@ class AddCarTextfield extends StatelessWidget {
   }
 }
 
+
+
 class AddCarRowTextField extends StatelessWidget {
   final TextEditingController? controller;
+  final TextEditingController? controller2;
   final String? hintText1;
   final String? hintText;
   final String? titleText;
@@ -79,6 +214,7 @@ class AddCarRowTextField extends StatelessWidget {
   AddCarRowTextField({
     required this.titleText,
     this.controller,
+    this.controller2,
     this.hintText1,
     this.hintText,
     this.keyboardType = TextInputType.text,
@@ -117,7 +253,8 @@ class AddCarRowTextField extends StatelessWidget {
                 controller: controller,
                 keyboardType: keyboardType,
                 inputFormatters: [
-                  Masked.carNumberMask,
+                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                  LengthLimitingTextInputFormatter(3),
                 ],
                 decoration: InputDecoration(
                   hintText: hintText1,
@@ -139,11 +276,15 @@ class AddCarRowTextField extends StatelessWidget {
               ),
               decoration: inputDecorations(dimens),
               child: TextField(
-                controller: controller,
+                controller: controller2,
                 keyboardType: keyboardType,
                 inputFormatters: [
-                  Masked.carNumberMask,
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(7),
                 ],
+                // inputFormatters: [
+                //   Masked.carNumberMask,
+                // ],
                 decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: dimens.hintStyle,

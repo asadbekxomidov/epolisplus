@@ -138,5 +138,7 @@ class AppStrings {
   static const String carOwnerText = "Владелец автомобиля";
   static const String carBrandText = "Марка автомобилия";
   static const String yearofManufactureText = "Год выпуска";
+  static const String uzflagText = "UZ";
+  static const String carNumberFormatter = "01 A 001 AA";
   // static const String addCarButtonText = "Добавить автомобиль";
 }

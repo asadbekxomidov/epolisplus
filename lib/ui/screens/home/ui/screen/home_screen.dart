@@ -1,3 +1,4 @@
+import 'package:epolisplus/ui/screens/home/bloc/background/background_bloc.dart';
 import 'package:epolisplus/ui/screens/home/bloc/home_bloc.dart';
 import 'package:epolisplus/ui/widgets/bluebackground.dart';
 import 'package:epolisplus/ui/widgets/buttons.dart';
@@ -19,8 +20,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return BlocProvider(
-      create: (context) => HomeBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => HomeBloc(),
+        ),
+        BlocProvider(
+          create: (context) => BackgroundBloc(),
+        ),
+      ],
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -91,7 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: dimens.homeStyle,
                     ),
                     Gap(dimens.paddingVerticalItem8),
-                    CustomHorizontalButton(dimens: dimens),
+                    CustomHorizontalButton(
+                      dimens: dimens,
+                    ),
                     Gap(dimens.paddingVerticalItem16),
                     Card(
                       child: Container(

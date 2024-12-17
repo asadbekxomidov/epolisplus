@@ -94,4 +94,48 @@ class ProfilRepository extends ProfilRepositoryIml {
       );
     }
   }
+
+  @override
+  Future<BaseModels> getCarInformation(
+    String teachPassportSeria,
+    String teachPassportNumber,
+    String govNumber,
+  ) async {
+    final prefsManager = SharedPreferencesManager();
+    final token = await prefsManager.getToken();
+
+    var headers = {
+      'Content-Type': 'application/json',
+      'Content': 'application/json',
+      'Accept-Language': 'ru-RU',
+      'Accept-Encoding': 'UTF-8',
+      'Authorization': 'Bearer $token',
+    };
+
+    var data = {
+      'teachPassportSeria': teachPassportSeria,
+      'teachPassportNumber': teachPassportNumber,
+      'govNumber': govNumber,
+    };
+
+    var url = ApiConstanta.GET_CAR_INFORMATION;
+    Response? response;
+
+    try {
+      var response = await service.getPostData(data, headers, url);
+      logger(response.toString(), error: 'Update Profile Func');
+
+      if (response?.statusCode == 200) {}
+      return BaseModels(
+        message: response?.statusMessage,
+        response: response?.data,
+        status: response?.statusCode,
+      );
+    } catch (e) {
+      return BaseModels(
+        status: 512,
+        message: e.toString(),
+      );
+    }
+  }
 }

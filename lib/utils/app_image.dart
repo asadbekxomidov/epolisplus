@@ -133,4 +133,5 @@ class AppImage {
   static String searchIcon = 'assets/images/search_icon.png';
   static String creditCardIcon = 'assets/images/card_icon.png';
   static String paswordCardImage = 'assets/images/password_card_image.png';
+  static String uzbFlagIcon = 'assets/images/flag_uzb.png';
 }

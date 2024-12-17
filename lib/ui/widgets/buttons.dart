@@ -707,15 +707,86 @@ class ToggleIconButton extends StatelessWidget {
 
 // ? HomePageScroll Buttons
 
+// class CustomHorizontalButton extends StatelessWidget {
+//   final Dimens dimens;
+
+//   const CustomHorizontalButton({Key? key, required this.dimens})
+//       : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // Ro'yxatlar widget ichida aniqlanadi
+//     final buttonLabels = [
+//       "KACKO",
+//       "OSAGO",
+//       "Journey",
+//       "Additional services",
+//       "Warranty code",
+//     ];
+
+//     final buttonIcons = [
+//       AppImage.kasko_icon,
+//       AppImage.osago_icon,
+//       AppImage.travel_icon,
+//       AppImage.additional_services_icon,
+//       AppImage.warranty_code_icon,
+//     ];
+
+//     return SingleChildScrollView(
+//       scrollDirection: Axis.horizontal,
+//       child: Row(
+//         children: List.generate(buttonLabels.length, (index) {
+//           return Padding(
+//             padding: const EdgeInsets.symmetric(horizontal: 4.0),
+//             child: SizedBox(
+//               child: TextButton(
+//                 onPressed: () {
+//                   // Bu yerda har bir tugma uchun kerakli funksiyalarni yozing
+//                   print('${buttonLabels[index]} pressed');
+//                 },
+//                 style: TextButton.styleFrom(
+//                   side: BorderSide(
+//                     color: AppColors.whiteColor,
+//                   ),
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(dimens.radius25),
+//                   ),
+//                 ),
+//                 child: Row(
+//                   children: [
+//                     Image.asset(
+//                       buttonIcons[index],
+//                       width: dimens.width20,
+//                       height: dimens.height20,
+//                       color: AppColors.whiteColor,
+//                     ),
+//                     SizedBox(width: dimens.width10),
+//                     Text(
+//                       buttonLabels[index],
+//                       style: dimens.homeButtonSty,
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           );
+//         }),
+//       ),
+//     );
+//   }
+// }
+
 class CustomHorizontalButton extends StatelessWidget {
   final Dimens dimens;
 
-  const CustomHorizontalButton({Key? key, required this.dimens})
-      : super(key: key);
+  const CustomHorizontalButton({
+    Key? key,
+    required this.dimens,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Ro'yxatlar widget ichida aniqlanadi
+    // Button labels and icons
     final buttonLabels = [
       "KACKO",
       "OSAGO",
@@ -732,19 +803,23 @@ class CustomHorizontalButton extends StatelessWidget {
       AppImage.warranty_code_icon,
     ];
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(buttonLabels.length, (index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
-            child: SizedBox(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: dimens.paddingVerticalItem8),
+      color: Colors.transparent, // Ensures buttons are placed properly
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: List.generate(buttonLabels.length, (index) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: TextButton(
                 onPressed: () {
-                  // Bu yerda har bir tugma uchun kerakli funksiyalarni yozing
+                  // Handle button press actions
                   print('${buttonLabels[index]} pressed');
                 },
                 style: TextButton.styleFrom(
+                  backgroundColor:
+                      Colors.white.withOpacity(0.1), // Button background color
                   side: BorderSide(
                     color: AppColors.whiteColor,
                   ),
@@ -763,14 +838,17 @@ class CustomHorizontalButton extends StatelessWidget {
                     SizedBox(width: dimens.width10),
                     Text(
                       buttonLabels[index],
-                      style: dimens.homeButtonSty,
+                      style: TextStyle(
+                        color: AppColors.whiteColor,
+                        fontSize: dimens.font14,
+                      ),
                     ),
                   ],
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          }),
+        ),
       ),
     );
   }
@@ -1053,45 +1131,49 @@ class LoadDataButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return Container(
-      height: dimens.height40,
-      width: dimens.screenWidth,
-      decoration: BoxDecoration(
-        color: color,
-        border: Border.all(
-          color: AppColors.lightGreenborderColor,
-          // color: AppColors.mainColor,
-          width: dimens.width1,
-        ),
-        borderRadius: BorderRadius.circular(
-          dimens.radius12,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            iconData!,
-            height: dimens.height20,
+    return InkWell(
+      onTap: () => onClick(),
+      child: Container(
+        height: dimens.height40,
+        width: dimens.screenWidth,
+        decoration: BoxDecoration(
+          color: color,
+          border: Border.all(
+            color: AppColors.lightGreenborderColor,
+            // color: AppColors.mainColor,
+            width: dimens.width1,
           ),
-          Gap(dimens.paddingHorizontal13),
-          Text(
-            text,
-            style: dimens.textStyle.copyWith(
-              color: AppColors.mainColor,
+          borderRadius: BorderRadius.circular(
+            dimens.radius12,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              iconData!,
+              height: dimens.height20,
             ),
-          ),
-          // isLoading
-          //     ? SizedBox(
-          //         height: dimens.height10,
-          //         width: dimens.height10,
-          //         child: CircularProgressIndicator(
-          //           color: Colors.red,
-          //           strokeWidth: dimens.width10 / 5,
-          //         ),
-          //       )
-          //     : SizedBox(),
-        ],
+            Gap(dimens.paddingHorizontal13),
+            Text(
+              text,
+              style: dimens.textStyle.copyWith(
+                color: AppColors.mainColor,
+              ),
+            ),
+            Gap(dimens.paddingHorizontal4),
+            isLoading
+                ? SizedBox(
+                    height: dimens.height10,
+                    width: dimens.height10,
+                    child: CircularProgressIndicator(
+                      color: Colors.red,
+                      strokeWidth: dimens.width10 / 5,
+                    ),
+                  )
+                : SizedBox(),
+          ],
+        ),
       ),
     );
   }

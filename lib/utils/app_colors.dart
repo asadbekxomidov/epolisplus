@@ -9,6 +9,7 @@ class AppColors {
   static Color titleColor = Color(0xFF000000);
   static Color textColor = Color(0xFF000000);
   static Color hintColor = Color(0xFFA3A3A3);
+  static Color hintTextFieldColor = Color.fromARGB(212, 212, 212, 1);
   static Color lineColor = Color(0xFFEFEFEF);
   static Color carNumberLine = Color.fromRGBO(10, 10, 10, 1);
   static Color textColorsSecondary = Color(0xFF737373);

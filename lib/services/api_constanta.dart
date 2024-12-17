@@ -14,6 +14,7 @@ class ApiConstanta {
   static const FAQ = "v1/references/get-faq";
   static const UPDATE_USER_INFORMATION = "v2/user/update-profile";
   static const USER_INFORMATION = "v2/user/profile";
+  static const GET_CAR_INFORMATION = "v1/osgo/vehicle";
 }
 
 

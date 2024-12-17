@@ -11,6 +11,10 @@ class CarLoadingState extends MyCarState {}
 
 class CarLoadedState extends MyCarState {}
 
-class CarErrorState extends MyCarState {}
+class CarErrorState extends MyCarState {
+  final String error;
+
+  CarErrorState(this.error);
+}
 
 class CarSuccesState extends MyCarState {}

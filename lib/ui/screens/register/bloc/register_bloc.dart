@@ -29,7 +29,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   Future<void> register(
       CheckRegisterEvent event, Emitter<RegisterState> emit) async {
     emit(RegisterLoadingState());
-    await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
 
     var phoneNumber = phoneController.text.trim();
     var fullName = fullNameController.text.trim();
