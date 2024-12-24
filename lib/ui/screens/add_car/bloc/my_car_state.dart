@@ -11,6 +11,15 @@ class CarLoadingState extends MyCarState {}
 
 class CarLoadedState extends MyCarState {}
 
+class CarInformationGetState extends MyCarState {
+  final CarInformationResponse response;
+
+  CarInformationGetState(this.response);
+
+  @override
+  List<Object?> get props => [response];
+}
+
 class CarErrorState extends MyCarState {
   final String error;
 

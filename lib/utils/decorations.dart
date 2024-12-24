@@ -13,6 +13,15 @@ mainDecorations() {
   );
 }
 
+pagesDecorations() {
+  return BoxDecoration(
+    image: DecorationImage(
+      image: AssetImage(AppImage.appMainImage),
+      // fit: BoxFit.cover,
+    ),
+  );
+}
+
 homeBlueDecorations() {
   return BoxDecoration(
     image: DecorationImage(
@@ -156,6 +165,21 @@ cardContainerDecoration(Dimens dimens) {
   );
 }
 
+myCarCardDecoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.cardContainerColor,
+    borderRadius: BorderRadius.circular(dimens.radius16),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.blackColor.withOpacity(0.1),
+        spreadRadius: 2,
+        blurRadius: 6,
+        offset: Offset(0, 3),
+      ),
+    ],
+  );
+}
+
 homepageButtonsDecoration(Dimens dimens) {
   return BoxDecoration(
     color: AppColors.whiteColor,
@@ -219,6 +243,82 @@ carrightNumberDecorations(Dimens dimens) {
     border: Border.all(
       color: AppColors.carNumberLine,
       width: dimens.width3,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
+  );
+}
+
+deleteButtonDEcoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.redColorFill,
+    borderRadius: BorderRadius.circular(
+      dimens.height50,
+    ),
+    border: Border.all(
+      color: AppColors.borderRedColor,
+      width: dimens.width1,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.blackColor.withOpacity(0.1),
+        spreadRadius: 2,
+        blurRadius: 6,
+        offset: Offset(0, 3),
+      ),
+    ],
+  );
+}
+
+getMyCarContainerDeco(Dimens dimens) {
+  return BoxDecoration(
+    borderRadius: BorderRadius.circular(dimens.radius4),
+    border: Border.all(
+      color: AppColors.textBlackColors,
+      width: dimens.width1_5,
+    ),
+    // boxShadow: [
+    //   BoxShadow(
+    //     color: AppColors.blackColor.withOpacity(0.1),
+    //     spreadRadius: 2,
+    //     blurRadius: 6,
+    //     offset: Offset(0, 3),
+    //   ),
+    // ],
+  );
+}
+
+myContainerWidgets(Dimens dimens, double radius) {
+  return BoxDecoration(
+    color: AppColors.myContainerGreyBackgroundColor,
+    borderRadius: BorderRadius.circular(radius),
+    border: Border.all(
+      color: AppColors.myContainerGreyBorderColor,
+      width: dimens.width1,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
+  );
+}
+
+
+mybuttonDeco(Dimens dimens, double radius, Color backgraoundColor, Color borderColor) {
+  return BoxDecoration(
+    color: backgraoundColor,
+    borderRadius: BorderRadius.circular(radius),
+    border: Border.all(
+      color: borderColor,
+      width: dimens.width1,
     ),
     boxShadow: [
       BoxShadow(

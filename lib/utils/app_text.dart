@@ -65,6 +65,8 @@ class AppStrings {
   static const String pointText =
       ".................................................................................................................................";
 
+  static const String pointTextMinus =
+      '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -';
   // ! Settings text
 
   static const String settingsText = "Настройки";
@@ -81,6 +83,7 @@ class AppStrings {
   // ! Notifications
 
   static const String notificationText = "Уведомления";
+  static const String warrantyCodeText = "Гарантийный код";
   static const String pushNotifications = "Push-уведомления";
   static const String partnersGetErrorText =
       "There was an error retrieving partner information";
@@ -95,6 +98,7 @@ class AppStrings {
   static const String emailallNotifications =
       "Все уведомления будут приходить на вашу электронную почту";
   static const String partnersaText = "Партнеры";
+  static const String searchText = "Поиск";
 
   // ! Oferta
 
@@ -116,13 +120,21 @@ class AppStrings {
   // ! Partners
 
   static const String servicesText = "Услуги";
+  // ! Ploicies
+
+  static const String myploicies = "Мои полисы";
+  // ! Splash
+
+  static const String emergencyCall = "Экстренный вызов";
+  
   // ! Kabinet
 
   static const String cabientText = "Кабинет";
   static const String personalInformation = "Личная информация";
   static const String saveChanges = "Cохранить изменения";
   static const String deleteAccountText = "Удалить аккаунт";
-  
+  static const String carOwner = "Владелец авто";
+
   // ? Add Car
   static const String stateNumber = "Гос номер";
   static const String addCatText = "Добавить авто";
@@ -133,12 +145,19 @@ class AppStrings {
   static const String addcaraff = "AAF";
   static const String addcar00 = "0000000";
   static const String loadDataText = "Загрузить данные";
-  static const String registrationCarcertificate = "Номер и серия\nтех. паспорта авто";
-  static const String registrationCarcertificateText = "Номер и серия тех. паспорта авто находится на тыльной стороне справа в углу, как показано ниже на картинке.";
+  static const String registrationCarcertificate =
+      "Номер и серия\nтех. паспорта авто";
+  static const String registrationCarcertificateText =
+      "Номер и серия тех. паспорта авто находится на тыльной стороне справа в углу, как показано ниже на картинке.";
   static const String carOwnerText = "Владелец автомобиля";
   static const String carBrandText = "Марка автомобилия";
   static const String yearofManufactureText = "Год выпуска";
+  static const String activatewarrantyCode = "Активировать гарантийный код";
   static const String uzflagText = "UZ";
   static const String carNumberFormatter = "01 A 001 AA";
-  // static const String addCarButtonText = "Добавить автомобиль";
+  static const String addwarrantyCode = "Добавить гарантийный код";
+  static const String vehicleInformation = "Информация об автомобиле";
+  static const String noconnectionInternet = "Нет подключенияк интернету";
+  static const String checkyourcetworWiFinetwork = "Проверьте настройки сети или подключитесь к другой Wi-Fi сети.";
+  static const String connectText = "Подключиться";
 }

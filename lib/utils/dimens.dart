@@ -28,6 +28,15 @@ class Dimens {
 
   // ?
 
+  double get paddingAll20 {
+    return height10 * 2;
+  }
+
+  double get paddingAll30 {
+    return height10 * 3;
+  }
+
+  // ?
   double get paddingVerticalItem {
     return height10 * 1.6;
   }
@@ -38,6 +47,10 @@ class Dimens {
 
   double get paddingVerticalItem27 {
     return height10 * 2.7;
+  }
+
+  double get paddingVerticalItem28 {
+    return height10 * 2.8;
   }
 
   double get paddingVerticalItem40 {
@@ -74,6 +87,10 @@ class Dimens {
 
   double get paddingVerticalItem137 {
     return 137 * screenHeight / 852;
+  }
+
+  double get paddingVerticalItem110 {
+    return 110 * screenHeight / 852;
   }
 
   double get paddingVerticalItem120 {
@@ -114,6 +131,10 @@ class Dimens {
 
   double get paddingVerticalItem3 {
     return height10 * 0.3;
+  }
+
+  double get paddingVerticalItem51 {
+    return height10 * 5.1;
   }
 
   double get paddingVerticalItem59 {
@@ -206,6 +227,10 @@ class Dimens {
     return 6 * screenHeight / 852;
   }
 
+  double get height7_5 {
+    return 7.5 * screenHeight / 852;
+  }
+
   double get height10 {
     return 10 * screenHeight / 852;
   }
@@ -252,6 +277,10 @@ class Dimens {
 
   double get height48 {
     return 48 * screenHeight / 852;
+  }
+
+  double get height50 {
+    return 50 * screenHeight / 852;
   }
 
   double get height58 {
@@ -330,6 +359,10 @@ class Dimens {
     return 268 * screenHeight / 852;
   }
 
+  double get height300 {
+    return 300 * screenHeight / 852;
+  }
+
   double get height306 {
     return 306 * screenHeight / 852;
   }
@@ -340,6 +373,10 @@ class Dimens {
 
   double get width1 {
     return 1 * screenWidth / 392;
+  }
+
+  double get width1_5 {
+    return 1.5 * screenWidth / 392;
   }
 
   double get width2 {
@@ -370,6 +407,10 @@ class Dimens {
     return 30 * screenWidth / 392;
   }
 
+  double get width40 {
+    return 40 * screenWidth / 392;
+  }
+
   double get width44 {
     return 44 * screenWidth / 392;
   }
@@ -380,6 +421,14 @@ class Dimens {
 
   double get width64 {
     return 64 * screenWidth / 392;
+  }
+
+  double get width142 {
+    return 142 * screenWidth / 392;
+  }
+
+  double get width100 {
+    return 100 * screenWidth / 392;
   }
 
   double get width150 {
@@ -414,6 +463,10 @@ class Dimens {
     return 289 * screenWidth / 392;
   }
 
+  double get radius4 {
+    return height10 * 0.4;
+  }
+
   double get radius8 {
     return height10 * 0.8;
   }
@@ -432,6 +485,18 @@ class Dimens {
 
   double get radius25 {
     return height10 * 2.5;
+  }
+
+  double get radius50 {
+    return height10 * 5;
+  }
+
+  double get font1 {
+    return height10 * 0.1;
+  }
+
+  double get font8 {
+    return height10 * 0.8;
   }
 
   double get font10 {
@@ -574,6 +639,17 @@ class Dimens {
     );
   }
 
+  TextStyle get pagesBlackTitleSty2 {
+    return TextStyle(
+      fontSize: font30,
+      fontFamily: "GeistVF",
+      color: AppColors.blackPagesTextColor,
+      fontWeight: FontWeight.w600,
+      decoration: TextDecoration.none,
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get pagesBlackTitleStymin {
     return TextStyle(
       fontSize: font16,
@@ -676,7 +752,17 @@ class Dimens {
     return TextStyle(
       fontSize: font10,
       fontWeight: FontWeight.normal,
-      color: AppColors.textColor,
+      color: AppColors.blueColorFill,
+      fontFamily: "GeistVF",
+      decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get cardUzFlagSty2 {
+    return TextStyle(
+      fontSize: font8,
+      fontWeight: FontWeight.normal,
+      color: AppColors.blueColorFill,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
     );
@@ -971,6 +1057,91 @@ class Dimens {
       fontWeight: FontWeight.w400,
       fontSize: height17,
       decoration: TextDecoration.none,
+    );
+  }
+
+  TextStyle get font24Blackw600Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w600,
+      fontSize: font24,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
+  TextStyle get font20Blackw400Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w400,
+      fontSize: font20,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
+  TextStyle get font20Blackw600Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w600,
+      fontSize: font20,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
+  TextStyle get font14Greyw400Sty {
+    return TextStyle(
+      color: AppColors.textGreyColors,
+      fontWeight: FontWeight.w400,
+      fontSize: font14,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
+  TextStyle get font16Blackw400Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w400,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font16Whitew600Sty {
+    return TextStyle(
+      color: AppColors.whiteColor255,
+      fontWeight: FontWeight.w600,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font16Greenw400Sty {
+    return TextStyle(
+      color: AppColors.greenColorDefault,
+      fontWeight: FontWeight.w400,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pointMinusSty {
+    return TextStyle(
+      // color: AppColors.textGreyColors,
+      color: AppColors.textGreyColor221,
+      // fontWeight: FontWeight.w400,
+      fontSize: font10,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

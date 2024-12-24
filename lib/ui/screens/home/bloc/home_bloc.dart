@@ -16,6 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<LogoutEvent>(_handleLogout);
     on<DeleteAccountEvent>(deleteAccount);
     on<PushScreensEvent>(pushSettings);
+    on<PushWarrantyEvent>(pushWarranty);
   }
 
   Future<void> _handleLogout(LogoutEvent event, Emitter<HomeState> emit) async {
@@ -63,6 +64,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       PushScreensEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     Get.to(() => SettingsScreen());
+    emit(HomeSuccessState());
+  }
+
+  Future<void> pushWarranty(
+      PushWarrantyEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
+    Get.to(() => WarrantycodeScreen());
     emit(HomeSuccessState());
   }
 }

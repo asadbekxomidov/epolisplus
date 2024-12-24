@@ -96,7 +96,7 @@ class ProfilRepository extends ProfilRepositoryIml {
   }
 
   @override
-  Future<BaseModels> getCarInformation(
+  Future<BaseModels<CarInformationResponse>> getCarInformation(
     String teachPassportSeria,
     String teachPassportNumber,
     String govNumber,
@@ -113,8 +113,8 @@ class ProfilRepository extends ProfilRepositoryIml {
     };
 
     var data = {
-      'teachPassportSeria': teachPassportSeria,
-      'teachPassportNumber': teachPassportNumber,
+      'techPassportSeria': teachPassportSeria,
+      'techPassportNumber': teachPassportNumber,
       'govNumber': govNumber,
     };
 
@@ -123,14 +123,142 @@ class ProfilRepository extends ProfilRepositoryIml {
 
     try {
       var response = await service.getPostData(data, headers, url);
-      logger(response.toString(), error: 'Update Profile Func');
 
-      if (response?.statusCode == 200) {}
-      return BaseModels(
-        message: response?.statusMessage,
-        response: response?.data,
-        status: response?.statusCode,
+      print('${response?.data} VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV');
+
+      if (response?.statusCode == 200 && response?.data != null) {
+        var responseData = response?.data['response']; // Faqat kerakli qism
+        if (responseData != null) {
+          var profilData = CarInformationResponse.fromJson(responseData);
+          print('${response?.data} RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+          return BaseModels<CarInformationResponse>(
+            message: response?.statusMessage,
+            response: profilData,
+            status: response?.statusCode,
+          );
+        } else {
+          print('Response is null or empty');
+          return BaseModels<CarInformationResponse>(
+            message: "Response data is null",
+            status: response?.statusCode,
+          );
+        }
+      } else {
+        print('Non-200 status code: ${response?.statusCode}');
+        return BaseModels<CarInformationResponse>(
+          message: response?.statusMessage ?? 'Error occurred',
+          status: response?.statusCode,
+        );
+      }
+    } catch (e) {
+      print('Exception: $e');
+      return BaseModels<CarInformationResponse>(
+        status: 512,
+        message: e.toString(),
       );
+    }
+  }
+
+  // @override
+  // Future<BaseModels<CarInformationResponse>> getCarInformation(
+  //   String teachPassportSeria,
+  //   String teachPassportNumber,
+  //   String govNumber,
+  // ) async {
+  //   final prefsManager = SharedPreferencesManager();
+  //   final token = await prefsManager.getToken();
+
+  //   var headers = {
+  //     'Content-Type': 'application/json',
+  //     'Content': 'application/json',
+  //     'Accept-Language': 'ru-RU',
+  //     'Accept-Encoding': 'UTF-8',
+  //     'Authorization': 'Bearer $token',
+  //   };
+
+  //   var data = {
+  //     'techPassportSeria': teachPassportSeria,
+  //     'techPassportNumber': teachPassportNumber,
+  //     'govNumber': govNumber,
+  //   };
+
+  //   var url = ApiConstanta.GET_CAR_INFORMATION;
+  //   Response? response;
+
+  //   try {
+  //     var response = await service.getPostData(data, headers, url);
+  //     logger(response.toString(), error: "REpository");
+
+  //     print('${response?.data} VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV');
+
+  //     if (response?.statusCode == 200 && response?.data != null) {
+  //       var responseData = response?.data;
+  //       var profilData = CarInformationResponse.fromJson(responseData);
+  //       print('${response?.data} RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+  //       print('139999999999999999999999999999999999999999');
+  //       print(
+  //           '${response?.statusMessage}0000000000000000000000000000000000000');
+  //       print('${response?.statusCode}111111111111111111111111111111111');
+  //       return BaseModels<CarInformationResponse>(
+  //         message: response?.statusMessage,
+  //         response: profilData,
+  //         status: response?.statusCode,
+  //       );
+  //     }
+  //     print('object9');
+  //     return BaseModels(
+  //       message: response?.statusMessage,
+  //       response: response?.data,
+  //       status: response?.statusCode,
+  //     );
+  //   } catch (e) {
+  //     print('object100');
+  //     return BaseModels(
+  //       status: 512,
+  //       message: e.toString(),
+  //     );
+  //   }
+  // }
+
+  @override
+  Future<BaseModels> deleteCar(
+    String govNumber,
+  ) async {
+    final prefsManager = SharedPreferencesManager();
+    final token = await prefsManager.getToken();
+
+    var headers = {
+      'Content-Type': 'application/json',
+      'Content': 'application/json',
+      'Accept-Language': 'ru-RU',
+      'Accept-Encoding': 'UTF-8',
+      'Authorization': 'Bearer $token',
+    };
+
+    var data = {
+      'car': govNumber,
+    };
+
+    var url = ApiConstanta.DELETE_CAR;
+    Response? response;
+
+    try {
+      var response = await service.getPostData(data, headers, url);
+      logger(response.toString(), error: 'Delete Car Func');
+
+      if (response?.statusCode == 200) {
+        return BaseModels(
+          message: response?.statusMessage,
+          response: response?.data,
+          status: response?.statusCode,
+        );
+      } else {
+        return BaseModels(
+          message: response?.statusMessage,
+          response: response?.data,
+          status: response?.statusCode,
+        );
+      }
     } catch (e) {
       return BaseModels(
         status: 512,

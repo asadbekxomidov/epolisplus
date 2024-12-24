@@ -61,3 +61,5 @@ export 'edit_profil/ui/screens/edit_profil_screen.dart';
 // ? add_car
 export 'add_car/ui/screen/add_car_screen.dart';
 export 'add_car/ui/screen/registercertnumber_screen.dart';
+// ? warrantycode
+export 'warrantycode/ui/screen/warrantycode_screen.dart';

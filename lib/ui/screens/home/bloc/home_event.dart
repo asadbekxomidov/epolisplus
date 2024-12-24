@@ -15,3 +15,5 @@ class DeleteAccountEvent extends HomeEvent {
 }
 
 class PushScreensEvent extends HomeEvent {}
+
+class PushWarrantyEvent extends HomeEvent {}

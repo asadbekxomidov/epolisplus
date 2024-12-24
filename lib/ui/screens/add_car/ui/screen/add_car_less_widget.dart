@@ -25,78 +25,130 @@ class AddCarLessWidget extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          print('add screen informations adjbjdfghaskdjhakdhkashdhakdhakhds');
           myCarBloc = BlocProvider.of<MyCarBloc>(context);
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // AddCarTextfield(
-              //   controller: myCarBloc.carNumberController,
-              //   showStar: true,
-              //   titleText: AppStrings.stateNumber,
-              // ),
-              // Gap(dimens.paddingVerticalItem16),
-              // AddCarRowTextField(
-              //   controller: myCarBloc.teachSeriaController,
-              //   controller2: myCarBloc.teachPassportNumberController,
-              //   hintText1: AppStrings.addcaraff,
-              //   hintText: AppStrings.addcar00,
-              //   titleText: AppStrings.technicalPassportText,
-              //   showStar: true,
-              // ),
-              Gap(dimens.paddingVerticalItem7),
-              ButtonPagesMin(
-                appColors: AppColors.mainColor,
-                iconData: AppImage.infocircleIcon,
-                onClick: () {
-                  myCarBloc.add(RegisterCertificateNumberEvent());
-                },
-                text: AppStrings.certificateNumberText,
-              ),
-              Gap(dimens.paddingVerticalItem12),
-              Text(
-                AppStrings.carOwnerText,
-                style: dimens.textStyleSecondary,
-              ),
-              MyContainerWidget(
-                text: "Asadbek Xomidov",
-              ),
-              Gap(dimens.paddingVerticalItem14),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.carBrandText,
-                        style: dimens.textStyleSecondary,
-                      ),
-                      MyContainerRowWidget(
-                        text: "Spark",
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        AppStrings.yearofManufactureText,
-                        style: dimens.textStyleSecondary,
-                      ),
-                      MyContainerRowWidget(
-                        text: "2020",
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Gap(dimens.paddingVerticalItem14),
-              RegisterPushButton(
-                onClick: () {},
-                text: AppStrings.addCarButtonText,
-              ),
-            ],
-          );
+
+          // if (state is CarLoadingState) {
+          //   return const Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Center(
+          //         child: CircularProgressIndicator(),
+          //       ),
+          //     ],
+          //   );
+          //
+
+          if (state is CarInitialState) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AddCarTextfield(
+                  hintText: AppStrings.carNumberFormatter,
+                  controller: myCarBloc.carNumberController,
+                  showStar: true,
+                  titleText: AppStrings.stateNumber,
+                ),
+                Gap(dimens.paddingVerticalItem16),
+                AddCarRowTextField(
+                  controller: myCarBloc.teachSeriaController,
+                  controller2: myCarBloc.teachPassportNumberController,
+                  hintText1: AppStrings.addcaraff,
+                  hintText: AppStrings.addcar00,
+                  titleText: AppStrings.technicalPassportText,
+                  showStar: true,
+                  style: dimens.myTextFieldStyle,
+                ),
+                Gap(dimens.paddingVerticalItem7),
+                ButtonPagesMin(
+                  appColors: AppColors.mainColor,
+                  iconData: AppImage.infocircleIcon,
+                  onClick: () {
+                    myCarBloc.add(RegisterCertificateNumberEvent());
+                  },
+                  text: AppStrings.certificateNumberText,
+                ),
+                Gap(dimens.paddingVerticalItem16),
+                LoadDataButtons(
+                  color: AppColors.lightGreenColor,
+                  isLoading: state is CarLoadingState,
+                  text: AppStrings.loadDataText,
+                  onClick: () {
+                    myCarBloc.add(AddCarEvent());
+                  },
+                  iconData: AppImage.searchIcon,
+                ),
+              ],
+            );
+          }
+
+          if (state is CarInformationGetState) {
+            final carInfo = state.response;
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AddCarTextfield(
+                  hintText: AppStrings.carNumberFormatter,
+                  controller: myCarBloc.carNumberController,
+                  showStar: true,
+                  titleText: AppStrings.stateNumber,
+                ),
+                Gap(dimens.paddingVerticalItem16),
+                AddCarRowTextField(
+                  controller: myCarBloc.teachSeriaController,
+                  controller2: myCarBloc.teachPassportNumberController,
+                  hintText1: AppStrings.addcaraff,
+                  hintText: AppStrings.addcar00,
+                  titleText: AppStrings.technicalPassportText,
+                  showStar: true,
+                  isActive: false,
+                  style: dimens.hintStyle,
+                ),
+                Gap(dimens.paddingVerticalItem7),
+                ButtonPagesMin(
+                  appColors: AppColors.mainColor,
+                  iconData: AppImage.infocircleIcon,
+                  onClick: () {
+                    myCarBloc.add(RegisterCertificateNumberEvent());
+                  },
+                  text: AppStrings.certificateNumberText,
+                ),
+                Gap(dimens.paddingVerticalItem16),
+                LoadDataButtons(
+                  color: AppColors.lightGreenColor,
+                  isLoading: state is CarLoadingState,
+                  text: AppStrings.loadDataText,
+                  onClick: () {
+                    myCarBloc.add(AddCarEvent());
+                  },
+                  iconData: AppImage.searchIcon,
+                ),
+                // Text(
+                //   "Car Model: ${carInfo.modelName}",
+                //   style: TextStyle(color: Colors.black),
+                // ),
+                // Text(
+                //   "Owner: ${carInfo.orgName}",
+                //   style: TextStyle(color: Colors.black),
+                // ),
+                // Text(
+                //   "Region: ${carInfo.regionName}",
+                //   style: TextStyle(color: Colors.black),
+                // ),
+                // Text(
+                //   "Issue Year: ${carInfo.issueYear ?? 'No Year'}",
+                //   style: TextStyle(color: Colors.black),
+                // ),
+                // Text(
+                //   "Engine Number: ${carInfo.engineNumber ?? 'No Engine Number'}",
+                //   style: TextStyle(color: Colors.black),
+                // ),
+              ],
+            );
+          }
+          return Column();
         },
       ),
     );

@@ -1,11 +1,10 @@
 // import 'package:epolisplus/repository/auth/auth_repository.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-
-import '../../tabbar/ui/screen/bottom_navigation_view.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';
@@ -15,13 +14,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   SplashBloc() : super(SplashInitial()) {
     on<CheckTokenEvent>(_checkToken);
+    on<CheckConnectionEvent>(_checkConnection);
   }
 
   Future<void> _checkToken(
       CheckTokenEvent event, Emitter<SplashState> emit) async {
     emit(SplashLoadingState());
-
-    await Future.delayed(const Duration(seconds: 1));
 
     // Get.off(() => CheckAuthScreen());
     final token = await _prefsManager.getToken();
@@ -48,6 +46,19 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     } else {
       Get.off(() => CheckAuthScreen());
       emit(SplashAuthRequiredState());
+    }
+  }
+
+  Future<void> _checkConnection(
+      CheckConnectionEvent event, Emitter<SplashState> emit) async {
+    emit(SplashLoadingState());
+
+    var connectivityResult = await Connectivity().checkConnectivity();
+
+    if (connectivityResult != ConnectivityResult.none) {
+      emit(SplashInternetAvailableState());
+    } else {
+      emit(SplashNoInternetState());
     }
   }
 }

@@ -1,11 +1,11 @@
-import 'package:epolisplus/models/profil/profil_response/profil_response.dart';
+import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/ui/screens/kabinet/bloc/kabinet_bloc.dart';
 import 'package:epolisplus/ui/widgets/buttons.dart';
 import 'package:epolisplus/ui/widgets/greenbackground.dart';
 import 'package:epolisplus/utils/utils_export.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_html/flutter_html.dart';
 import 'package:gap/gap.dart';
 
 class CabinetScreen extends StatefulWidget {
@@ -42,8 +42,9 @@ class _CabinetScreenState extends State<CabinetScreen> {
             );
           } else if (state is KabinetInformationGetState) {
             final profil = state.profilResponse;
+            final carInfoList = profil.carInfo;
+
             return Scaffold(
-              // Scaffold qo'shildi
               body: GreenImageBackground(
                 child: Container(
                   padding: EdgeInsets.symmetric(
@@ -93,11 +94,11 @@ class _CabinetScreenState extends State<CabinetScreen> {
                         ),
                         Gap(dimens.paddingVerticalItem4),
                         Text(
-                          formatPhoneNumber(profil.phone),
+                          profil.phone,
                           style: dimens.pagesYourNameSty,
                         ),
                         Gap(dimens.paddingVerticalItem16),
-                        my_car_widget(profil),
+                        my_car_widget(profil, carInfoList),
                       ],
                     ),
                   ),
@@ -116,8 +117,8 @@ class _CabinetScreenState extends State<CabinetScreen> {
     );
   }
 
-  my_car_widget(ProfilResponse profil) {
-    return profil.carInfo.length == 0
+  my_car_widget(ProfilResponse profil, List<CarInfoResponse> carInfoList) {
+    return carInfoList.isEmpty
         ? GestureDetector(
             onTap: () {
               kabinetBloc.add(AddMyCarEvent());
@@ -153,55 +154,141 @@ class _CabinetScreenState extends State<CabinetScreen> {
           )
         : Column(
             children: [
-              car_list(),
+              car_list(carInfoList),
               add_my_car_btn(),
             ],
           );
   }
 
-  car_list() {
+  car_list(List<CarInfoResponse> carInfoList) {
     return Column(
-      children: [
-        Card(
+      children: carInfoList.map((car) {
+        return Card(
           color: AppColors.cardContainerColor,
           child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: dimens.paddingVerticalItem8,
-              horizontal: dimens.paddingHorizontal4,
+            padding: EdgeInsets.all(
+              dimens.paddingAll20,
             ),
-            height: dimens.height208,
             width: dimens.screenWidth,
-            decoration: cardContainerDecoration(dimens),
-          ),
-        ),
-        Card(
-          color: AppColors.cardContainerColor,
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: dimens.paddingVerticalItem8,
-              horizontal: dimens.paddingHorizontal4,
+            decoration: myCarCardDecoration(dimens),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "${car.modelName}",
+                              style: dimens.font24Blackw600Sty,
+                            ),
+                          ],
+                        ),
+                        Gap(dimens.paddingHorizontal4),
+                        Text(
+                          "${car.issueYear} год",
+                          style: dimens.font14Greyw400Sty,
+                        ),
+                      ],
+                    ),
+                    DeleteButton(
+                      onClick: () {
+                        kabinetBloc.add(
+                          MyCarDeleteEvent(car.govNumber),
+                        );
+                      },
+                      icon: CupertinoIcons.delete,
+                    ),
+                  ],
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Container(
+                  height: dimens.height32,
+                  width: dimens.width142,
+                  decoration: getMyCarContainerDeco(dimens),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Gap(dimens.paddingHorizontal2),
+                      Text(
+                        "${car.govNumber}",
+                        style: dimens.font20Blackw400Sty,
+                      ),
+                      SizedBox(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppImage.uzbFlagIcon,
+                              height: dimens.height7_5,
+                            ),
+                            Text(
+                              AppStrings.uzflagText,
+                              style: dimens.cardUzFlagSty2,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gap(dimens.paddingHorizontal2),
+                    ],
+                  ),
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Row(
+                  children: [
+                    Text(
+                      "${car.techSeriya}",
+                      style: dimens.font14Greyw400Sty,
+                    ),
+                    Text(
+                      " ${car.techNumber}",
+                      style: dimens.font14Greyw400Sty,
+                    ),
+                  ],
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Text(
+                  AppStrings.pointTextMinus,
+                  style: dimens.pointMinusSty,
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Text(
+                  AppStrings.carOwner,
+                  style: dimens.font14Greyw400Sty,
+                ),
+                Text(
+                  "${car.orgName} o'g'li",
+                  style: dimens.font16Blackw400Sty,
+                ),
+              ],
             ),
-            height: dimens.height208,
-            width: dimens.screenWidth,
-            decoration: cardContainerDecoration(dimens),
           ),
-        ),
-      ],
+        );
+      }).toList(),
     );
   }
 
   add_my_car_btn() {
-    return RegisterPushButton(
+    return PagesButton(
+      image: AppImage.addIcon,
+      text: AppStrings.addCarButtonText,
       onClick: () {
         kabinetBloc.add(AddMyCarEvent());
       },
-      text: "add my car",
     );
   }
 }
 
+
+
+/*
 String formatPhoneNumber(String phone) {
   String cleanPhone = phone.replaceAll(RegExp(r'\D'), '');
 
   return '+${cleanPhone.substring(0, 3)} (${cleanPhone.substring(3, 5)}) ${cleanPhone.substring(5, 8)}-${cleanPhone.substring(8, 10)}-${cleanPhone.substring(10, 12)}';
 }
+*/

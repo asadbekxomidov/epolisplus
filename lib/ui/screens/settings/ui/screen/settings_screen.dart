@@ -26,6 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             listener: (context, state) {},
             builder: (context, state) {
               settingsBloc = BlocProvider.of<SettingsBloc>(context);
+              
               return Container(
                 padding: EdgeInsets.symmetric(
                   horizontal: dimens.paddingHorizontal16,

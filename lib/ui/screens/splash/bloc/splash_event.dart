@@ -6,3 +6,5 @@ abstract class SplashEvent extends Equatable {
 }
 
 class CheckTokenEvent extends SplashEvent {}
+
+class CheckConnectionEvent extends SplashEvent {}

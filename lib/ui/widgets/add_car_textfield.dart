@@ -1,105 +1,3 @@
-// import 'package:epolisplus/utils/utils_export.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:gap/gap.dart';
-
-// class AddCarTextfield extends StatelessWidget {
-//   final TextEditingController? controller;
-//   final String? hintText;
-//   final String? titleText;
-//   final TextInputType keyboardType;
-//   final bool showStar;
-
-//   AddCarTextfield({
-//     required this.titleText,
-//     this.controller,
-//     this.hintText,
-//     this.keyboardType = TextInputType.text,
-//     this.showStar = false,
-//   });
-
-//   late Dimens dimens;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     dimens = Dimens(context);
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Row(
-//           children: [
-//             Text(
-//               titleText!,
-//               style: dimens.textStyleSecondary,
-//             ),
-//             Gap(dimens.paddingHorizontalItem5),
-//             if (showStar) AppImage.starWidget(context),
-//           ],
-//         ),
-//         Gap(dimens.paddingVerticalItem2),
-//         Row(
-//           children: [
-//             Container(
-//               alignment: Alignment.center,
-//               width: dimens.width284,
-//               height: dimens.height64,
-//               padding: EdgeInsets.symmetric(
-//                 horizontal: dimens.paddingHorizontal13,
-//               ),
-//               decoration: carNumberDecorations(dimens),
-//               child: Row(
-//                 children: [
-//                   Expanded(
-//                     child: TextField(
-//                       controller: controller,
-//                       keyboardType: keyboardType,
-//                       textAlign: TextAlign.center,
-//                       textAlignVertical: TextAlignVertical.center,
-//                       inputFormatters: [
-//                         // CarNumberInputFormatter(),
-//                         UpperCaseFormatter(),
-//                         DualCarNumberInputFormatter(),
-//                         // LengthLimitingTextInputFormatter(11),
-//                       ],
-//                       cursorColor: AppColors.hintColor,
-//                       cursorWidth: dimens.width2,
-//                       cursorHeight: dimens.height40,
-//                       decoration: InputDecoration(
-//                         hintText: hintText,
-//                         hintStyle: dimens.carNumberTextFieldSty,
-//                         filled: false,
-//                         fillColor: AppColors.whiteColor,
-//                         border: InputBorder.none,
-//                         contentPadding: EdgeInsets.zero,
-//                       ),
-//                       style: dimens.carTextfieldCursorSty,
-//                     ),
-//                   ),
-//                   SizedBox(
-//                     child: Column(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       children: [
-//                         Image.asset(
-//                           AppImage.uzbFlagIcon,
-//                           height: dimens.height10,
-//                         ),
-//                         Text(
-//                           AppStrings.uzflagText,
-//                           style: dimens.cardUzFlagSty,
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ],
-//     );
-//   }
-// }
-
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -159,7 +57,7 @@ class AddCarTextfield extends StatelessWidget {
                       textAlignVertical: TextAlignVertical.center,
                       inputFormatters: [
                         UpperCaseFormatter(),
-                        DualCarNumberInputFormatter(), // Custom formatter for both formats
+                        // DualCarNumberInputFormatter(), // Custom formatter for both formats
                       ],
                       cursorColor: AppColors.hintColor,
                       cursorWidth: dimens.width2,
@@ -200,8 +98,6 @@ class AddCarTextfield extends StatelessWidget {
   }
 }
 
-
-
 class AddCarRowTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextEditingController? controller2;
@@ -210,6 +106,8 @@ class AddCarRowTextField extends StatelessWidget {
   final String? titleText;
   final TextInputType keyboardType;
   final bool showStar;
+  final bool isActive;
+  final TextStyle? style;
 
   AddCarRowTextField({
     required this.titleText,
@@ -219,6 +117,8 @@ class AddCarRowTextField extends StatelessWidget {
     this.hintText,
     this.keyboardType = TextInputType.text,
     this.showStar = false,
+    this.isActive = true,
+    this.style,
   });
 
   late Dimens dimens;
@@ -245,15 +145,18 @@ class AddCarRowTextField extends StatelessWidget {
             Container(
               width: dimens.width64,
               height: dimens.height40,
-              padding: EdgeInsets.only(
-                left: dimens.paddingHorizontal13,
+              padding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingHorizontal13,
               ),
-              decoration: inputDecorations(dimens),
+              decoration: inputDecoration(
+                dimens,
+                isActive: isActive,
+              ),
               child: TextField(
                 controller: controller,
                 keyboardType: keyboardType,
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]')),
+                  UpperCaseFormatter(),
                   LengthLimitingTextInputFormatter(3),
                 ],
                 decoration: InputDecoration(
@@ -262,8 +165,9 @@ class AddCarRowTextField extends StatelessWidget {
                   filled: false,
                   fillColor: AppColors.whiteColor,
                   border: InputBorder.none,
+                  enabled: isActive,
                 ),
-                style: dimens.myTextFieldStyle,
+                style: style,
               ),
             ),
             Gap(dimens.paddingHorizontal6),
@@ -274,7 +178,11 @@ class AddCarRowTextField extends StatelessWidget {
               padding: EdgeInsets.only(
                 left: dimens.paddingHorizontal13,
               ),
-              decoration: inputDecorations(dimens),
+              // decoration: inputDecorations(dimens),
+              decoration: inputDecoration(
+                dimens,
+                isActive: isActive,
+              ),
               child: TextField(
                 controller: controller2,
                 keyboardType: keyboardType,
@@ -282,17 +190,15 @@ class AddCarRowTextField extends StatelessWidget {
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(7),
                 ],
-                // inputFormatters: [
-                //   Masked.carNumberMask,
-                // ],
                 decoration: InputDecoration(
                   hintText: hintText,
                   hintStyle: dimens.hintStyle,
                   filled: false,
                   fillColor: AppColors.whiteColor,
                   border: InputBorder.none,
+                  enabled: isActive,
                 ),
-                style: dimens.myTextFieldStyle,
+                style: style,
               ),
             ),
           ],

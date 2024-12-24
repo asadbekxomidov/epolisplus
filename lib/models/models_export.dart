@@ -17,3 +17,4 @@ export 'question_answer_model/question_answer_response.dart';
 
 export 'profil/profil_response/carinforesponse/car_info_response.dart';
 export 'profil/profil_response/profil_response.dart';
+export 'profil/profil_response/carinforesponse/car_information_response.dart';

@@ -16,6 +16,7 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
     on<KabinetGetEvent>(userGetInformation);
     on<KabinetPushScreenEvent>(editpushScreen);
     on<AddMyCarEvent>(addCar);
+    on<MyCarDeleteEvent>(deleteCar);
   }
 
   Future<void> userGetInformation(
@@ -28,6 +29,38 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
     Emitter<KabinetState> emit,
   ) async {
     await Get.to(() => EditProfilScreen(event.userName));
+    await getData();
+  }
+
+  FutureOr<void> addCar(AddMyCarEvent event, Emitter<KabinetState> emit) async {
+    await Get.to(() => AddCarScreen());
+    await getData();
+  }
+
+  FutureOr<void> deleteCar(
+      MyCarDeleteEvent event, Emitter<KabinetState> emit) async {
+    emit(KabinetLoadingState());
+    try {
+      final profilRepository = ProfilRepository();
+      final response = await profilRepository.deleteCar(event.carNumber);
+
+      if (response.status == 200) {
+        await getData();
+      } else if (response.status == 401) {
+        final prefsManager = SharedPreferencesManager();
+        await prefsManager.clearPassword();
+        await prefsManager.clearPhone();
+        await prefsManager.clearToken();
+        Get.offAll(() => CheckAuthScreen());
+      } else {
+        // ignore: invalid_use_of_visible_for_testing_member
+        emit(KabinetErrorState(message: response.message ?? "Unknown error"));
+      }
+    } catch (e) {
+      // ignore: invalid_use_of_visible_for_testing_member
+      emit(KabinetErrorState(message: e.toString()));
+    }
+
     await getData();
   }
 
@@ -56,10 +89,5 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
       // ignore: invalid_use_of_visible_for_testing_member
       emit(KabinetErrorState(message: e.toString()));
     }
-  }
-
-  FutureOr<void> addCar(AddMyCarEvent event, Emitter<KabinetState> emit) async {
-    await Get.to(() => AddCarScreen());
-    await getData();
   }
 }

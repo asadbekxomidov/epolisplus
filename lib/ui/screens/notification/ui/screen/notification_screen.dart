@@ -21,15 +21,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     final dimens = Dimens(context);
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => NotificationBloc(),
-        ),
-        // BlocProvider(
-        //   create: (context) => SettingsBloc(),
-        // ),
-      ],
+    return BlocProvider(
+      create: (context) => NotificationBloc(),
       child: Scaffold(
         body: GreenImageBackground(
           child: BlocConsumer<NotificationBloc, NotificationState>(

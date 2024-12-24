@@ -38,6 +38,7 @@ class AppImage {
       'assets/images/home/icons/emergency_services_icon.png';
 
   static IconData visibility = Icons.visibility;
+  static IconData addIconData = Icons.add;
   static IconData in_visibility = Icons.visibility_off;
   static IconData arrow_forward_outlined = Icons.arrow_forward_outlined;
   static IconData arrow_circle_left_outlined = Icons.arrow_circle_left_outlined;
@@ -134,4 +135,9 @@ class AppImage {
   static String creditCardIcon = 'assets/images/card_icon.png';
   static String paswordCardImage = 'assets/images/password_card_image.png';
   static String uzbFlagIcon = 'assets/images/flag_uzb.png';
+  static String activateWIcon = 'assets/images/activate_w_icon.png';
+  static String codeIcon = 'assets/images/code_icon.png';
+  static String noInternet = 'assets/images/no_internet.png';
+  static String updateInternetIcon = 'assets/images/update_internet_icon.png';
+  static String splashPoliciesIcon = 'assets/images/splash_policies_icon.png';
 }

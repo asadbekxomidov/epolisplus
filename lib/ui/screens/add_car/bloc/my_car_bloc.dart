@@ -1,3 +1,5 @@
+import 'package:epolisplus/log/logger.dart';
+import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/repository/profil/profil_repository.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:equatable/equatable.dart';
@@ -26,14 +28,32 @@ class MyCarBloc extends Bloc<MyCarEvent, MyCarState> {
     var carNumber = carNumberController.text.trim();
     var teachPassportSeria = teachSeriaController.text.trim();
     var teachPassportNumber = teachPassportNumberController.text.trim();
+
     try {
       final ProfilRepository repository = ProfilRepository();
-      var response = repository.getCarInformation(
-        teachPassportSeria,
-        teachPassportNumber,
-        carNumber,
-      );
+      if (carNumber.isNotEmpty &&
+          teachPassportSeria.isNotEmpty &&
+          teachPassportNumber.isNotEmpty) {
+        var response = await repository.getCarInformation(
+          teachPassportSeria,
+          teachPassportNumber,
+          carNumber,
+        );
+
+        print('Response status: ${response.status}');
+        print('Response message: ${response.message}');
+        print('Response data: ${response.response}');
+        logger(response.toString(), error: "MyCar Bloc");
+
+        if (response.status == 200 && response.response != null) {
+          emit(CarInformationGetState(response.response!));
+        } else {
+          emit(CarErrorState(response.message!));
+        }
+      }
     } catch (e) {
+      print(
+          "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       emit(CarErrorState(e.toString()));
     }
   }
@@ -43,6 +63,3 @@ class MyCarBloc extends Bloc<MyCarEvent, MyCarState> {
     Get.to(() => RegisterCertnumberScreen());
   }
 }
-
-
-// getCarInformation

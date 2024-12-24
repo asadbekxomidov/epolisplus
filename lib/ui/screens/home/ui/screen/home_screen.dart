@@ -67,6 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         Row(
                           children: [
                             InkWell(
+                              onTap: () {
+                                homeBloc.add(PushWarrantyEvent());
+                              },
                               child: Image.asset(
                                 AppImage.shieldPlusIcon,
                                 height: dimens.height24,
@@ -102,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     CustomHorizontalButton(
                       dimens: dimens,
                     ),
-                    Gap(dimens.paddingVerticalItem16),
+                    // Gap(dimens.paddingVerticalItem16),
                     Card(
                       child: Container(
                         height: dimens.height220,
@@ -110,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: cardContainerDecoration(dimens),
                       ),
                     ),
-                    Gap(dimens.paddingVerticalItem16),
+                    // Gap(dimens.paddingVerticalItem16),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Column(
@@ -144,7 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     iconData: AppImage.navigatenextIcon,
                                     image: AppImage.warrantyHomeIcon,
                                     text: AppStrings.warrantyCode,
-                                    onClick: () {},
+                                    onClick: () {
+                                      homeBloc.add(PushWarrantyEvent());
+                                    },
                                   ),
                                 ],
                               ),
