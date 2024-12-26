@@ -133,19 +133,19 @@ class _AddCarScreenState extends State<AddCarScreen> {
               ),
             );
           }
-          print(
-              'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ  ${state} WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
-          if (state is CarLoadingState) {
-            return Scaffold(
-              body: Container(
-                height: dimens.screenHeight,
-                decoration: mainDecorations(),
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            );
-          }
+          // print(
+          //     'QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ  ${state} WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
+          // if (state is CarLoadingState) {
+          //   return Scaffold(
+          //     body: Container(
+          //       height: dimens.screenHeight,
+          //       decoration: mainDecorations(),
+          //       child: const Center(
+          //         child: CircularProgressIndicator(),
+          //       ),
+          //     ),
+          //   );
+          // }
 
           return Scaffold(
             body: Container(

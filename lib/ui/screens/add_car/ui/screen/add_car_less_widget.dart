@@ -28,17 +28,15 @@ class AddCarLessWidget extends StatelessWidget {
           print('add screen informations adjbjdfghaskdjhakdhkashdhakdhakhds');
           myCarBloc = BlocProvider.of<MyCarBloc>(context);
 
-          // if (state is CarLoadingState) {
-          //   return const Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: [
-          //       Center(
-          //         child: CircularProgressIndicator(),
-          //       ),
-          //     ],
-          //   );
-          //
+          if (state is CarLoadingState) {
+            return const Stack(
+              children: [
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ],
+            );
+          }
 
           if (state is CarInitialState) {
             return Column(

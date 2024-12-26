@@ -41,9 +41,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     // }
     if (token != null && token.isNotEmpty) {
       // print('${token} SplashSplashSplashSplashSplash');
+      await Future.delayed(Duration(seconds: 2));
       Get.off(() => BottomWidget());
       emit(SplashSuccessState());
     } else {
+      await Future.delayed(Duration(seconds: 2));
       Get.off(() => CheckAuthScreen());
       emit(SplashAuthRequiredState());
     }

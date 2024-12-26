@@ -51,7 +51,7 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
       builder: (context, state) {
         bloc = BlocProvider.of<CheckAuthBloc>(context);
         final bool isActive = state is PhoneWidgetState ? state.isActive : true;
-        final bool isLoading = state is LoadingState;
+        // final bool isLoading = state is LoadingState;
 
         return Container(
           height: dimens.screenHeight,
@@ -86,11 +86,12 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
               ),
               Gap(dimens.paddingVerticalItem16),
               RightIconBtn(
-                isLoading: isLoading,
+                isLoading: state is LoadingState,
                 onClick: () {
                   bloc.add(CheckAuthEvent());
                 },
                 text: AppStrings.loginButton,
+                // text: '',
               ),
             ],
           ),

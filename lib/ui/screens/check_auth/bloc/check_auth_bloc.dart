@@ -20,8 +20,8 @@ class CheckAuthBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
 
   Future<void> phonelogin(
       CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
-    emit(LoadingState());
     await Future.delayed(Duration(seconds: 2));
+    emit(LoadingState());
 
     var phoneNumber = phoneController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
@@ -40,8 +40,11 @@ class CheckAuthBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
       var isAuthUser = baseResponse.response as bool;
 
       if (isAuthUser) {
+        await Future.delayed(Duration(seconds: 1));
+
         Get.to(() => LoginScreen(phoneNumber: phoneNumber));
       } else {
+        await Future.delayed(Duration(seconds: 1));
         Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
       }
       return;

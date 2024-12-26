@@ -257,8 +257,13 @@ class CarInformationResponse {
     };
   }
 
+  // @override
+  // String toString() {
+  //   return "CarInformationResponse(error: '$error', errorMessage: '${errorMessage}', techPassportIssueDate: '$techPassportIssueDate', markaId: '$markaId', modelId: '$modelId', vehicleTypeId: '$vehicleTypeId', modelName: '$modelName', issueYear: '$issueYear', bodyNumber: '$bodyNumber', engineNumber: '$engineNumber', useTerritory: '$useTerritory', fy: '$fy', orgName: '$orgName', lastName: '$lastName', firstName: '$firstName', middleName: '$middleName', inn: '$inn', seats: '$seats', pinfl: '$pinfl', vehilceName: '$vehicleName', vehilceTerritory: '$vehicleTerritory', regionName: '$regionName', passportSeries: '$passportSeries', passportNumber: '$passportNumber', passportIssuedBy: '$passportIssuedBy', passportIssuedDate: '$passportIssuedDate', birthday: '$birthday', address: '$address')";
+  // }
+
   @override
   String toString() {
-    return 'CarInformationResponse(error: $error, errorMessage: $errorMessage, techPassportIssueDate: $techPassportIssueDate, markaId: $markaId, modelId: $modelId, vehicleTypeId: $vehicleTypeId, modelName: $modelName, issueYear: $issueYear, bodyNumber: $bodyNumber, engineNumber: $engineNumber, useTerritory: $useTerritory, fy: $fy, orgName: $orgName, lastName: $lastName, firstName: $firstName, middleName: $middleName, inn: $inn, seats: $seats, pinfl: $pinfl, vehilceName: $vehicleName, vehilceTerritory: $vehicleTerritory, regionName: $regionName, passportSeries: $passportSeries, passportNumber: $passportNumber, passportIssuedBy: $passportIssuedBy, passportIssuedDate: $passportIssuedDate, birthday: $birthday, address: $address)';
+    return "CarInformationResponse{error: '$error', errorMessage: '${errorMessage}', techPassportIssueDate: '$techPassportIssueDate', markaId: '$markaId', modelId: '$modelId', vehicleTypeId: '$vehicleTypeId', modelName: '$modelName', issueYear: '$issueYear', bodyNumber: '$bodyNumber', engineNumber: '$engineNumber', useTerritory: '$useTerritory', fy: '$fy', orgName: '$orgName', lastName: '$lastName', firstName: '$firstName', middleName: '$middleName', inn: '$inn', seats: '$seats', pinfl: '$pinfl', vehilceName: '$vehicleName', vehilceTerritory: '$vehicleTerritory', regionName: '$regionName', passportSeries: '$passportSeries', passportNumber: '$passportNumber', passportIssuedBy: '$passportIssuedBy', passportIssuedDate: '$passportIssuedDate', birthday: '$birthday', address: '$address'}";
   }
 }

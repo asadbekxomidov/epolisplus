@@ -14,7 +14,7 @@ class CarLoadedState extends MyCarState {}
 class CarInformationGetState extends MyCarState {
   final CarInformationResponse response;
 
-  CarInformationGetState(this.response);
+  CarInformationGetState({required this.response});
 
   @override
   List<Object?> get props => [response];

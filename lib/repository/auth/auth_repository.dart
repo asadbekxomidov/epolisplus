@@ -22,7 +22,9 @@ class AuthRepository extends AuthRepositoryIml {
       'Accept-Encoding': 'UTF-8',
     };
 
-    var data = {"phone": phoneNumber};
+    var data = {
+      "phone": phoneNumber,
+    };
 
     var url = ApiConstanta.CHECK_AUTH;
     Response? response;

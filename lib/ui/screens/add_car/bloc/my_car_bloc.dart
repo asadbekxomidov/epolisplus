@@ -46,14 +46,13 @@ class MyCarBloc extends Bloc<MyCarEvent, MyCarState> {
         logger(response.toString(), error: "MyCar Bloc");
 
         if (response.status == 200 && response.response != null) {
-          emit(CarInformationGetState(response.response!));
+          emit(CarInformationGetState(response: response.response!));
+        } else if (response.status == 500) {
         } else {
           emit(CarErrorState(response.message!));
         }
       }
     } catch (e) {
-      print(
-          "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       emit(CarErrorState(e.toString()));
     }
   }
