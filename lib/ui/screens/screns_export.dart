@@ -63,3 +63,5 @@ export 'add_car/ui/screen/add_car_screen.dart';
 export 'add_car/ui/screen/registercertnumber_screen.dart';
 // ? warrantycode
 export 'warrantycode/ui/screen/warrantycode_screen.dart';
+// ? modul
+export 'modul/addedcar/screen/added_car_screen.dart';

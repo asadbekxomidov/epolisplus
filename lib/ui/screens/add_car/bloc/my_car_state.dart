@@ -1,29 +1,20 @@
 part of 'my_car_bloc.dart';
 
-class MyCarState extends Equatable {
+abstract class MyCarState extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class CarInitialState extends MyCarState {}
+class MyCarInitialState extends MyCarState {}
 
-class CarLoadingState extends MyCarState {}
+class MyCarLodingState extends MyCarState {}
 
-class CarLoadedState extends MyCarState {}
+class MyCarLoadedState extends MyCarState {}
 
-class CarInformationGetState extends MyCarState {
-  final CarInformationResponse response;
-
-  CarInformationGetState({required this.response});
-
-  @override
-  List<Object?> get props => [response];
-}
-
-class CarErrorState extends MyCarState {
+class MyCarErrorState extends MyCarState {
   final String error;
 
-  CarErrorState(this.error);
+  MyCarErrorState(this.error);
 }
 
-class CarSuccesState extends MyCarState {}
+class MyCarSuccesState extends MyCarState {}

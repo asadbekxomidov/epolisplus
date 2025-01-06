@@ -1,10 +1,11 @@
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/ui/screens/modul/addedcar/screen/added_car_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/warrantycode/bloc/warrantycode_bloc.dart';
-import 'package:epolisplus/ui/screens/add_car/ui/screen/add_car_less_widget.dart';
 
 class WarrantycodeScreen extends StatefulWidget {
   const WarrantycodeScreen({super.key});
@@ -15,6 +16,7 @@ class WarrantycodeScreen extends StatefulWidget {
 
 class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
   late Dimens dimens;
+  late WarrantycodeBloc warrantycodeBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,8 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
         body: BlocConsumer<WarrantycodeBloc, WarrantycodeState>(
           listener: (context, state) {},
           builder: (context, state) {
+            warrantycodeBloc = BlocProvider.of<WarrantycodeBloc>(context);
+
             return Container(
               height: dimens.screenHeight,
               width: dimens.screenWidth,
@@ -146,7 +150,10 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                       style: dimens.font20Blackw400Sty,
                     ),
                     Gap(dimens.paddingVerticalItem16),
-                    AddCarLessWidget(),
+                    AddCarLessWidget(
+                      CarInformationResponse(),
+                      warrantycodeBloc,
+                    ),
                   ],
                 ),
               ),

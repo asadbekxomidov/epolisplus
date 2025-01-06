@@ -1,21 +1,26 @@
-import 'package:epolisplus/ui/screens/add_car/bloc/my_car_bloc.dart';
-import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'package:epolisplus/utils/utils_export.dart';
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/ui/widgets/widgets_export.dart';
+import 'package:epolisplus/ui/screens/modul/addedcar/bloc/add_car_bloc.dart';
 
 class AddCarLessWidget extends StatelessWidget {
   late Dimens dimens;
-  late MyCarBloc myCarBloc;
+  late AddedCarBloc myCarBloc;
+  CarInformationResponse vehicleInformation;
+  Bloc listener;
+
+  AddCarLessWidget(this.vehicleInformation, this.listener);
 
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => MyCarBloc(),
-      child: BlocConsumer<MyCarBloc, MyCarState>(
+      create: (context) => AddedCarBloc(),
+      child: BlocConsumer<AddedCarBloc, AddedCarState>(
         listener: (context, state) {
           if (state is CarErrorState) {
             showErrorMessageSnackBar(
@@ -25,8 +30,7 @@ class AddCarLessWidget extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          print('add screen informations adjbjdfghaskdjhakdhkashdhakdhakhds');
-          myCarBloc = BlocProvider.of<MyCarBloc>(context);
+          myCarBloc = BlocProvider.of<AddedCarBloc>(context);
 
           if (state is CarLoadingState) {
             return const Stack(
@@ -82,8 +86,6 @@ class AddCarLessWidget extends StatelessWidget {
           }
 
           if (state is CarInformationGetState) {
-            final carInfo = state.response;
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -123,26 +125,6 @@ class AddCarLessWidget extends StatelessWidget {
                   },
                   iconData: AppImage.searchIcon,
                 ),
-                // Text(
-                //   "Car Model: ${carInfo.modelName}",
-                //   style: TextStyle(color: Colors.black),
-                // ),
-                // Text(
-                //   "Owner: ${carInfo.orgName}",
-                //   style: TextStyle(color: Colors.black),
-                // ),
-                // Text(
-                //   "Region: ${carInfo.regionName}",
-                //   style: TextStyle(color: Colors.black),
-                // ),
-                // Text(
-                //   "Issue Year: ${carInfo.issueYear ?? 'No Year'}",
-                //   style: TextStyle(color: Colors.black),
-                // ),
-                // Text(
-                //   "Engine Number: ${carInfo.engineNumber ?? 'No Engine Number'}",
-                //   style: TextStyle(color: Colors.black),
-                // ),
               ],
             );
           }
@@ -152,3 +134,63 @@ class AddCarLessWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Gap(dimens.paddingVerticalItem12),
+Text(
+  AppStrings.carOwnerText,
+  style: dimens.textStyleSecondary,
+),
+MyContainerWidget(
+  text: "Asadbek Xomidov",
+),
+Gap(dimens.paddingVerticalItem14),
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.carBrandText,
+          style: dimens.textStyleSecondary,
+        ),
+        MyContainerRowWidget(
+          text: "Spark",
+        ),
+      ],
+    ),
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.yearofManufactureText,
+          style: dimens.textStyleSecondary,
+        ),
+        MyContainerRowWidget(
+          text: "2020",
+        ),
+      ],
+    ),
+  ],
+),
+Gap(dimens.paddingVerticalItem14),
+RegisterPushButton(
+  onClick: () {},
+  text: AppStrings.addCarButtonText,
+),
+
+*/
