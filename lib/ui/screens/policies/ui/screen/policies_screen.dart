@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/policies/bloc/policies_bloc.dart';
+import 'package:gap/gap.dart';
 
 class PoliciesScreen extends StatefulWidget {
   @override
@@ -15,6 +16,8 @@ class _PoliciesScreenState extends State<PoliciesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
     return BlocProvider(
       create: (context) => PoliciesBloc(),
       child: BlocConsumer<PoliciesBloc, PoliciesState>(
@@ -23,8 +26,20 @@ class _PoliciesScreenState extends State<PoliciesScreen> {
           return Scaffold(
             body: GreenImageBackground(
               child: Container(
+                padding: EdgeInsets.all(
+                  dimens.paddingHorizontal16,
+                ),
                 child: SingleChildScrollView(
-                  child: Column(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Gap(dimens.paddingVerticalItem59),
+                      Text(
+                        AppStrings.myPolicies,
+                        style: dimens.font30Whitew600Sty,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

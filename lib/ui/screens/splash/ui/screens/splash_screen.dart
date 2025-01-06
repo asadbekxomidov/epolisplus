@@ -1,7 +1,6 @@
 import 'package:epolisplus/ui/screens/splash/bloc/splash_bloc.dart';
-import 'package:epolisplus/ui/widgets/widgets_export.dart';
+// import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -158,46 +157,6 @@ class _SplashScreenState extends State<SplashScreen> {
             }
           },
           builder: (context, state) {
-            if (state is SplashLoadingState) {
-              return Container(
-                height: dimens.screenHeight,
-                decoration: mainDecorations(),
-              );
-            }
-            // return Container(
-            //   height: dimens.screenHeight,
-            //   decoration: mainDecorations(),
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: dimens.paddingHorizontal,
-            //   ),
-            //   child: Column(
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Gap(dimens.paddingVerticalItem225),
-            //       SizedBox(
-            //         child: Column(
-            //           children: [
-            //             Image.asset(
-            //               AppImage.splashImage,
-            //               height: dimens.height68,
-            //             ),
-            //             Gap(dimens.paddingVerticalItem64),
-            //             Image.asset(
-            //               AppImage.appImageLogo,
-            //               height: dimens.height32,
-            //             ),
-            //             Text(
-            //               AppStrings.splashwelcomeText,
-            //               style: dimens.splashTextStyle,
-            //               textAlign: TextAlign.center,
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // );
-
             return Container(
               height: dimens.screenHeight,
               decoration: mainDecorations(),

@@ -51,7 +51,7 @@ class AppStrings {
       "There is an error in the code or password sent, or the password is not entered the same repeatedly";
   static const String button_agree =
       "Agree to the terms of use of the application";
-  static const String myPolicies = "Мои полисы";
+
   static const String insurancePrograms = "Программы страхования";
   static const String warrantyCode = "Активировать гарантийный код";
   static const String additionalServices = "Дополнительные услуги";
@@ -122,11 +122,11 @@ class AppStrings {
   static const String servicesText = "Услуги";
   // ! Ploicies
 
-  static const String myploicies = "Мои полисы";
+  static const String myPolicies = "Мои полисы";
   // ! Splash
 
   static const String emergencyCall = "Экстренный вызов";
-  
+
   // ! Kabinet
 
   static const String cabientText = "Кабинет";
@@ -158,6 +158,7 @@ class AppStrings {
   static const String addwarrantyCode = "Добавить гарантийный код";
   static const String vehicleInformation = "Информация об автомобиле";
   static const String noconnectionInternet = "Нет подключенияк интернету";
-  static const String checkyourcetworWiFinetwork = "Проверьте настройки сети или подключитесь к другой Wi-Fi сети.";
+  static const String checkyourcetworWiFinetwork =
+      "Проверьте настройки сети или подключитесь к другой Wi-Fi сети.";
   static const String connectText = "Подключиться";
 }

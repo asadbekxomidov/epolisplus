@@ -169,6 +169,11 @@ myCarCardDecoration(Dimens dimens) {
   return BoxDecoration(
     color: AppColors.cardContainerColor,
     borderRadius: BorderRadius.circular(dimens.radius16),
+    image: DecorationImage(
+      image: AssetImage(
+        AppImage.epolisCardLogo,
+      ),
+    ),
     boxShadow: [
       BoxShadow(
         color: AppColors.blackColor.withOpacity(0.1),
@@ -311,8 +316,8 @@ myContainerWidgets(Dimens dimens, double radius) {
   );
 }
 
-
-mybuttonDeco(Dimens dimens, double radius, Color backgraoundColor, Color borderColor) {
+mybuttonDeco(
+    Dimens dimens, double radius, Color backgraoundColor, Color borderColor) {
   return BoxDecoration(
     color: backgraoundColor,
     borderRadius: BorderRadius.circular(radius),
@@ -327,5 +332,45 @@ mybuttonDeco(Dimens dimens, double radius, Color backgraoundColor, Color borderC
         offset: Offset(0, 2),
       ),
     ],
+  );
+}
+
+myCardDecorations(
+    Dimens dimens, double radius, Color backgraoundColor, Color borderColor) {
+  return BoxDecoration(
+    color: backgraoundColor,
+    borderRadius: BorderRadius.circular(radius),
+    border: Border.all(
+      color: borderColor,
+      width: dimens.width1,
+    ),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.shadowColor,
+        blurRadius: 4.0,
+        offset: Offset(0, 2),
+      ),
+    ],
+  );
+}
+
+myContainerLodingDEcorations(
+  Dimens dimens,
+  Color backgraoundColor,
+) {
+  return BoxDecoration(
+    color: backgraoundColor,
+    // borderRadius: BorderRadius.circular(radius),
+    // border: Border.all(
+    //   color: borderColor,
+    //   width: dimens.width1,
+    // ),
+    // boxShadow: [
+    //   BoxShadow(
+    //     color: AppColors.shadowColor,
+    //     blurRadius: 4.0,
+    //     offset: Offset(0, 2),
+    //   ),
+    // ],
   );
 }

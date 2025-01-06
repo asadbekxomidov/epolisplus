@@ -15,3 +15,60 @@ class LoadingIndicator extends StatelessWidget {
     return isLoading ? progressBar2(dimens2) : Container();
   }
 }
+
+// class LoadingPages extends StatelessWidget {
+//   late Dimens dimens;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     dimens = Dimens(context);
+
+//     return Dialog(
+//       backgroundColor: AppColors.dialogsColor,
+//       // insetPadding: EdgeInsets.zero,
+//       child: Stack(
+//         children: [
+//           Column(
+//             // mainAxisSize: MainAxisSize.max,
+//             // crossAxisAlignment: CrossAxisAlignment.center,
+//             // mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               Image.asset(
+//                 AppImage.loadingPageLogo,
+//                 height: dimens.height60,
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+class LoadingPages extends StatelessWidget {
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Stack(
+      children: [
+        Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          decoration: myContainerLodingDEcorations(
+            dimens,
+            AppColors.backgroundBlurColor0,
+          ),
+          child: Center(
+            child: Image.asset(
+              AppImage.loadingPageLogo,
+              height: dimens.height60,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

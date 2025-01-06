@@ -1060,6 +1060,16 @@ class Dimens {
     );
   }
 
+  TextStyle get font30Whitew600Sty {
+    return TextStyle(
+      color: AppColors.whiteColor255,
+      fontWeight: FontWeight.w600,
+      fontSize: font30,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
   TextStyle get font24Blackw600Sty {
     return TextStyle(
       color: AppColors.textBlackColors,

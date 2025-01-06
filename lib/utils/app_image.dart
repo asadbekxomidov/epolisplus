@@ -113,6 +113,7 @@ class AppImage {
 
   static String ingoUzbSvg = 'assets/svg/ingo_uzb_image_scg.svg';
   static String capitalSugurtaSvg = 'assets/svg/capital_sugurta_image_svg.svg';
+  static String epolisCardLogo = 'assets/svg/epolis_card_logo.svg';
 
   // ! partners
   static String partnersOsagoIcon =
@@ -140,4 +141,5 @@ class AppImage {
   static String noInternet = 'assets/images/no_internet.png';
   static String updateInternetIcon = 'assets/images/update_internet_icon.png';
   static String splashPoliciesIcon = 'assets/images/splash_policies_icon.png';
+  static String loadingPageLogo = 'assets/images/loading_page_logo.png';
 }

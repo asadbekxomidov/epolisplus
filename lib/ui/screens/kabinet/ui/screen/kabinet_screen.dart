@@ -1,12 +1,12 @@
-import 'package:epolisplus/models/models_export.dart';
-import 'package:epolisplus/ui/screens/kabinet/bloc/kabinet_bloc.dart';
-import 'package:epolisplus/ui/widgets/buttons.dart';
-import 'package:epolisplus/ui/widgets/greenbackground.dart';
-import 'package:epolisplus/utils/utils_export.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:epolisplus/ui/widgets/buttons.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/ui/widgets/greenbackground.dart';
+import 'package:epolisplus/ui/screens/kabinet/bloc/kabinet_bloc.dart';
 
 class CabinetScreen extends StatefulWidget {
   @override
@@ -36,11 +36,10 @@ class _CabinetScreenState extends State<CabinetScreen> {
 
           if (state is KabinetLoadingState) {
             return GreenImageBackground(
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
+              child: LoadingPages(),
             );
-          } else if (state is KabinetInformationGetState) {
+          }
+          if (state is KabinetInformationGetState) {
             final profil = state.profilResponse;
             final carInfoList = profil.carInfo;
 
@@ -125,7 +124,8 @@ class _CabinetScreenState extends State<CabinetScreen> {
             },
             child: Container(
                 padding: EdgeInsets.all(
-                  dimens.paddingVerticalItem36,
+                  dimens.paddingVerticalItem16,
+                  // dimens.paddingVerticalItem36,
                 ),
                 height: dimens.height208,
                 width: dimens.screenWidth,

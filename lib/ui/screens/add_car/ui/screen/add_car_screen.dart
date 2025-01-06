@@ -20,7 +20,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => MyCarBloc()..add(AddCarEvent()),
+      create: (context) => MyCarBloc(),
       child: BlocConsumer<MyCarBloc, MyCarState>(
         listener: (context, state) {
           if (state is CarErrorState) {

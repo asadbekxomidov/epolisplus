@@ -145,9 +145,9 @@ class AddCarRowTextField extends StatelessWidget {
             Container(
               width: dimens.width64,
               height: dimens.height40,
-              padding: EdgeInsets.symmetric(
-                horizontal: dimens.paddingHorizontal13,
-              ),
+              // padding: EdgeInsets.symmetric(
+              //   horizontal: dimens.paddingHorizontal13,
+              // ),
               decoration: inputDecoration(
                 dimens,
                 isActive: isActive,
@@ -155,6 +155,7 @@ class AddCarRowTextField extends StatelessWidget {
               child: TextField(
                 controller: controller,
                 keyboardType: keyboardType,
+                textAlign: TextAlign.center,
                 inputFormatters: [
                   UpperCaseFormatter(),
                   LengthLimitingTextInputFormatter(3),
@@ -175,9 +176,9 @@ class AddCarRowTextField extends StatelessWidget {
               // width: dimens.screenWidth,
               width: dimens.width289,
               height: dimens.height40,
-              padding: EdgeInsets.only(
-                left: dimens.paddingHorizontal13,
-              ),
+              // padding: EdgeInsets.only(
+              //   left: dimens.paddingHorizontal13,
+              // ),
               // decoration: inputDecorations(dimens),
               decoration: inputDecoration(
                 dimens,
@@ -186,6 +187,7 @@ class AddCarRowTextField extends StatelessWidget {
               child: TextField(
                 controller: controller2,
                 keyboardType: keyboardType,
+                textAlign: TextAlign.center,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                   LengthLimitingTextInputFormatter(7),

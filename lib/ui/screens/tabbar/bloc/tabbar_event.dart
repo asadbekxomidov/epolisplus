@@ -24,13 +24,3 @@ class TabScreenPushEvent extends TabbarEvent {
   @override
   List<Object?> get props => [index];
 }
-
-/*class HomeScreenPushEvent extends TabbarEvent {}
-
-class KabinetScreenPushEvent extends TabbarEvent {}
-
-class SosScreenPushEvent extends TabbarEvent {}
-
-class PoliciesScreenPushEvent extends TabbarEvent {}
-
-class PartnersScreenPushEvent extends TabbarEvent {}*/
