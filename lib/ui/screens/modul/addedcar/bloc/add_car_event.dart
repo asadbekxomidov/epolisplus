@@ -5,6 +5,8 @@ class AddedCarEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class GetInfromationCarEvent extends AddedCarEvent {}
+
 class AddCarEvent extends AddedCarEvent {}
 
 class RegisterCertificateNumberEvent extends AddedCarEvent {}

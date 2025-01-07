@@ -1,11 +1,10 @@
-import 'package:epolisplus/log/logger.dart';
-import 'package:epolisplus/models/models_export.dart';
-import 'package:epolisplus/repository/profil/profil_repository.dart';
-import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/repository/profil/profil_repository.dart';
 
 part 'add_car_event.dart';
 part 'add_car_state.dart';
@@ -14,8 +13,18 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
     implements OnVehicleListener {
   var _vehicleInformation = CarInformationResponse();
 
+  OnVehicleListener? listener;
+
   String get getVehicleOwnerName {
-    return "${_vehicleInformation.orgName} ${_vehicleInformation.birthday}";
+    return "${_vehicleInformation.orgName}";
+  }
+
+  String get getVehicleOwnerCarNumber {
+    return "${_vehicleInformation.issueYear}";
+  }
+
+  String get getVehicleOwnerCarModelName {
+    return "${_vehicleInformation.modelName}";
   }
 
   final TextEditingController carNumberController = TextEditingController();
@@ -23,13 +32,14 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
   final TextEditingController teachPassportNumberController =
       TextEditingController();
 
-  AddedCarBloc() : super(CarInitialState()) {
-    on<AddCarEvent>(onmyCarInformation);
+  AddedCarBloc({this.listener}) : super(CarInitialState()) {
+    on<GetInfromationCarEvent>(onmyCarInformation);
     on<RegisterCertificateNumberEvent>(onpushScreen);
+    on<AddCarEvent>(onaddCar);
   }
 
   Future<void> onmyCarInformation(
-      AddCarEvent event, Emitter<AddedCarState> emit) async {
+      GetInfromationCarEvent event, Emitter<AddedCarState> emit) async {
     emit(CarLoadingState());
 
     var carNumber = carNumberController.text.trim();
@@ -47,21 +57,18 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
           carNumber,
         );
 
-        print('Response status: ${response.status}');
-        print('Response message: ${response.message}');
-        print('Response data: ${response.response}');
-        logger(response.toString(), error: "MyCar Bloc");
-
         if (response.status == 200 && response.response != null) {
           print(response.response!);
           print("object");
           _vehicleInformation = response.response!;
-          // listener.onVehicle(_vehicleInformation);
+          // listener!.onVehicle(_vehicleInformation);
           emit(CarInformationGetState());
         } else if (response.status == 500) {
         } else {
           emit(CarErrorState(response.message!));
         }
+      } else {
+        emit(CarErrorState('Malumotlar bosh'));
       }
     } catch (e) {
       emit(CarErrorState(e.toString()));
@@ -79,6 +86,58 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
     if (vehicle.error == "0") {
       isShowBtn = true;
       // emit(CarSuccesState());
+    }
+  }
+
+  // Future<void> onaddCar(AddCarEvent event, Emitter<AddedCarState> emit) async {
+  //   emit(CarLoadedState());
+
+  //   try {
+  //     final ProfilRepository repository = ProfilRepository();
+
+  //     var baseResponse = await repository.addUserCar(_vehicleInformation);
+
+  //     if (baseResponse.status == 200) {
+  //       Get.back();
+  //       emit(CarSuccesState());
+  //     } else {
+  //       emit(CarErrorState(baseResponse.message!));
+  //     }
+  //   } catch (e) {
+  //     emit(CarErrorState(e.toString()));
+  //   }
+  // }
+
+  Future<void> onaddCar(AddCarEvent event, Emitter<AddedCarState> emit) async {
+    emit(CarLoadedState());
+
+    try {
+      final ProfilRepository repository = ProfilRepository();
+      var carNumber = carNumberController.text.trim();
+      var teachPassportSeria = teachSeriaController.text.trim();
+      var teachPassportNumber = teachPassportNumberController.text.trim();
+
+      if (carNumber.isNotEmpty &&
+          teachPassportSeria.isNotEmpty &&
+          teachPassportNumber.isNotEmpty) {
+        var data = _vehicleInformation.toJson();
+        // var data = _vehicleInformation.toJson(
+        //   carNumber,
+        //   teachPassportSeria,
+        //   teachPassportNumber,
+        // );
+
+        var baseResponse = await repository.addUserCar(data);
+
+        if (baseResponse.status == 200) {
+          Get.back();
+          emit(CarSuccesState());
+        } else {
+          emit(CarErrorState(baseResponse.message!));
+        }
+      }
+    } catch (e) {
+      emit(CarErrorState(e.toString()));
     }
   }
 }

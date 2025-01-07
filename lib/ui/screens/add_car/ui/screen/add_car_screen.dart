@@ -2,7 +2,7 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
-import 'package:epolisplus/models/models_export.dart';
+// import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/add_car/bloc/my_car_bloc.dart';
 import 'package:epolisplus/ui/screens/modul/addedcar/screen/added_car_screen.dart';
@@ -57,13 +57,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
                         style: dimens.pagesBlackTitleSty,
                       ),
                       Gap(dimens.paddingVerticalItem16),
-                      AddCarLessWidget(
-                        CarInformationResponse(),
-                        myCarBloc,
-
-                        // vehicleInformation: CarInformationResponse(),
-                        // listener: myCarBloc,
-                      ),
+                      AddedCarScreen(),
                       Gap(dimens.paddingVerticalItem12),
 
                       // Text(

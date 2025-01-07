@@ -11,4 +11,7 @@ abstract class ProfilRepositoryIml {
   Future<BaseModels> deleteCar(
     String govNumber,
   );
+  Future<BaseModels<CarInformationResponse>> addUserCar(
+    Map<String, dynamic> carData,
+  );
 }

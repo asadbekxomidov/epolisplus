@@ -14,13 +14,25 @@ void logger(
 }
 
 void loggerMap(
-    Map message, {
-      String error = "",
-    }) {
+  Map message, {
+  String error = "",
+}) {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
   if (IConstanta.IS_SHOW_LOGGER) {
     logger.t(message, error: error == "" ? null : error);
+  }
+}
+
+void loggerF(
+  String message, {
+  String error = "",
+}) {
+  var logger = Logger(
+    printer: PrettyPrinter(),
+  );
+  if (IConstanta.IS_SHOW_LOGGER) {
+    logger.f(message, error: error == "" ? null : error);
   }
 }

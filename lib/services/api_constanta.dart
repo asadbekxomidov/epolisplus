@@ -16,6 +16,7 @@ class ApiConstanta {
   static const USER_INFORMATION = "v2/user/profile";
   static const GET_CAR_INFORMATION = "v1/osgo/vehicle";
   static const DELETE_CAR = "v1/user/delete-my-car";
+  static const ADD_MY_CAR = "/v1/user/add-user-car";
 }
 
 

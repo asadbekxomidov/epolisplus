@@ -7,6 +7,7 @@ class AddCarTextfield extends StatelessWidget {
   final TextEditingController? controller;
   final String? hintText;
   final String? titleText;
+
   final TextInputType keyboardType;
   final bool showStar;
 
@@ -105,6 +106,7 @@ class AddCarRowTextField extends StatelessWidget {
   final String? hintText;
   final String? titleText;
   final TextInputType keyboardType;
+
   final bool showStar;
   final bool isActive;
   final TextStyle? style;

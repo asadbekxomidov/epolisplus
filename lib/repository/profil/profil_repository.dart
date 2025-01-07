@@ -18,7 +18,7 @@ class ProfilRepository extends ProfilRepositoryIml {
 
     var headers = {
       'Content-Type': 'application/json',
-      'Content': 'application/json',
+      'Content': 'ason',
       'Accept-Language': 'ru-RU',
       'Accept-Encoding': 'UTF-8',
       'Authorization': 'Bearer $token',
@@ -124,27 +124,68 @@ class ProfilRepository extends ProfilRepositoryIml {
     try {
       response = await service.getPostData(data, headers, url);
 
-      logger(response.toString(), error: 'ProfilRepository');
+      // logger(response.toString(), error: 'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
 
       if (response?.statusCode == 200 && response?.data != null) {
         var responseData = response?.data['response'];
+
+        // logger(responseData.toString(),
+        //     error: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
+
         if (responseData != null) {
           var profilData = CarInformationResponse.fromJson(responseData);
-
+          profilData.govNum = govNumber;
+          profilData.techSeria = teachPassportSeria;
+          profilData.techNumber = teachPassportNumber;
           return BaseModels<CarInformationResponse>(
             message: response?.statusMessage,
             response: profilData,
             status: response?.statusCode,
           );
-        } else {
-          return BaseModels<CarInformationResponse>(
-            message: "Response data is null",
-            status: response?.statusCode,
-          );
         }
+      }
+
+      return BaseModels<CarInformationResponse>(
+        message: response?.statusMessage,
+        status: response?.statusCode,
+      );
+    } catch (e) {
+      print('Exception: $e');
+      return BaseModels<CarInformationResponse>(
+        status: 512,
+        message: e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<BaseModels<CarInformationResponse>> addUserCar(
+      Map<String, dynamic> carData) async {
+    final prefsManager = SharedPreferencesManager();
+    final token = await prefsManager.getToken();
+
+    var headers = {
+      'Content-Type': 'application/json',
+      'Content': 'application/json',
+      'Accept-Language': 'ru-RU',
+      'Accept-Encoding': 'UTF-8',
+      'Authorization': 'Bearer $token',
+    };
+
+    var url = ApiConstanta.ADD_MY_CAR;
+    Response? response;
+
+    try {
+      response = await service.getPostData(carData, headers, url);
+
+      if (response?.statusCode == 200) {
+        return BaseModels(
+          status: response?.statusCode,
+          message: response?.statusMessage,
+        );
       } else {
-        return BaseModels<CarInformationResponse>(
-          message: response?.statusMessage ?? 'Error occurred',
+        return BaseModels(
+          message: response?.statusMessage,
           status: response?.statusCode,
         );
       }
@@ -204,3 +245,64 @@ class ProfilRepository extends ProfilRepositoryIml {
     }
   }
 }
+
+
+
+/*
+
+
+
+{
+  "link": "v1/osgo/vehicle",
+  "headers": {
+    "Content-Type": "application/json",
+    "Content": "application/json",
+    "Accept-Language": "ru-RU",
+    "Accept-Encoding": "UTF-8",
+    "Authorization": "Bearer vKmpRoRMhyxdtlTskNGCAaxXtqtPCb33Fr5XEC3PpSHlln2SBs8bGxaftsmmNuou"
+  },
+  "data": {
+    "techPassportSeria": "AAG",
+    "techPassportNumber": "3334805",
+    "govNumber": "10V535LA"
+  },
+  "response": {
+    "status": 200,
+    "code": false,
+    "message": "BIRTHDAY INFORMATION",
+    "response": {
+      "ERROR": "0",
+      "ERROR_MESSAGE": "",
+      "TECH_PASSPORT_ISSUE_DATE": "19.01.2024",
+      "ISSUE_YEAR": "2010",
+      "VEHICLE_TYPE_ID": "1",
+      "BODY_NUMBER": "XWB5M31BDAA037013",
+      "ENGINE_NUMBER": "F18D31854281",
+      "MODEL_ID": "4578#2$1498",
+      "MARKA_ID": "13",
+      "MODEL_NAME": "LACETTI",
+      "ORGNAME": "RUSTAMOV KOMILJON XOMITOVICH",
+      "LAST_NAME": "RUSTAMOV",
+      "FIRST_NAME": "KOMILJON",
+      "MIDDLE_NAME": "XOMITOVICH",
+      "USE_TERRITORY": "2",
+      "FY": "0",
+      "PINFL": "31504794170072",
+      "INN": "",
+      "SEATS": "5",
+      "VEHICLE_TYPE_NAME": "Легковые автомобили",
+      "VEHICLE_TERRITORY_ID": "2",
+      "REGION_NAME": "Ташкентский область",
+      "PASSPORT_SERIES": "",
+      "PASSPORT_NUMBER": "",
+      "PASSPORT_ISSUED_BY": "",
+      "PASSPORT_ISSUE_DATE": "",
+      "BIRTHDAY": "15.04.1979",
+      "ADDRESS": ""
+    }
+  }
+}
+
+
+
+ */

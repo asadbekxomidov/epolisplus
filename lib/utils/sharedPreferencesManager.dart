@@ -49,4 +49,11 @@ class SharedPreferencesManager {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_password);
   }
+
+  Future<void> clearUserInfo() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_password);
+    await prefs.remove(_phoneNumber);
+    await prefs.remove(_tokenKey);
+  }
 }
