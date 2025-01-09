@@ -47,21 +47,32 @@ export 'policies/ui/screen/policies_screen.dart';
 // ? partners
 export 'partners/ui/screen/partners_screen.dart';
 export 'partners/bloc/partners_bloc.dart';
+
 // ? oferta
 export 'oferta/screen/oferta_screen.dart';
 export 'oferta/screen/partners_oferta.dart';
+
 // ? questions
 export 'questionsanswers/ui/screen/questions_screen.dart';
+
 // ? aboutapp
 export 'about_app/screen/about_app_screen.dart';
+
 // ? bottomWidget
 export 'tabbar/ui/screen/bottom_navigation_view.dart';
+
 // ? bottomWidget
 export 'edit_profil/ui/screens/edit_profil_screen.dart';
+
 // ? add_car
 export 'add_car/ui/screen/add_car_screen.dart';
 export 'add_car/ui/screen/registercertnumber_screen.dart';
+
 // ? warrantycode
 export 'warrantycode/ui/screen/warrantycode_screen.dart';
+
 // ? modul
 export 'modul/addedcar/screen/added_car_screen.dart';
+
+// ? qrcodescreen
+export 'qr_code/screen/qr_code_scaner_screen.dart';

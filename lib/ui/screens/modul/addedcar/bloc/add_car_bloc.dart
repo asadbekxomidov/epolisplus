@@ -1,3 +1,4 @@
+import 'package:epolisplus/utils/my_function.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
@@ -45,6 +46,7 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
     var carNumber = carNumberController.text.trim();
     var teachPassportSeria = teachSeriaController.text.trim();
     var teachPassportNumber = teachPassportNumberController.text.trim();
+    carNumber = clearCarNumber(carNumber);
 
     try {
       final ProfilRepository repository = ProfilRepository();
@@ -58,12 +60,11 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
         );
 
         if (response.status == 200 && response.response != null) {
-          print(response.response!);
-          print("object");
           _vehicleInformation = response.response!;
           // listener!.onVehicle(_vehicleInformation);
           emit(CarInformationGetState());
         } else if (response.status == 500) {
+          emit(CarErrorState(response.message!));
         } else {
           emit(CarErrorState(response.message!));
         }
@@ -89,25 +90,6 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
     }
   }
 
-  // Future<void> onaddCar(AddCarEvent event, Emitter<AddedCarState> emit) async {
-  //   emit(CarLoadedState());
-
-  //   try {
-  //     final ProfilRepository repository = ProfilRepository();
-
-  //     var baseResponse = await repository.addUserCar(_vehicleInformation);
-
-  //     if (baseResponse.status == 200) {
-  //       Get.back();
-  //       emit(CarSuccesState());
-  //     } else {
-  //       emit(CarErrorState(baseResponse.message!));
-  //     }
-  //   } catch (e) {
-  //     emit(CarErrorState(e.toString()));
-  //   }
-  // }
-
   Future<void> onaddCar(AddCarEvent event, Emitter<AddedCarState> emit) async {
     emit(CarLoadedState());
 
@@ -121,11 +103,6 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState>
           teachPassportSeria.isNotEmpty &&
           teachPassportNumber.isNotEmpty) {
         var data = _vehicleInformation.toJson();
-        // var data = _vehicleInformation.toJson(
-        //   carNumber,
-        //   teachPassportSeria,
-        //   teachPassportNumber,
-        // );
 
         var baseResponse = await repository.addUserCar(data);
 

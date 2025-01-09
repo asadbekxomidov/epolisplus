@@ -16,15 +16,6 @@ class TabbarInitialState extends TabbarState {
   List<Object?> get props => [initialIndex];
 }
 
-class TabbarSelectionUpdated extends TabbarState {
-  final int selectedIndex;
-
-  const TabbarSelectionUpdated(this.selectedIndex);
-
-  @override
-  List<Object?> get props => [selectedIndex];
-}
-
 class TabbarSuccesState extends TabbarState {}
 
 class TabbarLoadingState extends TabbarState {}
@@ -34,9 +25,11 @@ class TabbarLoadedState extends TabbarState {}
 class TabbarErrorState extends TabbarState {}
 
 class HomeState2 extends TabbarState {}
+
 class CabinetState extends TabbarState {}
+
 class SosState extends TabbarState {}
+
 class PolicyState extends TabbarState {}
+
 class PartnerState extends TabbarState {}
-
-

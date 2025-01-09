@@ -6,3 +6,5 @@ abstract class WarrantycodeEvent extends Equatable {
 }
 
 class WarrantycodeGetEvent extends WarrantycodeEvent {}
+
+class WarrantycodePushScreenEvent extends WarrantycodeEvent {}

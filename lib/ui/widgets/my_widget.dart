@@ -305,7 +305,9 @@ class MyContainerRowImageWidget extends StatelessWidget {
     dimens = Dimens(context);
 
     return InkWell(
-      onTap: () => onclick(),
+      onTap: () {
+        onclick();
+      },
       child: Container(
         width: width,
         height: height,

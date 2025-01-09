@@ -15,6 +15,11 @@ clearPhoneMask(String phoneNumber) {
   return phoneNumber;
 }
 
+clearCarNumber(String phoneNumber) {
+  phoneNumber = phoneNumber.replaceAll(" ", "");
+  return phoneNumber;
+}
+
 lineContainer(Dimens dimens) {
   return Container(
     height: dimens.height1,

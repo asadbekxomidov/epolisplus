@@ -89,6 +89,22 @@ class AppImage {
     // );
   }
 
+  static Widget iconWidget(BuildContext context) {
+    return Image.asset(
+      AppImage.warrantycodewidgeticon,
+      height: Dimens(context).height18,
+    );
+    // return Row(
+    //   children: [
+    //     Gap(Dimens(context).paddingHorizontalItem),
+    //     Icon(
+    //       Icons.star_border_purple500_outlined,
+    //       color: AppColors.redColor,
+    //     ),
+    //   ],
+    // );
+  }
+
   // ! Home TapBar image
 
   static String homeTabbarIcon =
@@ -142,4 +158,6 @@ class AppImage {
   static String updateInternetIcon = 'assets/images/update_internet_icon.png';
   static String splashPoliciesIcon = 'assets/images/splash_policies_icon.png';
   static String loadingPageLogo = 'assets/images/loading_page_logo.png';
+  static String warrantycodewidgeticon =
+      'assets/images/warrantycode_widget_icon.png';
 }

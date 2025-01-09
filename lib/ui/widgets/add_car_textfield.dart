@@ -58,7 +58,7 @@ class AddCarTextfield extends StatelessWidget {
                       textAlignVertical: TextAlignVertical.center,
                       inputFormatters: [
                         UpperCaseFormatter(),
-                        // DualCarNumberInputFormatter(), // Custom formatter for both formats
+                        DualCarNumberInputFormatter(),
                       ],
                       cursorColor: AppColors.hintColor,
                       cursorWidth: dimens.width2,

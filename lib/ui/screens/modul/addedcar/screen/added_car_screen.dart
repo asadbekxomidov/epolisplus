@@ -1,6 +1,5 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
-import 'package:epolisplus/log/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/models/models_export.dart';
@@ -32,16 +31,6 @@ class AddedCarScreen extends StatelessWidget {
         },
         builder: (context, state) {
           myCarBloc = BlocProvider.of<AddedCarBloc>(context);
-
-          // if (state is CarLoadingState) {
-          //   return Stack(
-          //     children: [
-          //       Positioned(
-          //         child: LoadingPages(),
-          //       ),
-          //     ],
-          //   );
-          // }
 
           if (state is CarInitialState) {
             return Column(
@@ -86,16 +75,6 @@ class AddedCarScreen extends StatelessWidget {
             );
           }
 
-          // if (state is CarLoadingState) {
-          //   return const Positioned.fill(
-          //     child: Center(
-          //       child: CircularProgressIndicator(),
-          //     ),
-          //   );
-          // }
-
-          loggerF(state.toString(), error: 'AddCarLessWidget');
-
           if (state is CarInformationGetState) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,26 +96,6 @@ class AddedCarScreen extends StatelessWidget {
                   isActive: false,
                   style: dimens.hintStyle,
                 ),
-                // Gap(dimens.paddingVerticalItem7),
-                // ButtonPagesMin(
-                //   appColors: AppColors.mainColor,
-                //   iconData: AppImage.infocircleIcon,
-                //   onClick: () {
-                //     myCarBloc.add(RegisterCertificateNumberEvent());
-                //   },
-                //   text: AppStrings.certificateNumberText,
-                // ),
-                // Gap(dimens.paddingVerticalItem16),
-                // LoadDataButtons(
-                //   color: AppColors.lightGreenColor,
-                //   isLoading: state is CarLoadingState,
-                //   text: AppStrings.loadDataText,
-                //   onClick: () {
-                //     myCarBloc.add(AddCarEvent());
-                //   },
-                //   iconData: AppImage.searchIcon,
-                // ),
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 Gap(dimens.paddingVerticalItem12),
                 Text(
                   AppStrings.carOwnerText,
@@ -192,63 +151,3 @@ class AddedCarScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-Gap(dimens.paddingVerticalItem12),
-Text(
-  AppStrings.carOwnerText,
-  style: dimens.textStyleSecondary,
-),
-MyContainerWidget(
-  text: "Asadbek Xomidov",
-),
-Gap(dimens.paddingVerticalItem14),
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppStrings.carBrandText,
-          style: dimens.textStyleSecondary,
-        ),
-        MyContainerRowWidget(
-          text: "Spark",
-        ),
-      ],
-    ),
-    Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          AppStrings.yearofManufactureText,
-          style: dimens.textStyleSecondary,
-        ),
-        MyContainerRowWidget(
-          text: "2020",
-        ),
-      ],
-    ),
-  ],
-),
-Gap(dimens.paddingVerticalItem14),
-RegisterPushButton(
-  onClick: () {},
-  text: AppStrings.addCarButtonText,
-),
-
-*/

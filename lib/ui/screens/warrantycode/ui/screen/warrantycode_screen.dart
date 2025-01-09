@@ -66,6 +66,16 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                         ),
                       ],
                     ),
+                    MyTextfieldWCode(
+                      controller: TextEditingController(),
+                      myRadius: dimens.radius12,
+                      height: dimens.height40,
+                      width: dimens.width202,
+                      style: dimens.font16Blackw400Sty,
+                      text: AppStrings.searchText,
+                      hintstyle: dimens.hintStyle,
+                      iconData: true,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -112,7 +122,9 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                         // Gap(dimens.paddingHorizontal4),
                         MyContainerRowImageWidget(
                           mainAxisAlig: MainAxisAlignment.center,
-                          onclick: () {},
+                          onclick: () {
+                            warrantycodeBloc.add(WarrantycodePushScreenEvent());
+                          },
                           height: dimens.height40,
                           width: dimens.width40,
                           iconData: AppImage.codeIcon,
@@ -151,9 +163,9 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                     ),
                     Gap(dimens.paddingVerticalItem16),
                     AddedCarScreen(
-                      // CarInformationResponse(),
-                      // warrantycodeBloc,
-                    ),
+                        // CarInformationResponse(),
+                        // warrantycodeBloc,
+                        ),
                   ],
                 ),
               ),
