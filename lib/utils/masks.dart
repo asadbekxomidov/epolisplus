@@ -50,7 +50,6 @@ class Masked {
 //     );
 //   }
 // }
-
 // class DualCarNumberInputFormatter extends TextInputFormatter {
 //   @override
 //   TextEditingValue formatEditUpdate(
@@ -59,20 +58,20 @@ class Masked {
 //     String formattedText = '';
 
 //     if (text.length <= 2) {
-//       // Format: 12
+//       // Format: 10
 //       formattedText = text;
-//     } else if (text.length <= 5) {
-//       // Format: 12 340
-//       formattedText = text.substring(0, 2) + ' ' + text.substring(2, 5);
+//     } else if (text.length <= 4) {
+//       // Format: 10 V
+//       formattedText = text.substring(0, 2) + ' ' + text.substring(2, 3);
 //     } else if (text.length <= 7) {
-//       // Format: 12 V 340
+//       // Format: 10 V 535
 //       formattedText = text.substring(0, 2) +
 //           ' ' +
 //           text.substring(2, 3) +
 //           ' ' +
 //           text.substring(3, text.length);
 //     } else if (text.length <= 9) {
-//       // Format: 12 V 340 VV
+//       // Format: 10 V 535 LA or 10 525 ALA
 //       formattedText = text.substring(0, 2) +
 //           ' ' +
 //           text.substring(2, 3) +
@@ -88,7 +87,6 @@ class Masked {
 //     );
 //   }
 // }
-
 class DualCarNumberInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -96,20 +94,21 @@ class DualCarNumberInputFormatter extends TextInputFormatter {
     String text = newValue.text.replaceAll(RegExp(r'\s+'), '').toUpperCase();
     String formattedText = '';
 
-    // Format: 10
     if (text.length <= 2) {
+      // Format: 10
       formattedText = text;
-    }
-    // Format: 10 V 535
-    else if (text.length <= 5) {
+    } else if (text.length <= 3) {
+      // Format: 10 V
+      formattedText = text.substring(0, 2) + ' ' + text.substring(2, 3);
+    } else if (text.length <= 6) {
+      // Format: 10 V 535
       formattedText = text.substring(0, 2) +
           ' ' +
           text.substring(2, 3) +
           ' ' +
           text.substring(3, text.length);
-    }
-    // Format: 10 V 535 LA
-    else if (text.length <= 8) {
+    } else if (text.length <= 9) {
+      // Format: 10 V 535 LA or 10 525 ALA
       formattedText = text.substring(0, 2) +
           ' ' +
           text.substring(2, 3) +
@@ -118,68 +117,20 @@ class DualCarNumberInputFormatter extends TextInputFormatter {
           ' ' +
           text.substring(6, text.length);
     }
-    // Format: 10 V 535 LAA
-    else if (text.length <= 9) {
-      formattedText = text.substring(0, 2) +
-          ' ' +
-          text.substring(2, 3) +
-          ' ' +
-          text.substring(3, 6) +
-          ' ' +
-          text.substring(6, 9);
+
+    // Kiritilgan matn uzunligi va offsetni tekshirish
+    int newOffset =
+        newValue.selection.end + (formattedText.length - newValue.text.length);
+    if (newOffset < 0 || newOffset > formattedText.length) {
+      newOffset = formattedText.length; // Offsetni matn chegarasiga moslang
     }
 
     return TextEditingValue(
       text: formattedText,
-      selection: TextSelection.collapsed(offset: formattedText.length),
+      selection: TextSelection.collapsed(offset: newOffset),
     );
   }
 }
-
-// class DualCarNumberInputFormatter extends TextInputFormatter {
-//   @override
-//   TextEditingValue formatEditUpdate(
-//       TextEditingValue oldValue, TextEditingValue newValue) {
-//     String text = newValue.text.replaceAll(RegExp(r'\s+'), '').toUpperCase();
-//     String formattedText = '';
-
-//     // Format: 10
-//     if (text.length <= 2) {
-//       formattedText = text;
-//     }
-//     // Format: 10 V 535
-//     else if (text.length <= 5) {
-//       formattedText = text.substring(0, 2) +
-//           ' ' +
-//           text.substring(2, 3) +
-//           ' ' +
-//           text.substring(3, text.length);
-//     }
-//     // Format: 10 535 VLA
-//     else if (text.length <= 8) {
-//       formattedText = text.substring(0, 2) +
-//           ' ' +
-//           text.substring(2, 5) +
-//           ' ' +
-//           text.substring(5, text.length);
-//     }
-//     // Format: 10 V 535 LA
-//     else if (text.length <= 9) {
-//       formattedText = text.substring(0, 2) +
-//           ' ' +
-//           text.substring(2, 3) +
-//           ' ' +
-//           text.substring(3, 6) +
-//           ' ' +
-//           text.substring(6, text.length);
-//     }
-
-//     return TextEditingValue(
-//       text: formattedText,
-//       selection: TextSelection.collapsed(offset: formattedText.length),
-//     );
-//   }
-// }
 
 class UpperCaseFormatter extends TextInputFormatter {
   @override
