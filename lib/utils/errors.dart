@@ -16,6 +16,7 @@ class GetPartnersErrorclass extends Failure {
   String getErrorMessage(BuildContext context) =>
       AppStrings.partnersGetErrorText;
 }
+
 class PartnersPushWebErrorclass extends Failure {
   PartnersPushWebErrorclass() : super();
 

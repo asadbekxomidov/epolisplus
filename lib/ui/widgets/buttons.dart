@@ -1368,3 +1368,61 @@ class DeleteButton extends StatelessWidget {
     );
   }
 }
+
+// ? AddMyCarlst
+
+class AddMyCarListBtn extends StatelessWidget {
+  Function onClick;
+  String text;
+  IconData? iconData;
+  bool isLoading;
+
+  AddMyCarListBtn({
+    required this.onClick,
+    required this.text,
+    this.iconData,
+    this.isLoading = false,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return FilledButton(
+      style: FilledButton.styleFrom(
+        backgroundColor: AppColors.mainColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(dimens.radius16)),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.horizontalPadding,
+          vertical: dimens.verticalPadding,
+        ),
+      ),
+      onPressed: () => onClick(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: dimens.textStyle.copyWith(
+              color: AppColors.whiteColor,
+            ),
+          ),
+          Gap(dimens.paddingHorizontal13),
+          isLoading
+              ? SizedBox(
+                  height: dimens.height10,
+                  width: dimens.height10,
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                    strokeWidth: dimens.width10 / 5,
+                  ),
+                )
+              : SizedBox(),
+        ],
+      ),
+    );
+  }
+}

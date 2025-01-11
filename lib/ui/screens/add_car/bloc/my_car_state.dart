@@ -5,11 +5,11 @@ abstract class MyCarState extends Equatable {
   List<Object?> get props => [];
 }
 
-class MyCarInitialState extends MyCarState {}
+class CarInitialState extends MyCarState {}
 
-class MyCarLodingState extends MyCarState {}
+class CarLodingState extends MyCarState {}
 
-class MyCarLoadedState extends MyCarState {}
+class CarLoadedState extends MyCarState {}
 
 class MyCarErrorState extends MyCarState {
   final String error;
@@ -17,4 +17,4 @@ class MyCarErrorState extends MyCarState {
   MyCarErrorState(this.error);
 }
 
-class MyCarSuccesState extends MyCarState {}
+class CarSuccesState extends MyCarState {}

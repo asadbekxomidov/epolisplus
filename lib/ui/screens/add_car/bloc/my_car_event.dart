@@ -6,3 +6,5 @@ abstract class MyCarEvent extends Equatable {
 }
 
 class MyCarGetEvent extends MyCarEvent {}
+
+class AddCarEvent extends MyCarEvent {}

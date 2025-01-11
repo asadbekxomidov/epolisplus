@@ -1110,6 +1110,16 @@ class Dimens {
     );
   }
 
+  TextStyle get font16Redw400Sty {
+    return TextStyle(
+      color: AppColors.redColordefault,
+      fontWeight: FontWeight.w400,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
   TextStyle get font16Blackw400Sty {
     return TextStyle(
       color: AppColors.textBlackColors,

@@ -95,9 +95,10 @@ myContainerGreyDEcoration(Dimens dimens) {
   );
 }
 
-carNumberDecorations(Dimens dimens) {
+carNumberDecorations(Dimens dimens, {bool isActive = true}) {
   return BoxDecoration(
-    color: AppColors.whiteColor,
+    color: isActive ? AppColors.whiteColor : AppColors.neActiveColor,
+    // color: AppColors.whiteColor,
     borderRadius: BorderRadius.circular(
       dimens.radius8,
     ),

@@ -26,6 +26,7 @@ class AppStrings {
   static const String personalData = "Персональных данных";
   static const String back = "Назад";
   static const String closeText = "Отмена";
+  static const String deleteText = "Сбросить";
   static const String closeZText = "Закрыть";
   static const String verification = "Верификация";
   static const String phoneNumbercode =

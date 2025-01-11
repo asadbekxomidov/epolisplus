@@ -7,6 +7,6 @@ class AddedCarEvent extends Equatable {
 
 class GetInfromationCarEvent extends AddedCarEvent {}
 
-class AddCarEvent extends AddedCarEvent {}
-
 class RegisterCertificateNumberEvent extends AddedCarEvent {}
+
+class ClearVehicleEvent extends AddedCarEvent {}

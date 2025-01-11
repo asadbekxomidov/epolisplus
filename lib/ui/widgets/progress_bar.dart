@@ -1,4 +1,5 @@
 import 'package:epolisplus/utils/app_colors.dart';
+import 'package:epolisplus/utils/app_image.dart';
 import 'package:epolisplus/utils/dimens.dart';
 import 'package:flutter/material.dart';
 
@@ -27,5 +28,25 @@ progressBar2(Dimens dimens) {
       height: dimens.screenHeight,
       width: dimens.screenWidth,
     ),
+  );
+}
+
+late Dimens dimens;
+
+progressBar3() {
+  return Stack(
+    children: [
+      Container(
+        height: dimens.screenHeight,
+        width: dimens.screenWidth,
+        color: AppColors.backgroundBlurColor0,
+        child: Center(
+          child: Image.asset(
+            AppImage.progressBarGif,
+            height: dimens.height40,
+          ),
+        ),
+      ),
+    ],
   );
 }

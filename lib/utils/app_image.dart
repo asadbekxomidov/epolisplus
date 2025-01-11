@@ -158,6 +158,8 @@ class AppImage {
   static String updateInternetIcon = 'assets/images/update_internet_icon.png';
   static String splashPoliciesIcon = 'assets/images/splash_policies_icon.png';
   static String loadingPageLogo = 'assets/images/loading_page_logo.png';
+  static String closeIcon = 'assets/images/close_icon.png';
+  static String progressBarGif = 'assets/images/progressbar_gif.mp4';
   static String warrantycodewidgeticon =
       'assets/images/warrantycode_widget_icon.png';
 }

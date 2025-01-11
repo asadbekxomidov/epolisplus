@@ -10,6 +10,7 @@ class AddCarTextfield extends StatelessWidget {
 
   final TextInputType keyboardType;
   final bool showStar;
+  final bool isActive;
 
   AddCarTextfield({
     required this.titleText,
@@ -17,6 +18,7 @@ class AddCarTextfield extends StatelessWidget {
     this.hintText,
     this.keyboardType = TextInputType.text,
     this.showStar = false,
+    this.isActive = true,
   });
 
   late Dimens dimens;
@@ -47,7 +49,10 @@ class AddCarTextfield extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: dimens.paddingHorizontal13,
               ),
-              decoration: carNumberDecorations(dimens),
+              decoration: carNumberDecorations(
+                dimens,
+                isActive: isActive,
+              ),
               child: Row(
                 children: [
                   Expanded(

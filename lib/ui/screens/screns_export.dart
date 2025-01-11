@@ -72,7 +72,7 @@ export 'add_car/ui/screen/registercertnumber_screen.dart';
 export 'warrantycode/ui/screen/warrantycode_screen.dart';
 
 // ? modul
-export 'modul/addedcar/screen/added_car_screen.dart';
+export 'modul/addedcar/screen/vehicle_car_info.dart';
 
 // ? qrcodescreen
 export 'qr_code/screen/qr_code_scaner_screen.dart';
