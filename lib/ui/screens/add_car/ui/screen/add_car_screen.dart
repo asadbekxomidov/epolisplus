@@ -39,6 +39,10 @@ class _AddCarScreenState extends State<AddCarScreen> {
         builder: (context, state) {
           final myCarBloc = context.read<MyCarBloc>();
 
+          print('${myCarBloc.vehicleInformation} AAAAAAAAAAAAAAAAAAAAAAA');
+          print('${myCarBloc.vehicleInformation.error} WWWWWWWWWWWWWW');
+          // print('${myCarBloc.listener.onVehicle(vehicleInformation!)} WWWWWWWWWWWWWW');
+
           return Scaffold(
             resizeToAvoidBottomInset: true,
             body: Container(
@@ -72,7 +76,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
                           ? Column(
                               children: [
                                 AddMyCarListBtn(
-                                  isLoading: state is CarLodingState,
+                                  isLoading: state is MyCarLodingState,
                                   onClick: () {
                                     myCarBloc.add(AddCarEvent());
                                   },
@@ -83,8 +87,9 @@ class _AddCarScreenState extends State<AddCarScreen> {
                           : Column(
                               children: [
                                 Text(
+                                  // myCarBloc.listener.onVehicle(vehicleInformation),
                                   myCarBloc.vehicleInformation.toString(),
-                                  style: TextStyle(color: Colors.black),
+                                  style: const TextStyle(color: Colors.black),
                                 ),
                               ],
                             ),

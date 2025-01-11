@@ -78,6 +78,7 @@ class AddCarTextfield extends StatelessWidget {
                         contentPadding: EdgeInsets.zero,
                       ),
                       style: dimens.carTextfieldCursorSty,
+                      enabled: isActive,
                     ),
                   ),
                   SizedBox(
@@ -181,13 +182,8 @@ class AddCarRowTextField extends StatelessWidget {
             ),
             Gap(dimens.paddingHorizontal6),
             Container(
-              // width: dimens.screenWidth,
               width: dimens.width289,
               height: dimens.height40,
-              // padding: EdgeInsets.only(
-              //   left: dimens.paddingHorizontal13,
-              // ),
-              // decoration: inputDecorations(dimens),
               decoration: inputDecoration(
                 dimens,
                 isActive: isActive,

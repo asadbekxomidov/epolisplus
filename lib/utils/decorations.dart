@@ -79,10 +79,10 @@ inputDecorations(Dimens dimens) {
 
 myContainerGreyDEcoration(Dimens dimens) {
   return BoxDecoration(
-    color: AppColors.myContainerGreyBackgroundColor,
+    color: AppColors.neActiveColor,
     borderRadius: BorderRadius.circular(dimens.radius16),
     border: Border.all(
-      color: AppColors.myContainerGreyBorderColor,
+      color: AppColors.lineColor,
       width: dimens.width1,
     ),
     boxShadow: [

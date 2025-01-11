@@ -8,11 +8,14 @@ import 'package:epolisplus/ui/screens/modul/addedcar/bloc/add_car_bloc.dart';
 
 class VehicleCarInfo extends StatelessWidget {
   late Dimens dimens;
-  late AddedCarBloc myCarBloc;
+  late AddedCarBloc bloc;
   CarInformationResponse? vehicleInformation;
   OnVehicleListener? listener;
 
-  VehicleCarInfo({required this.vehicleInformation, required this.listener});
+  VehicleCarInfo({
+    required this.vehicleInformation,
+    required this.listener,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,37 +31,51 @@ class VehicleCarInfo extends StatelessWidget {
           if (state is CarErrorState) {
             showErrorMessageSnackBar(
               context,
-              state.error,
+              state.failure.getErrorMessage(context),
             );
           }
         },
         builder: (context, state) {
-          myCarBloc = BlocProvider.of<AddedCarBloc>(context);
+          bloc = BlocProvider.of<AddedCarBloc>(context);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AddCarTextfield(
                 hintText: AppStrings.carNumberFormatter,
-                controller: myCarBloc.gowNumberController,
+                controller: bloc.gowNumberController,
                 showStar: true,
                 titleText: AppStrings.stateNumber,
-                isActive: !myCarBloc.isHaveCarInformation,
+                isActive: !bloc.isHaveCarInformation,
               ),
               Gap(dimens.paddingVerticalItem16),
               AddCarRowTextField(
-                controller: myCarBloc.techSeriaController,
-                controller2: myCarBloc.techNumberController,
+                controller: bloc.techSeriaController,
+                controller2: bloc.techNumberController,
                 hintText1: AppStrings.addcaraff,
                 hintText: AppStrings.addcar00,
                 titleText: AppStrings.technicalPassportText,
                 showStar: true,
                 style: dimens.myTextFieldStyle,
-                isActive: !myCarBloc.isHaveCarInformation,
+                isActive: !bloc.isHaveCarInformation,
               ),
               Gap(dimens.paddingVerticalItem7),
-              myCarBloc.isHaveCarInformation
+              bloc.isHaveCarInformation
                   ? Column(
                       children: [
+                        Gap(dimens.paddingVerticalItem8),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppStrings.yearofManufactureText,
+                              style: dimens.textStyleSecondary,
+                            ),
+                            MyContainerWidget(
+                              text: bloc.getVehicleOwnerName,
+                            ),
+                          ],
+                        ),
+                        Gap(dimens.paddingVerticalItem4),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -70,7 +87,7 @@ class VehicleCarInfo extends StatelessWidget {
                                   style: dimens.textStyleSecondary,
                                 ),
                                 MyContainerRowWidget(
-                                  text: myCarBloc.getVehicleOwnerCarModelName,
+                                  text: bloc.getVehicleOwnerCarModelName,
                                 ),
                               ],
                             ),
@@ -82,7 +99,7 @@ class VehicleCarInfo extends StatelessWidget {
                                   style: dimens.textStyleSecondary,
                                 ),
                                 MyContainerRowWidget(
-                                  text: myCarBloc.getVehicleOwnerCarNumber,
+                                  text: bloc.getVehicleOwnerCarNumber,
                                 ),
                               ],
                             ),
@@ -97,7 +114,7 @@ class VehicleCarInfo extends StatelessWidget {
                           mainAxisAlig: MainAxisAlignment.center,
                           myRadius: 12,
                           onclick: () {
-                            myCarBloc.add(ClearVehicleEvent());
+                            bloc.add(ClearVehicleEvent());
                           },
                           style: dimens.font16Redw400Sty,
                           width: dimens.screenWidth,
@@ -112,7 +129,7 @@ class VehicleCarInfo extends StatelessWidget {
                           appColors: AppColors.mainColor,
                           iconData: AppImage.infocircleIcon,
                           onClick: () {
-                            myCarBloc.add(RegisterCertificateNumberEvent());
+                            bloc.add(RegisterCertificateNumberEvent());
                           },
                           text: AppStrings.certificateNumberText,
                         ),
@@ -122,7 +139,7 @@ class VehicleCarInfo extends StatelessWidget {
                           isLoading: state is CarLoadingState,
                           text: AppStrings.loadDataText,
                           onClick: () {
-                            myCarBloc.add(GetInfromationCarEvent());
+                            bloc.add(GetInfromationCarEvent());
                           },
                           iconData: AppImage.searchIcon,
                         ),
@@ -130,78 +147,6 @@ class VehicleCarInfo extends StatelessWidget {
                     ),
             ],
           );
-
-          // if (state is CarInformationGetState) {
-          //   return Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       AddCarTextfield(
-          //         hintText: AppStrings.carNumberFormatter,
-          //         controller: myCarBloc.carNumberController,
-          //         showStar: true,
-          //         titleText: AppStrings.stateNumber,
-          //       ),
-          //       Gap(dimens.paddingVerticalItem16),
-          //       AddCarRowTextField(
-          //         controller: myCarBloc.teachSeriaController,
-          //         controller2: myCarBloc.teachPassportNumberController,
-          //         hintText1: AppStrings.addcaraff,
-          //         hintText: AppStrings.addcar00,
-          //         titleText: AppStrings.technicalPassportText,
-          //         showStar: true,
-          //         isActive: false,
-          //         style: dimens.hintStyle,
-          //       ),
-          //       Gap(dimens.paddingVerticalItem12),
-          //       Text(
-          //         AppStrings.carOwnerText,
-          //         style: dimens.textStyleSecondary,
-          //       ),
-          //       MyContainerWidget(
-          //         text: myCarBloc.getVehicleOwnerName,
-          //       ),
-          //       Gap(dimens.paddingVerticalItem14),
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //         children: [
-          //           Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Text(
-          //                 AppStrings.carBrandText,
-          //                 style: dimens.textStyleSecondary,
-          //               ),
-          //               MyContainerRowWidget(
-          //                 text: myCarBloc.getVehicleOwnerCarModelName,
-          //               ),
-          //             ],
-          //           ),
-          //           Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //             children: [
-          //               Text(
-          //                 AppStrings.yearofManufactureText,
-          //                 style: dimens.textStyleSecondary,
-          //               ),
-          //               MyContainerRowWidget(
-          //                 text: myCarBloc.getVehicleOwnerCarNumber,
-          //               ),
-          //             ],
-          //           ),
-          //         ],
-          //       ),
-          //       Gap(dimens.paddingVerticalItem14),
-          //       RegisterPushButton(
-          //         isLoading: state is CarLoadingState,
-          //         onClick: () {
-          //           myCarBloc.add(AddCarEvent());
-          //         },
-          //         text: AppStrings.addCarButtonText,
-          //       ),
-          //     ],
-          //   );
-          // }
-          // return Column();
         },
       ),
     );

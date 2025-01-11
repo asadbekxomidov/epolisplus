@@ -32,14 +32,6 @@ class InputPhoneFailure extends Failure {
   String getErrorMessage(BuildContext context) => AppStrings.input_phone_errors;
 }
 
-class LoginFailure extends Failure {
-  LoginFailure() : super();
-
-  @override
-  String getErrorMessage(BuildContext context) =>
-      AppStrings.input_password_and_phone_errors;
-}
-
 class InputRegisterFailure extends Failure {
   InputRegisterFailure() : super();
 
@@ -93,4 +85,28 @@ class ServerFailure extends Failure {
 
   @override
   String getErrorMessage(BuildContext context) => message;
+}
+
+class InformationheadError extends Failure {
+  InformationheadError() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.informationnotfound;
+}
+
+class InformationnotfoundError extends Failure {
+  InformationnotfoundError() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.informationnotfound;
+}
+
+class LoginFailure extends Failure {
+  LoginFailure() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.input_password_and_phone_errors;
 }

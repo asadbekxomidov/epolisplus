@@ -7,7 +7,7 @@ abstract class MyCarState extends Equatable {
 
 class CarInitialState extends MyCarState {}
 
-class CarLodingState extends MyCarState {}
+class MyCarLodingState extends MyCarState {}
 
 class CarLoadedState extends MyCarState {}
 

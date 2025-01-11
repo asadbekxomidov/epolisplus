@@ -1,3 +1,4 @@
+// import 'package:epolisplus/log/logger.dart';
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,9 @@ class MyCarBloc extends Bloc<MyCarEvent, MyCarState>
   void onWait(bool isProgressbar) {}
 
   Future<void> addCar(AddCarEvent event, Emitter<MyCarState> emit) async {
-    emit(CarLoadedState());
+    emit(MyCarLodingState());
+
+    // loggerF(listener.onVehicle(vehicleInformation), error: "BLOC");
 
     try {
       final ProfilRepository repository = ProfilRepository();

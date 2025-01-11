@@ -133,40 +133,4 @@ class CarInformationResponse {
       "TECH_NUMBER": techNumber,
     };
   }
-  // Map<String, dynamic> toJson(
-  //     String govNumber, String techSeria, String techNumber) {
-  //   return {
-  //     "ERROR": error,
-  //     "ERROR_MESSAGE": errorMessage,
-  //     "TECH_PASSPORT_ISSUE_DATE": techPassportIssueDate,
-  //     "MARKA_ID": markaId,
-  //     "MODEL_ID": modelId,
-  //     "VEHICLE_TYPE_ID": vehicleTypeId,
-  //     "MODEL_NAME": modelName,
-  //     "ISSUE_YEAR": issueYear,
-  //     "BODY_NUMBER": bodyNumber,
-  //     "ENGINE_NUMBER": engineNumber,
-  //     "USE_TERRITORY": useTerritory,
-  //     "FY": fy,
-  //     "ORGNAME": orgName,
-  //     "LAST_NAME": lastName,
-  //     "FIRST_NAME": firstName,
-  //     "MIDDLE_NAME": middleName,
-  //     "INN": inn,
-  //     "SEATS": seats,
-  //     "PINFL": pinfl,
-  //     "VEHICLE_TYPE_NAME": vehicleName,
-  //     "VEHICLE_TERRITORY_ID": vehicleTerritory,
-  //     "REGION_NAME": regionName,
-  //     "PASSPORT_SERIES": passportSeries,
-  //     "PASSPORT_NUMBER": passportNumber,
-  //     "PASSPORT_ISSUED_BY": passportIssuedBy,
-  //     "PASSPORT_ISSUE_DATE": passportIssuedDate,
-  //     "BIRTHDAY": birthday,
-  //     "ADDRESS": address,
-  //     "GOV_NUMBER": govNumber,
-  //     "TECH_SERIYA": techSeria,
-  //     "TECH_NUMBER": techNumber,
-  //   };
-  // }
 }

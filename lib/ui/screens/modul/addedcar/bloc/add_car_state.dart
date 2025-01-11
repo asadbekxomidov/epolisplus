@@ -20,9 +20,9 @@ class CarInformationGetState extends AddedCarState {
 }
 
 class CarErrorState extends AddedCarState {
-  final String error;
+  Failure failure;
 
-  CarErrorState(this.error);
+  CarErrorState(this.failure);
 }
 
 class CarSuccesState extends AddedCarState {}

@@ -162,4 +162,5 @@ class AppStrings {
   static const String checkyourcetworWiFinetwork =
       "Проверьте настройки сети или подключитесь к другой Wi-Fi сети.";
   static const String connectText = "Подключиться";
+  static const String informationnotfound = "Информация не найдена";
 }

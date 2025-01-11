@@ -125,7 +125,7 @@ class MyContainerWidget extends StatelessWidget {
         children: [
           Text(
             text,
-            style: dimens.hintStyle,
+            style: dimens.myTextFieldStyle,
           ),
         ],
       ),
@@ -158,7 +158,7 @@ class MyContainerRowWidget extends StatelessWidget {
         children: [
           Text(
             text,
-            style: dimens.hintStyle,
+            style: dimens.myTextFieldStyle,
           ),
         ],
       ),

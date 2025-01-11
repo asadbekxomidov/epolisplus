@@ -78,10 +78,10 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
           preferense.clearUserInfo();
         }
       } else {
-        emit(CarErrorState(''));
+        emit(CarErrorState(InformationheadError()));
       }
     } catch (e) {
-      emit(CarErrorState(e.toString()));
+      emit(CarErrorState(InformationnotfoundError()));
     }
   }
 
