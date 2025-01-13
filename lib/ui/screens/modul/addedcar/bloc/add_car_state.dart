@@ -12,7 +12,6 @@ class CarLoadingState extends AddedCarState {}
 class CarLoadedState extends AddedCarState {}
 
 class CarInformationGetState extends AddedCarState {
-
   CarInformationGetState();
 
   @override

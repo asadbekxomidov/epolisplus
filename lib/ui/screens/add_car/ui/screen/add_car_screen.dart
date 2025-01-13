@@ -32,7 +32,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
           if (state is MyCarErrorState) {
             showErrorMessageSnackBar(
               context,
-              state.error,
+              state.failure.getErrorMessage(context),
             );
           }
         },

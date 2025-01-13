@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
 import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/repository/auth/auth_repository.dart';
@@ -26,15 +27,12 @@ class OfertaBloc extends Bloc<OfertaEvent, OfertaState> {
       if (result.status == 200 && result.response != null) {
         emit(OfertaInitialState(result.response!));
       } else {
-        emit(OfertaErrorState(
-            message: result.message ?? 'Xato: Ma’lumot topilmadi'));
+        emit(OfertaErrorState(OfertaInfoNotFound()));
       }
     } catch (e, stackTrace) {
       logger(e.toString(), error: 'Oferta Bloc Error');
       logger(stackTrace.toString(), error: 'Stack Trace');
-      emit(OfertaErrorState(
-        message: 'Server bilan muammo: ${e.toString()}',
-      ));
+      emit(OfertaErrorState(OfertaInfoNotFound()));
     }
   }
 
@@ -50,15 +48,12 @@ class OfertaBloc extends Bloc<OfertaEvent, OfertaState> {
       if (result.status == 200 && result.response != null) {
         emit(OfertaInitialState(result.response!));
       } else {
-        emit(OfertaErrorState(
-            message: result.message ?? 'Xato: Ma’lumot topilmadi'));
+        emit(OfertaErrorState(OfertaInfoNotFound()));
       }
     } catch (e, stackTrace) {
       logger(e.toString(), error: 'Oferta Bloc Error');
       logger(stackTrace.toString(), error: 'Stack Trace');
-      emit(OfertaErrorState(
-        message: 'Server bilan muammo: ${e.toString()}',
-      ));
+      emit(OfertaErrorState(OfertaInfoNotFound()));
     }
   }
 }

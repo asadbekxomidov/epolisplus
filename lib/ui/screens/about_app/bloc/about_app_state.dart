@@ -11,4 +11,8 @@ class AboutAppLoadingState extends AboutAppState {}
 
 class AboutAppLoadedState extends AboutAppState {}
 
-class AboutAppErrorState extends AboutAppState {}
+class AboutAppErrorState extends AboutAppState {
+  Failure failure;
+
+  AboutAppErrorState({required this.failure});
+}

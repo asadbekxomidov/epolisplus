@@ -1,4 +1,5 @@
 // import 'package:epolisplus/log/logger.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,11 +49,11 @@ class MyCarBloc extends Bloc<MyCarEvent, MyCarState>
           Get.back();
           emit(CarSuccesState());
         } else {
-          emit(MyCarErrorState(baseResponse.message!));
+          emit(MyCarErrorState(CarNotFound()));
         }
       }
     } catch (e) {
-      emit(MyCarErrorState(e.toString()));
+      emit(MyCarErrorState(CarNotFound()));
     }
   }
 }

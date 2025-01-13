@@ -1,3 +1,4 @@
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:equatable/equatable.dart';
 import 'package:epolisplus/log/logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,15 +32,13 @@ class QuestionsBloc extends Bloc<QuestionsEvent, QuestionsState> {
 
           emit(QuestionsLoadedState(questionAnswerList: questionAnswerList));
         } else {
-          emit(QuestionsErrorState(message: "No data found"));
+          emit(QuestionsErrorState(QuestionInfonotfound()));
         }
       } else {
-        print(result.message);
-        emit(QuestionsErrorState(message: result.message ?? "No data found"));
+        emit(QuestionsErrorState(QuestionInfonotfound()));
       }
     } catch (e) {
-      emit(QuestionsErrorState(message: "An error occurred: $e"));
-      print('Error: $e');
+      emit(QuestionsErrorState(QuestionInfonotfound()));
     }
   }
 }

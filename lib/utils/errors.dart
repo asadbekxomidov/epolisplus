@@ -110,3 +110,47 @@ class LoginFailure extends Failure {
   String getErrorMessage(BuildContext context) =>
       AppStrings.input_password_and_phone_errors;
 }
+
+class CarNotFound extends Failure {
+  CarNotFound() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) => AppStrings.carnotfound;
+}
+
+class UserInfoNotChange extends Failure {
+  UserInfoNotChange() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) => AppStrings.userInfonotchange;
+}
+
+class UserInfoNotFound extends Failure {
+  UserInfoNotFound() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) => AppStrings.userinfonotfound;
+}
+
+class OfertaInfoNotFound extends Failure {
+  OfertaInfoNotFound() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) => AppStrings.ofertainfoNotFound;
+}
+
+class QuestionInfonotfound extends Failure {
+  QuestionInfonotfound() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.questionInfonotfound;
+}
+
+class ErrorSettingssection extends Failure {
+  ErrorSettingssection() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.errorSettingssection;
+}

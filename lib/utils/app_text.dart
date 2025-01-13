@@ -163,4 +163,11 @@ class AppStrings {
       "Проверьте настройки сети или подключитесь к другой Wi-Fi сети.";
   static const String connectText = "Подключиться";
   static const String informationnotfound = "Информация не найдена";
+  static const String carnotfound = "Автомобиль не найден";
+  static const String userInfonotchange =
+      "Информация о пользователе не может быть изменена.";
+  static const String userinfonotfound = "Информация о пользователе не найдена";
+  static const String ofertainfoNotFound = "Информация о предложении не найдена";
+  static const String questionInfonotfound = "Вопросы информация не найдена";
+  static const String errorSettingssection = "В разделе настроек обнаружена ошибка.";
 }

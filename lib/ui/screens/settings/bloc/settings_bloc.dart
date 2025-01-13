@@ -31,7 +31,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       Get.offAll(() => CheckAuthScreen());
       emit(LogoutSuccessState());
     } catch (e) {
-      emit(SettingsErrorState('Logout failed: $e'));
+      emit(SettingsErrorState(ErrorSettingssection()));
     }
   }
 
@@ -71,7 +71,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     if (selectedLanguage != null) {
       emit(SettingsSuccesState());
     } else {
-      emit(SettingsErrorState('No language selected'));
+      emit(SettingsErrorState(ErrorSettingssection()));
     }
   }
 
@@ -86,7 +86,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       final Uri phoneUri = Uri.parse('tel:$phone');
       bool phoneLaunched = await launchUrl(phoneUri);
       if (!phoneLaunched) {
-        emit(SettingsErrorState('Telefon raqamga o\'ta olmadi.'));
+        emit(SettingsErrorState(ErrorSettingssection()));
         return;
       }
 
@@ -94,11 +94,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       final Uri telegramUri = Uri.parse(url);
       bool telegramLaunched = await launchUrl(telegramUri);
       if (!telegramLaunched) {
-        emit(SettingsErrorState('Telegram botga o\'ta olmadi.'));
+        emit(SettingsErrorState(ErrorSettingssection()));
         return;
       }
     } catch (e) {
-      emit(SettingsErrorState('Xatolik yuz berdi: $e'));
+      emit(SettingsErrorState(ErrorSettingssection()));
       return;
     }
 
@@ -121,7 +121,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     if (selectedOption != null) {
       emit(SettingsSuccesState());
     } else {
-      emit(SettingsErrorState('Hech narsa tanlanmadi.'));
+      emit(SettingsErrorState(ErrorSettingssection()));
     }
   }
 }

@@ -36,12 +36,9 @@ class KabinetInformationGetState extends KabinetState {
 }
 
 class KabinetErrorState extends KabinetState {
-  final String message;
+  Failure failure;
 
-  KabinetErrorState({required this.message});
-
-  @override
-  List<Object?> get props => [message];
+  KabinetErrorState(this.failure);
 }
 
 class KabinetSuccesState extends KabinetState {}

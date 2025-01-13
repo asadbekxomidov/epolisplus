@@ -27,7 +27,11 @@ class _CabinetScreenState extends State<CabinetScreen> {
         listener: (context, state) {
           if (state is KabinetErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
+              SnackBar(
+                content: Text(
+                  state.failure.getErrorMessage(context),
+                ),
+              ),
             );
           }
         },

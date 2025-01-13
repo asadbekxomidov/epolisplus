@@ -1,3 +1,4 @@
+import 'package:epolisplus/utils/errors.dart';
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

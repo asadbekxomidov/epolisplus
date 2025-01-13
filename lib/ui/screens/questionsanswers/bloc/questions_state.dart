@@ -20,10 +20,7 @@ class QuestionsLoadedState extends QuestionsState {
 }
 
 class QuestionsErrorState extends QuestionsState {
-  final String message;
+  Failure failure;
 
-  const QuestionsErrorState({required this.message});
-
-  @override
-  List<Object> get props => [message];
+  QuestionsErrorState(this.failure);
 }

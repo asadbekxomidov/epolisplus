@@ -1,12 +1,12 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member
 import 'dart:async';
-
-import 'package:epolisplus/models/models_export.dart';
-import 'package:epolisplus/repository/profil/profil_repository.dart';
-import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:epolisplus/utils/sharedPreferencesManager.dart';
+import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/repository/profil/profil_repository.dart';
 
 part 'kabinet_event.dart';
 part 'kabinet_state.dart';
@@ -53,19 +53,16 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
         await prefsManager.clearToken();
         Get.offAll(() => CheckAuthScreen());
       } else {
-        // ignore: invalid_use_of_visible_for_testing_member
-        emit(KabinetErrorState(message: response.message ?? "Unknown error"));
+        emit(KabinetErrorState(UserInfoNotFound()));
       }
     } catch (e) {
-      // ignore: invalid_use_of_visible_for_testing_member
-      emit(KabinetErrorState(message: e.toString()));
+      emit(KabinetErrorState(UserInfoNotFound()));
     }
 
     await getData();
   }
 
   getData() async {
-    // ignore: invalid_use_of_visible_for_testing_member
     emit(KabinetLoadingState());
 
     try {
@@ -73,7 +70,6 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
       final response = await profilRepository.getProfile();
 
       if (response.status == 200 && response.response != null) {
-        // ignore: invalid_use_of_visible_for_testing_member
         emit(KabinetInformationGetState(profilResponse: response.response!));
       } else if (response.status == 401) {
         final prefsManager = SharedPreferencesManager();
@@ -82,12 +78,10 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
         await prefsManager.clearToken();
         Get.offAll(() => CheckAuthScreen());
       } else {
-        // ignore: invalid_use_of_visible_for_testing_member
-        emit(KabinetErrorState(message: response.message ?? "Unknown error"));
+        emit(KabinetErrorState(UserInfoNotFound()));
       }
     } catch (e) {
-      // ignore: invalid_use_of_visible_for_testing_member
-      emit(KabinetErrorState(message: e.toString()));
+      emit(KabinetErrorState(UserInfoNotFound()));
     }
   }
 }

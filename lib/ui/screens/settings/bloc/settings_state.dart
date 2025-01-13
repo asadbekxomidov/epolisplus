@@ -12,12 +12,9 @@ class SettingsLoadingState extends SettingsState {}
 class SettingsLoadedState extends SettingsState {}
 
 class SettingsErrorState extends SettingsState {
-  final String errorMessage;
+  Failure failure;
 
-  SettingsErrorState(this.errorMessage);
-
-  @override
-  List<Object?> get props => [errorMessage];
+  SettingsErrorState(this.failure);
 }
 
 class NavigateToNotificationScreen extends SettingsState {}

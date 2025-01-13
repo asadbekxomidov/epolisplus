@@ -12,9 +12,9 @@ class MyCarLodingState extends MyCarState {}
 class CarLoadedState extends MyCarState {}
 
 class MyCarErrorState extends MyCarState {
-  final String error;
+  Failure failure;
 
-  MyCarErrorState(this.error);
+  MyCarErrorState(this.failure);
 }
 
 class CarSuccesState extends MyCarState {}

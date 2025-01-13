@@ -36,7 +36,9 @@ class _PartnersOfertaState extends State<PartnersOferta> {
               // }
               if (state is OfertaErrorState) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(state.message),
+                  content: Text(
+                    state.failure.getErrorMessage(context),
+                  ),
                 ));
               }
             },
@@ -108,7 +110,7 @@ class _PartnersOfertaState extends State<PartnersOferta> {
     } else if (state is OfertaErrorState) {
       return Center(
         child: Text(
-          state.message,
+          state.failure.getErrorMessage(context),
           style: dimens.titleStyle,
         ),
       );

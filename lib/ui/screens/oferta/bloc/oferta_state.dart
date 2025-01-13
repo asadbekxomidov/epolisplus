@@ -28,10 +28,7 @@ class OfertaLoadedState extends OfertaState {
 }
 
 class OfertaErrorState extends OfertaState {
-  final String message;
+  Failure failure;
 
-  const OfertaErrorState({this.message = 'An error occurred'});
-
-  @override
-  List<Object> get props => [message];
+  OfertaErrorState(this.failure);
 }

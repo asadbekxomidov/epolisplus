@@ -37,10 +37,10 @@ class EditProfilBloc extends Bloc<EditProfilEvent, EditProfilState> {
         return;
         // emit(EditProfileInitialState());
       } else {
-        emit(EditProfileErrorState());
+        emit(EditProfileErrorState(UserInfoNotChange()));
       }
     } catch (e) {
-      emit(EditProfileErrorState());
+      emit(EditProfileErrorState(UserInfoNotChange()));
     }
   }
 
@@ -52,7 +52,7 @@ class EditProfilBloc extends Bloc<EditProfilEvent, EditProfilState> {
     String? phone = await _prefsManager.getPhone();
 
     if (token == null || phone == null) {
-      emit(EditProfileErrorState());
+      emit(EditProfileErrorState(UserInfoNotChange()));
       return;
     }
 
@@ -69,7 +69,7 @@ class EditProfilBloc extends Bloc<EditProfilEvent, EditProfilState> {
       Get.off(() => CheckAuthScreen());
     } else {
       logger(baseResponse.message.toString());
-      emit(EditProfileErrorState());
+      emit(EditProfileErrorState(UserInfoNotChange()));
     }
   }
 }

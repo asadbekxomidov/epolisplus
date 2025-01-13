@@ -11,6 +11,10 @@ class WarrantycodeLoadingState extends WarrantycodeState {}
 
 class WarrantycodeLoadedState extends WarrantycodeState {}
 
-class WarrantycodeErrorState extends WarrantycodeState {}
+class WarrantycodeErrorState extends WarrantycodeState {
+  Failure failure;
+
+  WarrantycodeErrorState(this.failure);
+}
 
 class WarrantycodeSuccesState extends WarrantycodeState {}
