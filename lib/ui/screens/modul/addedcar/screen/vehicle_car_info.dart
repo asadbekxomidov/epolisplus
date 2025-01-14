@@ -40,23 +40,18 @@ class VehicleCarInfo extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AddCarTextfield(
-                hintText: AppStrings.carNumberFormatter,
-                controller: bloc.gowNumberController,
-                showStar: true,
-                titleText: AppStrings.stateNumber,
-                isActive: !bloc.isHaveCarInformation,
-              ),
-              Gap(dimens.paddingVerticalItem16),
-              AddCarRowTextField(
-                controller: bloc.techSeriaController,
-                controller2: bloc.techNumberController,
-                hintText1: AppStrings.addcaraff,
-                hintText: AppStrings.addcar00,
+              CarInfoTextField(
                 titleText: AppStrings.technicalPassportText,
-                showStar: true,
-                style: dimens.myTextFieldStyle,
+                govNumberController: bloc.gowNumberController,
+                govNumberHintText: AppStrings.carNumberFormatter,
+                govNumberTitleText: AppStrings.stateNumber,
                 isActive: !bloc.isHaveCarInformation,
+                showStar: true,
+                techNumberController: bloc.techNumberController,
+                techNumberHintText: AppStrings.addcar00,
+                techSeriaController: bloc.techSeriaController,
+                techSeriaHintText: AppStrings.addcaraff,
+                style: dimens.myTextFieldStyle,
               ),
               Gap(dimens.paddingVerticalItem7),
               bloc.isHaveCarInformation
@@ -106,21 +101,6 @@ class VehicleCarInfo extends StatelessWidget {
                           ],
                         ),
                         Gap(dimens.paddingVerticalItem16),
-                        MyRowButoonWidget(
-                          backgroundColor: AppColors.redColorFill,
-                          color: AppColors.redColor,
-                          height: dimens.height40,
-                          iconSize: 20,
-                          mainAxisAlig: MainAxisAlignment.center,
-                          myRadius: 12,
-                          onclick: () {
-                            bloc.add(ClearVehicleEvent());
-                          },
-                          style: dimens.font16Redw400Sty,
-                          width: dimens.screenWidth,
-                          iconData: AppImage.closeIcon,
-                          text: AppStrings.deleteText,
-                        ),
                       ],
                     )
                   : Column(

@@ -1,213 +1,218 @@
-import 'package:epolisplus/utils/utils_export.dart';
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gap/gap.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 
-class AddCarTextfield extends StatelessWidget {
-  final TextEditingController? controller;
-  final String? hintText;
+class CarInfoTextField extends StatefulWidget {
+  final TextEditingController? govNumberController;
+  final String? govNumberHintText;
+  final String? govNumberTitleText;
+  final TextEditingController? techSeriaController;
+  final TextEditingController? techNumberController;
+  final String? techSeriaHintText;
+  final String? techNumberHintText;
   final String? titleText;
-
-  final TextInputType keyboardType;
-  final bool showStar;
-  final bool isActive;
-
-  AddCarTextfield({
-    required this.titleText,
-    this.controller,
-    this.hintText,
-    this.keyboardType = TextInputType.text,
-    this.showStar = false,
-    this.isActive = true,
-  });
-
-  late Dimens dimens;
-
-  @override
-  Widget build(BuildContext context) {
-    dimens = Dimens(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              titleText!,
-              style: dimens.textStyleSecondary,
-            ),
-            Gap(dimens.paddingHorizontalItem5),
-            if (showStar) AppImage.starWidget(context),
-          ],
-        ),
-        Gap(dimens.paddingVerticalItem2),
-        Row(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              width: dimens.width284,
-              height: dimens.height64,
-              padding: EdgeInsets.symmetric(
-                horizontal: dimens.paddingHorizontal13,
-              ),
-              decoration: carNumberDecorations(
-                dimens,
-                isActive: isActive,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: controller,
-                      keyboardType: keyboardType,
-                      textAlign: TextAlign.center,
-                      textAlignVertical: TextAlignVertical.center,
-                      inputFormatters: [
-                        // UpperCaseFormatter(),
-                        LengthLimitingTextInputFormatter(11),
-                        DualCarNumberInputFormatter(),
-                      ],
-                      cursorColor: AppColors.hintColor,
-                      cursorWidth: dimens.width2,
-                      cursorHeight: dimens.height40,
-                      decoration: InputDecoration(
-                        hintText: hintText,
-                        hintStyle: dimens.carNumberTextFieldSty,
-                        filled: false,
-                        fillColor: AppColors.whiteColor,
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.zero,
-                      ),
-                      style: dimens.carTextfieldCursorSty,
-                      enabled: isActive,
-                    ),
-                  ),
-                  SizedBox(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AppImage.uzbFlagIcon,
-                          height: dimens.height10,
-                        ),
-                        Text(
-                          AppStrings.uzflagText,
-                          style: dimens.cardUzFlagSty,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class AddCarRowTextField extends StatelessWidget {
-  final TextEditingController? controller;
-  final TextEditingController? controller2;
-  final String? hintText1;
-  final String? hintText;
-  final String? titleText;
-  final TextInputType keyboardType;
-
   final bool showStar;
   final bool isActive;
   final TextStyle? style;
 
-  AddCarRowTextField({
+  CarInfoTextField({
     required this.titleText,
-    this.controller,
-    this.controller2,
-    this.hintText1,
-    this.hintText,
-    this.keyboardType = TextInputType.text,
+    this.govNumberController,
+    this.techNumberController,
+    this.techNumberHintText,
+    this.techSeriaController,
+    this.techSeriaHintText,
     this.showStar = false,
     this.isActive = true,
     this.style,
+    this.govNumberHintText,
+    this.govNumberTitleText,
   });
 
-  late Dimens dimens;
+  @override
+  _CarInfoTextFieldState createState() => _CarInfoTextFieldState();
+}
+
+class _CarInfoTextFieldState extends State<CarInfoTextField> {
+  final FocusNode _govFocusNode = FocusNode();
+  final FocusNode _seriaFocusNode = FocusNode();
+  final FocusNode _numberFocusNode = FocusNode();
+
+  void _unfocusKeyboard() {
+    FocusScope.of(context).unfocus();
+  }
 
   @override
   Widget build(BuildContext context) {
-    dimens = Dimens(context);
+    final dimens = Dimens(context);
+
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              titleText!,
-              style: dimens.textStyleSecondary,
-            ),
-            Gap(dimens.paddingHorizontalItem5),
-            if (showStar) AppImage.starWidget(context),
-          ],
-        ),
+        _buildTitleRow(context, widget.govNumberTitleText, dimens),
         Gap(dimens.paddingVerticalItem2),
-        Row(
-          children: [
-            Container(
-              width: dimens.width64,
-              height: dimens.height40,
-              // padding: EdgeInsets.symmetric(
-              //   horizontal: dimens.paddingHorizontal13,
-              // ),
-              decoration: inputDecoration(
-                dimens,
-                isActive: isActive,
+        _buildGovNumberField(dimens),
+        Gap(dimens.paddingVerticalItem16),
+        _buildTitleRow(context, widget.titleText, dimens),
+        Gap(dimens.paddingVerticalItem2),
+        _buildTechPassportFields(context, dimens),
+      ],
+    );
+  }
+
+  Widget _buildTitleRow(BuildContext context, String? title, Dimens dimens) {
+    return Row(
+      children: [
+        Text(
+          title ?? '',
+          style: dimens.textStyleSecondary,
+        ),
+        Gap(dimens.paddingHorizontalItem5),
+        if (widget.showStar) AppImage.starWidget(context),
+      ],
+    );
+  }
+
+  Widget _buildGovNumberField(Dimens dimens) {
+    return Container(
+      alignment: Alignment.center,
+      width: dimens.width284,
+      height: dimens.height64,
+      padding: EdgeInsets.symmetric(horizontal: dimens.paddingHorizontal13),
+      decoration: carNumberDecorations(
+        dimens,
+        isActive: widget.isActive,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: widget.govNumberController,
+              focusNode: _govFocusNode,
+              keyboardType: TextInputType.text,
+              textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.center,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(11),
+                DualCarNumberInputFormatter(),
+              ],
+              cursorColor: AppColors.hintColor,
+              cursorWidth: dimens.width2,
+              cursorHeight: dimens.height40,
+              decoration: InputDecoration(
+                hintText: widget.govNumberHintText,
+                hintStyle: dimens.carNumberTextFieldSty,
+                filled: false,
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.zero,
               ),
-              child: TextField(
-                controller: controller,
-                keyboardType: keyboardType,
-                textAlign: TextAlign.center,
-                inputFormatters: [
-                  UpperCaseFormatter(),
-                  LengthLimitingTextInputFormatter(3),
-                ],
-                decoration: InputDecoration(
-                  hintText: hintText1,
-                  hintStyle: dimens.hintStyle,
-                  filled: false,
-                  fillColor: AppColors.whiteColor,
-                  border: InputBorder.none,
-                  enabled: isActive,
-                ),
-                style: style,
-              ),
+              style: dimens.carTextfieldCursorSty,
+              enabled: widget.isActive,
+              onChanged: (value) {
+                if (value.length == 11) {
+                  _seriaFocusNode.requestFocus();
+                }
+              },
+              onSubmitted: (_) {
+                _seriaFocusNode.requestFocus();
+              },
             ),
-            Gap(dimens.paddingHorizontal6),
-            Container(
-              width: dimens.width289,
-              height: dimens.height40,
-              decoration: inputDecoration(
-                dimens,
-                isActive: isActive,
-              ),
-              child: TextField(
-                controller: controller2,
-                keyboardType: keyboardType,
-                textAlign: TextAlign.center,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(7),
-                ],
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: dimens.hintStyle,
-                  filled: false,
-                  fillColor: AppColors.whiteColor,
-                  border: InputBorder.none,
-                  enabled: isActive,
+          ),
+          SizedBox(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  AppImage.uzbFlagIcon,
+                  height: dimens.height10,
                 ),
-                style: style,
-              ),
+                Text(
+                  AppStrings.uzflagText,
+                  style: dimens.cardUzFlagSty,
+                ),
+              ],
             ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTechPassportFields(BuildContext context, Dimens dimens) {
+    return Row(
+      children: [
+        // Tech Seria
+        Container(
+          width: dimens.width64,
+          height: dimens.height40,
+          decoration: inputDecoration(
+            dimens,
+            isActive: widget.isActive,
+          ),
+          child: TextField(
+            controller: widget.techSeriaController,
+            focusNode: _seriaFocusNode,
+            keyboardType: TextInputType.text,
+            textAlign: TextAlign.center,
+            inputFormatters: [
+              UpperCaseFormatter(),
+              LengthLimitingTextInputFormatter(3),
+            ],
+            decoration: InputDecoration(
+              hintText: widget.techSeriaHintText,
+              hintStyle: dimens.hintStyle,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.zero,
+            ),
+            style: widget.style,
+            onChanged: (value) {
+              if (value.length == 3) {
+                _numberFocusNode.requestFocus();
+              }
+            },
+            onSubmitted: (_) {
+              _numberFocusNode.requestFocus();
+            },
+          ),
+        ),
+
+        Gap(dimens.paddingHorizontal6),
+
+        // Tech Number
+        Container(
+          width: dimens.width289,
+          height: dimens.height40,
+          decoration: inputDecoration(
+            dimens,
+            isActive: widget.isActive,
+          ),
+          child: TextField(
+            controller: widget.techNumberController,
+            focusNode: _numberFocusNode,
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.center,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(7),
+            ],
+            decoration: InputDecoration(
+              hintText: widget.techNumberHintText,
+              hintStyle: dimens.hintStyle,
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.zero,
+            ),
+            style: widget.style,
+            onChanged: (value) {
+              if (value.length == 7) {
+                _unfocusKeyboard();
+              }
+            },
+            onSubmitted: (_) {
+              _unfocusKeyboard();
+            },
+          ),
         ),
       ],
     );

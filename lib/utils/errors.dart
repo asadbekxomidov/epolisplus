@@ -94,6 +94,13 @@ class InformationheadError extends Failure {
   String getErrorMessage(BuildContext context) =>
       AppStrings.informationnotfound;
 }
+class CheckInformationtryagain extends Failure {
+  CheckInformationtryagain() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.checkinformationtryagain;
+}
 
 class InformationnotfoundError extends Failure {
   InformationnotfoundError() : super();
@@ -153,4 +160,12 @@ class ErrorSettingssection extends Failure {
   @override
   String getErrorMessage(BuildContext context) =>
       AppStrings.errorSettingssection;
+}
+
+class ErrorretrievingtheWarrantycode extends Failure {
+  ErrorretrievingtheWarrantycode() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.errorretrievingthewarrantycode;
 }

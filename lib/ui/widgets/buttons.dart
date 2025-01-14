@@ -270,7 +270,20 @@ class RegisterPushButton extends StatelessWidget {
                     strokeWidth: dimens.width10 / 5,
                   ),
                 )
-              : SizedBox(),
+              : Icon(
+                  iconData ?? AppImage.arrow_forward_outlined,
+                  size: dimens.height20,
+                ),
+          // isLoading
+          //     ? SizedBox(
+          //         height: dimens.height10,
+          //         width: dimens.height10,
+          //         child: CircularProgressIndicator(
+          //           color: Colors.red,
+          //           strokeWidth: dimens.width10 / 5,
+          //         ),
+          //       )
+          //     : SizedBox(),
         ],
       ),
     );
@@ -1184,7 +1197,8 @@ class PagesButton extends StatelessWidget {
       child: Container(
         height: dimens.height48,
         // width: dimens.width202,
-        decoration: partnersPageButtonDecorations(dimens),
+        decoration: myCarCardDecoration(dimens),
+        // decoration: partnersPageButtonDecorations(dimens),
         child: MyRowBottonWidget(
           image: image!,
           text: text!,

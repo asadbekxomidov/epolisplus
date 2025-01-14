@@ -133,4 +133,8 @@ class CarInformationResponse {
       "TECH_NUMBER": techNumber,
     };
   }
+
+  factory CarInformationResponse.empty() {
+    return CarInformationResponse();
+  }
 }

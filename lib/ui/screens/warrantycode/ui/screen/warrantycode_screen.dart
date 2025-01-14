@@ -2,9 +2,7 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
-import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'package:epolisplus/ui/screens/modul/addedcar/bloc/add_car_bloc.dart';
 import 'package:epolisplus/ui/screens/warrantycode/bloc/warrantycode_bloc.dart';
 import 'package:epolisplus/ui/screens/modul/addedcar/screen/vehicle_car_info.dart';
 
@@ -16,21 +14,23 @@ class WarrantycodeScreen extends StatefulWidget {
 class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
   late Dimens dimens;
   late WarrantycodeBloc warrantycodeBloc;
-  OnVehicleListener? listener;
-  CarInformationResponse? vehicleInformation;
 
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => WarrantycodeBloc(
-        listener: listener ?? WarrantyDefaultVehicleListener(),
-        vehicleInformation: vehicleInformation ?? CarInformationResponse(),
-      ),
+      create: (context) => WarrantycodeBloc(),
       child: Scaffold(
         body: BlocConsumer<WarrantycodeBloc, WarrantycodeState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is WarrantycodeErrorState) {
+              showErrorMessageSnackBar(
+                context,
+                state.failure.getErrorMessage(context),
+              );
+            }
+          },
           builder: (context, state) {
             warrantycodeBloc = BlocProvider.of<WarrantycodeBloc>(context);
 
@@ -38,9 +38,7 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
               height: dimens.screenHeight,
               width: dimens.screenWidth,
               decoration: pagesDecorations(),
-              padding: EdgeInsets.all(
-                dimens.paddingHorizontal16,
-              ),
+              padding: EdgeInsets.all(dimens.paddingHorizontal16),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,16 +68,6 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                         ),
                       ],
                     ),
-                    MyTextfieldWCode(
-                      controller: TextEditingController(),
-                      myRadius: dimens.radius12,
-                      height: dimens.height40,
-                      width: dimens.width202,
-                      style: dimens.font16Blackw400Sty,
-                      text: AppStrings.searchText,
-                      hintstyle: dimens.hintStyle,
-                      iconData: true,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -92,23 +80,18 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                               style: dimens.font14Greyw400Sty,
                             ),
                             Gap(dimens.paddingVerticalItem2),
-                            MyContainerRowPWidget(
-                              mainAxisAlig: MainAxisAlignment.start,
-                              onclick: () {},
-                              paddingContainer: dimens.paddingHorizontal13,
-                              padding: dimens.paddingHorizontal4,
-                              text: AppStrings.searchText,
+                            MyTextfieldWCode(
+                              controller: TextEditingController(),
+                              myRadius: dimens.radius12,
                               height: dimens.height40,
                               width: dimens.width202,
-                              // iconData: Icons.search,
                               style: dimens.font16Blackw400Sty,
-                              iconSize: dimens.height20,
-                              color: AppColors.blackColor,
-                              myRadius: dimens.radius12,
+                              text: AppStrings.searchText,
+                              hintstyle: dimens.hintStyle,
+                              iconData: true,
                             ),
                           ],
                         ),
-                        // Gap(dimens.paddingHorizontal4),
                         MyContainerRowPWidget(
                           paddingContainer: 1,
                           mainAxisAlig: MainAxisAlignment.center,
@@ -123,7 +106,6 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                           color: AppColors.blackColor,
                           myRadius: dimens.radius12,
                         ),
-                        // Gap(dimens.paddingHorizontal4),
                         MyContainerRowImageWidget(
                           mainAxisAlig: MainAxisAlignment.center,
                           onclick: () {
@@ -150,7 +132,7 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                       isLoading: state is WarrantycodeLoadingState,
                       text: AppStrings.addwarrantyCode,
                       onClick: () {
-                        // myCarBloc.add(AddCarEvent());
+                        // warrantycodeBloc.add(WarrantycodeGetVehicleInfoEvent());
                       },
                       iconData: AppImage.addIconData,
                       colorIcon: AppColors.greenColorDefault,
@@ -167,9 +149,30 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                     ),
                     Gap(dimens.paddingVerticalItem16),
                     VehicleCarInfo(
-                      vehicleInformation: warrantycodeBloc.vehicleInformation!,
-                      listener: warrantycodeBloc.listener!,
+                      vehicleInformation: warrantycodeBloc.vehicleInformation,
+                      listener: warrantycodeBloc,
                     ),
+                    warrantycodeBloc.isHaveCarInformation
+                        ? Column(
+                            children: [
+                              // Text(
+                              //   warrantycodeBloc.vehicleInformation.orgName,
+                              //   style: TextStyle(color: Colors.black),
+                              // ),
+                              PhoneWidget(
+                                controller:
+                                    warrantycodeBloc.phoneNumberController,
+                                isActive: false,
+                                showStar: true,
+                              ),
+                              Gap(dimens.paddingVerticalItem8),
+                              AddMyCarListBtn(
+                                onClick: () {},
+                                text: 'add',
+                              ),
+                            ],
+                          )
+                        : const SizedBox()
                   ],
                 ),
               ),

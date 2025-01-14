@@ -1,5 +1,6 @@
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 
 class PhoneWidget extends StatelessWidget {
@@ -12,7 +13,7 @@ class PhoneWidget extends StatelessWidget {
     required this.controller,
     this.showStar = false,
     this.isActive = true,
-  }) : super(key: key);
+  });
   late Dimens dimens;
 
   @override
@@ -50,6 +51,7 @@ class PhoneWidget extends StatelessWidget {
                   controller: controller,
                   inputFormatters: [
                     Masked.maskPhone,
+                    LengthLimitingTextInputFormatter(14),
                   ],
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(

@@ -1,7 +1,10 @@
-import 'package:epolisplus/utils/errors.dart';
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/ui/screens/modul/addedcar/bloc/add_car_bloc.dart';
 import 'package:epolisplus/models/profil/profil_response/carinforesponse/car_information_response.dart';
@@ -11,37 +14,42 @@ part 'warrantycode_state.dart';
 
 class WarrantycodeBloc extends Bloc<WarrantycodeEvent, WarrantycodeState>
     implements OnVehicleListener {
-  OnVehicleListener? listener;
-  CarInformationResponse? vehicleInformation;
+  TextEditingController phoneNumberController = TextEditingController();
+  var vehicleInformation = CarInformationResponse();
 
-  // WarrantycodeBloc() : super(WarrantycodeInitialState()) {
-  WarrantycodeBloc({this.listener, this.vehicleInformation})
-      : super(WarrantycodeInitialState()) {
-    on<WarrantycodePushScreenEvent>(onQrCodeScreen);
+  WarrantycodeBloc() : super(WarrantycodeInitialState()) {
+    on<WarrantycodePushScreenEvent>(qrCodeScreenNavigate);
   }
 
-  void onQrCodeScreen(
+  bool get isHaveCarInfor {
+    print("Checking if vehicle info exists: ${vehicleInformation.error}");
+    return vehicleInformation.error == "0";
+  }
+
+  bool get isHaveCarInformation {
+    return vehicleInformation.error == "0";
+  }
+
+  void qrCodeScreenNavigate(
       WarrantycodePushScreenEvent event, Emitter<WarrantycodeState> emit) {
     Get.to(() => QrCodeScanerScreen());
   }
 
   @override
-  void clearData() {}
+  void onVehicle(CarInformationResponse vehicle) {
+    emit(WarrantycodeLoadingState());
+    this.vehicleInformation = vehicle;
+    print("Updated vehicle info: ${vehicle.orgName}");
+    print("Updated error: ${vehicle.error}");
+    emit(WarrantycodeSuccesState());
+  }
 
   @override
-  void onVehicle(CarInformationResponse vehicle) {}
-
-  @override
-  void onWait(bool isProgressbar) {}
-}
-
-class WarrantyDefaultVehicleListener implements OnVehicleListener {
-  @override
-  void clearData() {}
-
-  @override
-  void onVehicle(CarInformationResponse vehicle) {}
-
-  @override
-  void onWait(bool isProgressbar) {}
+  void onWait(bool isProgressbar) {
+    if (isProgressbar) {
+      print('Loading...');
+    } else {
+      print('Finished loading...');
+    }
+  }
 }

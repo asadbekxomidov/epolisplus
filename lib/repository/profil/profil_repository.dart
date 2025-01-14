@@ -124,13 +124,8 @@ class ProfilRepository extends ProfilRepositoryIml {
     try {
       response = await service.getPostData(data, headers, url);
 
-      // logger(response.toString(), error: 'WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
-
       if (response?.statusCode == 200 && response?.data != null) {
         var responseData = response?.data['response'];
-
-        // logger(responseData.toString(),
-        //     error: 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ');
 
         if (responseData != null) {
           var profilData = CarInformationResponse.fromJson(responseData);
@@ -143,6 +138,10 @@ class ProfilRepository extends ProfilRepositoryIml {
             status: response?.statusCode,
           );
         }
+      } else if (response?.statusCode == 500) {
+        return BaseModels(
+          message: response?.statusMessage,
+        );
       }
 
       return BaseModels<CarInformationResponse>(

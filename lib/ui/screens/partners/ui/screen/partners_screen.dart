@@ -81,7 +81,7 @@ class _PartnersScreenState extends State<PartnersScreen> {
                                   ),
                                   color: AppColors.partnersCardColor,
                                 ),
-                                height: dimens.height268,
+                                // height: dimens.height268,
                                 padding: EdgeInsets.all(
                                   dimens.paddingVerticalItem20,
                                 ),

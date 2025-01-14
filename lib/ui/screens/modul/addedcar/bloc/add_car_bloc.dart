@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/repository/profil/profil_repository.dart';
 
 part 'add_car_event.dart';
@@ -43,7 +41,6 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
   }) : super(CarInitialState()) {
     on<GetInfromationCarEvent>(onmyCarInformation);
     on<RegisterCertificateNumberEvent>(onpushScreen);
-    on<ClearVehicleEvent>(clearVehicle);
   }
 
   Future<void> onmyCarInformation(
@@ -72,13 +69,14 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
         if (response.status == 200 && response.response != null) {
           vehicleInformation = response.response!;
           listener.onVehicle(vehicleInformation);
+          print('----------------------${vehicleInformation.orgName}');
           emit(CarInformationGetState());
         } else if (response.status == 401) {
           final preferense = SharedPreferencesManager();
           preferense.clearUserInfo();
         }
       } else {
-        emit(CarErrorState(InformationheadError()));
+        emit(CarErrorState(CheckInformationtryagain()));
       }
     } catch (e) {
       emit(CarErrorState(InformationnotfoundError()));
@@ -89,23 +87,9 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
       RegisterCertificateNumberEvent event, Emitter<AddedCarState> emit) async {
     Get.to(() => RegisterCertnumberScreen());
   }
-
-  FutureOr<void> clearVehicle(
-      ClearVehicleEvent event, Emitter<AddedCarState> emit) {
-    listener.clearData();
-    vehicleInformation = CarInformationResponse();
-    gowNumberController.text = "";
-    techSeriaController.text = "";
-    techNumberController.text = "";
-    emit(CarSuccesState());
-  }
 }
 
 abstract class OnVehicleListener {
   void onVehicle(CarInformationResponse vehicle);
-  void onWait(bool isProgressbar) {
-    return progressBar3();
-  }
-
-  void clearData();
+  void onWait(bool isProgressbar) {}
 }

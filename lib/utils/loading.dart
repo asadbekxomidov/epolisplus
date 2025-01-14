@@ -1,6 +1,7 @@
-import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'package:epolisplus/utils/utils_export.dart';
+// import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/widgets/widgets_export.dart';
 
 class LoadingIndicator extends StatelessWidget {
   final bool isLoading;
@@ -16,59 +17,35 @@ class LoadingIndicator extends StatelessWidget {
   }
 }
 
-// class LoadingPages extends StatelessWidget {
-//   late Dimens dimens;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     dimens = Dimens(context);
-
-//     return Dialog(
-//       backgroundColor: AppColors.dialogsColor,
-//       // insetPadding: EdgeInsets.zero,
-//       child: Stack(
-//         children: [
-//           Column(
-//             // mainAxisSize: MainAxisSize.max,
-//             // crossAxisAlignment: CrossAxisAlignment.center,
-//             // mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Image.asset(
-//                 AppImage.loadingPageLogo,
-//                 height: dimens.height60,
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class LoadingPages extends StatelessWidget {
-  late Dimens dimens;
-
   @override
   Widget build(BuildContext context) {
-    dimens = Dimens(context);
-
-    return Stack(
-      children: [
-        Container(
-          height: dimens.screenHeight,
-          width: dimens.screenWidth,
-          decoration: myContainerLodingDEcorations(
-            dimens,
-            AppColors.backgroundBlurColor0,
-          ),
-          child: Center(
-            child: Image.asset(
-              AppImage.loadingPageLogo,
-              height: dimens.height60,
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        child: Center(
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Image.asset(AppImage.progressBarGif),
             ),
           ),
         ),
-      ],
+      ),
+    );
+  }
+
+  static void showLoading(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => LoadingPages(),
     );
   }
 }

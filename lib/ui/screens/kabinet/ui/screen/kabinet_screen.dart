@@ -159,6 +159,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
         : Column(
             children: [
               car_list(carInfoList),
+              Gap(dimens.paddingVerticalItem8),
               add_my_car_btn(),
             ],
           );
