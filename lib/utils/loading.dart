@@ -1,4 +1,4 @@
-// import 'dart:ui';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
@@ -18,26 +18,27 @@ class LoadingIndicator extends StatelessWidget {
 }
 
 class LoadingPages extends StatelessWidget {
+  late Dimens dimens;
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Dialog(
-        backgroundColor: Colors.transparent,
-        child: Center(
+    dimens = Dimens(context);
+
+    return Stack(
+      children: [
+        BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           child: Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Image.asset(AppImage.progressBarGif),
-            ),
+            color: AppColors.dialogsColor.withOpacity(0.5),
           ),
         ),
-      ),
+        Center(
+          child: Image.asset(
+            AppImage.progressBarGif,
+            height: dimens.height40,
+          ),
+        ),
+      ],
     );
   }
 

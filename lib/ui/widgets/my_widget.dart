@@ -123,9 +123,11 @@ class MyContainerWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Text(
-            text,
-            style: dimens.myTextFieldStyle,
+          Expanded(
+            child: Text(
+              text,
+              style: dimens.myTextFieldStyle,
+            ),
           ),
         ],
       ),
@@ -270,6 +272,73 @@ class MyContainerRowPWidget extends StatelessWidget {
   }
 }
 
+class MyWidgetShowDilog extends StatelessWidget {
+  final String? text;
+  final double width;
+  final MainAxisAlignment mainAxisAlig;
+  final Function onclick;
+  final double height;
+  final double iconSize;
+  final double? padding;
+  final double? paddingContainer;
+  final IconData? iconData;
+  final TextStyle style;
+  final Color color;
+  final double myRadius;
+
+  MyWidgetShowDilog({
+    this.text,
+    required this.width,
+    required this.mainAxisAlig,
+    required this.onclick,
+    required this.height,
+    this.paddingContainer,
+    this.iconData,
+    this.padding,
+    required this.style,
+    required this.iconSize,
+    required this.color,
+    required this.myRadius,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return InkWell(
+      onTap: () => onclick(),
+      child: Container(
+        width: width,
+        height: height,
+        padding: EdgeInsets.only(
+          left: paddingContainer!,
+        ),
+        decoration: myContainerWidgets(dimens, myRadius),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: mainAxisAlig,
+          children: [
+            // if (padding != null) Gap(padding!),
+            if (text != null && text!.isNotEmpty)
+              Text(
+                text!,
+                style: style,
+              ),
+            if (iconData != null)
+              Icon(
+                iconData,
+                size: iconSize,
+                color: color,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class MyContainerRowImageWidget extends StatelessWidget {
   final String? text;
   final double width;
@@ -319,16 +388,16 @@ class MyContainerRowImageWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: mainAxisAlig,
           children: [
-            if (iconData != null)
-              Image.asset(
-                iconData!,
-                height: iconSize,
-              ),
             if (padding != null) Gap(padding!),
             if (text != null && text!.isNotEmpty)
               Text(
                 text!,
                 style: style,
+              ),
+            if (iconData != null)
+              Image.asset(
+                iconData!,
+                height: iconSize,
               ),
           ],
         ),

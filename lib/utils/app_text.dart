@@ -172,4 +172,5 @@ class AppStrings {
   static const String errorSettingssection = "В разделе настроек обнаружена ошибка.";
   static const String errorretrievingthewarrantycode = "Произошла ошибка при получении гарантийного кода..";
   static const String checkinformationtryagain = "Проверьте правильность информации и повторите попытку";
+  static const String errorQrcodepleasetryagain = "В QR-коде ошибка. Попробуйте еще раз.";
 }

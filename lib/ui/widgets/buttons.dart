@@ -1,3 +1,4 @@
+import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/ui/widgets/bloc/timer_bloc/timer_bloc.dart';
 // import 'package:epolisplus/ui/widgets/button/cubit/toggle_cubit.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
@@ -6,6 +7,7 @@ import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 // import 'package:json_serializable/type_helper.dart';
 
 // ? Button Navigatsiya
@@ -142,7 +144,58 @@ class ButtonPagesBtn extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
-        // onClick!();
+        onClick!();
+        // Get.back();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            iconData,
+            // AppImage.arrow_circle_left_outlined,
+            color: appColors,
+            size: dimens.height24,
+          ),
+          Gap(dimens.width5),
+          Text(
+            text!,
+            // AppStrings.back,
+            style: TextStyle(
+              fontSize: dimens.height16,
+              color: appColors,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class NavigatePopHomePage extends StatelessWidget {
+  Function? onClick;
+  String? text;
+  IconData? iconData;
+  Color? appColors;
+
+  NavigatePopHomePage({
+    this.onClick,
+    this.text,
+    this.iconData,
+    this.appColors,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () {
+        // Navigator.pop(context);
+        onClick!();
+        Get.off(() => BottomWidget());
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,

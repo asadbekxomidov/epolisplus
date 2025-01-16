@@ -213,16 +213,20 @@ class _CabinetScreenState extends State<CabinetScreen> {
                 Gap(dimens.paddingVerticalItem8),
                 Container(
                   height: dimens.height32,
-                  width: dimens.width142,
+                  // width: dimens.width142,
                   decoration: getMyCarContainerDeco(dimens),
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Gap(dimens.paddingHorizontal2),
                       Text(
                         "${car.govNumber}",
-                        style: dimens.font20Blackw400Sty,
+                        style: dimens.font16Blackw400Sty,
+                        // style: dimens.font20Blackw400Sty,
                       ),
+                      Gap(dimens.paddingVerticalItem2),
                       SizedBox(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

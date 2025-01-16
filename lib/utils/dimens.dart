@@ -1087,6 +1087,7 @@ class Dimens {
       fontSize: font20,
       decoration: TextDecoration.none,
       fontFamily: "GeistVF",
+      // overflow: TextOverflow.ellipsis,
     );
   }
 

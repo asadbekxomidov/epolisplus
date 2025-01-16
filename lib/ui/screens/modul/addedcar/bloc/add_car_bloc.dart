@@ -56,7 +56,10 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
       final ProfilRepository repository = ProfilRepository();
       if (carNumber.isNotEmpty &&
           teachPassportSeria.isNotEmpty &&
-          teachPassportNumber.isNotEmpty) {
+          teachPassportNumber.isNotEmpty &&
+          carNumber.length == 8 &&
+          teachPassportSeria.length == 3 &&
+          teachPassportNumber.length == 7) {
         listener.onWait(true);
 
         var response = await repository.getCarInformation(

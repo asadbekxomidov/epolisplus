@@ -37,8 +37,8 @@ class _PartnersScreenState extends State<PartnersScreen> {
             builder: (context, state) {
               partnersBloc = BlocProvider.of<PartnersBloc>(context);
               if (state is PartnersLoadingState) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return Center(
+                  child: LoadingPages(),
                 );
               }
               if (state is PartnersLoadedState) {

@@ -94,6 +94,7 @@ class InformationheadError extends Failure {
   String getErrorMessage(BuildContext context) =>
       AppStrings.informationnotfound;
 }
+
 class CheckInformationtryagain extends Failure {
   CheckInformationtryagain() : super();
 
@@ -168,4 +169,12 @@ class ErrorretrievingtheWarrantycode extends Failure {
   @override
   String getErrorMessage(BuildContext context) =>
       AppStrings.errorretrievingthewarrantycode;
+}
+
+class DrCodeNotFound extends Failure {
+  DrCodeNotFound() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.errorQrcodepleasetryagain;
 }

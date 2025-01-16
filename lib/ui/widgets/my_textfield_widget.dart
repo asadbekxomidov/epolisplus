@@ -13,6 +13,7 @@ class MyTextfieldWCode extends StatelessWidget {
   final TextStyle? hintstyle;
   final Color? color;
   final double? myRadius;
+  final bool? isActive;
 
   MyTextfieldWCode({
     required this.controller,
@@ -25,6 +26,7 @@ class MyTextfieldWCode extends StatelessWidget {
     this.iconSize,
     this.color,
     this.myRadius,
+    this.isActive = true,
   });
 
   late Dimens dimens;
@@ -43,6 +45,7 @@ class MyTextfieldWCode extends StatelessWidget {
           Gap(dimens.paddingHorizontal6),
           Expanded(
             child: TextField(
+              controller: controller,
               cursorHeight: dimens.height20,
               cursorColor: AppColors.blackColor,
               textAlign: TextAlign.start,
@@ -52,6 +55,7 @@ class MyTextfieldWCode extends StatelessWidget {
                 hintStyle: hintstyle,
               ),
               style: style,
+              enabled: isActive,
             ),
           ),
         ],

@@ -7,6 +7,7 @@ import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/qr_code/bloc/qr_code_bloc.dart';
 
 class QrCodeScanerScreen extends StatefulWidget {
+  QRViewController? controller;
   @override
   State<QrCodeScanerScreen> createState() => _QrCodeScanerScreenState();
 }
@@ -26,22 +27,19 @@ class _QrCodeScanerScreenState extends State<QrCodeScanerScreen> {
         body: BlocConsumer<QrCodeBloc, QrCodeState>(
           listener: (context, state) {
             if (state is QrCodeErrorState) {
-              showErrorMessageSnackBar(context, state.error);
+              showErrorMessageSnackBar(
+                context,
+                state.failure.getErrorMessage(context),
+              );
             }
-            // if (state is QrCodeScannedSuccessState) {
-            //   showSuccessMessageSnackBar(context, "Scanned: ${state.data}");
-            // }
           },
           builder: (context, state) {
             final bloc = BlocProvider.of<QrCodeBloc>(context);
 
             return Container(
               height: dimens.screenHeight,
-              decoration: mainDecorations(),
               width: dimens.screenWidth,
-              // padding: EdgeInsets.symmetric(
-              //   horizontal: dimens.paddingHorizontal16,
-              // ),
+              decoration: whitePagesDecorations(),
               child: Column(
                 children: [
                   Gap(dimens.paddingVerticalItem59),
@@ -60,7 +58,7 @@ class _QrCodeScanerScreenState extends State<QrCodeScanerScreen> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             width: dimens.screenWidth,
                             height: dimens.screenHeight,
                             child: Stack(
@@ -103,18 +101,5 @@ class _QrCodeScanerScreenState extends State<QrCodeScanerScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void reassemble() {
-    super.reassemble();
-    context.read<QrCodeBloc>().add(QrCodePauseEvent());
-    context.read<QrCodeBloc>().add(QrCodeResumeEvent());
-  }
-
-  @override
-  void dispose() {
-    context.read<QrCodeBloc>().add(QrCodeDisposeEvent());
-    super.dispose();
   }
 }

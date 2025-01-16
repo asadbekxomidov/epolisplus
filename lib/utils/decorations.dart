@@ -22,11 +22,9 @@ pagesDecorations() {
   );
 }
 
-homeBlueDecorations() {
+whitePagesDecorations() {
   return BoxDecoration(
-    image: DecorationImage(
-      image: AssetImage(AppImage.homeBlueImage),
-    ),
+    color: AppColors.backgroundWhiteColor,
   );
 }
 

@@ -18,3 +18,20 @@ class WarrantycodeErrorState extends WarrantycodeState {
 }
 
 class WarrantycodeSuccesState extends WarrantycodeState {}
+
+class WarrantycodeNewWidgetState extends WarrantycodeState {
+  final List<Widget> widgets;
+
+  WarrantycodeNewWidgetState(this.widgets);
+}
+
+class WarrantycodeAddNewWidgetEvent extends WarrantycodeEvent {}
+
+class WarrantycodeUpdatedState extends WarrantycodeState {
+  final List<WarrantyAddQrCodeWidget> warrantyWidgets;
+
+  WarrantycodeUpdatedState(this.warrantyWidgets);
+
+  @override
+  List<Object?> get props => [warrantyWidgets];
+}
