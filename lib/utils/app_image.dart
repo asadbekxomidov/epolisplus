@@ -160,6 +160,8 @@ class AppImage {
   static String loadingPageLogo = 'assets/images/loading_page_logo.png';
   static String closeIcon = 'assets/images/close_icon.png';
   static String selectIcon = 'assets/images/select_icon.png';
+  static String deleteRedIcon = 'assets/images/delete_icon.png';
+  static String whiteDeleteIcon = 'assets/images/white_delete_icon.png';
   static String warrantycodewidgeticon =
       'assets/images/warrantycode_widget_icon.png';
 

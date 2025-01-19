@@ -346,11 +346,14 @@ class MyContainerRowImageWidget extends StatelessWidget {
   final MainAxisAlignment mainAxisAlig;
 
   final double height;
-  final double iconSize;
+  final double? iconSize;
   final double? padding;
+  final double? centerPadding;
   final String? iconData;
+  final String? image;
   final TextStyle style;
   final Color color;
+  final Color borderColor;
   final double myRadius;
 
   MyContainerRowImageWidget({
@@ -360,10 +363,13 @@ class MyContainerRowImageWidget extends StatelessWidget {
     required this.mainAxisAlig,
     required this.height,
     this.iconData,
+    this.image,
     this.padding,
+    this.centerPadding,
     required this.style,
-    required this.iconSize,
+    this.iconSize,
     required this.color,
+    required this.borderColor,
     required this.myRadius,
   });
 
@@ -383,12 +389,18 @@ class MyContainerRowImageWidget extends StatelessWidget {
         // padding: EdgeInsets.only(
         //   left: dimens.paddingHorizontal13,
         // ),
-        decoration: myContainerWidgets(dimens, myRadius),
+        decoration: mybuttonDeco(dimens, myRadius, color, borderColor),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: mainAxisAlig,
           children: [
             if (padding != null) Gap(padding!),
+            if (image != null)
+              Image.asset(
+                image!,
+                height: iconSize!,
+              ),
+            if (centerPadding != null) Gap(centerPadding!),
             if (text != null && text!.isNotEmpty)
               Text(
                 text!,
@@ -397,7 +409,7 @@ class MyContainerRowImageWidget extends StatelessWidget {
             if (iconData != null)
               Image.asset(
                 iconData!,
-                height: iconSize,
+                height: iconSize!,
               ),
           ],
         ),

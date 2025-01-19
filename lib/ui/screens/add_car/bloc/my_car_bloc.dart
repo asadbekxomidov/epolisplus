@@ -42,17 +42,10 @@ class MyCarBloc extends Bloc<MyCarEvent, MyCarState>
     return vehicleInformation.error == "0";
   }
 
-  // Future<void> clearCarInfo(
-  //     ClearCarInfoEvent event, Emitter<MyCarState> emit) async {
-  //   emit(MyCarLodingState());
-  //   vehicleInformation = CarInformationResponse();
-  //   emit(MyCarSuccesState());
-  // }
-
   Future<void> clearCarInfo(
       ClearCarInfoEvent event, Emitter<MyCarState> emit) async {
     emit(MyCarLodingState());
-    vehicleInformation = CarInformationResponse.empty();
+    vehicleInformation = CarInformationResponse();
     emit(MyCarSuccesState());
   }
 

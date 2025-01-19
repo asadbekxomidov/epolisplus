@@ -367,6 +367,10 @@ class Dimens {
     return 306 * screenHeight / 852;
   }
 
+  double get height332 {
+    return 332 * screenHeight / 852;
+  }
+
   double get height440 {
     return 440 * screenHeight / 852;
   }
@@ -451,6 +455,10 @@ class Dimens {
     return 220 * screenWidth / 392;
   }
 
+  double get width265 {
+    return 265 * screenWidth / 392;
+  }
+
   double get width202 {
     return 202 * screenWidth / 392;
   }
@@ -461,6 +469,10 @@ class Dimens {
 
   double get width289 {
     return 289 * screenWidth / 392;
+  }
+
+  double get width313 {
+    return 313 * screenWidth / 392;
   }
 
   double get radius4 {

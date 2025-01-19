@@ -1,11 +1,10 @@
-import 'package:epolisplus/log/logger.dart';
-import 'package:epolisplus/repository/auth/auth_repository.dart';
-import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:epolisplus/utils/utils_export.dart';
 import 'package:get/get.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/repository/auth/auth_repository.dart';
 
 part 'verification_event.dart';
 part 'verification_state.dart';
@@ -32,8 +31,6 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
       return;
     }
 
-    emit(VerificationSuccessState());
-
     final authRepository = AuthRepository();
 
     if (phoneNumber.isNotEmpty && phoneCode.isNotEmpty) {
@@ -43,14 +40,12 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
           await authRepository.confirmAccount(phoneNumber, phoneCode);
 
       if (baseResponse.status == 200) {
-        logger(baseResponse.response.toString(), error: "Verification Bloc");
         Get.offAll(() => BottomWidget());
-        emit(VerificationLoadingState());
+        emit(VerificationSuccessState());
       } else {
         emit(VerificationErrorState(InputPhoneCodeFailure()));
       }
     } else {
-      print('else Verficatsiya Bloc else');
       emit(VerificationErrorState(PhoneCodeFailure()));
     }
   }
@@ -62,13 +57,10 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     final authRepository = AuthRepository();
 
     try {
-      print("send Code func");
       final baseResponse = await authRepository.resendSms(phoneNumber);
 
       if (baseResponse.status == 200) {
-        print("send Code func ${baseResponse.status}");
         emit(VerificationSuccessState());
-        logger(baseResponse.response.toString(), error: "Verification Bloc");
       } else {
         emit(VerificationErrorState(SmsSendFailure()));
       }

@@ -159,8 +159,9 @@ class _CabinetScreenState extends State<CabinetScreen> {
         : Column(
             children: [
               car_list(carInfoList),
-              Gap(dimens.paddingVerticalItem8),
+              Gap(dimens.paddingVerticalItem4),
               add_my_car_btn(),
+              Gap(dimens.paddingVerticalItem16),
             ],
           );
   }
@@ -213,7 +214,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                 Gap(dimens.paddingVerticalItem8),
                 Container(
                   height: dimens.height32,
-                  // width: dimens.width142,
+                  width: dimens.height124,
                   decoration: getMyCarContainerDeco(dimens),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -222,7 +223,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                     children: [
                       Gap(dimens.paddingHorizontal2),
                       Text(
-                        "${car.govNumber}",
+                        car.govNumber,
                         style: dimens.font16Blackw400Sty,
                         // style: dimens.font20Blackw400Sty,
                       ),
@@ -291,8 +292,6 @@ class _CabinetScreenState extends State<CabinetScreen> {
     );
   }
 }
-
-
 
 /*
 String formatPhoneNumber(String phone) {

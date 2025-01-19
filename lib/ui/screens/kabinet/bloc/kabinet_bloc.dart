@@ -48,9 +48,7 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
         await getData();
       } else if (response.status == 401) {
         final prefsManager = SharedPreferencesManager();
-        await prefsManager.clearPassword();
-        await prefsManager.clearPhone();
-        await prefsManager.clearToken();
+        await prefsManager.clearUserInfo();
         Get.offAll(() => CheckAuthScreen());
       } else {
         emit(KabinetErrorState(UserInfoNotFound()));
@@ -73,9 +71,9 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
         emit(KabinetInformationGetState(profilResponse: response.response!));
       } else if (response.status == 401) {
         final prefsManager = SharedPreferencesManager();
-        await prefsManager.clearPassword();
-        await prefsManager.clearPhone();
-        await prefsManager.clearToken();
+        await prefsManager.clearUserInfo();
+        // await prefsManager.clearPhone();
+        // await prefsManager.clearToken();
         Get.offAll(() => CheckAuthScreen());
       } else {
         emit(KabinetErrorState(UserInfoNotFound()));

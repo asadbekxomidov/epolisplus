@@ -1,4 +1,3 @@
-import 'package:epolisplus/log/logger.dart';
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,21 +44,20 @@ class QrCodeBloc extends Bloc<QrCodeEvent, QrCodeState> {
       emit(QrCodeScannedState(scannedData: scannedData!));
       add(QrCodeNavigateEvent(scannedData: scannedData!));
     } else {
-      emit(QrCodeErrorState(DrCodeNotFound()));
+      emit(QrCodeErrorState(QrCodeNotFound()));
     }
   }
 
   void _onNavigate(QrCodeNavigateEvent event, Emitter<QrCodeState> emit) {
     if (event.scannedData.isNotEmpty) {
-      Get.off(() => WarrantycodeScreen(data: event.scannedData));
+      // Get.off(() => WarrantycodeScreen());
+      Get.back(result: WarrantycodeScreen());
     } else {
-      emit(QrCodeErrorState(DrCodeNotFound()));
+      emit(QrCodeErrorState(QrCodeNotFound()));
     }
   }
 
   void setController(QRViewController controllerQrCode) {
-    loggerF(controllerQrCode.toString(), error: 'QRViewController Func');
-    print('object ${controllerQrCode}');
     qrCodeController = controllerQrCode;
     controllerQrCode.scannedDataStream.listen((scanData) {
       if (scanData.code != null && scanData.code!.isNotEmpty) {

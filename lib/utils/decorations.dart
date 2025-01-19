@@ -164,6 +164,27 @@ cardContainerDecoration(Dimens dimens) {
   );
 }
 
+// myCarCardDecoration(Dimens dimens) {
+//   return BoxDecoration(
+//     color: AppColors.cardContainerColor,
+//     borderRadius: BorderRadius.circular(dimens.radius16),
+//     image: DecorationImage(
+//       image: AssetImage(
+//         AppImage.epolisCardLogo,
+//       ),
+//       fit: BoxFit.cover,
+//     ),
+//     boxShadow: [
+//       BoxShadow(
+//         color: AppColors.blackColor.withOpacity(0.1),
+//         spreadRadius: 2,
+//         blurRadius: 6,
+//         offset: Offset(0, 3),
+//       ),
+//     ],
+//   );
+// }
+
 myCarCardDecoration(Dimens dimens) {
   return BoxDecoration(
     color: AppColors.cardContainerColor,
@@ -172,12 +193,28 @@ myCarCardDecoration(Dimens dimens) {
       image: AssetImage(
         AppImage.epolisCardLogo,
       ),
+      fit: BoxFit.cover,
     ),
     boxShadow: [
       BoxShadow(
-        color: AppColors.blackColor.withOpacity(0.1),
-        spreadRadius: 2,
-        blurRadius: 6,
+        color: AppColors.blackColor.withOpacity(0.05),
+        spreadRadius: 1,
+        blurRadius: 8,
+        offset: Offset(0, 3),
+      ),
+    ],
+  );
+}
+
+myCardPagesDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.cardContainerColor,
+    borderRadius: BorderRadius.circular(dimens.radius16),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.blackColor.withOpacity(0.05),
+        spreadRadius: 1,
+        blurRadius: 8,
         offset: Offset(0, 3),
       ),
     ],

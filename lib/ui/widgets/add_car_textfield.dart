@@ -166,6 +166,7 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.zero,
             ),
+            enabled: widget.isActive,
             style: widget.style,
             onChanged: (value) {
               if (value.length == 3) {
@@ -203,6 +204,7 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.zero,
             ),
+            enabled: widget.isActive,
             style: widget.style,
             onChanged: (value) {
               if (value.length == 7) {

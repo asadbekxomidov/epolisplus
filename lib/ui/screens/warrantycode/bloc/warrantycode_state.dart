@@ -5,33 +5,12 @@ abstract class WarrantycodeState extends Equatable {
   List<Object?> get props => [];
 }
 
-class WarrantycodeInitialState extends WarrantycodeState {}
+class LoadingState extends WarrantycodeState {}
 
-class WarrantycodeLoadingState extends WarrantycodeState {}
-
-class WarrantycodeLoadedState extends WarrantycodeState {}
-
-class WarrantycodeErrorState extends WarrantycodeState {
+class ErrorState extends WarrantycodeState {
   Failure failure;
 
-  WarrantycodeErrorState(this.failure);
+  ErrorState(this.failure);
 }
 
-class WarrantycodeSuccesState extends WarrantycodeState {}
-
-class WarrantycodeNewWidgetState extends WarrantycodeState {
-  final List<Widget> widgets;
-
-  WarrantycodeNewWidgetState(this.widgets);
-}
-
-class WarrantycodeAddNewWidgetEvent extends WarrantycodeEvent {}
-
-class WarrantycodeUpdatedState extends WarrantycodeState {
-  final List<WarrantyAddQrCodeWidget> warrantyWidgets;
-
-  WarrantycodeUpdatedState(this.warrantyWidgets);
-
-  @override
-  List<Object?> get props => [warrantyWidgets];
-}
+class SuccessState extends WarrantycodeState {}

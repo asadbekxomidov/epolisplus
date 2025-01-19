@@ -91,7 +91,30 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                           child: DeleteAccountButton(
                             image: AppImage.deleteEditIcon,
                             onClick: () {
-                              editProfilBloc.add(DeleteAccountEvent());
+                              showDialog(
+                                context: context,
+                                barrierDismissible: true,
+                                builder: (context) {
+                                  return DeleteAccountShowDialog(
+                                    onClick: () {
+                                      editProfilBloc.add(DeleteAccountEvent());
+                                    },
+                                  );
+                                },
+                              );
+
+                              // showDialog(
+                              //   context: context,
+                              //   barrierDismissible: true,
+                              //   builder: (context) {
+                              //     return DeleteAccountShowDilog(
+                              //       onClick: () {
+                              //         editProfilBloc.add(DeleteAccountEvent());
+                              //       },
+                              //     );
+                              //   },
+                              // );
+                              // editProfilBloc.add(DeleteAccountEvent());
                             },
                             text: AppStrings.deleteAccountText,
                             dimens: dimens,

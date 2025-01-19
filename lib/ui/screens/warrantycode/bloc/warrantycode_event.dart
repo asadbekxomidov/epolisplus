@@ -1,20 +1,28 @@
 part of 'warrantycode_bloc.dart';
 
-abstract class WarrantycodeEvent extends Equatable {
+abstract class WarrantyCodeEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class WarrantycodeGetEvent extends WarrantycodeEvent {}
-
-class WarrantycodePushScreenEvent extends WarrantycodeEvent {
-  String? scannedData;
-
-  WarrantycodePushScreenEvent({this.scannedData});
+class GetInformationWarrantyCodeEvent extends WarrantyCodeEvent {
+  int position;
+  GetInformationWarrantyCodeEvent(this.position);
 }
 
-class WarrantycodeGetVehicleInfoEvent extends WarrantycodeEvent {}
+class OpenScanningQrcodeEvent extends WarrantyCodeEvent {
+  int position;
+  OpenScanningQrcodeEvent(this.position);
+}
 
-class WarrantycodeQrCodeClearEvent extends WarrantycodeEvent {}
+class DeleteWarrantyCodeEvent extends WarrantyCodeEvent {
+  int position;
+  DeleteWarrantyCodeEvent(this.position);
+}
 
-class WarrantycodeAddRowEvent extends WarrantycodeEvent {}
+class AddWarrantyCodeEvent extends WarrantyCodeEvent {}
+
+class AddActiveteCodeEvent extends WarrantyCodeEvent {
+  int position;
+  AddActiveteCodeEvent(this.position);
+}

@@ -1250,7 +1250,7 @@ class PagesButton extends StatelessWidget {
       child: Container(
         height: dimens.height48,
         // width: dimens.width202,
-        decoration: myCarCardDecoration(dimens),
+        decoration: cardContainerDecoration(dimens),
         // decoration: partnersPageButtonDecorations(dimens),
         child: MyRowBottonWidget(
           image: image!,

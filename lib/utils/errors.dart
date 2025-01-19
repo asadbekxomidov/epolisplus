@@ -171,10 +171,18 @@ class ErrorretrievingtheWarrantycode extends Failure {
       AppStrings.errorretrievingthewarrantycode;
 }
 
-class DrCodeNotFound extends Failure {
-  DrCodeNotFound() : super();
+class QrCodeNotFound extends Failure {
+  QrCodeNotFound() : super();
 
   @override
   String getErrorMessage(BuildContext context) =>
       AppStrings.errorQrcodepleasetryagain;
+}
+
+class QrCodemaybeerror extends Failure {
+  QrCodemaybeerror() : super();
+
+  @override
+  String getErrorMessage(BuildContext context) =>
+      AppStrings.qrCodemaybeerror;
 }

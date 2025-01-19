@@ -1,9 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:epolisplus/log/logger.dart';
 import 'package:epolisplus/models/base_models.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/services/api_service.dart';
 import 'package:epolisplus/services/api_constanta.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:epolisplus/models/question_answer_model/question_answer_response.dart';
 import 'package:epolisplus/repository/question_answer/question_answer_repository_iml.dart';
 
@@ -34,7 +34,7 @@ class QuestionAnswerRepository extends QuestionAnswerRepositoryIml {
     Response? response;
 
     try {
-      var response = await service.getGetData(headers, url);
+      response = await service.getGetData(headers, url);
       logger('${response?.data}', error: 'QuestionAnswerRepository');
 
       if (response?.statusCode == 200) {

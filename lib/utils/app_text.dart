@@ -57,6 +57,7 @@ class AppStrings {
   static const String warrantyCode = "Активировать гарантийный код";
   static const String additionalServices = "Дополнительные услуги";
   static const String emergencyServices = "Экстренные услуги";
+  static const String cancelText = "Отменить";
 
   // ! home text
 
@@ -167,10 +168,19 @@ class AppStrings {
   static const String userInfonotchange =
       "Информация о пользователе не может быть изменена.";
   static const String userinfonotfound = "Информация о пользователе не найдена";
-  static const String ofertainfoNotFound = "Информация о предложении не найдена";
+  static const String ofertainfoNotFound =
+      "Информация о предложении не найдена";
   static const String questionInfonotfound = "Вопросы информация не найдена";
-  static const String errorSettingssection = "В разделе настроек обнаружена ошибка.";
-  static const String errorretrievingthewarrantycode = "Произошла ошибка при получении гарантийного кода..";
-  static const String checkinformationtryagain = "Проверьте правильность информации и повторите попытку";
-  static const String errorQrcodepleasetryagain = "В QR-коде ошибка. Попробуйте еще раз.";
+  static const String errorSettingssection =
+      "В разделе настроек обнаружена ошибка.";
+  static const String errorretrievingthewarrantycode =
+      "Произошла ошибка при получении гарантийного кода..";
+  static const String checkinformationtryagain =
+      "Проверьте правильность информации и повторите попытку";
+  static const String errorQrcodepleasetryagain =
+      "В QR-коде ошибка. Попробуйте еще раз.";
+  static const String deleteYourAccount = "Вы хотите удалить аккаунт?";
+  static const String qrCodemaybeerror = "Пожалуйста, проверьте QR-код, это может быть ошибка.";
+  static const String actioncannotbeUndone =
+      "Данное действие отменить будет невозможно!";
 }

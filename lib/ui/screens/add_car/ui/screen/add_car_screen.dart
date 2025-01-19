@@ -31,7 +31,6 @@ class _AddCarScreenState extends State<AddCarScreen> {
           }
         },
         builder: (context, state) {
-          print("builder");
           bloc = BlocProvider.of<MyCarBloc>(context);
           return Scaffold(
             resizeToAvoidBottomInset: true,
@@ -52,43 +51,24 @@ class _AddCarScreenState extends State<AddCarScreen> {
                         iconData: Icons.close,
                         text: AppStrings.closeText,
                       ),
+                      Gap(dimens.paddingVerticalItem8),
                       Text(
                         AppStrings.addCatText,
                         style: dimens.pagesBlackTitleSty,
                       ),
-                      Gap(dimens.paddingVerticalItem16),
+                      Gap(dimens.paddingVerticalItem8),
                       VehicleCarInfo(
                         listener: bloc,
                         vehicleInformation: bloc.vehicleInformation,
                       ),
                       Gap(dimens.paddingVerticalItem12),
                       bloc.isHaveCarInfor
-                          ? Column(
-                              children: [
-                                MyRowButoonWidget(
-                                  backgroundColor: AppColors.redColorFill,
-                                  color: AppColors.redColor,
-                                  height: dimens.height40,
-                                  iconSize: dimens.height20,
-                                  mainAxisAlig: MainAxisAlignment.center,
-                                  myRadius: dimens.radius12,
-                                  onclick: () {
-                                    bloc.add(ClearCarInfoEvent());
-                                  },
-                                  style: dimens.font16Redw400Sty,
-                                  width: dimens.screenWidth,
-                                  iconData: AppImage.closeIcon,
-                                  text: AppStrings.deleteText,
-                                ),
-                                Gap(dimens.paddingVerticalItem12),
-                                AddMyCarListBtn(
-                                  isLoading: state is MyCarLodingState,
-                                  onClick: () {
-                                    bloc.add(AddCarEvent());
-                                  },
-                                  text: AppStrings.addCarButtonText,
-                                ),
-                              ],
+                          ? AddMyCarListBtn(
+                              isLoading: state is MyCarLodingState,
+                              onClick: () {
+                                bloc.add(AddCarEvent());
+                              },
+                              text: AppStrings.addCarButtonText,
                             )
                           : Container(),
                     ],
