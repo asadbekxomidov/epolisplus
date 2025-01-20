@@ -14,6 +14,8 @@ export 'partners/partners_model/response/partners_response.dart';
 
 export 'question_answer_model/question_answer_response.dart';
 // ? profil
+export 'activate_code/activate_waranty_code.dart';
+// ? profil
 
 export 'profil/profil_response/carinforesponse/car_info_response.dart';
 export 'profil/profil_response/profil_response.dart';

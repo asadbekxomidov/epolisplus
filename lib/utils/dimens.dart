@@ -28,6 +28,10 @@ class Dimens {
 
   // ?
 
+  double get paddingAll18 {
+    return height10 * 1.8;
+  }
+
   double get paddingAll20 {
     return height10 * 2;
   }

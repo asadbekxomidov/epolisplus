@@ -76,3 +76,12 @@ export 'modul/addedcar/screen/vehicle_car_info.dart';
 
 // ? qrcodescreen
 export 'qr_code/screen/qr_code_scaner_screen.dart';
+
+// ? travel
+export 'travel/ui/screen/travel_screen.dart';
+
+// ? osago
+export 'osago/ui/screen/osago_screen.dart';
+
+// ? casko
+export 'casko/ui/screen/casko_screen.dart';

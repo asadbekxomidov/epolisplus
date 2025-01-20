@@ -161,6 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Gap(dimens.paddingVerticalItem16),
                             HomePageButtonMain(
+                              onClick: () {
+                                homeBloc.add(OpenCaskoEvent());
+                              },
                               decoration: kaskoDecorationsCon(dimens),
                               iconData: AppImage.arrowcirclerightIcon,
                               image: AppImage.kaskolHomeIcon,
@@ -168,6 +171,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Gap(dimens.paddingVerticalItem8),
                             HomePageButtonMain(
+                              onClick: () {
+                                homeBloc.add(OpenOsagoEvent());
+                              },
                               decoration: osagoDecorationsCon(dimens),
                               iconData: AppImage.arrowcirclerightIcon,
                               image: AppImage.osagoHomeIcon,
@@ -175,6 +181,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Gap(dimens.paddingVerticalItem8),
                             HomePageButtonMain(
+                              onClick: () {
+                                homeBloc.add(OpenTravelEvent());
+                              },
                               decoration: travelDecorationsCon(dimens),
                               iconData: AppImage.arrowcirclerightIcon,
                               image: AppImage.travelHomeIcon,

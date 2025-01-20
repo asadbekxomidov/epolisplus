@@ -17,3 +17,9 @@ class DeleteAccountEvent extends HomeEvent {
 class PushScreensEvent extends HomeEvent {}
 
 class PushWarrantyEvent extends HomeEvent {}
+
+class OpenCaskoEvent extends HomeEvent {}
+
+class OpenOsagoEvent extends HomeEvent {}
+
+class OpenTravelEvent extends HomeEvent {}

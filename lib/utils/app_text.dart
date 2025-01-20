@@ -181,6 +181,7 @@ class AppStrings {
       "В QR-коде ошибка. Попробуйте еще раз.";
   static const String deleteYourAccount = "Вы хотите удалить аккаунт?";
   static const String qrCodemaybeerror = "Пожалуйста, проверьте QR-код, это может быть ошибка.";
+  static const String caskoinsurancePrograms = "Программы страхования КАСКО";
   static const String actioncannotbeUndone =
       "Данное действие отменить будет невозможно!";
 }

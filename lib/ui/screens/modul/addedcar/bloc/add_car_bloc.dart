@@ -72,14 +72,14 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
         if (response.status == 200 && response.response != null) {
           vehicleInformation = response.response!;
           listener.onVehicle(vehicleInformation);
-          print('----------------------${vehicleInformation.orgName}');
           emit(CarInformationGetState());
         } else if (response.status == 401) {
           final preferense = SharedPreferencesManager();
           preferense.clearUserInfo();
+        } else if (response.status == 500) {
+          emit(CarErrorState(CheckInformationtryagain()));
         }
-      } else {
-        emit(CarErrorState(CheckInformationtryagain()));
+        emit(CarSuccesState());
       }
     } catch (e) {
       emit(CarErrorState(InformationnotfoundError()));

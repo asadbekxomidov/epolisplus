@@ -35,13 +35,16 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
             }
           },
           builder: (context, state) {
+            print('builder');
             bloc = BlocProvider.of<WarrantycodeBloc>(context);
 
             return Container(
               height: dimens.screenHeight,
               width: dimens.screenWidth,
               decoration: whitePagesDecorations(),
-              padding: EdgeInsets.all(dimens.paddingHorizontal16),
+              padding: EdgeInsets.all(
+                dimens.paddingHorizontal16,
+              ),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,18 +77,20 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                         ),
                       ],
                     ),
-
                     ListView.builder(
                       shrinkWrap: true,
                       primary: false,
                       itemCount: bloc.listActivateCode.length,
                       itemBuilder: (context, index) {
                         var models = bloc.listActivateCode[index];
-                        return item_code(models, index);
+                        return Column(
+                          children: [
+                            item_code(models, index),
+                            Gap(dimens.paddingVerticalItem8),
+                          ],
+                        );
                       },
                     ),
-
-                    // ...bloc.warrantyWidgets,
                     Gap(dimens.paddingVerticalItem16),
                     Text(
                       AppStrings.pointTextMinus,
@@ -103,16 +108,6 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                         iconData: AppImage.addIconData,
                         colorIcon: AppColors.greenColorDefault,
                       ),
-                    // LoadDataButton(
-                    //   color: AppColors.lightGreenColor,
-                    //   isLoading: state is WarrantycodeLoadingState,
-                    //   text: AppStrings.addwarrantyCode,
-                    //   onClick: () {
-                    //     // bloc.add(WarrantycodeAddRowEvent(dimens: dimens));
-                    //   },
-                    //   iconData: AppImage.addIconData,
-                    //   colorIcon: AppColors.greenColorDefault,
-                    // ),
                     Gap(dimens.paddingVerticalItem16),
                     Text(
                       AppStrings.pointTextMinus,
@@ -123,7 +118,7 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                       AppStrings.vehicleInformation,
                       style: dimens.font20Blackw400Sty,
                     ),
-                    Gap(dimens.paddingVerticalItem16),
+                    Gap(dimens.paddingVerticalItem8),
                     VehicleCarInfo(
                       vehicleInformation: bloc.vehicleInformation,
                       listener: bloc,
@@ -192,11 +187,19 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                     isScrollControlled: true,
                     backgroundColor: AppColors.transparentColor,
                     builder: (context) {
-                      return MyShowWarrantCodeScreenDilog();
+                      return MyShowWarrantCodeScreenDilog(
+                        partners: bloc.isHaveActivatePartnersInfo(position),
+                        onClick: () {
+                          Get.back();
+                        },
+                      );
                     },
                   );
                 },
-                text: 'test',
+                text: bloc
+                    .isHaveActivatePartnersInfo(position)
+                    .map((partner) => partner.partner_name)
+                    .join(', '),
                 height: dimens.height40,
                 width: bloc.isHaveQrCodeInfo(position)
                     ? dimens.width150

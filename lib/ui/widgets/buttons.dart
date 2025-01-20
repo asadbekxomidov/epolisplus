@@ -120,6 +120,52 @@ class LeftBackIconBtn extends StatelessWidget {
   }
 }
 
+class NaviGatePopButton extends StatelessWidget {
+  Function? onClick;
+  String? text;
+  IconData? iconData;
+  Color? appColors;
+
+  NaviGatePopButton({
+    this.onClick,
+    this.text,
+    this.iconData,
+    this.appColors,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () {
+        onClick!();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            iconData ?? AppImage.arrow_circle_left_outlined,
+            color: appColors,
+            size: dimens.height24,
+          ),
+          Gap(dimens.width5),
+          Text(
+            text ?? AppStrings.back,
+            style: TextStyle(
+              fontSize: dimens.height16,
+              color: appColors,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 // ? ButtonPages
 
 class ButtonPagesBtn extends StatelessWidget {
@@ -145,6 +191,56 @@ class ButtonPagesBtn extends StatelessWidget {
       onTap: () {
         Navigator.pop(context);
         onClick!();
+        // Get.back();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            iconData,
+            // AppImage.arrow_circle_left_outlined,
+            color: appColors,
+            size: dimens.height24,
+          ),
+          Gap(dimens.width5),
+          Text(
+            text!,
+            // AppStrings.back,
+            style: TextStyle(
+              fontSize: dimens.height16,
+              color: appColors,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BackNavigateButton extends StatelessWidget {
+  Function onClick;
+  String? text;
+  IconData? iconData;
+  Color? appColors;
+
+  BackNavigateButton({
+    required this.onClick,
+    this.text,
+    this.iconData,
+    this.appColors,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () {
+        // Navigator.pop(context);
+        onClick();
         // Get.back();
       },
       child: Row(
@@ -1148,12 +1244,14 @@ class CardButtonsWidget extends StatelessWidget {
 // ? HomePageMainButton
 
 class HomePageButtonMain extends StatelessWidget {
+  final Function onClick;
   late Dimens dimens;
   final String image;
   final IconData iconData;
   final String text;
   Decoration decoration;
   HomePageButtonMain({
+    required this.onClick,
     required this.decoration,
     required this.image,
     required this.iconData,
@@ -1164,32 +1262,39 @@ class HomePageButtonMain extends StatelessWidget {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return Card(
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: dimens.paddingHorizontal16,
-        ),
-        height: dimens.height72,
-        width: dimens.screenWidth,
-        decoration: decoration,
-        // decoration: kaskoDecorationsCon(dimens),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              image,
-              // AppImage.kaskolHomeIcon,
-              height: dimens.height40,
-            ),
-            ButtonWidgets(
-              onClick: () {},
-              dimens: dimens,
-              text: text,
-              // text: AppStrings.kasko,
-              iconData: iconData,
-              // iconData: AppImage.arrowcirclerightIcon,
-            ),
-          ],
+    return GestureDetector(
+      onTap: () {
+        onClick();
+      },
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingHorizontal16,
+          ),
+          height: dimens.height72,
+          width: dimens.screenWidth,
+          decoration: decoration,
+          // decoration: kaskoDecorationsCon(dimens),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                image,
+                // AppImage.kaskolHomeIcon,
+                height: dimens.height40,
+              ),
+              ButtonWidgets(
+                onClick: () {
+                  onClick();
+                },
+                dimens: dimens,
+                text: text,
+                // text: AppStrings.kasko,
+                iconData: iconData,
+                // iconData: AppImage.arrowcirclerightIcon,
+              ),
+            ],
+          ),
         ),
       ),
     );

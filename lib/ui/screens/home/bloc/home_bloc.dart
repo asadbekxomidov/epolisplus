@@ -17,6 +17,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DeleteAccountEvent>(deleteAccount);
     on<PushScreensEvent>(pushSettings);
     on<PushWarrantyEvent>(pushWarranty);
+    on<OpenCaskoEvent>(openCasko);
+    on<OpenOsagoEvent>(openOsago);
+    on<OpenTravelEvent>(openTravel);
   }
 
   Future<void> _handleLogout(LogoutEvent event, Emitter<HomeState> emit) async {
@@ -70,7 +73,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> pushWarranty(
       PushWarrantyEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
-    Get.to(() => WarrantycodeScreen());
+    await Get.to(() => WarrantycodeScreen());
+    emit(HomeSuccessState());
+  }
+
+  Future<void> openCasko(
+      OpenCaskoEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
+    await Get.to(() => CaskoScreen());
+    emit(HomeSuccessState());
+  }
+
+  Future<void> openOsago(
+      OpenOsagoEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
+    await Get.to(() => OsagoScreen());
+    emit(HomeSuccessState());
+  }
+
+  Future<void> openTravel(
+      OpenTravelEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
+    await Get.to(() => TravelScreen());
     emit(HomeSuccessState());
   }
 }

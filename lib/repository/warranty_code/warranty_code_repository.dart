@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:epolisplus/log/logger.dart';
-import 'package:epolisplus/models/base_models.dart';
-import 'package:epolisplus/services/api_constanta.dart';
-import 'package:epolisplus/services/api_service.dart';
 import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/services/api_service.dart';
+import 'package:epolisplus/models/models_export.dart';
+import 'package:epolisplus/services/api_constanta.dart';
 
 import 'warranty_code_repository_iml.dart';
 
@@ -15,7 +15,7 @@ class WarrantyCodeRepository extends WarrantyCodeRepositoryIml {
   }
 
   @override
-  Future<BaseModels> warrantyInfo(String code) async {
+  Future<BaseModels<ActivateCodeResponse>> warrantyInfo(String code) async {
     final prefsManager = SharedPreferencesManager();
     final token = await prefsManager.getToken();
 
@@ -36,28 +36,28 @@ class WarrantyCodeRepository extends WarrantyCodeRepositoryIml {
 
     try {
       response = await service.getPostData(data, headers, url);
-      logger(response.toString(), error: 'WarrantyCodeRepository');
 
       if (response?.statusCode == 200) {
-        return BaseModels(
-          response: response?.data,
-          status: response?.statusCode,
-          message: response?.statusMessage,
+        logger(response!.data.toString(), error: 'Status 200');
+
+        var responseData = ActivateCodeResponse.fromJson(
+          response.data['response'],
         );
-        // } else if (response?.statusCode == 401) {
-        //   await prefsManager.clearUserInfo();
-        //   return BaseModels(
-        //     message: response?.statusMessage,
-        //     status: response?.statusCode,
-        //   );
-      } else {
+
         return BaseModels(
-          status: response?.statusCode,
-          message: response?.statusMessage,
+          response: responseData,
+          status: response.statusCode,
+          message: response.statusMessage,
+        );
+      } else {
+        logger(response!.data.toString(), error: 'Error');
+        return BaseModels(
+          status: response.statusCode,
+          message: response.statusMessage,
         );
       }
     } catch (e) {
-      return BaseModels(
+      return BaseModels<ActivateCodeResponse>(
         message: e.toString(),
       );
     }

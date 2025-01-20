@@ -1,5 +1,5 @@
-import 'package:epolisplus/models/base_models.dart';
+import 'package:epolisplus/models/models_export.dart';
 
 abstract class WarrantyCodeRepositoryIml {
-  Future<BaseModels> warrantyInfo(String code);
+  Future<BaseModels<ActivateCodeResponse>> warrantyInfo(String code);
 }

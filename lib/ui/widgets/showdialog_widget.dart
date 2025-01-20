@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/ui/widgets/my_widget.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +31,24 @@ class ShowdialogWidget extends StatelessWidget {
   }
 }
 
+// ? WarrantyCodePartnersDialog
+
 class MyShowWarrantCodeScreenDilog extends StatelessWidget {
+  final Function onClick;
   late Dimens dimens;
+  final List<ActivateCodePartnersResponse> partners;
+
+  MyShowWarrantCodeScreenDilog({
+    required this.partners,
+    required this.onClick,
+  });
+
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pop();
+        onClick();
       },
       child: DraggableScrollableSheet(
         initialChildSize: 0.4,
@@ -46,37 +57,58 @@ class MyShowWarrantCodeScreenDilog extends StatelessWidget {
         builder: (BuildContext context, ScrollController scrollController) {
           return Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.whiteColor255,
               borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20),
+                top: Radius.circular(
+                  dimens.radius16,
+                ),
               ),
             ),
-            child: SingleChildScrollView(
-              controller: scrollController,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Container(
-                        width: 40,
-                        height: 5,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10),
+            child: GestureDetector(
+              onTap: () {
+                onClick();
+              },
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Container(
+                          width: 40,
+                          height: 5,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      "Hamkorlarimiz haqida ma'lumot",
-                      style: dimens.font16Blackw400Sty,
-                    ),
-                    Text(
-                      '',
-                      style: dimens.font14Greyw400Sty,
-                    ),
-                  ],
+                      Text(
+                        "Hamkorlarimiz haqida ma'lumot",
+                        style: dimens.font16Blackw400Sty,
+                      ),
+                      partners.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: partners.length,
+                              itemBuilder: (context, index) {
+                                var partner = partners[index];
+                                return ListTile(
+                                  onTap: () {
+                                    print(
+                                        "Tanlangan Partner: ${partner.partner_name}");
+                                  },
+                                  title: Text(partner.partner_name),
+                                  subtitle:
+                                      Text("Partner ID: ${partner.partner_id}"),
+                                );
+                              },
+                            )
+                          : Text('Hamkorlar mavjud emas'),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -87,81 +119,7 @@ class MyShowWarrantCodeScreenDilog extends StatelessWidget {
   }
 }
 
-// class DeleteAccountShowDilog extends StatelessWidget {
-//   late Dimens dimens;
-//   final Function? onClick;
-
-//   DeleteAccountShowDilog({
-//     this.onClick,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     dimens = Dimens(context);
-//     return Stack(
-//       children: [
-//         BackdropFilter(
-//           filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-//           child: Container(
-//             color: AppColors.dialogsColor.withOpacity(0.5),
-//           ),
-//         ),
-//         Center(
-//           child: Container(
-//             height: dimens.height332,
-//             width: dimens.width313,
-//             child: Column(
-//               children: [
-//                 Image.asset(
-//                   AppImage.deleteEditIcon,
-//                   height: dimens.height20,
-//                 ),
-//                 Text(
-//                   AppStrings.deleteYourAccount,
-//                   style: dimens.font20Blackw600Sty,
-//                 ),
-//                 Gap(dimens.paddingVerticalItem2),
-//                 Text(
-//                   AppStrings.actioncannotbeUndone,
-//                   style: dimens.font14Greyw400Sty,
-//                 ),
-//                 Gap(dimens.paddingVerticalItem4),
-//                 MyContainerRowImageWidget(
-//                   style: dimens.font16Whitew600Sty,
-//                   width: dimens.width265,
-//                   height: dimens.height40,
-//                   image: AppImage.deleteEditIcon,
-//                   iconSize: dimens.height20,
-//                   color: AppColors.redColordefault,
-//                   mainAxisAlig: MainAxisAlignment.center,
-//                   myRadius: dimens.radius12,
-//                   onclick: () {
-//                     onClick!();
-//                   },
-//                   text: AppStrings.deleteText,
-//                   padding: dimens.paddingHorizontal4,
-//                 ),
-//                 MyContainerRowImageWidget(
-//                   style: dimens.font16Blackw400Sty,
-//                   width: dimens.width265,
-//                   height: dimens.height40,
-//                   // iconData: AppImage.deleteEditIcon,
-//                   // iconSize: dimens.height20,
-//                   color: AppColors.redColordefault,
-//                   mainAxisAlig: MainAxisAlignment.center,
-//                   myRadius: dimens.radius12,
-//                   onclick: () {},
-//                   text: AppStrings.cancelText,
-//                   padding: dimens.paddingHorizontal4,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+// ? DeleteAccountShowDialog
 
 class DeleteAccountShowDialog extends StatelessWidget {
   final Function? onClick;

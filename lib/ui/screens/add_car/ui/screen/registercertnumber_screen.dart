@@ -2,6 +2,7 @@ import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class RegisterCertnumberScreen extends StatelessWidget {
   late Dimens dimens;
@@ -21,10 +22,13 @@ class RegisterCertnumberScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Gap(dimens.paddingVerticalItem59),
-            ButtonPagesBtn(
+            BackNavigateButton(
               appColors: AppColors.mainColor,
               iconData: Icons.close,
               text: AppStrings.closeZText,
+              onClick: () {
+                Get.back();
+              },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
