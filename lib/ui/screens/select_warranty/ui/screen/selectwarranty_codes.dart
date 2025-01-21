@@ -1,15 +1,12 @@
-import 'package:epolisplus/ui/screens/select_warranty/bloc/select_warranty_bloc.dart';
-import 'package:epolisplus/ui/widgets/buttons.dart';
-import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'package:epolisplus/utils/utils_export.dart';
+import 'package:get/get.dart';
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
-import 'package:get/get.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/widgets/widgets_export.dart';
+import 'package:epolisplus/ui/screens/select_warranty/bloc/select_warranty_bloc.dart';
 
 class SelectwarrantyCodes extends StatefulWidget {
-  const SelectwarrantyCodes({super.key});
-
   @override
   State<SelectwarrantyCodes> createState() => _SelectwarrantyCodesState();
 }
@@ -25,9 +22,13 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
     return BlocProvider(
       create: (context) => SelectWarrantyBloc(),
       child: Scaffold(
+        backgroundColor: AppColors.blackColor,
         body: Stack(
           children: [
-            ui(),
+            Positioned(
+              top: dimens.paddingVerticalItem59,
+              child: ui(),
+            ),
           ],
         ),
       ),
@@ -38,17 +39,25 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
     return BlocConsumer<SelectWarrantyBloc, SelectWarrantyState>(
       listener: (context, state) {},
       builder: (context, state) {
+        bloc = BlocProvider.of<SelectWarrantyBloc>(context);
+
         return Container(
           height: dimens.screenHeight,
           width: dimens.screenWidth,
-          decoration: whitePagesDecorations(),
+          decoration: backgroundPagesDecorations(dimens),
           padding: EdgeInsets.all(
             dimens.paddingHorizontal16,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(dimens.paddingVerticalItem59),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ContainerGreyWidget(),
+                ],
+              ),
+              Gap(dimens.paddingVerticalItem26),
               LeftBackIconBtn(
                 appColors: AppColors.greenColorDefault,
                 onClick: () {
@@ -84,7 +93,9 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
                     containerPadding: dimens.paddingAll12,
                     height: dimens.height88,
                     width: dimens.width172,
-                    onClick: () {},
+                    onClick: () {
+                      bloc.add(OpenAvtoSinePageEvent());
+                    },
                     radius: dimens.radius12,
                     text: AppStrings.carTiresText,
                     style: dimens.font16Blackw600Sty,
@@ -98,7 +109,9 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
                     containerPadding: dimens.paddingAll12,
                     height: dimens.height88,
                     width: dimens.width172,
-                    onClick: () {},
+                    onClick: () {
+                      bloc.add(OpenPhoneWarrantyEvent());
+                    },
                     radius: dimens.radius12,
                     text: AppStrings.phoneText,
                     style: dimens.font16Blackw600Sty,
@@ -115,7 +128,9 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
                 containerPadding: dimens.paddingAll12,
                 height: dimens.height88,
                 width: dimens.width172,
-                onClick: () {},
+                onClick: () {
+                  bloc.add(OpenRefrigeratorEvent());
+                },
                 radius: dimens.radius12,
                 text: AppStrings.fridgeText,
                 style: dimens.font16Blackw600Sty,

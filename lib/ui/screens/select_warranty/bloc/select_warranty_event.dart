@@ -7,4 +7,8 @@ abstract class SelectWarrantyEvent extends Equatable {
 
 class SelectWarrantyCodeEvent extends SelectWarrantyEvent {}
 
-class OpenWarrantyScreen extends SelectWarrantyEvent {}
+class OpenAvtoSinePageEvent extends SelectWarrantyEvent {}
+
+class OpenPhoneWarrantyEvent extends SelectWarrantyEvent {}
+
+class OpenRefrigeratorEvent extends SelectWarrantyEvent {}

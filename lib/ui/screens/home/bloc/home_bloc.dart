@@ -73,19 +73,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> pushWarranty(
       PushWarrantyEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
-    await Get.to(() => WarrantycodeScreen());
+    await Get.to(() => SelectwarrantyCodes());
+    // await Get.to(() => WarrantycodeScreen());
     emit(HomeSuccessState());
   }
 
-  Future<void> openCasko(
-      OpenCaskoEvent event, Emitter<HomeState> emit) async {
+  Future<void> openCasko(OpenCaskoEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     await Get.to(() => CaskoScreen());
     emit(HomeSuccessState());
   }
 
-  Future<void> openOsago(
-      OpenOsagoEvent event, Emitter<HomeState> emit) async {
+  Future<void> openOsago(OpenOsagoEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     await Get.to(() => OsagoScreen());
     emit(HomeSuccessState());

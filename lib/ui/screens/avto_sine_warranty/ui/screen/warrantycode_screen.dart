@@ -50,10 +50,8 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Gap(dimens.paddingVerticalItem59),
-                    NavigatePopHomePage(
-                      appColors: AppColors.mainColor,
-                      iconData: Icons.close,
-                      text: AppStrings.closeText,
+                    LeftBackIconBtn(
+                      appColors: AppColors.greenColorDefault,
                       onClick: () {
                         Get.back();
                       },
@@ -72,7 +70,8 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                           ),
                         ),
                         Image.asset(
-                          AppImage.activateWIcon,
+                          AppImage.cartiresgreyIcon,
+                          // AppImage.activateWIcon,
                           height: dimens.height40,
                         ),
                       ],

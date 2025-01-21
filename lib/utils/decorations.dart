@@ -28,6 +28,16 @@ whitePagesDecorations() {
   );
 }
 
+backgroundPagesDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.backgroundWhiteColor,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(dimens.radius20),
+      topRight: Radius.circular(dimens.radius20),
+    ),
+  );
+}
+
 homePageDecorations(Dimens dimens) {
   return BoxDecoration(
     // color: AppColors.whiteColor,
@@ -408,5 +418,14 @@ myContainerLodingDEcorations(
     //     offset: Offset(0, 2),
     //   ),
     // ],
+  );
+}
+
+myContainerGreyDec(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.greyColorFillSecondary,
+    borderRadius: BorderRadius.circular(
+      dimens.radius50,
+    ),
   );
 }

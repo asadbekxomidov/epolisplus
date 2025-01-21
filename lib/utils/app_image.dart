@@ -163,6 +163,7 @@ class AppImage {
   static String deleteRedIcon = 'assets/images/delete_icon.png';
   static String whiteDeleteIcon = 'assets/images/white_delete_icon.png';
   static String cartiresIcon = 'assets/images/car_tires_icon.png';
+  static String cartiresgreyIcon = 'assets/images/car_tires_grey_icon.png';
   static String phoneIcon = 'assets/images/phone_icon.png';
   static String fridgeIcon = 'assets/images/fridge_icon.png';
   static String warrantycodewidgeticon =

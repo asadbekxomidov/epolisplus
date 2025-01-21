@@ -62,5 +62,6 @@ class AppColors {
   static Color whiteColor255 = Color.fromRGBO(255, 255, 255, 1);
   static Color backgroundBlurColor0 = Color(0x2D2D2D);
   static Color backgroundWhiteColor = Color.fromRGBO(250, 250, 250, 1);
+  static Color greyColorFillSecondary = Color.fromRGBO(10, 10, 10, 0.09);
   // static Color backgroundBlurColor0 = Color.fromRGBO(0, 0, 0, 0.8);
 }

@@ -9,13 +9,29 @@ part 'select_warranty_state.dart';
 class SelectWarrantyBloc
     extends Bloc<SelectWarrantyEvent, SelectWarrantyState> {
   SelectWarrantyBloc() : super(SuccessState()) {
-    on<OpenWarrantyScreen>(openWarranty);
+    on<OpenAvtoSinePageEvent>(openAvtoSine);
+    on<OpenPhoneWarrantyEvent>(openPhoneWarranty);
+    on<OpenRefrigeratorEvent>(openRefrigeratorWarranty);
   }
 
-  Future<void> openWarranty(
-      OpenWarrantyScreen event, Emitter<SelectWarrantyState> emit) async {
+  Future<void> openAvtoSine(
+      OpenAvtoSinePageEvent event, Emitter<SelectWarrantyState> emit) async {
     emit(LoadedState());
-    Get.to(() => WarrantycodeScreen());
+    await Get.to(() => WarrantycodeScreen());
+    emit(SuccessState());
+  }
+
+  Future<void> openPhoneWarranty(
+      OpenPhoneWarrantyEvent event, Emitter<SelectWarrantyState> emit) async {
+    emit(LoadedState());
+    await Get.to(() => PhoneWarrantyScreen());
+    emit(SuccessState());
+  }
+
+  Future<void> openRefrigeratorWarranty(
+      OpenRefrigeratorEvent event, Emitter<SelectWarrantyState> emit) async {
+    emit(LoadedState());
+    await Get.to(() => RefrigerWarrantyScreen());
     emit(SuccessState());
   }
 }

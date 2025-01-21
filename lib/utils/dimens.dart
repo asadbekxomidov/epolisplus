@@ -53,6 +53,10 @@ class Dimens {
     return height10 * 6.9;
   }
 
+  double get paddingVerticalItem26 {
+    return height10 * 2.6;
+  }
+
   double get paddingVerticalItem27 {
     return height10 * 2.7;
   }
@@ -509,6 +513,10 @@ class Dimens {
 
   double get radius16 {
     return height10 * 1.6;
+  }
+
+  double get radius20 {
+    return height10 * 2;
   }
 
   double get radius25 {

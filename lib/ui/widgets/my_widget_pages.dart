@@ -86,3 +86,18 @@ class OpenWarrantyButton extends StatelessWidget {
     );
   }
 }
+
+class ContainerGreyWidget extends StatelessWidget {
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      height: dimens.height6,
+      width: dimens.width64,
+      decoration: myContainerGreyDec(dimens),
+    );
+  }
+}
