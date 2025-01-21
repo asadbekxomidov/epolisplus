@@ -184,4 +184,7 @@ class AppStrings {
   static const String caskoinsurancePrograms = "Программы страхования КАСКО";
   static const String actioncannotbeUndone =
       "Данное действие отменить будет невозможно!";
+  static const String carTiresText = "Автошины";
+  static const String phoneText = "Телефон";
+  static const String fridgeText = "Холдильник";
 }

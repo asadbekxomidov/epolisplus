@@ -68,8 +68,8 @@ export 'edit_profil/ui/screens/edit_profil_screen.dart';
 export 'add_car/ui/screen/add_car_screen.dart';
 export 'add_car/ui/screen/registercertnumber_screen.dart';
 
-// ? warrantycode
-export 'warrantycode/ui/screen/warrantycode_screen.dart';
+// ? avto_sine_warranty
+export 'avto_sine_warranty/ui/screen/warrantycode_screen.dart';
 
 // ? modul
 export 'modul/addedcar/screen/vehicle_car_info.dart';
@@ -85,3 +85,12 @@ export 'osago/ui/screen/osago_screen.dart';
 
 // ? casko
 export 'casko/ui/screen/casko_screen.dart';
+
+// ? select_warranty
+export 'select_warranty/ui/screen/selectwarranty_codes.dart';
+
+// ? refrigerator_warranty
+export 'refrigerator_warranty/ui/screen/refriger_warranty_screen.dart';
+
+// ? phone_warranty
+export 'phone_warranty/ui/screen/phone_warranty_screen.dart';

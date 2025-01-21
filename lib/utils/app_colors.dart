@@ -54,6 +54,7 @@ class AppColors {
   static Color textGreyColor221 = Color.fromRGBO(221, 221, 221, 1);
   static Color borderRedColor = Color.fromRGBO(249, 222, 245, 1);
   static Color redColorFill = Color.fromRGBO(253, 243, 245, 1);
+  static Color redColorStoke = Color.fromRGBO(249, 222, 228, 1);
   static Color blueColorFill = Color.fromRGBO(4, 170, 200, 1);
   static Color greenColorDefault = Color.fromRGBO(0, 160, 112, 1);
   static Color greyColor255 = Color.fromRGBO(255, 255, 255, 1);

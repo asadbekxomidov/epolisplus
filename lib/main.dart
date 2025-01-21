@@ -1,3 +1,4 @@
+import 'package:epolisplus/ui/screens/select_warranty/ui/screen/selectwarranty_codes.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
@@ -11,7 +12,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: SelectwarrantyCodes(),
+      // home: SplashScreen(),
     );
   }
 }

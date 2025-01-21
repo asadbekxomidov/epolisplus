@@ -10,3 +10,4 @@ export 'my_widget.dart';
 export 'add_car_textfield.dart';
 export 'my_textfield_widget.dart';
 export 'showdialog_widget.dart';
+export 'my_widget_pages.dart';

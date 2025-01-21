@@ -28,6 +28,10 @@ class Dimens {
 
   // ?
 
+  double get paddingAll12 {
+    return height10 * 1.2;
+  }
+
   double get paddingAll18 {
     return height10 * 1.8;
   }
@@ -263,6 +267,10 @@ class Dimens {
     return 24 * screenHeight / 852;
   }
 
+  double get height27 {
+    return 27 * screenHeight / 852;
+  }
+
   double get height28 {
     return 28 * screenHeight / 852;
   }
@@ -313,6 +321,10 @@ class Dimens {
 
   double get height78 {
     return 78 * screenHeight / 852;
+  }
+
+  double get height88 {
+    return 88 * screenHeight / 852;
   }
 
   double get height94 {
@@ -1141,6 +1153,17 @@ class Dimens {
     return TextStyle(
       color: AppColors.textBlackColors,
       fontWeight: FontWeight.w400,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font16Blackw600Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w600,
       fontSize: font16,
       decoration: TextDecoration.none,
       fontFamily: "GeistVF",

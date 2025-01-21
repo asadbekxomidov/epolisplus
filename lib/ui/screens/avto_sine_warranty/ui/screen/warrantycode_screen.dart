@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'package:epolisplus/ui/screens/warrantycode/bloc/warrantycode_bloc.dart';
+import 'package:epolisplus/ui/screens/avto_sine_warranty/bloc/warrantycode_bloc.dart';
 import 'package:epolisplus/ui/screens/modul/addedcar/screen/vehicle_car_info.dart';
 import 'package:get/get.dart';
 
@@ -204,11 +204,11 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                 width: bloc.isHaveQrCodeInfo(position)
                     ? dimens.width150
                     : dimens.width100,
-                iconData: AppImage.selectIcon,
-                style: dimens.font16Blackw400Sty,
+                myRadius: dimens.radius12,
                 iconSize: dimens.height20,
                 color: AppColors.whiteColor,
-                myRadius: dimens.radius12,
+                iconData: AppImage.selectIcon,
+                style: dimens.font16Blackw400Sty,
               )
             : MyContainerRowPWidget(
                 paddingContainer: 1,
@@ -221,10 +221,10 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                 height: dimens.height40,
                 width: dimens.width100,
                 iconData: Icons.search,
-                style: dimens.font16Blackw400Sty,
                 iconSize: dimens.height20,
-                color: AppColors.blackColor,
                 myRadius: dimens.radius12,
+                color: AppColors.blackColor,
+                style: dimens.font16Blackw400Sty,
               ),
         bloc.isHaveQrCodeInfo(position)
             ? MyContainerRowImageWidget(
@@ -233,13 +233,13 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                 onclick: () {
                   bloc.add(DeleteWarrantyCodeEvent(position));
                 },
-                height: dimens.height40,
                 width: dimens.width40,
-                iconData: AppImage.deleteEditIcon,
-                style: dimens.font16Blackw400Sty,
+                height: dimens.height40,
                 iconSize: dimens.height20,
-                color: AppColors.greyColor239,
                 myRadius: dimens.radius50,
+                color: AppColors.greyColor239,
+                style: dimens.font16Blackw400Sty,
+                iconData: AppImage.deleteEditIcon,
               )
             : MyContainerRowImageWidget(
                 borderColor: AppColors.cardContainerColor,
@@ -247,13 +247,13 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                 onclick: () {
                   bloc.add(OpenScanningQrcodeEvent(position));
                 },
-                height: dimens.height40,
                 width: dimens.width40,
-                iconData: AppImage.codeIcon,
-                style: dimens.font16Blackw400Sty,
-                iconSize: dimens.height20,
-                color: AppColors.greyColor255,
+                height: dimens.height40,
                 myRadius: dimens.radius50,
+                iconSize: dimens.height20,
+                iconData: AppImage.codeIcon,
+                color: AppColors.greyColor255,
+                style: dimens.font16Blackw400Sty,
               ),
       ],
     );
