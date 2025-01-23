@@ -143,8 +143,10 @@ class AppStrings {
   static const String savedCarsText = "У вас нет сохраненных автомобилей.";
   static const String addCarButtonText = "Добавить автомобиль";
   static const String technicalPassportText = "Серия и номер тех. паспорта";
+  static const String seriesnumberPassportID = "Серия и номер Паспортa/ID";
   static const String certificateNumberText = "Откуда взять номер техпаспорта?";
   static const String addcaraff = "AAF";
+  static const String seriaa = "AA";
   static const String addcar00 = "0000000";
   static const String loadDataText = "Загрузить данные";
   static const String registrationCarcertificate =
@@ -155,6 +157,8 @@ class AppStrings {
   static const String carBrandText = "Марка автомобилия";
   static const String yearofManufactureText = "Год выпуска";
   static const String activatewarrantyCode = "Активировать гарантийный код";
+  static const String activatePhonewarrantyCode = "Гарантийний кодна телефон";
+  static const String warrantyCoderefrigerator = "Гарантийний код на холодильник";
   static const String uzflagText = "UZ";
   static const String carNumberFormatter = "01 A 001 AA";
   static const String addwarrantyCode = "Добавить гарантийный код";
@@ -187,4 +191,8 @@ class AppStrings {
   static const String carTiresText = "Автошины";
   static const String phoneText = "Телефон";
   static const String fridgeText = "Холдильник";
+  static const String informationAboutapplicant = "Информация о заявителе";
+  static const String proceedPayment = "Перейти к оплате";
+  static const String iMEIPhone = "IMEI телефона";
+  static const String entertheCode = "Введите код";
 }

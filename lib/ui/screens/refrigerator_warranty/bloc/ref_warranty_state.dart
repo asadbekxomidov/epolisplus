@@ -9,6 +9,10 @@ class LoadingState extends RefWarrantyState {}
 
 class LoadedState extends RefWarrantyState {}
 
-class ErrorState extends RefWarrantyState {}
+class ErrorState extends RefWarrantyState {
+  Failure failure;
+
+  ErrorState(this.failure);
+}
 
 class SuccessState extends RefWarrantyState {}

@@ -32,6 +32,7 @@ class WarrantycodeBloc extends Bloc<WarrantyCodeEvent, WarrantycodeState>
 
   TextEditingController phoneNumberController = TextEditingController();
   var vehicleInformation = CarInformationResponse();
+  String? partnerName;
   final int maxWidgets = 4;
 
   WarrantycodeBloc() : super(SuccessState()) {
@@ -47,21 +48,14 @@ class WarrantycodeBloc extends Bloc<WarrantyCodeEvent, WarrantycodeState>
     return listActivateCode[position].models.code.isNotEmpty;
   }
 
-  // isHaveActivatePartnersInfo(int position) {
-  //   final activatePartnerInfo = listActivateCode[position].models.partners
-  //       as ActivateCodePartnersResponse;
+  isHaveActivatePartnersInfo(int position) {
+    // listActivateCode[position].models ActivateCodeResponse tipida ekanligini tekshirib chiqing
+    final activateCodeResponse =
+        listActivateCode[position].models as ActivateCodeResponse;
 
-  //   return activatePartnerInfo;
-  // }
-
-isHaveActivatePartnersInfo(int position) {
-  // listActivateCode[position].models ActivateCodeResponse tipida ekanligini tekshirib chiqing
-  final activateCodeResponse = listActivateCode[position].models as ActivateCodeResponse;
-
-  // partners ro'yxatiga kirish
-  return activateCodeResponse.partners;  // partners ro'yxatini qaytarish
-}
-
+    // partners ro'yxatiga kirish
+    return activateCodeResponse.partners; // partners ro'yxatini qaytarish
+  }
 
   void openScaningPage(
       OpenScanningQrcodeEvent event, Emitter<WarrantycodeState> emit) async {
@@ -128,7 +122,7 @@ isHaveActivatePartnersInfo(int position) {
       AddActiveteCodeEvent event, Emitter<WarrantycodeState> emit) async {
     emit(LoadingState());
     try {
-      var qrCode = listActivateCode[event.position].controller.text;
+      var qrCode = listActivateCode[event.position].controller.text.trim();
       if (qrCode.isNotEmpty) {
         final repository = WarrantyCodeRepository();
         var response = await repository.warrantyInfo(qrCode);

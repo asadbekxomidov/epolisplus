@@ -6,3 +6,19 @@ abstract class PhoneWarrantyEvent extends Equatable {
 }
 
 class PhoneWarrantyCodeInfoEvent extends PhoneWarrantyEvent {}
+
+class DeleteActiveCodeEvent extends PhoneWarrantyEvent {
+  int position;
+  DeleteActiveCodeEvent(this.position);
+}
+
+class AddActivateCodeEvent extends PhoneWarrantyEvent {
+  int position;
+  AddActivateCodeEvent(this.position);
+}
+
+
+class OpenScanningQrcodeEvent extends PhoneWarrantyEvent {
+  int position;
+  OpenScanningQrcodeEvent(this.position);
+}

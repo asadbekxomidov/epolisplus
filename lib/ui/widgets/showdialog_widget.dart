@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/ui/widgets/my_widget.dart';
+import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -37,15 +38,18 @@ class MyShowWarrantCodeScreenDilog extends StatelessWidget {
   final Function onClick;
   late Dimens dimens;
   final List<ActivateCodePartnersResponse> partners;
+  final String text;
 
   MyShowWarrantCodeScreenDilog({
     required this.partners,
     required this.onClick,
+    required this.text,
   });
 
   @override
   Widget build(BuildContext context) {
     dimens = Dimens(context);
+
     return GestureDetector(
       onTap: () {
         onClick();
@@ -71,20 +75,21 @@ class MyShowWarrantCodeScreenDilog extends StatelessWidget {
               child: SingleChildScrollView(
                 controller: scrollController,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(
+                    dimens.paddingAll12,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Center(
-                        child: Container(
-                          width: 40,
-                          height: 5,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ContainerGreyWidget(),
+                          ],
                         ),
                       ),
+                      Gap(dimens.paddingVerticalItem12),
                       Text(
                         "Hamkorlarimiz haqida ma'lumot",
                         style: dimens.font16Blackw400Sty,
@@ -97,12 +102,15 @@ class MyShowWarrantCodeScreenDilog extends StatelessWidget {
                                 var partner = partners[index];
                                 return ListTile(
                                   onTap: () {
-                                    print(
-                                        "Tanlangan Partner: ${partner.partner_name}");
+                                    print("${partner.partner_name}");
                                   },
                                   title: Text(partner.partner_name),
-                                  subtitle:
-                                      Text("Partner ID: ${partner.partner_id}"),
+                                  trailing: IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.check_box_outline_blank,
+                                    ),
+                                  ),
                                 );
                               },
                             )
@@ -118,6 +126,108 @@ class MyShowWarrantCodeScreenDilog extends StatelessWidget {
     );
   }
 }
+
+
+// class MyShowWarrantCodeScreenDilog extends StatelessWidget {
+//   final Function(String) onPartnerSelected;
+//   final List<ActivateCodePartnersResponse> partners;
+//   final String text;
+
+//   MyShowWarrantCodeScreenDilog({
+//     required this.partners,
+//     required this.onPartnerSelected,
+//     required this.text,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     ValueNotifier<String> selectedPartnerName = ValueNotifier<String>(text);
+
+//     return GestureDetector(
+//       onTap: () {
+//         Navigator.pop(context);
+//       },
+//       child: DraggableScrollableSheet(
+//         initialChildSize: 0.4,
+//         minChildSize: 0.3,
+//         maxChildSize: 0.7,
+//         builder: (BuildContext context, ScrollController scrollController) {
+//           return Container(
+//             decoration: BoxDecoration(
+//               color: AppColors.whiteColor255,
+//               borderRadius: BorderRadius.vertical(
+//                 top: Radius.circular(16), // Use appropriate value
+//               ),
+//             ),
+//             child: GestureDetector(
+//               onTap: () {
+//                 Navigator.pop(context);
+//               },
+//               child: SingleChildScrollView(
+//                 controller: scrollController,
+//                 child: Padding(
+//                   padding: const EdgeInsets.all(12.0), // Use appropriate value
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Center(
+//                         child: Row(
+//                           mainAxisAlignment: MainAxisAlignment.center,
+//                           children: [
+//                             ContainerGreyWidget(),
+//                           ],
+//                         ),
+//                       ),
+//                       const SizedBox(height: 12), // Use appropriate value
+//                       Text(
+//                         "Hamkorlarimiz haqida ma'lumot",
+//                         style: TextStyle(
+//                           fontSize: 16, // Use appropriate value
+//                           fontWeight: FontWeight.w400,
+//                           color: Colors.black,
+//                         ),
+//                       ),
+//                       partners.isNotEmpty
+//                           ? ValueListenableBuilder<String>(
+//                               valueListenable: selectedPartnerName,
+//                               builder: (context, selectedName, _) {
+//                                 return ListView.builder(
+//                                   shrinkWrap: true,
+//                                   physics: const NeverScrollableScrollPhysics(),
+//                                   itemCount: partners.length,
+//                                   itemBuilder: (context, index) {
+//                                     var partner = partners[index];
+//                                     return ListTile(
+//                                       onTap: () {
+//                                         selectedPartnerName.value =
+//                                             partner.partner_name;
+//                                         onPartnerSelected(partner.partner_name);
+//                                         Navigator.pop(context);
+//                                       },
+//                                       title: Text(partner.partner_name),
+//                                       trailing: Icon(
+//                                         selectedName == partner.partner_name
+//                                             ? Icons.check_box
+//                                             : Icons.check_box_outline_blank,
+//                                       ),
+//                                     );
+//                                   },
+//                                 );
+//                               },
+//                             )
+//                           : Text('Hamkorlar mavjud emas'),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
 
 // ? DeleteAccountShowDialog
 

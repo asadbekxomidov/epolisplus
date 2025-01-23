@@ -35,8 +35,18 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
             }
           },
           builder: (context, state) {
-            print('builder');
             bloc = BlocProvider.of<WarrantycodeBloc>(context);
+
+            if (state is LoadingState) {
+              return Container(
+                height: dimens.screenHeight,
+                width: dimens.screenWidth,
+                decoration: whitePagesDecorations(),
+                child: Center(
+                  child: LoadingPages(),
+                ),
+              );
+            }
 
             return Container(
               height: dimens.screenHeight,
@@ -188,17 +198,33 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                     builder: (context) {
                       return MyShowWarrantCodeScreenDilog(
                         partners: bloc.isHaveActivatePartnersInfo(position),
+                        text: bloc.partnerName!,
                         onClick: () {
                           Get.back();
                         },
                       );
                     },
                   );
+                  // showModalBottomSheet(
+                  //   context: context,
+                  //   isScrollControlled: true,
+                  //   backgroundColor: AppColors.transparentColor,
+                  //   builder: (context) {
+                  //     return MyShowWarrantCodeScreenDilog(
+                  //       partners: bloc.isHaveActivatePartnersInfo(position),
+                  //       text: bloc.partnerName!,
+                  //       onPartnerSelected: (selectedPartnerName) {
+                  //         bloc.partnerName = selectedPartnerName;
+                  //       },
+                  //     );
+                  //   },
+                  // );
                 },
-                text: bloc
-                    .isHaveActivatePartnersInfo(position)
-                    .map((partner) => partner.partner_name)
-                    .join(', '),
+                text: bloc.partnerName!,
+                // text: bloc
+                //     .isHaveActivatePartnersInfo(position)
+                //     .map((partner) => partner.partner_name)
+                //     .join(', '),
                 height: dimens.height40,
                 width: bloc.isHaveQrCodeInfo(position)
                     ? dimens.width150

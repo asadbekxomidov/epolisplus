@@ -162,38 +162,21 @@ travelDecorationsCon(Dimens dimens) {
 cardContainerDecoration(Dimens dimens) {
   return BoxDecoration(
     color: AppColors.cardContainerColor,
+    border: Border.all(
+      color: AppColors.greyColor239,
+      width: dimens.width1_5,
+    ),
     borderRadius: BorderRadius.circular(dimens.radius16),
     boxShadow: [
       BoxShadow(
-        color: AppColors.blackColor.withOpacity(0.1),
-        spreadRadius: 2,
-        blurRadius: 6,
-        offset: Offset(0, 3),
+        color: AppColors.blackColor.withOpacity(0.04),
+        spreadRadius: 1,
+        blurRadius: 4,
+        offset: Offset(0, 2),
       ),
     ],
   );
 }
-
-// myCarCardDecoration(Dimens dimens) {
-//   return BoxDecoration(
-//     color: AppColors.cardContainerColor,
-//     borderRadius: BorderRadius.circular(dimens.radius16),
-//     image: DecorationImage(
-//       image: AssetImage(
-//         AppImage.epolisCardLogo,
-//       ),
-//       fit: BoxFit.cover,
-//     ),
-//     boxShadow: [
-//       BoxShadow(
-//         color: AppColors.blackColor.withOpacity(0.1),
-//         spreadRadius: 2,
-//         blurRadius: 6,
-//         offset: Offset(0, 3),
-//       ),
-//     ],
-//   );
-// }
 
 myCarCardDecoration(Dimens dimens) {
   return BoxDecoration(
@@ -333,14 +316,6 @@ getMyCarContainerDeco(Dimens dimens) {
       color: AppColors.textBlackColors,
       width: dimens.width1_5,
     ),
-    // boxShadow: [
-    //   BoxShadow(
-    //     color: AppColors.blackColor.withOpacity(0.1),
-    //     spreadRadius: 2,
-    //     blurRadius: 6,
-    //     offset: Offset(0, 3),
-    //   ),
-    // ],
   );
 }
 

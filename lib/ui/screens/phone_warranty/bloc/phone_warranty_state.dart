@@ -9,6 +9,10 @@ class LoadingState extends PhoneWarrantyState {}
 
 class LoadedState extends PhoneWarrantyState {}
 
-class ErrorState extends PhoneWarrantyState {}
+class ErrorState extends PhoneWarrantyState {
+  Failure failure;
+
+  ErrorState(this.failure);
+}
 
 class SuccessState extends PhoneWarrantyState {}

@@ -431,6 +431,10 @@ class Dimens {
     return 30 * screenWidth / 392;
   }
 
+  double get width32 {
+    return 32 * screenWidth / 392;
+  }
+
   double get width40 {
     return 40 * screenWidth / 392;
   }
@@ -1120,6 +1124,28 @@ class Dimens {
     return TextStyle(
       color: AppColors.textBlackColors,
       fontWeight: FontWeight.w400,
+      fontSize: font20,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font16Blackw500Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w500,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font20Blackw500Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w500,
       fontSize: font20,
       decoration: TextDecoration.none,
       fontFamily: "GeistVF",

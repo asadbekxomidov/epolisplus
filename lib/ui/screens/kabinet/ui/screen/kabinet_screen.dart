@@ -214,34 +214,56 @@ class _CabinetScreenState extends State<CabinetScreen> {
                 Gap(dimens.paddingVerticalItem8),
                 Container(
                   height: dimens.height32,
-                  width: dimens.height124,
+                  width: dimens.width142,
+                  // decoration: BoxDecoration(
+                  //   color: Colors.white,
+                  //   border: Border.all(color: Colors.black, width: 2),
+                  //   borderRadius: BorderRadius.circular(dimens.radius4),
+                  // ),
                   decoration: getMyCarContainerDeco(dimens),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Gap(dimens.paddingHorizontal2),
-                      Text(
-                        car.govNumber,
-                        style: dimens.font16Blackw400Sty,
-                        // style: dimens.font20Blackw400Sty,
-                      ),
-                      Gap(dimens.paddingVerticalItem2),
-                      SizedBox(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              AppImage.uzbFlagIcon,
-                              height: dimens.height7_5,
+                      // Chap tomonda boshidagi sonlar
+                      Container(
+                        width: dimens.width32,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            right: BorderSide(
+                              color: AppColors.blackColor,
+                              width: dimens.width1_5,
                             ),
-                            Text(
-                              AppStrings.uzflagText,
-                              style: dimens.cardUzFlagSty2,
-                            ),
-                          ],
+                          ),
                         ),
+                        child: Text(
+                          car.govNumber.substring(0, 2), // 2 ta bosh son
+                          style: dimens.font16Blackw500Sty,
+                        ),
+                      ),
+                      Gap(dimens.paddingHorizontal4),
+                      // Matnning qolgan qismi
+                      Expanded(
+                        child: Text(
+                          car.govNumber.substring(2), // Matnning qolgan qismi
+                          style: dimens.font20Blackw500Sty,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      Gap(dimens.paddingHorizontal4),
+                      // O'ng tomondagi bayroq va "uz"
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            AppImage.uzbFlagIcon, // Bayroq rasmi
+                            height: dimens.height10,
+                          ),
+                          Text(
+                            AppStrings.uzflagText, // "uz" matni
+                            style: dimens.cardUzFlagSty2,
+                          ),
+                        ],
                       ),
                       Gap(dimens.paddingHorizontal2),
                     ],
@@ -271,7 +293,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
                   style: dimens.font14Greyw400Sty,
                 ),
                 Text(
-                  "${car.orgName} o'g'li",
+                  car.orgName,
                   style: dimens.font16Blackw400Sty,
                 ),
               ],
