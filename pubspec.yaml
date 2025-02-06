@@ -50,9 +50,12 @@ dependencies:
   url_launcher: ^6.3.1
   equatable: ^2.0.7
   connectivity_plus: ^6.1.1
-  qr_code_scanner: ^1.0.1
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
+  intl: ^0.20.2
+  qr_code_scanner_plus: ^2.0.6
+  # qr_code_scanner: ^1.0.1
+  # qr_code_scanner_plus: ^2.0.9+1
 
 dev_dependencies:
   flutter_test:
@@ -104,6 +107,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
+  fonts:
+    - family: GeistVF
+      fonts:
+        - asset: fonts/GeistVF.ttf
+
+    - family: Fe-Font
+      fonts:
+        - asset: fonts/Fe-Font.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

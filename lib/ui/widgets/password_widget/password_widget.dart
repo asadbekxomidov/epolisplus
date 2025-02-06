@@ -41,7 +41,10 @@ class PasswordWidget extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: dimens.paddingHorizontal13,
                 ),
-                decoration: inputDecorations(dimens),
+                decoration: newDecoration(
+                  dimens,
+                  isActive: true,
+                ),
                 child: TextField(
                   controller: controller,
                   obscureText: isObscure,

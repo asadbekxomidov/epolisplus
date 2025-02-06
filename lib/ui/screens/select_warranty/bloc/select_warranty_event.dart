@@ -5,10 +5,10 @@ abstract class SelectWarrantyEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class SelectWarrantyCodeEvent extends SelectWarrantyEvent {}
+class GetWarrantyEvent extends SelectWarrantyEvent {}
 
-class OpenAvtoSinePageEvent extends SelectWarrantyEvent {}
+class OpenWarrantyCodeEvent extends SelectWarrantyEvent {
+  WarrantycodeResponse response;
 
-class OpenPhoneWarrantyEvent extends SelectWarrantyEvent {}
-
-class OpenRefrigeratorEvent extends SelectWarrantyEvent {}
+  OpenWarrantyCodeEvent(this.response);
+}

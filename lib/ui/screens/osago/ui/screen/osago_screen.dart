@@ -21,33 +21,58 @@ class _OsagoScreenState extends State<OsagoScreen> {
     return BlocProvider(
       create: (context) => OsagoBloc(),
       child: Scaffold(
-        body: BlocConsumer<OsagoBloc, OsagoState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            bloc = BlocProvider.of<OsagoBloc>(context);
-
-            return Container(
-              height: dimens.screenHeight,
-              width: dimens.screenWidth,
-              padding: EdgeInsets.all(
-                dimens.paddingAll18,
-              ),
-              decoration: whitePagesDecorations(),
-              child: Column(
-                children: [
-                  Gap(dimens.paddingVerticalItem59),
-                  NaviGatePopButton(
-                    onClick: () {
-                      Get.back();
-                    },
-                    appColors: AppColors.mainColor,
-                  ),
-                ],
-              ),
-            );
-          },
+        backgroundColor: AppColors.blackColor,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              ui(),
+              BlocBuilder<OsagoBloc, OsagoState>(
+                builder: (context, state) {
+                  return LoadingIndicator2(
+                    isLoading: state is LoadingState,
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  ui() {
+    return BlocConsumer<OsagoBloc, OsagoState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        bloc = BlocProvider.of<OsagoBloc>(context);
+
+        return Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingWidth,
+            vertical: dimens.paddingHeight,
+          ),
+          decoration: backgroundPagesDecorations(dimens),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ContainerGreyWidget(),
+                ],
+              ),
+              Gap(dimens.paddingVerticalItem26),
+              NaviGatePopButton(
+                onClick: () {
+                  Get.back();
+                },
+                appColors: AppColors.mainColor,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

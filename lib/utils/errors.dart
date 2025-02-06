@@ -183,6 +183,13 @@ class QrCodemaybeerror extends Failure {
   QrCodemaybeerror() : super();
 
   @override
+  String getErrorMessage(BuildContext context) => AppStrings.qrCodemaybeerror;
+}
+
+class UserInfometionError extends Failure {
+  UserInfometionError() : super();
+
+  @override
   String getErrorMessage(BuildContext context) =>
-      AppStrings.qrCodemaybeerror;
+      AppStrings.serInformationErrorText;
 }

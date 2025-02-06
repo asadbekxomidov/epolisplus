@@ -1,9 +1,9 @@
-import 'package:epolisplus/ui/screens/edit_profil/bloc/edit_profil_bloc.dart';
-import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'package:epolisplus/utils/utils_export.dart';
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/widgets/widgets_export.dart';
+import 'package:epolisplus/ui/screens/edit_profil/bloc/edit_profil_bloc.dart';
 
 class EditProfilScreen extends StatefulWidget {
   final String userName;
@@ -52,6 +52,9 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                         appColors: AppColors.mainColor,
                         iconData: Icons.close,
                         text: AppStrings.closeText,
+                        onClick: () {
+                          Navigator.pop(context);
+                        },
                         // onClick: () => Get.back(),
                       ),
                       Gap(dimens.paddingVerticalItem8),
@@ -82,43 +85,40 @@ class _EditProfilScreenState extends State<EditProfilScreen> {
                   ),
                   Column(
                     children: [
-                      Card(
-                        color: AppColors.cardContainerColor,
-                        child: Container(
-                          height: dimens.height48,
-                          width: dimens.screenWidth,
-                          decoration: cardContainerDecoration(dimens),
-                          child: DeleteAccountButton(
-                            image: AppImage.deleteEditIcon,
-                            onClick: () {
-                              showDialog(
-                                context: context,
-                                barrierDismissible: true,
-                                builder: (context) {
-                                  return DeleteAccountShowDialog(
-                                    onClick: () {
-                                      editProfilBloc.add(DeleteAccountEvent());
-                                    },
-                                  );
-                                },
-                              );
+                      Container(
+                        height: dimens.height48,
+                        width: dimens.screenWidth,
+                        decoration: cardContainerDecoration(dimens),
+                        child: DeleteAccountButton(
+                          image: AppImage.deleteEditIcon,
+                          onClick: () {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (context) {
+                                return DeleteAccountShowDialog(
+                                  onClick: () {
+                                    editProfilBloc.add(DeleteAccountEvent());
+                                  },
+                                );
+                              },
+                            );
 
-                              // showDialog(
-                              //   context: context,
-                              //   barrierDismissible: true,
-                              //   builder: (context) {
-                              //     return DeleteAccountShowDilog(
-                              //       onClick: () {
-                              //         editProfilBloc.add(DeleteAccountEvent());
-                              //       },
-                              //     );
-                              //   },
-                              // );
-                              // editProfilBloc.add(DeleteAccountEvent());
-                            },
-                            text: AppStrings.deleteAccountText,
-                            dimens: dimens,
-                          ),
+                            // showDialog(
+                            //   context: context,
+                            //   barrierDismissible: true,
+                            //   builder: (context) {
+                            //     return DeleteAccountShowDilog(
+                            //       onClick: () {
+                            //         editProfilBloc.add(DeleteAccountEvent());
+                            //       },
+                            //     );
+                            //   },
+                            // );
+                            // editProfilBloc.add(DeleteAccountEvent());
+                          },
+                          text: AppStrings.deleteAccountText,
+                          dimens: dimens,
                         ),
                       ),
                       Gap(dimens.paddingVerticalItem16),

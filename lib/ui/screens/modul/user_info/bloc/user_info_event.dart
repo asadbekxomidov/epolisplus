@@ -6,3 +6,6 @@ abstract class UserInfoEvent extends Equatable {
 }
 
 class UserInfoGetEvent extends UserInfoEvent {}
+
+class UserBirhDateEvent extends UserInfoEvent {}
+

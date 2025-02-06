@@ -34,6 +34,9 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
   var gowNumberController = TextEditingController();
   var techSeriaController = TextEditingController();
   var techNumberController = TextEditingController();
+  var gowNumberFocus = FocusNode();
+  var techSeryFocus = FocusNode();
+  var techNumberFocus = FocusNode();
 
   AddedCarBloc({
     required this.listener,
@@ -75,12 +78,13 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
           emit(CarInformationGetState());
         } else if (response.status == 401) {
           final preferense = SharedPreferencesManager();
-          preferense.clearUserInfo();
-        } else if (response.status == 500) {
-          emit(CarErrorState(CheckInformationtryagain()));
+          await preferense.clearUserInfo();
         }
-        emit(CarSuccesState());
+        if (response.message! != 'OK') {
+          emit(CarErrorState(ServerFailure(message: response.message!)));
+        }
       }
+      emit(CarSuccesState());
     } catch (e) {
       emit(CarErrorState(InformationnotfoundError()));
     }

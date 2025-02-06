@@ -6,7 +6,6 @@ import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-// import 'package:json_serializable/type_helper.dart';
 
 // ? Button Navigatsiya
 
@@ -119,13 +118,13 @@ class LeftBackIconBtn extends StatelessWidget {
 }
 
 class NaviGatePopButton extends StatelessWidget {
-  Function? onClick;
+  Function onClick;
   String? text;
   IconData? iconData;
   Color? appColors;
 
   NaviGatePopButton({
-    this.onClick,
+    required this.onClick,
     this.text,
     this.iconData,
     this.appColors,
@@ -139,7 +138,7 @@ class NaviGatePopButton extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        onClick!();
+        onClick();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -187,7 +186,7 @@ class ButtonPagesBtn extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
+        // Navigator.pop(context);
         onClick!();
         // Get.back();
       },
@@ -203,160 +202,7 @@ class ButtonPagesBtn extends StatelessWidget {
           Gap(dimens.width5),
           Text(
             text!,
-            // AppStrings.back,
-            style: TextStyle(
-              fontSize: dimens.height16,
-              color: appColors,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class BackNavigateButton extends StatelessWidget {
-  Function onClick;
-  String? text;
-  IconData? iconData;
-  Color? appColors;
-
-  BackNavigateButton({
-    required this.onClick,
-    this.text,
-    this.iconData,
-    this.appColors,
-  });
-
-  late Dimens dimens;
-
-  @override
-  Widget build(BuildContext context) {
-    dimens = Dimens(context);
-
-    return GestureDetector(
-      onTap: () {
-        // Navigator.pop(context);
-        onClick();
-        // Get.back();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            iconData,
-            // AppImage.arrow_circle_left_outlined,
-            color: appColors,
-            size: dimens.height24,
-          ),
-          Gap(dimens.width5),
-          Text(
-            text!,
-            // AppStrings.back,
-            style: TextStyle(
-              fontSize: dimens.height16,
-              color: appColors,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class NavigatePopHomePage extends StatelessWidget {
-  Function? onClick;
-  String? text;
-  IconData? iconData;
-  Color? appColors;
-
-  NavigatePopHomePage({
-    this.onClick,
-    this.text,
-    this.iconData,
-    this.appColors,
-  });
-
-  late Dimens dimens;
-
-  @override
-  Widget build(BuildContext context) {
-    dimens = Dimens(context);
-
-    return GestureDetector(
-      onTap: () {
-        onClick!();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            iconData,
-            // AppImage.arrow_circle_left_outlined,
-            color: appColors,
-            size: dimens.height24,
-          ),
-          Gap(dimens.width5),
-          Text(
-            text!,
-            // AppStrings.back,
-            style: TextStyle(
-              fontSize: dimens.height16,
-              color: appColors,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ? ButtonPages
-
-class ButtonPagesMin extends StatelessWidget {
-  Function? onClick;
-  String? text;
-  IconData? iconData;
-  Color? appColors;
-
-  ButtonPagesMin({
-    this.onClick,
-    this.text,
-    this.iconData,
-    this.appColors,
-  });
-
-  late Dimens dimens;
-
-  @override
-  Widget build(BuildContext context) {
-    dimens = Dimens(context);
-
-    return GestureDetector(
-      onTap: () {
-        // Navigator.pop(context);
-        onClick!();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            iconData,
-            // AppImage.arrow_circle_left_outlined,
-            color: appColors,
-            size: dimens.height16,
-          ),
-          Gap(dimens.width5),
-          Text(
-            text!,
-            style: TextStyle(
-              fontSize: dimens.font14,
-              color: appColors,
-              fontWeight: FontWeight.w400,
-            ),
+            style: dimens.font16Greenw400Sty,
           ),
         ],
       ),
@@ -504,27 +350,6 @@ class IconsButtonWidget extends StatelessWidget {
             color: isAgreeChecked ? AppColors.mainColor : Colors.grey,
           ),
         ),
-        // Expanded(
-        //   child: RichText(
-        //     textAlign: TextAlign.left,
-        //     text: TextSpan(
-        //       text: AppStrings.agreeProcessing,
-        //       style: dimens.textStyle,
-        //       children: [
-        //         TextSpan(
-        //           text: '           ',
-        //         ),
-        //         TextSpan(
-        //           onEnter: (event) {
-        //             onClickOferta();
-        //           },
-        //           text: AppStrings.personalData,
-        //           style: dimens.textStyleGreen,
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -742,7 +567,6 @@ class DeleteAccountButton extends StatelessWidget {
       splashColor: AppColors.transparentColor,
       highlightColor: AppColors.transparentColor,
       onTap: () {
-        print('logout button');
         onClick();
       },
       child: Row(
@@ -865,75 +689,6 @@ class ToggleIconButton extends StatelessWidget {
 }
 
 // ? HomePageScroll Buttons
-
-// class CustomHorizontalButton extends StatelessWidget {
-//   final Dimens dimens;
-
-//   const CustomHorizontalButton({Key? key, required this.dimens})
-//       : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // Ro'yxatlar widget ichida aniqlanadi
-//     final buttonLabels = [
-//       "KACKO",
-//       "OSAGO",
-//       "Journey",
-//       "Additional services",
-//       "Warranty code",
-//     ];
-
-//     final buttonIcons = [
-//       AppImage.kasko_icon,
-//       AppImage.osago_icon,
-//       AppImage.travel_icon,
-//       AppImage.additional_services_icon,
-//       AppImage.warranty_code_icon,
-//     ];
-
-//     return SingleChildScrollView(
-//       scrollDirection: Axis.horizontal,
-//       child: Row(
-//         children: List.generate(buttonLabels.length, (index) {
-//           return Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 4.0),
-//             child: SizedBox(
-//               child: TextButton(
-//                 onPressed: () {
-//                   // Bu yerda har bir tugma uchun kerakli funksiyalarni yozing
-//                   print('${buttonLabels[index]} pressed');
-//                 },
-//                 style: TextButton.styleFrom(
-//                   side: BorderSide(
-//                     color: AppColors.whiteColor,
-//                   ),
-//                   shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(dimens.radius25),
-//                   ),
-//                 ),
-//                 child: Row(
-//                   children: [
-//                     Image.asset(
-//                       buttonIcons[index],
-//                       width: dimens.width20,
-//                       height: dimens.height20,
-//                       color: AppColors.whiteColor,
-//                     ),
-//                     SizedBox(width: dimens.width10),
-//                     Text(
-//                       buttonLabels[index],
-//                       style: dimens.homeButtonSty,
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           );
-//         }),
-//       ),
-//     );
-//   }
-// }
 
 class CustomHorizontalButton extends StatelessWidget {
   final Dimens dimens;
@@ -1262,35 +1017,33 @@ class HomePageButtonMain extends StatelessWidget {
       onTap: () {
         onClick();
       },
-      child: Card(
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: dimens.paddingHorizontal16,
-          ),
-          height: dimens.height72,
-          width: dimens.screenWidth,
-          decoration: decoration,
-          // decoration: kaskoDecorationsCon(dimens),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                image,
-                // AppImage.kaskolHomeIcon,
-                height: dimens.height40,
-              ),
-              ButtonWidgets(
-                onClick: () {
-                  onClick();
-                },
-                dimens: dimens,
-                text: text,
-                // text: AppStrings.kasko,
-                iconData: iconData,
-                // iconData: AppImage.arrowcirclerightIcon,
-              ),
-            ],
-          ),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.paddingHorizontal16,
+        ),
+        height: dimens.height72,
+        // width: dimens.screenWidth,
+        decoration: decoration,
+        // decoration: kaskoDecorationsCon(dimens),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              image,
+              // AppImage.kaskolHomeIcon,
+              height: dimens.height40,
+            ),
+            ButtonWidgets(
+              onClick: () {
+                onClick();
+              },
+              dimens: dimens,
+              text: text,
+              // text: AppStrings.kasko,
+              iconData: iconData,
+              // iconData: AppImage.arrowcirclerightIcon,
+            ),
+          ],
         ),
       ),
     );
@@ -1351,8 +1104,7 @@ class PagesButton extends StatelessWidget {
       child: Container(
         height: dimens.height48,
         // width: dimens.width202,
-        decoration: cardContainerDecoration(dimens),
-        // decoration: partnersPageButtonDecorations(dimens),
+        decoration: newEditDecoration(dimens),
         child: MyRowBottonWidget(
           image: image!,
           text: text!,
@@ -1589,6 +1341,393 @@ class AddMyCarListBtn extends StatelessWidget {
                   ),
                 )
               : SizedBox(),
+        ],
+      ),
+    );
+  }
+}
+
+// ? ButtonSelectBirthDateButton
+
+class MyWidgetButton extends StatelessWidget {
+  Function onClick;
+  String text;
+  IconData? iconData;
+  bool isLoading;
+
+  MyWidgetButton({
+    required this.onClick,
+    required this.text,
+    this.iconData,
+    this.isLoading = false,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return FilledButton(
+      style: FilledButton.styleFrom(
+        backgroundColor: AppColors.mainColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(dimens.radius16)),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.horizontalPadding,
+          vertical: dimens.verticalPadding,
+        ),
+      ),
+      onPressed: () {
+        onClick();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: dimens.textStyle.copyWith(
+              color: AppColors.whiteColor,
+            ),
+          ),
+          Gap(dimens.paddingHorizontal13),
+          isLoading
+              ? SizedBox(
+                  height: dimens.height10,
+                  width: dimens.height10,
+                  child: CircularProgressIndicator(
+                    color: Colors.red,
+                    strokeWidth: dimens.width10 / 5,
+                  ),
+                )
+              : Icon(
+                  iconData ?? AppImage.arrow_forward_outlined,
+                  size: dimens.height20,
+                ),
+          // isLoading
+          //     ? SizedBox(
+          //         height: dimens.height10,
+          //         width: dimens.height10,
+          //         child: CircularProgressIndicator(
+          //           color: Colors.red,
+          //           strokeWidth: dimens.width10 / 5,
+          //         ),
+          //       )
+          //     : SizedBox(),
+        ],
+      ),
+    );
+  }
+}
+
+// ? MyTextIconButton
+
+class MyTextIconButton extends StatelessWidget {
+  Function onClick;
+  String text;
+  IconData iconData;
+  Color appColors;
+
+  MyTextIconButton({
+    required this.onClick,
+    required this.text,
+    required this.iconData,
+    required this.appColors,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () {
+        onClick();
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            iconData,
+            // AppImage.arrow_circle_left_outlined,
+            color: appColors,
+            size: dimens.height20,
+          ),
+          Gap(dimens.width5),
+          Text(
+            text,
+            style: dimens.font14Greenw400Sty,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? MyGreenButton
+
+class MyGreenButton extends StatelessWidget {
+  Function onClick;
+  String text;
+  IconData? iconData;
+  Color? iconColor;
+  bool isCheck;
+
+  MyGreenButton({
+    required this.onClick,
+    required this.text,
+    this.iconData,
+    this.iconColor,
+    this.isCheck = false,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: isCheck ? onClick() : () {},
+      child: Container(
+        height: dimens.height40,
+        width: dimens.screenWidth,
+        decoration:
+            isCheck ? greenDecorations(dimens) : newEditDecoration(dimens),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: isCheck
+                  ? dimens.font16Whitew600Sty
+                  : dimens.font16Blackw600Sty,
+            ),
+            Gap(dimens.paddingHorizontal13),
+            if (iconData != null)
+              Icon(
+                iconData,
+                size: dimens.height20,
+                color: iconColor,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ? MyRichTextButton
+
+class MyRichTextButton extends StatelessWidget {
+  final bool isAgreeChecked;
+  final Function onClick;
+  final Function onClickOferta;
+  final String text;
+  final String greenText;
+
+  MyRichTextButton({
+    required this.onClick,
+    required this.isAgreeChecked,
+    required this.onClickOferta,
+    required this.text,
+    required this.greenText,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () {
+        onClick();
+      },
+      child: Row(
+        children: [
+          Icon(
+            isAgreeChecked ? Icons.check_box : Icons.check_box_outline_blank,
+            color: isAgreeChecked ? AppColors.mainColor : Colors.grey,
+            size: dimens.height20,
+          ),
+          Gap(dimens.paddingHorizontal4),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                text,
+                style: dimens.font14Black400Sty,
+              ),
+              InkWell(
+                highlightColor: AppColors.transparentColor,
+                splashColor: AppColors.transparentColor,
+                onTap: () {
+                  onClickOferta();
+                },
+                child: Text(
+                  greenText,
+                  style: dimens.font14Greenw400Sty,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? CheckButton
+
+class CheckTextButton extends StatelessWidget {
+  String text;
+
+  CheckTextButton({required this.text});
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      height: dimens.height50,
+      padding: EdgeInsets.only(
+        left: dimens.paddingHorizontal13,
+      ),
+      decoration: newEditDecoration(dimens),
+      child: Row(
+        children: [
+          Text(
+            text,
+            style: dimens.font16Blackw400Sty,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? RedButton
+
+class RedButton extends StatelessWidget {
+  final String? image;
+  final String? text;
+
+  RedButton({
+    this.image,
+    this.text,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      height: dimens.height40,
+      decoration: BoxDecoration(
+          color: AppColors.redColordefault,
+          borderRadius: BorderRadius.circular(
+            dimens.radius8,
+          ),
+          border: Border.all(
+            color: AppColors.redColordefault,
+          )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (image != null)
+            Image.asset(
+              image!,
+              height: dimens.height20,
+            ),
+          Gap(dimens.paddingHorizontal8),
+          if (text != null)
+            Text(
+              text!,
+              style: dimens.font14White400Sty,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class WhiteBtn extends StatelessWidget {
+  final String? image;
+  final String? text;
+
+  WhiteBtn({
+    this.image,
+    this.text,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      height: dimens.height40,
+      decoration: newEditDecoration(dimens),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (image != null)
+            Image.asset(
+              image!,
+              height: dimens.height20,
+            ),
+          Gap(dimens.paddingHorizontal8),
+          if (text != null)
+            Text(
+              text!,
+              style: dimens.font14Black400Sty,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? rectangular button
+
+class RecButton extends StatelessWidget {
+  final String? image;
+  final String? title;
+  final BoxDecoration decoration;
+
+  RecButton({
+    required this.decoration,
+    this.title,
+    this.image,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      height: dimens.height132,
+      decoration: decoration,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (image != null)
+            Image.asset(
+              image!,
+              height: dimens.height60,
+            ),
+          Gap(dimens.paddingVerticalItem8),
+          if (title != null)
+            Text(
+              title!,
+              style: dimens.govfont18Blackw600Sty,
+            ),
         ],
       ),
     );

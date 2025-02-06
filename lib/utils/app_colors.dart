@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static Color backColor = Colors.white;
   static Color mainColor = Color(0xFF00A070);
   static Color lightGreenColor = Color.fromRGBO(240, 249, 246, 1);
   static Color lightGreenborderColor = Color.fromRGBO(214, 240, 232, 1);
@@ -11,6 +12,7 @@ class AppColors {
   static Color hintColor = Color(0xFFA3A3A3);
   static Color hintTextFieldColor = Color.fromARGB(212, 212, 212, 1);
   static Color lineColor = Color(0xFFEFEFEF);
+  static Color shadow_color = const Color(0xFFD1D5DB);
   static Color carNumberLine = Color.fromRGBO(10, 10, 10, 1);
   static Color textColorsSecondary = Color(0xFF737373);
   static Color neActiveColor = Color(0xFFF3F3F3);
@@ -18,6 +20,8 @@ class AppColors {
   static Color textBlackColor = const Color.fromRGBO(10, 10, 10, 0);
   static Color redColor = Color(0xFFE70101);
   static Color cardContainerColor = Color.fromARGB(252, 252, 252, 255);
+
+  static Color flag_color = const Color(0xFF4CA7C4);
 
   static Color shadowColor = Color(0xFFF5F5F5);
   static Color whiteColor = Colors.white;
@@ -47,6 +51,9 @@ class AppColors {
   static Color myContainerGreyBorderColor = Color.fromRGBO(221, 221, 221, 1);
   static Color myContainerGreyBackgroundColor =
       Color.fromRGBO(250, 250, 250, 1);
+
+  static Color greys = const Color(0xFFD1D5DB);
+  static Color red_line_color = const Color(0xFFF5DFE4);
 
   static Color textBlackColors = Color.fromRGBO(10, 10, 10, 1);
   static Color textGreyColors = Color.fromRGBO(115, 115, 115, 1);

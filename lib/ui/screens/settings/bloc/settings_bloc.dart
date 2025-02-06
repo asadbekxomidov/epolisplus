@@ -36,16 +36,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   void onPushScreen(
-      SettingsPushScreenEvent event, Emitter<SettingsState> emit) {
+      SettingsPushScreenEvent event, Emitter<SettingsState> emit) async {
     emit(SettingsLoadingState());
-    Get.to(() => const NotificationScreen());
+    await Get.to(() => NotificationScreen());
     emit(SettingsSuccesState());
   }
 
   void onPushAboutAppScreen(
-      SettingsAboutAppEvent event, Emitter<SettingsState> emit) {
+      SettingsAboutAppEvent event, Emitter<SettingsState> emit) async {
     emit(SettingsLoadingState());
-    Get.to(() => const AboutAppScreen());
+    await Get.to(() => const AboutAppScreen());
     emit(SettingsSuccesState());
   }
 

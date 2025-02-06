@@ -5,6 +5,7 @@ import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/add_car/bloc/my_car_bloc.dart';
 import 'package:epolisplus/ui/screens/modul/addedcar/screen/vehicle_car_info.dart';
+import 'package:get/get.dart';
 
 class AddCarScreen extends StatefulWidget {
   @override
@@ -50,6 +51,9 @@ class _AddCarScreenState extends State<AddCarScreen> {
                         appColors: AppColors.mainColor,
                         iconData: Icons.close,
                         text: AppStrings.closeText,
+                        onClick: () {
+                          Get.back();
+                        },
                       ),
                       Gap(dimens.paddingVerticalItem8),
                       Text(

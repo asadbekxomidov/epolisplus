@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:gap/gap.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/services/api_constanta.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/select_warranty/bloc/select_warranty_bloc.dart';
 
@@ -20,16 +22,22 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => SelectWarrantyBloc(),
+      create: (context) => SelectWarrantyBloc()..add(GetWarrantyEvent()),
       child: Scaffold(
         backgroundColor: AppColors.blackColor,
-        body: Stack(
-          children: [
-            Positioned(
-              top: dimens.paddingVerticalItem59,
-              child: ui(),
-            ),
-          ],
+        body: SafeArea(
+          child: Stack(
+            children: [
+              ui(),
+              BlocBuilder<SelectWarrantyBloc, SelectWarrantyState>(
+                builder: (context, state) {
+                  return LoadingIndicator2(
+                    isLoading: state is LoadingState,
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -84,59 +92,59 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
                 ],
               ),
               Gap(dimens.paddingVerticalItem16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OpenWarrantyButton(
-                    backgroundColor: AppColors.redColorFill,
-                    borderColor: AppColors.redColorStoke,
-                    containerPadding: dimens.paddingAll12,
-                    height: dimens.height88,
-                    width: dimens.width172,
-                    onClick: () {
-                      bloc.add(OpenAvtoSinePageEvent());
-                    },
-                    radius: dimens.radius12,
-                    text: AppStrings.carTiresText,
-                    style: dimens.font16Blackw600Sty,
-                    iconSize: dimens.height27,
-                    image: AppImage.cartiresIcon,
-                    verticalPadding: dimens.paddingVerticalItem8,
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisExtent: dimens.height100,
+                    crossAxisSpacing: dimens.paddingAll12,
+                    mainAxisSpacing: dimens.paddingAll12,
                   ),
-                  OpenWarrantyButton(
-                    backgroundColor: AppColors.redColorFill,
-                    borderColor: AppColors.redColorStoke,
-                    containerPadding: dimens.paddingAll12,
-                    height: dimens.height88,
-                    width: dimens.width172,
-                    onClick: () {
-                      bloc.add(OpenPhoneWarrantyEvent());
-                    },
-                    radius: dimens.radius12,
-                    text: AppStrings.phoneText,
-                    style: dimens.font16Blackw600Sty,
-                    iconSize: dimens.height27,
-                    image: AppImage.phoneIcon,
-                    verticalPadding: dimens.paddingVerticalItem8,
-                  ),
-                ],
-              ),
-              Gap(dimens.paddingVerticalItem14),
-              OpenWarrantyButton(
-                backgroundColor: AppColors.redColorFill,
-                borderColor: AppColors.redColorStoke,
-                containerPadding: dimens.paddingAll12,
-                height: dimens.height88,
-                width: dimens.width172,
-                onClick: () {
-                  bloc.add(OpenRefrigeratorEvent());
-                },
-                radius: dimens.radius12,
-                text: AppStrings.fridgeText,
-                style: dimens.font16Blackw600Sty,
-                iconSize: dimens.height27,
-                image: AppImage.fridgeIcon,
-                verticalPadding: dimens.paddingVerticalItem8,
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: bloc.baseResponse.length,
+                  itemBuilder: (context, index) {
+                    final warranty = bloc.baseResponse[index];
+
+                    return GestureDetector(
+                      onTap: () {
+                        bloc.add(OpenWarrantyCodeEvent(warranty));
+                      },
+                      child: Container(
+                        height: dimens.height88,
+                        width: dimens.width172,
+                        padding: EdgeInsets.all(
+                          dimens.paddingAll12,
+                        ),
+                        decoration: mybuttonDeco(
+                          dimens,
+                          dimens.radius12,
+                          AppColors.redColorFill,
+                          AppColors.redColorStoke,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            warranty.icon.endsWith('.svg')
+                                ? SvgPicture.network(
+                                    "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${warranty.icon}",
+                                    height: dimens.height20,
+                                  )
+                                : Image.network(
+                                    "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${warranty.icon}",
+                                    height: dimens.height20,
+                                  ),
+                            Text(
+                              warranty.name,
+                              style: dimens.font16Blackw600Sty,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           ),

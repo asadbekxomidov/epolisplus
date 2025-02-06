@@ -12,7 +12,7 @@ class ProfilRepository extends ProfilRepositoryIml {
   ProfilRepository() : service = ApiService(ApiConstanta.BASE_URL_EPOLIS_PLUS);
 
   @override
-  Future<BaseModels<ProfilResponse>> getProfile() async {
+  Future<BaseModels> getProfile() async {
     final prefsManager = SharedPreferencesManager();
     final token = await prefsManager.getToken();
 
@@ -31,25 +31,23 @@ class ProfilRepository extends ProfilRepositoryIml {
       response = await service.getGetData(headers, url);
 
       if (response?.statusCode == 200 && response?.data != null) {
-        var responseData = response?.data;
-        var profilData = ProfilResponse.fromJson(responseData);
-        return BaseModels<ProfilResponse>(
-          response: profilData,
+        return BaseModels(
+          response: ProfilResponse.fromJson(response?.data['response']),
           message: response?.statusMessage,
           status: response?.statusCode,
-          code: response?.isRedirect,
         );
       } else {
-        return BaseModels<ProfilResponse>(
+        logger(response.toString(), error: 'ELSEGA TUSHDI');
+        return BaseModels(
           status: response?.statusCode,
           message: response?.statusMessage,
-          response: null,
+          response: response?.data,
         );
       }
     } catch (e) {
-      logger('Error Repository: $e', error: 'ProfilRepository');
-      return BaseModels<ProfilResponse>(
-        status: 500,
+      logger('Error Repository: $e', error: 'User VihcleInformation Error');
+      return BaseModels(
+        status: 512,
         message: 'An error occurred: $e',
         response: null,
       );

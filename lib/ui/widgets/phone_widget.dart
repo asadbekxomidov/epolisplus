@@ -33,7 +33,7 @@ class PhoneWidget extends StatelessWidget {
         ),
         Gap(dimens.paddingVerticalItem2),
         Container(
-          decoration: inputDecoration(
+          decoration: newDecoration(
             dimens,
             isActive: isActive,
           ),

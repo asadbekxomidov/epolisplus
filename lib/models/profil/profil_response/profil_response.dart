@@ -12,16 +12,23 @@ class ProfilResponse {
   });
 
   factory ProfilResponse.fromJson(Map<String, dynamic> json) {
-    var responseData = json['response'] ?? {};
-
     return ProfilResponse(
-      phone: responseData['PHONE'] ?? '',
-      fullName: responseData['FULL_NAME'] ?? '',
-      carInfo: (responseData['CAR_INFO'] as List<dynamic>? ?? [])
-          .map((item) => CarInfoResponse.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      fullName: json['FULL_NAME'],
+      phone: json['PHONE'],
+      carInfo: CarInfoResponse.fromListJson(json['CAR_INFO']),
     );
   }
+  // factory ProfilResponse.fromJson(Map<String, dynamic> json) {
+  //   var responseData = json['response'];
+
+  //   return ProfilResponse(
+  //     phone: responseData['PHONE'],
+  //     fullName: responseData['FULL_NAME'],
+  //     carInfo: (responseData['CAR_INFO'] as List<dynamic>? ?? [])
+  //         .map((item) => CarInfoResponse.fromJson(item as Map<String, dynamic>))
+  //         .toList(),
+  //   );
+  // }
 
   Map<String, dynamic> toJson() {
     return {

@@ -20,3 +20,11 @@ export 'activate_code/activate_waranty_code.dart';
 export 'profil/profil_response/carinforesponse/car_info_response.dart';
 export 'profil/profil_response/profil_response.dart';
 export 'profil/profil_response/carinforesponse/car_information_response.dart';
+
+// ? profil
+
+export 'user/user_info_response/user_info_response.dart';
+
+// ? warranty
+
+export 'warrantyCode/warrantycode_response.dart';

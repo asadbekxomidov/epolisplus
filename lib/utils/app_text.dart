@@ -60,6 +60,7 @@ class AppStrings {
   static const String cancelText = "Отменить";
 
   // ! home text
+  static const String guarant = "Гарантия";
 
   static const String kasko = "КАСКО";
   static const String osago = "ОСАГО";
@@ -145,6 +146,7 @@ class AppStrings {
   static const String technicalPassportText = "Серия и номер тех. паспорта";
   static const String seriesnumberPassportID = "Серия и номер Паспортa/ID";
   static const String certificateNumberText = "Откуда взять номер техпаспорта?";
+  static const String wheregetWarranty = "Где я могу получить гарантию?";
   static const String addcaraff = "AAF";
   static const String seriaa = "AA";
   static const String addcar00 = "0000000";
@@ -158,7 +160,8 @@ class AppStrings {
   static const String yearofManufactureText = "Год выпуска";
   static const String activatewarrantyCode = "Активировать гарантийный код";
   static const String activatePhonewarrantyCode = "Гарантийний кодна телефон";
-  static const String warrantyCoderefrigerator = "Гарантийний код на холодильник";
+  static const String warrantyCoderefrigerator =
+      "Гарантийний код на холодильник";
   static const String uzflagText = "UZ";
   static const String carNumberFormatter = "01 A 001 AA";
   static const String addwarrantyCode = "Добавить гарантийный код";
@@ -184,7 +187,8 @@ class AppStrings {
   static const String errorQrcodepleasetryagain =
       "В QR-коде ошибка. Попробуйте еще раз.";
   static const String deleteYourAccount = "Вы хотите удалить аккаунт?";
-  static const String qrCodemaybeerror = "Пожалуйста, проверьте QR-код, это может быть ошибка.";
+  static const String qrCodemaybeerror =
+      "Пожалуйста, проверьте QR-код, это может быть ошибка.";
   static const String caskoinsurancePrograms = "Программы страхования КАСКО";
   static const String actioncannotbeUndone =
       "Данное действие отменить будет невозможно!";
@@ -194,5 +198,19 @@ class AppStrings {
   static const String informationAboutapplicant = "Информация о заявителе";
   static const String proceedPayment = "Перейти к оплате";
   static const String iMEIPhone = "IMEI телефона";
+  static const String equipmentVINcode = "Вин-код оборудования";
   static const String entertheCode = "Введите код";
+  static const String dateofBirth = "Дата рождения";
+  static const String ddmmgggg = "дд.мм.гггг";
+  static const String fio = "F.I.O";
+  static const String serInformationErrorText =
+      "В вашей информации о пользователе обнаружена ошибка.";
+  static const String pinfl = "PINFL (JSHSHIR)";
+  static const String phoneCost = "Стоимость телефона (Сум)";
+  static const String costInsurance = "Стоимость страхования";
+  static const String calculateText = "Рассчитать";
+  static const String proceedtoPayment = "Перейти к оплате";
+  static const String addCodeReferral = "Добавить код приглашения";
+  static const String iAgree = "Ознакомлен(а) и согласен(а) с ";
+  static const String insuranceConditions = "Условиями страхования";
 }

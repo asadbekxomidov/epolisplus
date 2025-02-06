@@ -112,7 +112,7 @@ carNumberDecorations(Dimens dimens, {bool isActive = true}) {
     ),
     border: Border.all(
       color: AppColors.carNumberLine,
-      width: dimens.width3,
+      width: dimens.width1_5,
     ),
     boxShadow: [
       BoxShadow(
@@ -126,6 +126,30 @@ carNumberDecorations(Dimens dimens, {bool isActive = true}) {
 
 // Home screen
 
+servicesDecoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(dimens.radius14),
+    image: DecorationImage(
+      image: AssetImage(AppImage.serviseDecimage),
+      alignment: Alignment.topLeft,
+    ),
+    boxShadow: myShadow(dimens),
+  );
+}
+
+guarantDecoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(dimens.radius14),
+    image: DecorationImage(
+      image: AssetImage(AppImage.guarantDecimage),
+      alignment: Alignment.topLeft,
+    ),
+    boxShadow: myShadow(dimens),
+  );
+}
+
 kaskoDecorationsCon(Dimens dimens) {
   return BoxDecoration(
     color: AppColors.whiteColor,
@@ -134,6 +158,7 @@ kaskoDecorationsCon(Dimens dimens) {
       image: AssetImage(AppImage.kaskoImage),
       alignment: Alignment.topLeft,
     ),
+    boxShadow: myShadow(dimens),
   );
 }
 
@@ -145,6 +170,7 @@ osagoDecorationsCon(Dimens dimens) {
       image: AssetImage(AppImage.osagoImage),
       alignment: Alignment.topLeft,
     ),
+    boxShadow: myShadow(dimens),
   );
 }
 
@@ -156,6 +182,7 @@ travelDecorationsCon(Dimens dimens) {
       image: AssetImage(AppImage.travelImage),
       alignment: Alignment.topLeft,
     ),
+    boxShadow: myShadow(dimens),
   );
 }
 
@@ -337,25 +364,6 @@ myContainerWidgets(Dimens dimens, double radius) {
   );
 }
 
-mybuttonDeco(
-    Dimens dimens, double radius, Color backgraoundColor, Color borderColor) {
-  return BoxDecoration(
-    color: backgraoundColor,
-    borderRadius: BorderRadius.circular(radius),
-    border: Border.all(
-      color: borderColor,
-      width: dimens.width1,
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: AppColors.shadowColor,
-        blurRadius: 4.0,
-        offset: Offset(0, 2),
-      ),
-    ],
-  );
-}
-
 myCardDecorations(
     Dimens dimens, double radius, Color backgraoundColor, Color borderColor) {
   return BoxDecoration(
@@ -402,5 +410,160 @@ myContainerGreyDec(Dimens dimens) {
     borderRadius: BorderRadius.circular(
       dimens.radius50,
     ),
+  );
+}
+
+greenDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.mainColor,
+    borderRadius: BorderRadius.circular(
+      dimens.radius12,
+    ),
+  );
+}
+
+whiteDefaultDecorations(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    border: Border.all(
+      color: AppColors.lineColor,
+      width: dimens.width1_5,
+    ),
+    borderRadius: BorderRadius.circular(
+      dimens.radius12,
+    ),
+  );
+}
+
+newDecoration(Dimens dimens, {bool isActive = true}) {
+  return BoxDecoration(
+    color: isActive ? AppColors.whiteColor : AppColors.neActiveColor,
+    borderRadius: BorderRadius.circular(dimens.height10),
+    border: Border.all(
+      color: AppColors.lineColor,
+      width: dimens.width10 / 17,
+    ),
+    boxShadow: [
+      BoxShadow(
+        offset: Offset(0, 1),
+        blurRadius: dimens.height10 / 2,
+        color: AppColors.greys,
+      ),
+    ],
+  );
+}
+
+mybuttonDeco(
+    Dimens dimens, double radius, Color backgraoundColor, Color borderColor) {
+  return BoxDecoration(
+    color: backgraoundColor,
+    borderRadius: BorderRadius.circular(radius),
+    border: Border.all(
+      color: borderColor,
+      width: dimens.width1,
+    ),
+    boxShadow: myShadow(dimens),
+  );
+}
+
+// ? NEW DECORATIONS
+
+newEditDecoration(
+  Dimens dimens, {
+  bool withLine = true,
+  bool isGreen = false,
+  bool isShadow = true,
+}) {
+  return BoxDecoration(
+    color: isGreen ? AppColors.mainColor : AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(dimens.radius12),
+    border: isGreen
+        ? null
+        : withLine
+            ? Border.all(
+                color: AppColors.lineColor,
+                width: dimens.line_size,
+              )
+            : null,
+    boxShadow: isShadow ? myShadow(dimens) : null,
+  );
+}
+
+myShadow(Dimens dimens) {
+  return [
+    BoxShadow(
+      offset: Offset(0, 0),
+      blurRadius: dimens.line_size,
+      color: AppColors.shadow_color,
+    ),
+  ];
+}
+
+redDecoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.red_line_color,
+    // color: MyColor.red_light_color,
+    borderRadius: BorderRadius.circular(dimens.height45 / 2),
+    border: Border.all(
+      color: AppColors.red_line_color,
+      // color:  AppColors.redColorStoke,
+      width: dimens.line_size,
+    ),
+    boxShadow: myShadow(dimens),
+  );
+}
+
+newEditDecorationRadius50(
+  Dimens dimens, {
+  bool withLine = true,
+  bool isGreen = false,
+  bool isShadow = true,
+}) {
+  return BoxDecoration(
+    color: isGreen ? AppColors.mainColor : AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(dimens.radius50),
+    border: isGreen
+        ? null
+        : withLine
+            ? Border.all(
+                color: AppColors.lineColor,
+                width: dimens.line_size,
+              )
+            : null,
+    boxShadow: isShadow ? myShadow(dimens) : null,
+  );
+}
+
+newEditDecorationRadiusRadi(
+  Dimens dimens, {
+  double? radius,
+  bool withLine = true,
+  bool isGreen = false,
+  bool isShadow = true,
+}) {
+  return BoxDecoration(
+    color: isGreen ? AppColors.mainColor : AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(radius ?? dimens.radius50),
+    border: isGreen
+        ? null
+        : withLine
+            ? Border.all(
+                color: AppColors.lineColor,
+                width: dimens.line_size,
+              )
+            : null,
+    boxShadow: isShadow ? myShadow(dimens) : null,
+  );
+}
+
+policy_category_select_decoration(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(dimens.height20),
+    border: Border.all(
+      color: AppColors.whiteColor,
+      width: dimens.line_size,
+    ),
+    //   boxShadow: myShadow(dimens),
   );
 }

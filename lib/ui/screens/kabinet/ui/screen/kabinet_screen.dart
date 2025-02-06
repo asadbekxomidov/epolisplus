@@ -21,102 +21,114 @@ class _CabinetScreenState extends State<CabinetScreen> {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return BlocProvider(
-      create: (context) => KabinetBloc()..add(KabinetGetEvent()),
-      child: BlocConsumer<KabinetBloc, KabinetState>(
-        listener: (context, state) {
-          if (state is KabinetErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  state.failure.getErrorMessage(context),
-                ),
-              ),
-            );
-          }
-        },
-        builder: (context, state) {
-          kabinetBloc = BlocProvider.of<KabinetBloc>(context);
-
-          if (state is KabinetLoadingState) {
-            return GreenImageBackground(
-              child: LoadingPages(),
-            );
-          }
-          if (state is KabinetInformationGetState) {
-            final profil = state.profilResponse;
-            final carInfoList = profil.carInfo;
-
-            return Scaffold(
-              body: GreenImageBackground(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: dimens.paddingHorizontal16,
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gap(dimens.paddingVerticalItem59),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              AppStrings.cabientText,
-                              style: dimens.pagesTitleSty,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                kabinetBloc.add(
-                                  KabinetPushScreenEvent(profil.fullName),
-                                );
-                              },
-                              splashColor: AppColors.transparentColor,
-                              highlightColor: AppColors.transparentColor,
-                              child: Image.asset(
-                                AppImage.cabinetEditIcon,
-                                height: dimens.height24,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Gap(dimens.paddingVerticalItem8),
-                        Text(
-                          AppStrings.yourname,
-                          style: dimens.pagesTextSty,
-                        ),
-                        Gap(dimens.paddingVerticalItem4),
-                        Text(
-                          profil.fullName,
-                          style: dimens.pagesYourNameSty,
-                        ),
-                        Gap(dimens.paddingVerticalItem8),
-                        Text(
-                          AppStrings.phoneNumberHint,
-                          style: dimens.pagesTextSty,
-                        ),
-                        Gap(dimens.paddingVerticalItem4),
-                        Text(
-                          profil.phone,
-                          style: dimens.pagesYourNameSty,
-                        ),
-                        Gap(dimens.paddingVerticalItem16),
-                        my_car_widget(profil, carInfoList),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            );
-          } else {
-            return Scaffold(
-              body: GreenImageBackground(
-                child: Container(),
-              ),
-            );
-          }
-        },
+    return Scaffold(
+      body: GreenImageBackground(
+        child: BlocProvider(
+          create: (context) => KabinetBloc()..add(KabinetGetEvent()),
+          child: SafeArea(
+            child: Stack(
+              children: [
+                ui(),
+                BlocBuilder<KabinetBloc, KabinetState>(
+                  builder: (context, state) {
+                    return LoadingIndicator2(
+                      isLoading: state is KabinetLoadingState,
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
       ),
+    );
+  }
+
+  ui() {
+    return BlocConsumer<KabinetBloc, KabinetState>(
+      listener: (context, state) {
+        if (state is KabinetErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                state.failure.getErrorMessage(context),
+              ),
+            ),
+          );
+        }
+      },
+      builder: (context, state) {
+        kabinetBloc = BlocProvider.of<KabinetBloc>(context);
+
+        if (state is KabinetInformationGetState) {
+          final profil = state.profilResponse;
+          final carInfoList = profil.carInfo;
+
+          return Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: dimens.paddingHorizontal16,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(dimens.paddingVerticalItem8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.cabientText,
+                        style: dimens.pagesTitleSty,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          kabinetBloc.add(
+                            KabinetPushScreenEvent(profil.fullName),
+                          );
+                        },
+                        splashColor: AppColors.transparentColor,
+                        highlightColor: AppColors.transparentColor,
+                        child: Image.asset(
+                          AppImage.cabinetEditIcon,
+                          height: dimens.height24,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Gap(dimens.paddingVerticalItem8),
+                  Text(
+                    AppStrings.yourname,
+                    style: dimens.pagesTextSty,
+                  ),
+                  Gap(dimens.paddingVerticalItem4),
+                  Text(
+                    profil.fullName,
+                    style: dimens.pagesYourNameSty,
+                  ),
+                  Gap(dimens.paddingVerticalItem8),
+                  Text(
+                    AppStrings.phoneNumberHint,
+                    style: dimens.pagesTextSty,
+                  ),
+                  Gap(dimens.paddingVerticalItem4),
+                  Text(
+                    profil.phone,
+                    style: dimens.pagesYourNameSty,
+                  ),
+                  Gap(dimens.paddingVerticalItem16),
+                  my_car_widget(profil, carInfoList),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Scaffold(
+            body: GreenImageBackground(
+              child: Container(),
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -169,135 +181,126 @@ class _CabinetScreenState extends State<CabinetScreen> {
   car_list(List<CarInfoResponse> carInfoList) {
     return Column(
       children: carInfoList.map((car) {
-        return Card(
-          color: AppColors.cardContainerColor,
-          child: Container(
-            padding: EdgeInsets.all(
-              dimens.paddingAll20,
-            ),
-            width: dimens.screenWidth,
-            decoration: myCarCardDecoration(dimens),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              "${car.modelName}",
-                              style: dimens.font24Blackw600Sty,
-                            ),
-                          ],
-                        ),
-                        Gap(dimens.paddingHorizontal4),
-                        Text(
-                          "${car.issueYear} год",
-                          style: dimens.font14Greyw400Sty,
-                        ),
-                      ],
-                    ),
-                    DeleteButton(
-                      onClick: () {
-                        kabinetBloc.add(
-                          MyCarDeleteEvent(car.govNumber),
-                        );
-                      },
-                      icon: CupertinoIcons.delete,
-                    ),
-                  ],
-                ),
-                Gap(dimens.paddingVerticalItem8),
-                Container(
-                  height: dimens.height32,
-                  width: dimens.width142,
-                  // decoration: BoxDecoration(
-                  //   color: Colors.white,
-                  //   border: Border.all(color: Colors.black, width: 2),
-                  //   borderRadius: BorderRadius.circular(dimens.radius4),
-                  // ),
-                  decoration: getMyCarContainerDeco(dimens),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+        return Container(
+          margin: EdgeInsets.symmetric(
+            vertical: dimens.paddingVerticalItem4,
+          ),
+          padding: EdgeInsets.all(
+            dimens.paddingAll20,
+          ),
+          width: dimens.screenWidth,
+          decoration: newEditDecoration(dimens),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Chap tomonda boshidagi sonlar
-                      Container(
-                        width: dimens.width32,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            right: BorderSide(
-                              color: AppColors.blackColor,
-                              width: dimens.width1_5,
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          car.govNumber.substring(0, 2), // 2 ta bosh son
-                          style: dimens.font16Blackw500Sty,
-                        ),
-                      ),
-                      Gap(dimens.paddingHorizontal4),
-                      // Matnning qolgan qismi
-                      Expanded(
-                        child: Text(
-                          car.govNumber.substring(2), // Matnning qolgan qismi
-                          style: dimens.font20Blackw500Sty,
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Gap(dimens.paddingHorizontal4),
-                      // O'ng tomondagi bayroq va "uz"
                       Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            AppImage.uzbFlagIcon, // Bayroq rasmi
-                            height: dimens.height10,
-                          ),
                           Text(
-                            AppStrings.uzflagText, // "uz" matni
-                            style: dimens.cardUzFlagSty2,
+                            "${car.modelName}",
+                            style: dimens.font24Blackw600Sty,
                           ),
                         ],
                       ),
-                      Gap(dimens.paddingHorizontal2),
+                      Gap(dimens.paddingHorizontal4),
+                      Text(
+                        "${car.issueYear} год",
+                        style: dimens.font14Greyw400Sty,
+                      ),
                     ],
                   ),
-                ),
-                Gap(dimens.paddingVerticalItem8),
-                Row(
+                  DeleteButton(
+                    onClick: () {
+                      kabinetBloc.add(
+                        MyCarDeleteEvent(car.govNumber),
+                      );
+                    },
+                    icon: CupertinoIcons.delete,
+                  ),
+                ],
+              ),
+              Gap(dimens.paddingVerticalItem8),
+              Container(
+                height: dimens.height32,
+                width: dimens.width142,
+                decoration: getMyCarContainerDeco(dimens),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "${car.techSeriya}",
-                      style: dimens.font14Greyw400Sty,
+                    Container(
+                      width: dimens.width32,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            color: AppColors.blackColor,
+                            width: dimens.width1_5,
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        car.govNumber.substring(0, 2),
+                        style: dimens.govfont16Blackw500Sty,
+                      ),
                     ),
-                    Text(
-                      " ${car.techNumber}",
-                      style: dimens.font14Greyw400Sty,
+                    Expanded(
+                      child: Text(
+                        formatString(car.govNumber.substring(2)),
+                        // car.govNumber.substring(2),
+                        style: dimens.govfont16Blackw500Sty,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          AppImage.uzbFlagIcon, // Bayroq rasmi
+                          height: dimens.height10,
+                        ),
+                        Text(
+                          AppStrings.uzflagText, // "uz" matni
+                          style: dimens.cardUzFlagSty2,
+                        ),
+                      ],
+                    ),
+                    Gap(dimens.paddingHorizontal2),
                   ],
                 ),
-                Gap(dimens.paddingVerticalItem8),
-                Text(
-                  AppStrings.pointTextMinus,
-                  style: dimens.pointMinusSty,
-                ),
-                Gap(dimens.paddingVerticalItem8),
-                Text(
-                  AppStrings.carOwner,
-                  style: dimens.font14Greyw400Sty,
-                ),
-                Text(
-                  car.orgName,
-                  style: dimens.font16Blackw400Sty,
-                ),
-              ],
-            ),
+              ),
+              Gap(dimens.paddingVerticalItem8),
+              Row(
+                children: [
+                  Text(
+                    "${car.techSeriya}",
+                    style: dimens.font14Greyw400Sty,
+                  ),
+                  Text(
+                    " ${car.techNumber}",
+                    style: dimens.font14Greyw400Sty,
+                  ),
+                ],
+              ),
+              Gap(dimens.paddingVerticalItem8),
+              Text(
+                AppStrings.pointTextMinus,
+                style: dimens.pointMinusSty,
+              ),
+              Gap(dimens.paddingVerticalItem8),
+              Text(
+                AppStrings.carOwner,
+                style: dimens.font14Greyw400Sty,
+              ),
+              Text(
+                car.orgName,
+                style: dimens.font16Blackw400Sty,
+              ),
+            ],
           ),
         );
       }).toList(),
@@ -314,6 +317,30 @@ class _CabinetScreenState extends State<CabinetScreen> {
     );
   }
 }
+
+String formatString(String input) {
+  final regex = RegExp(r'([A-Z]+)(\d+)([A-Z]+)');
+  final match = regex.firstMatch(input);
+
+  if (match != null) {
+    return '${match.group(1)} ${match.group(2)} ${match.group(3)}'
+        .replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  return input;
+}
+
+
+// String formaGovNumber(String input) {
+//   final regex = RegExp(r'([A-Z]+)(\d+)([A-Z]+)');
+//   final match = regex.firstMatch(input);
+
+//   if (match != null) {
+//     return '${match.group(1)} ${match.group(2)} ${match.group(3)}';
+//   }
+
+//   return input; 
+// }
 
 /*
 String formatPhoneNumber(String phone) {

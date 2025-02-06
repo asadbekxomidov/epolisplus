@@ -19,6 +19,11 @@ class AppImage {
   static String kaskoImage = 'assets/images/home/kasko_image.png';
   static String osagoImage = 'assets/images/home/osago_image.png';
   static String travelImage = 'assets/images/home/travel_image.png';
+  static String serviseDecimage = 'assets/images/home/servise_decimage.png';
+  static String guarantDecimage = 'assets/images/home/guarant_image.png';
+
+  static String guarantIcon = 'assets/images/home/guarant_icon.png';
+  static String serviseIcon = 'assets/images/home/servise_icon.png';
 
   // ? home_screen icons
   static String additional_services_icon =
@@ -168,10 +173,12 @@ class AppImage {
   static String phoneIcon = 'assets/images/phone_icon.png';
   static String fridgeIcon = 'assets/images/fridge_icon.png';
   static String refrigeratorgreyIcon = 'assets/images/refrigerator_grey_icon.png';
+  static String amoutCoinIcon = 'assets/images/amout_pint_icon.png';
   static String warrantycodewidgeticon =
       'assets/images/warrantycode_widget_icon.png';
 
   // ?  Gift
 
   static String progressBarGif = 'assets/gifs/progressbar.gif';
+  static String newLineImage = 'assets/images/new_line_image.png';
 }

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'app_colors.dart';
 
 class Dimens {
@@ -14,8 +12,20 @@ class Dimens {
 
   // ? PADDING BUTTONS
 
+  double get fontGowNumber {
+    return height10 * 3.2;
+  }
+
   double get heightt15 {
     return 15 * screenHeight / 852;
+  }
+
+  double get paddingHeight {
+    return height15;
+  }
+
+  double get paddingWidth {
+    return width10 * 1.6;
   }
 
   double get horizontalPadding {
@@ -26,7 +36,14 @@ class Dimens {
     return 0.013 * screenHeight;
   }
 
+  double get line_size {
+    return height10 / 10;
+  }
+
   // ?
+  double get height45 {
+    return 45 * screenHeight / 967;
+  }
 
   double get paddingAll12 {
     return height10 * 1.2;
@@ -387,6 +404,10 @@ class Dimens {
     return 306 * screenHeight / 852;
   }
 
+  double get height329 {
+    return 329 * screenHeight / 852;
+  }
+
   double get height332 {
     return 332 * screenHeight / 852;
   }
@@ -457,6 +478,10 @@ class Dimens {
 
   double get width100 {
     return 100 * screenWidth / 392;
+  }
+
+  double get width120 {
+    return 120 * screenWidth / 392;
   }
 
   double get width150 {
@@ -822,7 +847,8 @@ class Dimens {
     return TextStyle(
       fontSize: font10,
       fontWeight: FontWeight.w400,
-      color: AppColors.tabbarTextColor,
+      // color: AppColors.tabbarTextColor,
+      color: Colors.teal,
       fontFamily: "GeistVF",
       decoration: TextDecoration.none,
     );
@@ -942,7 +968,8 @@ class Dimens {
       fontSize: font40,
       fontWeight: FontWeight.normal,
       color: AppColors.blackColor,
-      fontFamily: "GeistVF",
+      fontFamily: "Fe-Font",
+      // fontFamily: "GeistVF",
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,
     );
@@ -950,7 +977,7 @@ class Dimens {
 
   TextStyle get hintStyle {
     return TextStyle(
-      fontSize: font16,
+      fontSize: font14,
       fontWeight: FontWeight.normal,
       color: AppColors.hintColor,
       fontFamily: "GeistVF",
@@ -965,7 +992,7 @@ class Dimens {
       fontWeight: FontWeight.w400,
       // color: AppColors.hintTextFieldColor,
       color: AppColors.hintColor,
-      fontFamily: "GeistVF",
+      fontFamily: "Fe-Font",
       decoration: TextDecoration.none,
       overflow: TextOverflow.ellipsis,
     );
@@ -1087,6 +1114,7 @@ class Dimens {
       overflow: TextOverflow.ellipsis,
       color: AppColors.pointColor,
       fontWeight: FontWeight.w300,
+      fontFamily: "GeistVF",
       fontSize: font14,
     );
   }
@@ -1095,6 +1123,7 @@ class Dimens {
     return TextStyle(
       color: AppColors.blackColor,
       fontWeight: FontWeight.w400,
+      fontFamily: "GeistVF",
       fontSize: height17,
       decoration: TextDecoration.none,
     );
@@ -1142,6 +1171,37 @@ class Dimens {
     );
   }
 
+  TextStyle get govfont16Blackw500Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w500,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "Fe-Font",
+    );
+  }
+
+  TextStyle get govfont18Blackw600Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w600,
+      fontSize: font18,
+      decoration: TextDecoration.none,
+      fontFamily: "Fe-Font",
+    );
+  }
+
+  TextStyle get govfont20Blackw500Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w500,
+      fontSize: font20,
+      decoration: TextDecoration.none,
+      fontFamily: "Fe-Font",
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get font20Blackw500Sty {
     return TextStyle(
       color: AppColors.textBlackColors,
@@ -1166,6 +1226,26 @@ class Dimens {
   TextStyle get font14Greyw400Sty {
     return TextStyle(
       color: AppColors.textGreyColors,
+      fontWeight: FontWeight.w400,
+      fontSize: font14,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
+  TextStyle get font14Black400Sty {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w400,
+      fontSize: font14,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
+  TextStyle get font14White400Sty {
+    return TextStyle(
+      color: AppColors.whiteColor,
       fontWeight: FontWeight.w400,
       fontSize: font14,
       decoration: TextDecoration.none,
@@ -1227,12 +1307,46 @@ class Dimens {
     );
   }
 
+  TextStyle get font14Greenw400Sty {
+    return TextStyle(
+      color: AppColors.greenColorDefault,
+      fontWeight: FontWeight.w400,
+      fontSize: font14,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font14Greenw500Sty {
+    return TextStyle(
+      color: AppColors.greenColorDefault,
+      fontWeight: FontWeight.w500,
+      fontSize: font14,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get pointMinusSty {
     return TextStyle(
       // color: AppColors.textGreyColors,
       color: AppColors.textGreyColor221,
       // fontWeight: FontWeight.w400,
       fontSize: font10,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get pointdotStyle {
+    return TextStyle(
+      // color: AppColors.textGreyColors,
+      color: AppColors.textGreyColor221,
+      // fontWeight: FontWeight.w400,
+      fontSize: font14,
       decoration: TextDecoration.none,
       fontFamily: "GeistVF",
       overflow: TextOverflow.ellipsis,

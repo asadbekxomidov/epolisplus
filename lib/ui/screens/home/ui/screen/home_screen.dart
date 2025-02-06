@@ -1,11 +1,10 @@
-import 'package:epolisplus/ui/screens/home/bloc/background/background_bloc.dart';
-import 'package:epolisplus/ui/screens/home/bloc/home_bloc.dart';
-import 'package:epolisplus/ui/widgets/bluebackground.dart';
-import 'package:epolisplus/ui/widgets/buttons.dart';
-import 'package:epolisplus/utils/utils_export.dart';
+import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:epolisplus/ui/widgets/buttons.dart';
+import 'package:epolisplus/utils/utils_export.dart';
+import 'package:epolisplus/ui/widgets/bluebackground.dart';
+import 'package:epolisplus/ui/screens/home/bloc/home_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,187 +19,194 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => HomeBloc(),
+    return BlocProvider(
+      create: (context) => HomeBloc(),
+      child: Scaffold(
+        body: Bluebackground(
+          child: SafeArea(
+            child: Stack(
+              children: [
+                ui(),
+                BlocBuilder<HomeBloc, HomeState>(
+                  builder: (context, state) {
+                    return LoadingIndicator2(
+                      isLoading: state is HomeLoadingState,
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
         ),
-        BlocProvider(
-          create: (context) => BackgroundBloc(),
-        ),
-      ],
-      child: BlocConsumer<HomeBloc, HomeState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          homeBloc = BlocProvider.of<HomeBloc>(context);
+      ),
+    );
+  }
 
-          return Scaffold(
-            body: Bluebackground(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: dimens.paddingHorizontal16,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Gap(dimens.paddingVerticalItem59),
-                    // ?
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              AppImage.personIcon,
-                              height: dimens.height24,
-                            ),
-                            Gap(dimens.paddingHorizontal8),
-                            Text(
-                              'asadbek',
-                              style: TextStyle(
-                                color: AppColors.whiteColor,
-                                fontSize: dimens.font16,
-                              ),
-                            ),
-                          ],
+  ui() {
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        homeBloc = BlocProvider.of<HomeBloc>(context);
+
+        return Container(
+          // padding: EdgeInsets.symmetric(
+          //   horizontal: dimens.paddingHorizontal16,
+          // ),
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingWidth,
+            vertical: dimens.paddingHeight,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Gap(dimens.paddingVerticalItem8),
+              // ?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                        AppImage.personIcon,
+                        height: dimens.height24,
+                      ),
+                      Gap(dimens.paddingHorizontal8),
+                      Text(
+                        'asadbek',
+                        style: TextStyle(
+                          color: AppColors.whiteColor,
+                          fontSize: dimens.font16,
                         ),
-                        Row(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                homeBloc.add(PushWarrantyEvent());
-                              },
-                              child: Image.asset(
-                                AppImage.shieldPlusIcon,
-                                height: dimens.height24,
-                              ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          homeBloc.add(PushWarrantyEvent());
+                        },
+                        child: Image.asset(
+                          AppImage.shieldPlusIcon,
+                          height: dimens.height24,
+                        ),
+                      ),
+                      Gap(dimens.paddingHorizontal16),
+                      InkWell(
+                        child: Image.asset(
+                          AppImage.notificationIcon,
+                          height: dimens.height24,
+                        ),
+                      ),
+                      Gap(dimens.paddingHorizontal16),
+                      InkWell(
+                        onTap: () {
+                          homeBloc.add(PushScreensEvent());
+                        },
+                        child: Image.asset(
+                          AppImage.settingsIcon,
+                          height: dimens.height24,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Gap(dimens.paddingVerticalItem18),
+              Text(
+                AppStrings.myPolicies,
+                style: dimens.homeStyle,
+              ),
+              Gap(dimens.paddingVerticalItem8),
+              CustomHorizontalButton(
+                dimens: dimens,
+              ),
+              // Gap(dimens.paddingVerticalItem16),
+              Container(
+                height: dimens.height220,
+                width: dimens.screenWidth,
+                decoration: newEditDecoration(dimens),
+              ),
+              // Gap(dimens.paddingVerticalItem16),
+
+              Expanded(
+                child: ListView(
+                  children: [
+                    Gap(dimens.paddingVerticalItem20),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: GestureDetector(
+                            onTap: () {
+                              homeBloc.add(OpenAddServisePEvent());
+                            },
+                            child: RecButton(
+                              decoration: servicesDecoration(dimens),
+                              title: AppStrings.servicesText,
+                              image: AppImage.serviseIcon,
                             ),
-                            Gap(dimens.paddingHorizontal16),
-                            InkWell(
-                              child: Image.asset(
-                                AppImage.notificationIcon,
-                                height: dimens.height24,
-                              ),
+                          ),
+                        ),
+                        Gap(dimens.paddingHorizontal8),
+                        Expanded(
+                          flex: 5,
+                          child: GestureDetector(
+                            onTap: () {
+                              homeBloc.add(PushWarrantyEvent());
+                            },
+                            child: RecButton(
+                              decoration: guarantDecoration(dimens),
+                              title: AppStrings.guarant,
+                              image: AppImage.guarantIcon,
                             ),
-                            Gap(dimens.paddingHorizontal16),
-                            InkWell(
-                              onTap: () {
-                                homeBloc.add(PushScreensEvent());
-                              },
-                              child: Image.asset(
-                                AppImage.settingsIcon,
-                                height: dimens.height24,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
-                    Gap(dimens.paddingVerticalItem18),
+                    Gap(dimens.paddingVerticalItem16),
                     Text(
-                      AppStrings.myPolicies,
-                      style: dimens.homeStyle,
+                      AppStrings.insurancePrograms,
+                      style: dimens.insuranceProgramsSty,
+                    ),
+                    Gap(dimens.paddingVerticalItem16),
+                    HomePageButtonMain(
+                      onClick: () {
+                        homeBloc.add(OpenCaskoEvent());
+                      },
+                      decoration: kaskoDecorationsCon(dimens),
+                      iconData: AppImage.arrowcirclerightIcon,
+                      image: AppImage.kaskolHomeIcon,
+                      text: AppStrings.kasko,
                     ),
                     Gap(dimens.paddingVerticalItem8),
-                    CustomHorizontalButton(
-                      dimens: dimens,
+                    HomePageButtonMain(
+                      onClick: () {
+                        homeBloc.add(OpenOsagoEvent());
+                      },
+                      decoration: osagoDecorationsCon(dimens),
+                      iconData: AppImage.arrowcirclerightIcon,
+                      image: AppImage.osagoHomeIcon,
+                      text: AppStrings.osago,
+                    ),
+                    Gap(dimens.paddingVerticalItem8),
+                    HomePageButtonMain(
+                      onClick: () {
+                        homeBloc.add(OpenTravelEvent());
+                      },
+                      decoration: travelDecorationsCon(dimens),
+                      iconData: AppImage.arrowcirclerightIcon,
+                      image: AppImage.travelHomeIcon,
+                      text: AppStrings.travel,
                     ),
                     // Gap(dimens.paddingVerticalItem16),
-                    Card(
-                      child: Container(
-                        height: dimens.height220,
-                        width: dimens.screenWidth,
-                        decoration: cardContainerDecoration(dimens),
-                      ),
-                    ),
-                    // Gap(dimens.paddingVerticalItem16),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Gap(dimens.paddingVerticalItem20),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: dimens.paddingHorizontal13,
-                                vertical: dimens.paddingVerticalItem8,
-                              ),
-                              height: dimens.height100,
-                              width: dimens.screenWidth,
-                              decoration: homepageButtonsDecoration(dimens),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  HomePageButtons(
-                                    iconData: AppImage.navigatenextIcon,
-                                    image: AppImage.additional_services_icon,
-                                    text: AppStrings.warrantyCode,
-                                    onClick: () {},
-                                  ),
-                                  Text(
-                                    AppStrings.pointText,
-                                    style: dimens.pointStyle,
-                                  ),
-                                  Gap(dimens.height5),
-                                  HomePageButtons(
-                                    iconData: AppImage.navigatenextIcon,
-                                    image: AppImage.warrantyHomeIcon,
-                                    text: AppStrings.warrantyCode,
-                                    onClick: () {
-                                      homeBloc.add(PushWarrantyEvent());
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Gap(dimens.paddingVerticalItem16),
-                            Text(
-                              AppStrings.insurancePrograms,
-                              style: dimens.insuranceProgramsSty,
-                            ),
-                            Gap(dimens.paddingVerticalItem16),
-                            HomePageButtonMain(
-                              onClick: () {
-                                homeBloc.add(OpenCaskoEvent());
-                              },
-                              decoration: kaskoDecorationsCon(dimens),
-                              iconData: AppImage.arrowcirclerightIcon,
-                              image: AppImage.kaskolHomeIcon,
-                              text: AppStrings.kasko,
-                            ),
-                            Gap(dimens.paddingVerticalItem8),
-                            HomePageButtonMain(
-                              onClick: () {
-                                homeBloc.add(OpenOsagoEvent());
-                              },
-                              decoration: osagoDecorationsCon(dimens),
-                              iconData: AppImage.arrowcirclerightIcon,
-                              image: AppImage.osagoHomeIcon,
-                              text: AppStrings.osago,
-                            ),
-                            Gap(dimens.paddingVerticalItem8),
-                            HomePageButtonMain(
-                              onClick: () {
-                                homeBloc.add(OpenTravelEvent());
-                              },
-                              decoration: travelDecorationsCon(dimens),
-                              iconData: AppImage.arrowcirclerightIcon,
-                              image: AppImage.travelHomeIcon,
-                              text: AppStrings.travel,
-                            ),
-                            Gap(dimens.paddingVerticalItem16),
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -9,6 +9,10 @@ class LoadingState extends UserInfoState {}
 
 class LoadedState extends UserInfoState {}
 
-class ErrorState extends UserInfoState {}
+class ErrorState extends UserInfoState {
+  Failure failure;
+
+  ErrorState(this.failure);
+}
 
 class SuccessState extends UserInfoState {}

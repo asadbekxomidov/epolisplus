@@ -9,7 +9,7 @@ import 'package:epolisplus/utils/utils_export.dart';
 class OfertaScreen extends StatefulWidget {
   final String? ofertaText;
 
-  const OfertaScreen({super.key, this.ofertaText});
+  OfertaScreen({this.ofertaText});
 
   @override
   State<OfertaScreen> createState() => _OfertaScreenState();

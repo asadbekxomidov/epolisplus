@@ -17,6 +17,20 @@ class LoadingIndicator extends StatelessWidget {
   }
 }
 
+class LoadingIndicator2 extends StatelessWidget {
+  final bool isLoading;
+  const LoadingIndicator2({
+    Key? key,
+    required this.isLoading,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var dimens2 = Dimens(context);
+    return isLoading ? LoadingPages() : Container();
+  }
+}
+
 class LoadingPages extends StatelessWidget {
   late Dimens dimens;
 

@@ -25,150 +25,156 @@ class _PartnersScreenState extends State<PartnersScreen> {
       body: GreenImageBackground(
         child: BlocProvider(
           create: (context) => PartnersBloc()..add(PartnersGetEvent()),
-          child: BlocConsumer<PartnersBloc, PartnersState>(
-            listener: (context, state) {
-              if (state is PartnersErrorState) {
-                showErrorMessageSnackBar(
-                  context,
-                  state.failure.getErrorMessage(context),
-                );
-              }
-            },
-            builder: (context, state) {
-              partnersBloc = BlocProvider.of<PartnersBloc>(context);
-              if (state is PartnersLoadingState) {
-                return Center(
-                  child: LoadingPages(),
-                );
-              }
-              if (state is PartnersLoadedState) {
-                return Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: dimens.paddingHorizontal16,
-                  ),
-                  child: Column(
-                    children: [
-                      Gap(dimens.paddingVerticalItem59),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            AppStrings.partnersaText,
-                            style: dimens.settingsStyle,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              partnersBloc.add(PartnerPushScreenEvent());
-                            },
-                            child: Icon(
-                              AppImage.infocircleIcon,
-                              size: dimens.height24,
-                              color: AppColors.whiteColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: state.partners.length,
-                          itemBuilder: (context, index) {
-                            final partner = state.partners[index];
-                            return Card(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    dimens.radius16,
-                                  ),
-                                  color: AppColors.partnersCardColor,
-                                ),
-                                // height: dimens.height268,
-                                padding: EdgeInsets.all(
-                                  dimens.paddingVerticalItem20,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    partner.image.endsWith('.svg')
-                                        ? SvgPicture.network(
-                                            "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
-                                            height: dimens.height20,
-                                          )
-                                        : Image.network(
-                                            "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
-                                            height: dimens.height20,
-                                          ),
-                                    Text(
-                                      AppStrings.servicesText,
-                                      style: dimens.partnersTextSty,
-                                    ),
-                                    Gap(dimens.paddingVerticalItem8),
-                                    // partner_product_list(),
-                                    partnerProductList(partner.productList),
-                                    // Gap(dimens.paddingVerticalItem8),
-                                    Text(
-                                      AppStrings.pointText,
-                                      style: dimens.pointStyle,
-                                    ),
-                                    Gap(dimens.paddingVerticalItem8),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        PartnersButton(
-                                          image: AppImage.partnersCallOpercon,
-                                          text: AppStrings.languageText,
-                                          onclick: () {
-                                            partnersBloc.add(
-                                              PartnerPushPhoneEvent(
-                                                partner.phone,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        Gap(dimens.paddingHorizontal8),
-                                        PartnersButton(
-                                          image: AppImage.partnersVebSaytcon,
-                                          text: AppStrings.languageText,
-                                          onclick: () {
-                                            partnersBloc.add(
-                                              PartnerPushWebEvent(partner.site),
-                                            );
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-              if (state is PartnersErrorState) {
-                return Center(
-                  child: Text(
-                    'Failed to load partners.',
-                    style: TextStyle(
-                      color: AppColors.redColor,
-                    ),
-                  ),
-                );
-              }
-              return GreenImageBackground(
-                child: Container(),
-              );
-            },
+          child: SafeArea(
+            child: Stack(
+              children: [
+                ui(),
+                BlocBuilder<PartnersBloc, PartnersState>(
+                  builder: (context, state) {
+                    return LoadingIndicator2(
+                      isLoading: state is PartnersLoadingState,
+                    );
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget partnerProductList(List<Product>? productList) {
+  ui() {
+    return BlocConsumer<PartnersBloc, PartnersState>(
+      listener: (context, state) {
+        if (state is PartnersErrorState) {
+          showErrorMessageSnackBar(
+            context,
+            state.failure.getErrorMessage(context),
+          );
+        }
+      },
+      builder: (context, state) {
+        partnersBloc = BlocProvider.of<PartnersBloc>(context);
+
+        if (state is PartnersLoadedState) {
+          return Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: dimens.paddingHorizontal16,
+            ),
+            child: Column(
+              children: [
+                Gap(dimens.paddingVerticalItem8),
+                // Gap(dimens.paddingVerticalItem59),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppStrings.partnersaText,
+                      style: dimens.settingsStyle,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        partnersBloc.add(PartnerPushScreenEvent());
+                      },
+                      child: Icon(
+                        AppImage.infocircleIcon,
+                        size: dimens.height24,
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: state.partners.length,
+                    itemBuilder: (context, index) {
+                      final partner = state.partners[index];
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            decoration: newEditDecoration(dimens),
+                            padding: EdgeInsets.all(
+                              dimens.paddingVerticalItem20,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                partner.image.endsWith('.svg')
+                                    ? SvgPicture.network(
+                                        "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
+                                        height: dimens.height20,
+                                      )
+                                    : Image.network(
+                                        "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
+                                        height: dimens.height20,
+                                      ),
+                                Text(
+                                  AppStrings.servicesText,
+                                  style: dimens.partnersTextSty,
+                                ),
+                                Gap(dimens.paddingVerticalItem8),
+                                // partner_product_list(),
+                                partnerProductList(partner.productList),
+                                // Gap(dimens.paddingVerticalItem8),
+                                Text(
+                                  AppStrings.pointText,
+                                  style: dimens.pointStyle,
+                                ),
+                                Gap(dimens.paddingVerticalItem8),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    PartnersButton(
+                                      image: AppImage.partnersCallOpercon,
+                                      text: AppStrings.languageText,
+                                      onclick: () {
+                                        partnersBloc.add(
+                                          PartnerPushPhoneEvent(
+                                            partner.phone,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    Gap(dimens.paddingHorizontal8),
+                                    PartnersButton(
+                                      image: AppImage.partnersVebSaytcon,
+                                      text: AppStrings.languageText,
+                                      onclick: () {
+                                        partnersBloc.add(
+                                          PartnerPushWebEvent(partner.site),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Gap(dimens.paddingVerticalItem12),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return GreenImageBackground(
+          child: Container(),
+        );
+      },
+    );
+  }
+
+  partnerProductList(List<Product>? productList) {
     if (productList == null || productList.isEmpty) {
       return const SizedBox();
     }

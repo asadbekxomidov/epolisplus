@@ -23,36 +23,55 @@ class _CaskoScreenState extends State<CaskoScreen> {
       create: (context) => CaskoBloc(),
       child: Scaffold(
         body: GreenImageBackground(
-            child: BlocConsumer<CaskoBloc, CaskoState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            bloc = BlocProvider.of<CaskoBloc>(context);
-            return Container(
-              height: dimens.screenHeight,
-              width: dimens.screenWidth,
-              padding: EdgeInsets.all(
-                dimens.paddingAll18,
-              ),
-              child: Column(
-                children: [
-                  Gap(dimens.paddingVerticalItem59),
-                  NaviGatePopButton(
-                    onClick: () {
-                      Get.back();
-                    },
-                    appColors: AppColors.whiteColor,
-                  ),
-                  Gap(dimens.paddingVerticalItem8),
-                  Text(
-                    AppStrings.caskoinsurancePrograms,
-                    style: dimens.font30Whitew600Sty,
-                  ),
-                ],
-              ),
-            );
-          },
-        )),
+          child: SafeArea(
+            child: Stack(
+              children: [
+                ui(),
+                BlocBuilder<CaskoBloc, CaskoState>(
+                  builder: (context, state) {
+                    return LoadingIndicator2(
+                      isLoading: state is LoadingState,
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
       ),
+    );
+  }
+
+  ui() {
+    return BlocConsumer<CaskoBloc, CaskoState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        bloc = BlocProvider.of<CaskoBloc>(context);
+        return Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingWidth,
+            vertical: dimens.paddingHeight,
+          ),
+          child: Column(
+            children: [
+              Gap(dimens.paddingVerticalItem10),
+              NaviGatePopButton(
+                onClick: () {
+                  Get.back();
+                },
+                appColors: AppColors.whiteColor,
+              ),
+              Gap(dimens.paddingVerticalItem8),
+              Text(
+                AppStrings.caskoinsurancePrograms,
+                style: dimens.font30Whitew600Sty,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

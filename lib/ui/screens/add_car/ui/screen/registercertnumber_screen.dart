@@ -22,7 +22,7 @@ class RegisterCertnumberScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Gap(dimens.paddingVerticalItem59),
-            BackNavigateButton(
+            MyTextIconButton(
               appColors: AppColors.mainColor,
               iconData: Icons.close,
               text: AppStrings.closeZText,

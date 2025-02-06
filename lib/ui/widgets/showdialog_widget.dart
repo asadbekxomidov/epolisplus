@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:epolisplus/models/models_export.dart';
-import 'package:epolisplus/ui/widgets/my_widget.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
@@ -31,203 +30,6 @@ class ShowdialogWidget extends StatelessWidget {
     );
   }
 }
-
-// ? WarrantyCodePartnersDialog
-
-class MyShowWarrantCodeScreenDilog extends StatelessWidget {
-  final Function onClick;
-  late Dimens dimens;
-  final List<ActivateCodePartnersResponse> partners;
-  final String text;
-
-  MyShowWarrantCodeScreenDilog({
-    required this.partners,
-    required this.onClick,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    dimens = Dimens(context);
-
-    return GestureDetector(
-      onTap: () {
-        onClick();
-      },
-      child: DraggableScrollableSheet(
-        initialChildSize: 0.4,
-        minChildSize: 0.3,
-        maxChildSize: 0.7,
-        builder: (BuildContext context, ScrollController scrollController) {
-          return Container(
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor255,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(
-                  dimens.radius16,
-                ),
-              ),
-            ),
-            child: GestureDetector(
-              onTap: () {
-                onClick();
-              },
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Padding(
-                  padding: EdgeInsets.all(
-                    dimens.paddingAll12,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ContainerGreyWidget(),
-                          ],
-                        ),
-                      ),
-                      Gap(dimens.paddingVerticalItem12),
-                      Text(
-                        "Hamkorlarimiz haqida ma'lumot",
-                        style: dimens.font16Blackw400Sty,
-                      ),
-                      partners.isNotEmpty
-                          ? ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: partners.length,
-                              itemBuilder: (context, index) {
-                                var partner = partners[index];
-                                return ListTile(
-                                  onTap: () {
-                                    print("${partner.partner_name}");
-                                  },
-                                  title: Text(partner.partner_name),
-                                  trailing: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.check_box_outline_blank,
-                                    ),
-                                  ),
-                                );
-                              },
-                            )
-                          : Text('Hamkorlar mavjud emas'),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-
-// class MyShowWarrantCodeScreenDilog extends StatelessWidget {
-//   final Function(String) onPartnerSelected;
-//   final List<ActivateCodePartnersResponse> partners;
-//   final String text;
-
-//   MyShowWarrantCodeScreenDilog({
-//     required this.partners,
-//     required this.onPartnerSelected,
-//     required this.text,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     ValueNotifier<String> selectedPartnerName = ValueNotifier<String>(text);
-
-//     return GestureDetector(
-//       onTap: () {
-//         Navigator.pop(context);
-//       },
-//       child: DraggableScrollableSheet(
-//         initialChildSize: 0.4,
-//         minChildSize: 0.3,
-//         maxChildSize: 0.7,
-//         builder: (BuildContext context, ScrollController scrollController) {
-//           return Container(
-//             decoration: BoxDecoration(
-//               color: AppColors.whiteColor255,
-//               borderRadius: BorderRadius.vertical(
-//                 top: Radius.circular(16), // Use appropriate value
-//               ),
-//             ),
-//             child: GestureDetector(
-//               onTap: () {
-//                 Navigator.pop(context);
-//               },
-//               child: SingleChildScrollView(
-//                 controller: scrollController,
-//                 child: Padding(
-//                   padding: const EdgeInsets.all(12.0), // Use appropriate value
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Center(
-//                         child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             ContainerGreyWidget(),
-//                           ],
-//                         ),
-//                       ),
-//                       const SizedBox(height: 12), // Use appropriate value
-//                       Text(
-//                         "Hamkorlarimiz haqida ma'lumot",
-//                         style: TextStyle(
-//                           fontSize: 16, // Use appropriate value
-//                           fontWeight: FontWeight.w400,
-//                           color: Colors.black,
-//                         ),
-//                       ),
-//                       partners.isNotEmpty
-//                           ? ValueListenableBuilder<String>(
-//                               valueListenable: selectedPartnerName,
-//                               builder: (context, selectedName, _) {
-//                                 return ListView.builder(
-//                                   shrinkWrap: true,
-//                                   physics: const NeverScrollableScrollPhysics(),
-//                                   itemCount: partners.length,
-//                                   itemBuilder: (context, index) {
-//                                     var partner = partners[index];
-//                                     return ListTile(
-//                                       onTap: () {
-//                                         selectedPartnerName.value =
-//                                             partner.partner_name;
-//                                         onPartnerSelected(partner.partner_name);
-//                                         Navigator.pop(context);
-//                                       },
-//                                       title: Text(partner.partner_name),
-//                                       trailing: Icon(
-//                                         selectedName == partner.partner_name
-//                                             ? Icons.check_box
-//                                             : Icons.check_box_outline_blank,
-//                                       ),
-//                                     );
-//                                   },
-//                                 );
-//                               },
-//                             )
-//                           : Text('Hamkorlar mavjud emas'),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
 
 // ? DeleteAccountShowDialog
 
@@ -268,17 +70,26 @@ class DeleteAccountShowDialog extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    MyContainerRowImageWidget(
-                      mainAxisAlig: MainAxisAlignment.center,
-                      onclick: () {},
+                    Container(
                       height: dimens.height68,
                       width: dimens.height68,
-                      iconData: AppImage.deleteRedIcon,
-                      style: dimens.font16Blackw400Sty,
-                      iconSize: dimens.height36,
-                      color: AppColors.redColorFill,
-                      myRadius: dimens.radius50,
-                      borderColor: AppColors.borderRedColor,
+                      decoration: BoxDecoration(
+                          color: AppColors.redColorFill,
+                          borderRadius: BorderRadius.circular(
+                            dimens.radius50,
+                          ),
+                          border: Border.all(
+                            color: AppColors.borderRedColor,
+                          )),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            AppImage.deleteRedIcon,
+                            height: dimens.height36,
+                          ),
+                        ],
+                      ),
                     ),
                     Gap(dimens.paddingVerticalItem12),
                     Text(
@@ -293,39 +104,26 @@ class DeleteAccountShowDialog extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     Gap(dimens.paddingVerticalItem16),
-                    MyContainerRowImageWidget(
-                      style: dimens.font16Whitew600Sty,
-                      width: dimens.width265,
-                      height: dimens.height40,
-                      image: AppImage.whiteDeleteIcon,
-                      iconSize: dimens.height20,
-                      color: AppColors.redColordefault,
-                      borderColor: AppColors.redColordefault,
-                      mainAxisAlig: MainAxisAlignment.center,
-                      myRadius: dimens.radius12,
-                      onclick: () {
+                    GestureDetector(
+                      onTap: () {
                         if (onClick != null) {
                           onClick!();
                         }
                         Navigator.of(context).pop();
                       },
-                      text: AppStrings.closeText,
-                      centerPadding: dimens.paddingHorizontal8,
+                      child: RedButton(
+                        image: AppImage.whiteDeleteIcon,
+                        text: AppStrings.closeText,
+                      ),
                     ),
                     Gap(dimens.paddingVerticalItem8),
-                    MyContainerRowImageWidget(
-                      style: dimens.font16Blackw400Sty,
-                      width: dimens.width265,
-                      height: dimens.height40,
-                      color: AppColors.whiteColor255,
-                      borderColor: AppColors.greyColor239,
-                      mainAxisAlig: MainAxisAlignment.center,
-                      myRadius: dimens.radius12,
-                      onclick: () {
-                        Navigator.of(context).pop();
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
                       },
-                      text: AppStrings.cancelText,
-                      padding: dimens.paddingHorizontal4,
+                      child: WhiteBtn(
+                        text: AppStrings.cancelText,
+                      ),
                     ),
                   ],
                 ),
@@ -333,6 +131,115 @@ class DeleteAccountShowDialog extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ? WarrantyCodePartnersDialog
+
+class MyShowWarrantCodeScreenDilog extends StatelessWidget {
+  final Function(String) onSelectPartner;
+  final List<ActivateCodePartnersResponse> partners;
+
+  const MyShowWarrantCodeScreenDilog({
+    required this.partners,
+    required this.onSelectPartner,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Agar faqat bitta partner bo'lsa, uni avtomatik tanlash
+    final ValueNotifier<String> selectedPartnerName = ValueNotifier<String>(
+      partners.isNotEmpty ? partners.first.partner_name : "",
+    );
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.4,
+        minChildSize: 0.3,
+        maxChildSize: 0.7,
+        builder: (BuildContext context, ScrollController scrollController) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 4,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[400],
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    "Hamkorlarimiz haqida ma'lumot",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  partners.isNotEmpty
+                      ? Expanded(
+                          child: ValueListenableBuilder<String>(
+                            valueListenable: selectedPartnerName,
+                            builder: (context, selectedName, _) {
+                              return ListView.builder(
+                                controller: scrollController,
+                                itemCount: partners.length,
+                                itemBuilder: (context, index) {
+                                  var partner = partners[index];
+                                  return ListTile(
+                                    title: Text(partner.partner_name),
+                                    trailing: Icon(
+                                      selectedName == partner.partner_name
+                                          ? Icons.check_circle
+                                          : Icons.circle_outlined,
+                                      color:
+                                          selectedName == partner.partner_name
+                                              ? Colors.green
+                                              : Colors.grey,
+                                    ),
+                                    onTap: () {
+                                      selectedPartnerName.value =
+                                          partner.partner_name;
+                                      onSelectPartner(partner.partner_name);
+                                      Navigator.pop(context); // Dialogni yopish
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        )
+                      : const Text('Hamkorlar mavjud emas'),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

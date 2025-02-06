@@ -28,7 +28,9 @@ class VehicleCarInfo extends StatelessWidget {
       ),
       child: BlocConsumer<AddedCarBloc, AddedCarState>(
         listener: (context, state) {
+          print("📢 BlocConsumer listener: ${state.runtimeType}");
           if (state is CarErrorState) {
+            print("❌ Xatolik: ${state.failure.getErrorMessage(context)}");
             showErrorMessageSnackBar(
               context,
               state.failure.getErrorMessage(context),
@@ -36,6 +38,10 @@ class VehicleCarInfo extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          print('STATESTATESTATE ${state}');
+          print("📌 Bloc builder state: ${state.runtimeType}");
+          assert(listener != null, "❌ listener NULL bo'lishi mumkin!");
+
           bloc = BlocProvider.of<AddedCarBloc>(context);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +58,9 @@ class VehicleCarInfo extends StatelessWidget {
                 techSeriaController: bloc.techSeriaController,
                 techSeriaHintText: AppStrings.addcaraff,
                 style: dimens.myTextFieldStyle,
+                onClick: () {
+                  bloc.add(GetInfromationCarEvent());
+                },
               ),
               Gap(dimens.paddingVerticalItem7),
               bloc.isHaveCarInformation
@@ -105,7 +114,7 @@ class VehicleCarInfo extends StatelessWidget {
                     )
                   : Column(
                       children: [
-                        ButtonPagesMin(
+                        MyTextIconButton(
                           appColors: AppColors.mainColor,
                           iconData: AppImage.infocircleIcon,
                           onClick: () {

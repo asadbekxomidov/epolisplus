@@ -5,8 +5,6 @@ import 'package:epolisplus/ui/screens/screns_export.dart';
 import 'package:epolisplus/ui/screens/tabbar/bloc/tabbar_bloc.dart';
 
 class BottomWidget extends StatefulWidget {
-  const BottomWidget({super.key});
-
   @override
   State<BottomWidget> createState() => _BottomNavigationViewState();
 }
@@ -33,6 +31,7 @@ class _BottomNavigationViewState extends State<BottomWidget> {
               },
               selectedLabelStyle: dimens.tabbarTextSty,
               unselectedLabelStyle: dimens.tabbarSelectTextSty,
+              iconSize: dimens.height18,
               currentIndex: bloc.currentIndex,
               backgroundColor: AppColors.whiteColor,
               type: BottomNavigationBarType.fixed,

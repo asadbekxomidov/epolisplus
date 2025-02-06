@@ -72,8 +72,6 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
       } else if (response.status == 401) {
         final prefsManager = SharedPreferencesManager();
         await prefsManager.clearUserInfo();
-        // await prefsManager.clearPhone();
-        // await prefsManager.clearToken();
         Get.offAll(() => CheckAuthScreen());
       } else {
         emit(KabinetErrorState(UserInfoNotFound()));

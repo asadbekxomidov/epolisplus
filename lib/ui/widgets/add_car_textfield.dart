@@ -2,32 +2,35 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:epolisplus/utils/utils_export.dart';
+// import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
 class CarInfoTextField extends StatefulWidget {
-  final TextEditingController? govNumberController;
-  final String? govNumberHintText;
-  final String? govNumberTitleText;
-  final TextEditingController? techSeriaController;
-  final TextEditingController? techNumberController;
-  final String? techSeriaHintText;
-  final String? techNumberHintText;
-  final String? titleText;
   final bool showStar;
   final bool isActive;
+  final Function? onClick;
   final TextStyle? style;
+  final String? titleText;
+  final String? govNumberHintText;
+  final String? techSeriaHintText;
+  final String? govNumberTitleText;
+  final String? techNumberHintText;
+  final TextEditingController? govNumberController;
+  final TextEditingController? techSeriaController;
+  final TextEditingController? techNumberController;
 
   CarInfoTextField({
+    this.style,
+    this.onClick,
+    this.isActive = true,
+    this.showStar = false,
+    this.techSeriaHintText,
+    this.govNumberHintText,
+    this.techNumberHintText,
+    this.govNumberTitleText,
     required this.titleText,
     this.govNumberController,
-    this.techNumberController,
-    this.techNumberHintText,
     this.techSeriaController,
-    this.techSeriaHintText,
-    this.showStar = false,
-    this.isActive = true,
-    this.style,
-    this.govNumberHintText,
-    this.govNumberTitleText,
+    this.techNumberController,
   });
 
   @override
@@ -99,19 +102,26 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
                 DualCarNumberInputFormatter(),
               ],
               cursorColor: AppColors.hintColor,
-              cursorWidth: dimens.width2,
+              // cursorWidth: dimens.width2,
               cursorHeight: dimens.height40,
               decoration: InputDecoration(
                 hintText: widget.govNumberHintText,
                 hintStyle: dimens.carNumberTextFieldSty,
-                filled: false,
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.zero,
+                alignLabelWithHint: false,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
               ),
               style: dimens.carTextfieldCursorSty,
               enabled: widget.isActive,
+
               onChanged: (value) {
+                print('${value.length} COUNT VALUE LENGHT');
+                print('${value.length.floor()} COUNT VALUE LENGHT 222222');
+
                 if (value.length == 11) {
+                  _seriaFocusNode.requestFocus();
+                } else if (value.length == '## ### ###') {
                   _seriaFocusNode.requestFocus();
                 }
               },
@@ -146,8 +156,8 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
         // Tech Seria
         Container(
           width: dimens.width64,
-          height: dimens.height40,
-          decoration: inputDecoration(
+          // height: dimens.height40,
+          decoration: newDecoration(
             dimens,
             isActive: widget.isActive,
           ),
@@ -184,8 +194,8 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
         // Tech Number
         Container(
           width: dimens.width289,
-          height: dimens.height40,
-          decoration: inputDecoration(
+          // height: dimens.height40,
+          decoration: newDecoration(
             dimens,
             isActive: widget.isActive,
           ),
@@ -209,6 +219,7 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
             onChanged: (value) {
               if (value.length == 7) {
                 _unfocusKeyboard();
+                widget.onClick!();
               }
             },
             onSubmitted: (_) {

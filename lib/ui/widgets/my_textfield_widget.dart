@@ -1,5 +1,6 @@
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 
 class MyTextfieldWCode extends StatelessWidget {
@@ -37,8 +38,9 @@ class MyTextfieldWCode extends StatelessWidget {
 
     return Container(
       width: width,
-      height: height,
-      decoration: myContainerWidgets(dimens, myRadius!),
+      // height: height,
+      decoration: newDecoration(dimens, isActive: true),
+      // decoration: myContainerWidgets(dimens, myRadius!),
       child: Row(
         children: [
           Gap(dimens.paddingHorizontal8),
@@ -67,7 +69,7 @@ class MyTextfieldWCode extends StatelessWidget {
   }
 }
 
-class UserInFoWidget extends StatelessWidget {
+class UserInFoWidget extends StatefulWidget {
   final String text;
   final bool showStar;
   final bool isActive;
@@ -86,10 +88,21 @@ class UserInFoWidget extends StatelessWidget {
     this.isActive = true,
   });
 
-  late Dimens dimens;
+  @override
+  _UserInFoWidgetState createState() => _UserInFoWidgetState();
+}
+
+class _UserInFoWidgetState extends State<UserInFoWidget> {
+  final FocusNode _seriaFocusNode = FocusNode();
+  final FocusNode _pasportFocusNode = FocusNode();
+
+  void _unfocusKeyboard() {
+    FocusScope.of(context).unfocus();
+  }
+
   @override
   Widget build(BuildContext context) {
-    dimens = Dimens(context);
+    final dimens = Dimens(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -98,60 +111,159 @@ class UserInFoWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              text,
+              widget.text,
               style: dimens.textStyleSecondary,
             ),
             Gap(dimens.paddingHorizontalItem5),
-            if (showStar) AppImage.starWidget(context),
+            if (widget.showStar) AppImage.starWidget(context),
           ],
         ),
         Row(
           children: [
+            // Seria TextField
             Container(
-              height: dimens.height40,
+              // height: dimens.height40,
               width: dimens.width64,
-              decoration: inputDecoration(
+              decoration: newDecoration(
                 dimens,
-                isActive: isActive,
+                isActive: widget.isActive,
               ),
               child: TextField(
+                controller: widget.seriaController,
+                focusNode: _seriaFocusNode,
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.characters,
+                inputFormatters: [
+                  UpperCaseFormatter(),
+                  LengthLimitingTextInputFormatter(2),
+                ],
                 decoration: InputDecoration(
+                  hintText: widget.seriaHintText,
+                  hintStyle: dimens.hintStyle,
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(
                     horizontal: dimens.paddingHorizontal13,
                   ),
-                  hintText: seriaHintText,
-                  hintStyle: dimens.hintStyle,
                 ),
-                cursorHeight: dimens.height20,
+                style: dimens.myTextFieldStyle,
+                enabled: widget.isActive,
+                onChanged: (value) {
+                  if (value.length == 2) {
+                    FocusScope.of(context).requestFocus(_pasportFocusNode);
+                  }
+                },
+                onSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_pasportFocusNode);
+                },
               ),
             ),
             Gap(dimens.paddingHorizontal8),
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                height: dimens.height40,
+                // height: dimens.height40,
                 width: dimens.screenWidth,
-                decoration: inputDecoration(
+                decoration: newDecoration(
                   dimens,
-                  isActive: isActive,
+                  isActive: widget.isActive,
                 ),
                 child: TextField(
+                  controller: widget.pasportIdController,
+                  focusNode: _pasportFocusNode,
+                  textAlign: TextAlign.center,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(7),
+                  ],
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: dimens.paddingHorizontal13,
                     ),
                     border: InputBorder.none,
-                    hintText: pasportHintText,
+                    hintText: widget.pasportHintText,
                     hintStyle: dimens.hintStyle,
                   ),
-                  cursorHeight: dimens.height20,
+                  style: dimens.myTextFieldStyle,
+                  enabled: widget.isActive,
+                  onChanged: (value) {
+                    if (value.length == 7) {
+                      _unfocusKeyboard();
+                    }
+                  },
+                  onSubmitted: (_) {
+                    _unfocusKeyboard();
+                  },
                 ),
               ),
             ),
           ],
         ),
       ],
+    );
+  }
+}
+
+// ? UserInfoBirthDateWidget
+
+class UserBirthDateWidget extends StatelessWidget {
+  late Dimens dimens;
+
+  final String text;
+  final String hintText;
+  final bool showStar;
+  final bool isActive;
+  final Function onClick;
+
+  UserBirthDateWidget({
+    this.isActive = true,
+    this.showStar = false,
+    required this.text,
+    required this.hintText,
+    required this.onClick,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () {
+        onClick();
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                text,
+                style: dimens.textStyleSecondary,
+              ),
+              Gap(dimens.paddingHorizontalItem5),
+              if (showStar) AppImage.starWidget(context),
+            ],
+          ),
+          Container(
+            height: dimens.height48,
+            width: dimens.screenWidth,
+            decoration: newDecoration(
+              dimens,
+              isActive: isActive,
+            ),
+            child: Row(
+              children: [
+                Gap(dimens.paddingHorizontal13),
+                Text(
+                  hintText,
+                  style: dimens.hintStyle,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -188,12 +300,27 @@ class ImeIphoneTextField extends StatelessWidget {
           ],
         ),
         Container(
-          height: dimens.height40,
+          // height: dimens.height40,
           width: dimens.screenWidth,
-          decoration: inputDecoration(
-            dimens,
-            isActive: isActive,
+          decoration: BoxDecoration(
+            color: AppColors.whiteColor,
+            borderRadius: BorderRadius.circular(dimens.height10),
+            border: Border.all(
+              color: AppColors.lineColor,
+              width: dimens.width10 / 17,
+            ),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 1),
+                blurRadius: dimens.height10 / 2,
+                color: AppColors.greys,
+              ),
+            ],
           ),
+          // decoration: newDecoration(
+          //   dimens,
+          //   isActive: isActive,
+          // ),
           child: TextField(
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -205,6 +332,127 @@ class ImeIphoneTextField extends StatelessWidget {
             ),
             cursorHeight: dimens.height20,
             enabled: isActive,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ? AmoutINputTextField
+class AmoutInputWidget extends StatelessWidget {
+  final String text;
+  final TextEditingController controller;
+  final Function(String) onChanged;
+  final bool isActive;
+
+  AmoutInputWidget({
+    required this.text,
+    required this.controller,
+    required this.onChanged,
+    this.isActive = true,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: dimens.textStyleSecondary,
+        ),
+        Container(
+          // height: dimens.height40,
+          // width: dimens.width220,
+          decoration: newDecoration(
+            dimens,
+            isActive: true,
+          ),
+          child: TextField(
+            controller: controller,
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              ThousandsSeparatorInputFormatter(),
+              LengthLimitingTextInputFormatter(13),
+            ],
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingHorizontal13,
+              ),
+              border: InputBorder.none,
+            ),
+            cursorHeight: dimens.height20,
+            onChanged: onChanged,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ? AddRefCodeTextField
+
+class RefCodeTextField extends StatelessWidget {
+  String title;
+  String hintText;
+  bool isCheck;
+  TextEditingController controller;
+
+  RefCodeTextField({
+    required this.title,
+    required this.hintText,
+    required this.controller,
+    required this.isCheck,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              title,
+              style: dimens.textStyleSecondary,
+            ),
+          ],
+        ),
+        Container(
+          decoration: newDecoration(dimens),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    hintText: isCheck ? '' : hintText,
+                    hintStyle: dimens.hintStyle,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: dimens.paddingHorizontal13,
+                    ),
+                    border: InputBorder.none,
+                  ),
+                  style: dimens.font14Black400Sty,
+                ),
+              ),
+              isCheck
+                  ? Icon(
+                      Icons.check,
+                      size: dimens.height20,
+                      color: AppColors.mainColor,
+                    )
+                  : Container(),
+              Gap(dimens.paddingHorizontal4),
+            ],
           ),
         ),
       ],

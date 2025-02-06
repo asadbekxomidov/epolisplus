@@ -111,7 +111,7 @@ class PagesTextFieldProfil extends StatelessWidget {
           padding: EdgeInsets.only(
             left: dimens.paddingHorizontal13,
           ),
-          decoration: inputDecorations(dimens),
+          decoration: newDecoration(dimens),
           child: TextField(
             controller: effectiveController,
             keyboardType: keyboardType,

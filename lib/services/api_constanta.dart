@@ -18,6 +18,8 @@ class ApiConstanta {
   static const DELETE_CAR = "v1/user/delete-my-car";
   static const ADD_MY_CAR = "/v1/user/add-user-car";
   static const ACTIVATE_QRCODE = "v2/warranty/warranty-info";
+  static const USER_GET_INFO = "v1/osgo/passport-birth-date";
+  static const WARRANTY_TYPE_LIST = "v1/warranty/warranty-type-list";
 }
 
 

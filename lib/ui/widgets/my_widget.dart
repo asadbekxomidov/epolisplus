@@ -1,6 +1,7 @@
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 
 class MyRowWidget extends StatelessWidget {
   final String image;
@@ -217,7 +218,6 @@ class MyContainerRowPWidget extends StatelessWidget {
   final IconData? iconData;
   final TextStyle style;
   final Color color;
-  final double myRadius;
 
   MyContainerRowPWidget({
     this.text,
@@ -231,7 +231,6 @@ class MyContainerRowPWidget extends StatelessWidget {
     required this.style,
     required this.iconSize,
     required this.color,
-    required this.myRadius,
   });
 
   late Dimens dimens;
@@ -244,11 +243,12 @@ class MyContainerRowPWidget extends StatelessWidget {
       onTap: () => onclick(),
       child: Container(
         width: width,
-        height: height,
+        height: dimens.height50,
+        // height: height,
         padding: EdgeInsets.only(
           left: paddingContainer!,
         ),
-        decoration: myContainerWidgets(dimens, myRadius),
+        decoration: newEditDecoration(dimens),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: mainAxisAlig,
@@ -384,12 +384,14 @@ class MyContainerRowImageWidget extends StatelessWidget {
         onclick();
       },
       child: Container(
-        width: width,
-        height: height,
-        // padding: EdgeInsets.only(
-        //   left: dimens.paddingHorizontal13,
-        // ),
-        decoration: mybuttonDeco(dimens, myRadius, color, borderColor),
+        // width: width,
+        height: dimens.height48,
+        // height: height,
+        padding: EdgeInsets.symmetric(
+          horizontal: dimens.paddingWidth,
+          vertical: dimens.paddingHeight,
+        ),
+        decoration: newEditDecorationRadiusRadi(dimens, radius: myRadius),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: mainAxisAlig,
@@ -400,7 +402,7 @@ class MyContainerRowImageWidget extends StatelessWidget {
                 image!,
                 height: iconSize!,
               ),
-            if (centerPadding != null) Gap(centerPadding!),
+            // if (centerPadding != null) Gap(centerPadding!),
             if (text != null && text!.isNotEmpty)
               Text(
                 text!,
@@ -478,6 +480,110 @@ class MyRowButoonWidget extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ? MyRowImageWidget
+
+class MyRowImageWidget extends StatelessWidget {
+  String text;
+  String image;
+
+  MyRowImageWidget({
+    required this.text,
+    required this.image,
+  });
+
+  late Dimens dimens;
+
+  String formatNumber(String value) {
+    try {
+      final number = double.parse(value.replaceAll(' ', ''));
+      final formatter = NumberFormat('#,###', 'en_US');
+      return formatter.format(number).replaceAll(',', ' ');
+    } catch (e) {
+      return value;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      // width: dimens.screenWidth,
+      // height: dimens.height40,
+      height: dimens.height48,
+      padding: EdgeInsets.only(
+        left: dimens.paddingHorizontal13,
+      ),
+      decoration: myContainerGreyDEcoration(dimens),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Image.asset(
+            image,
+            height: dimens.height20,
+          ),
+          Gap(dimens.paddingHorizontal8),
+          Expanded(
+            child: Text(
+              '${formatNumber(text)} сум',
+              style: dimens.myTextFieldStyle,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? RowIconButton
+class RowIconButton extends StatelessWidget {
+  String text;
+  String image;
+  double widthCon;
+
+  RowIconButton({
+    required this.text,
+    required this.image,
+    required this.widthCon,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      // width: widthCon,
+      // height: dimens.height40,
+      height: dimens.height50,
+      padding: EdgeInsets.only(
+        left: dimens.paddingHorizontal13,
+      ),
+      decoration: newEditDecoration(
+        dimens,
+        // isActive: true,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Image.asset(
+            image,
+            height: dimens.height20,
+          ),
+          Gap(dimens.paddingHorizontal8),
+          Expanded(
+            child: Text(
+              text,
+              style: dimens.myTextFieldStyle,
+            ),
+          ),
+        ],
       ),
     );
   }

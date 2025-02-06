@@ -7,8 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({super.key});
-
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();
 }
@@ -28,7 +26,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           child: BlocConsumer<NotificationBloc, NotificationState>(
             listener: (context, state) {},
             builder: (context, state) {
-              settingsBloc = BlocProvider.of<SettingsBloc>(context);
               notificationBloc = BlocProvider.of<NotificationBloc>(context);
 
               return Container(

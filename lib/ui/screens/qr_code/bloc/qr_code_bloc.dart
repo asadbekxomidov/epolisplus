@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
 
 part 'qr_code_event.dart';

@@ -57,3 +57,22 @@ class SharedPreferencesManager {
     await prefs.remove(_tokenKey);
   }
 }
+
+class SelectStorage {
+  static const _birthDate = 'birth_date';
+
+  Future<void> saveBirthDate(String birthDate) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_birthDate, birthDate);
+  }
+
+  Future<String?> getBirthDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_birthDate);
+  }
+
+  Future<void> clearBirthDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_birthDate);
+  }
+}

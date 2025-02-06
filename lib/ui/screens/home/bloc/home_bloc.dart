@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:equatable/equatable.dart';
 import 'package:epolisplus/log/logger.dart';
@@ -20,6 +22,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<OpenCaskoEvent>(openCasko);
     on<OpenOsagoEvent>(openOsago);
     on<OpenTravelEvent>(openTravel);
+    on<OpenAddServisePEvent>(openaddServise);
   }
 
   Future<void> _handleLogout(LogoutEvent event, Emitter<HomeState> emit) async {
@@ -65,35 +68,42 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> pushSettings(
       PushScreensEvent event, Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
+    // emit(HomeLoadingState());
     Get.to(() => SettingsScreen());
     emit(HomeSuccessState());
   }
 
   Future<void> pushWarranty(
       PushWarrantyEvent event, Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
+    // emit(HomeLoadingState());
     await Get.to(() => SelectwarrantyCodes());
     // await Get.to(() => WarrantycodeScreen());
     emit(HomeSuccessState());
   }
 
   Future<void> openCasko(OpenCaskoEvent event, Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
+    // emit(HomeLoadingState());
     await Get.to(() => CaskoScreen());
     emit(HomeSuccessState());
   }
 
   Future<void> openOsago(OpenOsagoEvent event, Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
+    // emit(HomeLoadingState());
     await Get.to(() => OsagoScreen());
     emit(HomeSuccessState());
   }
 
   Future<void> openTravel(
       OpenTravelEvent event, Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
+    // emit(HomeLoadingState());
     await Get.to(() => TravelScreen());
+    emit(HomeSuccessState());
+  }
+
+  Future<void> openaddServise(
+      OpenAddServisePEvent event, Emitter<HomeState> emit) async {
+    // emit(HomeLoadingState());
+    await Get.to(() => AddServiseScreen());
     emit(HomeSuccessState());
   }
 }
