@@ -6,3 +6,5 @@ abstract class NotificationEvent extends Equatable {
 }
 
 class NotificationToggleEvent extends NotificationEvent {}
+
+class GetNotificationEvent extends NotificationEvent {}

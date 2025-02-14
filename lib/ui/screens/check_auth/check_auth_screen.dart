@@ -18,23 +18,33 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
   Widget build(BuildContext context) {
     dimens = Dimens(context);
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: BlocProvider(
-        create: (context) => CheckAuthBloc(),
-        child: Stack(
-          children: [
-            ui(),
-            BlocBuilder<CheckAuthBloc, PhoneLoginState>(
-              builder: (context, state) {
-                return LoadingIndicator(
-                  isLoading: state is LoadingState,
-                );
-              },
-            ),
-          ],
+    return BlocProvider(
+      create: (context) => CheckAuthBloc(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          color: AppColors.bg_color,
+          child: Stack(
+            children: [
+              backImage(dimens),
+              ui(),
+              loading(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  loading() {
+    return BlocBuilder<CheckAuthBloc, PhoneLoginState>(
+      builder: (context, state) {
+        return LoadingIndicator(
+          isLoading: state is LoadingState,
+        );
+      },
     );
   }
 
@@ -57,7 +67,7 @@ class _CheckAuthScreenState extends State<CheckAuthScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: dimens.paddingHorizontal,
           ),
-          decoration: mainDecorations(),
+          // decoration: mainDecorations(),
           child: Column(
             children: [
               Gap(dimens.paddingVerticalItem137),

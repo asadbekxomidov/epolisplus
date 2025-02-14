@@ -1,5 +1,7 @@
 import 'package:epolisplus/utils/app_image.dart';
+import 'package:epolisplus/utils/constanta.dart';
 import 'package:epolisplus/utils/dimens.dart';
+import 'package:epolisplus/utils/resource.dart';
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -34,6 +36,22 @@ backgroundPagesDecorations(Dimens dimens) {
     borderRadius: BorderRadius.only(
       topLeft: Radius.circular(dimens.radius20),
       topRight: Radius.circular(dimens.radius20),
+    ),
+  );
+}
+
+pagesDeco(Dimens dimens) {
+  return BoxDecoration(
+    color: AppColors.backgroundWhiteColor,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(dimens.radius20),
+      topRight: Radius.circular(dimens.radius20),
+    ),
+    image: DecorationImage(
+      image: AssetImage(
+        Resource.NEW_BACK_IMAGE2,
+      ),
+      fit: BoxFit.fitWidth,
     ),
   );
 }
@@ -489,12 +507,43 @@ newEditDecoration(
   );
 }
 
+newEditDecorationNeColor(
+  Dimens dimens, {
+  bool withLine = true,
+  bool isGreen = false,
+  bool isShadow = true,
+}) {
+  return BoxDecoration(
+    // color: isGreen ? AppColors.mainColor : AppColors.whiteColor,
+    borderRadius: BorderRadius.circular(dimens.radius12),
+    border: isGreen
+        ? null
+        : withLine
+            ? Border.all(
+                color: AppColors.lineColor,
+                width: dimens.line_size,
+              )
+            : null,
+    boxShadow: isShadow ? myShadow(dimens) : null,
+  );
+}
+
 myShadow(Dimens dimens) {
   return [
     BoxShadow(
       offset: Offset(0, 0),
       blurRadius: dimens.line_size,
       color: AppColors.shadow_color,
+    ),
+  ];
+}
+
+myShadow2(Dimens dimens) {
+  return [
+    BoxShadow(
+      offset: Offset(0, 0),
+      blurRadius: dimens.line_size,
+      color: AppColors.whiteColor255,
     ),
   ];
 }
@@ -510,6 +559,22 @@ redDecoration(Dimens dimens) {
       width: dimens.line_size,
     ),
     boxShadow: myShadow(dimens),
+  );
+}
+
+newEditDecorationNotActive(
+  Dimens dimens, {
+  bool withLine = true,
+}) {
+  return BoxDecoration(
+    color: AppColors.inactive_line_color,
+    borderRadius: BorderRadius.circular(dimens.radius16),
+    border: withLine
+        ? Border.all(
+            color: AppColors.inactive_line_color,
+            width: dimens.line_size,
+          )
+        : null,
   );
 }
 
@@ -556,12 +621,49 @@ newEditDecorationRadiusRadi(
   );
 }
 
+gowNumberDecoration(Dimens dimens, bool isMiddle) {
+  return BoxDecoration(
+    color: AppColors.white,
+    borderRadius:
+        BorderRadius.circular(isMiddle ? dimens.radius16 / 2 : dimens.radius16),
+    border: Border.all(
+      color: AppColors.black,
+      width: dimens.line_size * 2,
+    ),
+    boxShadow: myShadow(dimens),
+  );
+}
+
 policy_category_select_decoration(Dimens dimens) {
   return BoxDecoration(
     color: AppColors.whiteColor,
     borderRadius: BorderRadius.circular(dimens.height20),
     border: Border.all(
       color: AppColors.whiteColor,
+      width: dimens.line_size,
+    ),
+    //   boxShadow: myShadow(dimens),
+  );
+}
+
+policy_category_not_select_decoration(Dimens dimens, int categoryId) {
+  return BoxDecoration(
+    color: AppColors.prazrachni,
+    borderRadius: BorderRadius.circular(dimens.radius16),
+    border: Border.all(
+      color: categoryId == IConstanta.CATEGORY_ACTIVE ||
+              categoryId == IConstanta.POLICY_KASKO ||
+              categoryId == IConstanta.POLICY_SERVICE ||
+              categoryId == IConstanta.POLICY_GARANTY
+          ? AppColors.green_line_color
+          : categoryId == IConstanta.CATEGORY_UNPAID ||
+                  categoryId == IConstanta.POLICY_OSAGO
+              ? AppColors.blue_line_color
+              : categoryId == IConstanta.CATEGORY_ARCHIVE
+                  ? AppColors.black_line_color
+                  : categoryId == IConstanta.POLICY_TRAVEL
+                      ? AppColors.red_line_color
+                      : AppColors.black_line_color,
       width: dimens.line_size,
     ),
     //   boxShadow: myShadow(dimens),

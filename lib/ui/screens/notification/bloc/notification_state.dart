@@ -5,12 +5,14 @@ abstract class NotificationState extends Equatable {
   List<Object?> get props => [];
 }
 
-class NotificationInitialState extends NotificationState {}
+class SuccesState extends NotificationState {}
 
-class NotificationSuccesState extends NotificationState {}
+class LoadingState extends NotificationState {}
 
-class NotificationLoadingState extends NotificationState {}
+class LoadedState extends NotificationState {}
 
-class NotificationLoadedState extends NotificationState {}
+class ErrorState extends NotificationState {
+  Failure failure;
 
-class NotificationErrorState extends NotificationState {}
+  ErrorState({required this.failure});
+}

@@ -22,17 +22,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
       create: (context) => SettingsBloc(),
       child: Scaffold(
         body: GreenImageBackground(
-          child: Stack(
-            children: [
-              ui(),
-              BlocBuilder<SettingsBloc, SettingsState>(
-                builder: (context, state) {
-                  return LoadingIndicator2(
-                    isLoading: state is SettingsLoadingState,
-                  );
-                },
-              )
-            ],
+          child: SafeArea(
+            child: Stack(
+              children: [
+                ui(),
+                BlocBuilder<SettingsBloc, SettingsState>(
+                  builder: (context, state) {
+                    return LoadingIndicator2(
+                      isLoading: state is SettingsLoadingState,
+                    );
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -49,30 +51,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: dimens.paddingHorizontal16,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gap(dimens.paddingVerticalItem59),
-                LeftBackIconBtn(
-                  appColors: AppColors.whiteColor,
-                ),
-                Gap(dimens.paddingVerticalItem10),
-                Text(
-                  AppStrings.settingsText,
-                  style: dimens.settingsStyle,
-                ),
-                Gap(dimens.paddingVerticalItem8),
-                Card(
-                  color: AppColors.cardContainerColor,
-                  child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(dimens.paddingVerticalItem10),
+                  LeftBackIconBtn(
+                    appColors: AppColors.whiteColor,
+                  ),
+                  Gap(dimens.paddingVerticalItem10),
+                  Text(
+                    AppStrings.settingsText,
+                    style: dimens.settingsStyle,
+                  ),
+                  Gap(dimens.paddingVerticalItem8),
+                  Container(
                     padding: EdgeInsets.symmetric(
-                      vertical: dimens.paddingVerticalItem8,
-                      horizontal: dimens.paddingHorizontal4,
+                      vertical: dimens.paddingHeight,
+                      horizontal: dimens.paddingWidth,
                     ),
-                    height: dimens.height252,
                     width: dimens.screenWidth,
-                    decoration: cardContainerDecoration(dimens),
+                    decoration: newEditDecoration(dimens),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -85,7 +86,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           text: AppStrings.notifications,
                           iconData: AppImage.navigatenextIcon,
                         ),
+                        Gap(dimens.paddingVerticalItem8),
                         lineContainer(dimens),
+                        Gap(dimens.paddingVerticalItem8),
                         SettingFuncButton(
                           onClick: () {
                             settingsBloc.add(SettingsDilogEvent(context));
@@ -95,7 +98,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           text: AppStrings.languageText,
                           iconData: AppImage.navigatenextIcon,
                         ),
+                        Gap(dimens.paddingVerticalItem8),
                         lineContainer(dimens),
+                        Gap(dimens.paddingVerticalItem8),
                         SettingFuncButton(
                           onClick: () {
                             settingsBloc.add(SettingsHelpDeskDilogEvent(
@@ -107,7 +112,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           text: AppStrings.helpdeskText,
                           iconData: AppImage.navigatenextIcon,
                         ),
+                        Gap(dimens.paddingVerticalItem8),
                         lineContainer(dimens),
+                        Gap(dimens.paddingVerticalItem8),
                         SettingFuncButton(
                           onClick: () {
                             settingsBloc.add(SettingsQuestionscreenEvent());
@@ -117,7 +124,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           text: AppStrings.questionsAnswerText,
                           iconData: AppImage.navigatenextIcon,
                         ),
+                        Gap(dimens.paddingVerticalItem8),
                         lineContainer(dimens),
+                        Gap(dimens.paddingVerticalItem8),
                         SettingFuncButton(
                           onClick: () {
                             settingsBloc.add(SettingsAboutAppEvent());
@@ -130,14 +139,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ],
                     ),
                   ),
-                ),
-                Gap(dimens.paddingVerticalItem320),
-                Card(
-                  color: AppColors.cardContainerColor,
-                  child: Container(
+                ],
+              ),
+              Column(
+                children: [
+                  Container(
                     height: dimens.height48,
                     width: dimens.screenWidth,
-                    decoration: cardContainerDecoration(dimens),
+                    decoration: newEditDecoration(dimens),
                     child: LogoutButton(
                       image: AppImage.settingslogoutIcon,
                       onClick: () {
@@ -147,19 +156,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       dimens: dimens,
                     ),
                   ),
-                ),
-                Gap(dimens.paddingHorizontalItem3),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppStrings.appVersion,
-                      style: dimens.logoutCardStyle,
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  Gap(dimens.paddingHorizontalItem3),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppStrings.appVersion,
+                        style: dimens.logoutCardStyle,
+                      ),
+                    ],
+                  ),
+                  Gap(dimens.paddingVerticalItem16),
+                ],
+              ),
+            ],
           ),
         );
       },

@@ -33,19 +33,29 @@ class _VerificationScreenState extends State<VerificationScreen> {
       resizeToAvoidBottomInset: false,
       body: BlocProvider(
         create: (context) => VerificationBloc(widget.phoneNumber),
-        child: Stack(
-          children: [
-            ui(),
-            BlocBuilder<VerificationBloc, VerificationState>(
-              builder: (context, state) {
-                return LoadingIndicator(
-                  isLoading: state is VerificationLoadingState,
-                );
-              },
-            )
-          ],
+        child: Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          color: AppColors.bg_color,
+          child: Stack(
+            children: [
+              backImage(dimens),
+              ui(),
+              loading(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  loading() {
+    return BlocBuilder<VerificationBloc, VerificationState>(
+      builder: (context, state) {
+        return LoadingIndicator(
+          isLoading: state is VerificationLoadingState,
+        );
+      },
     );
   }
 
@@ -68,7 +78,6 @@ class _VerificationScreenState extends State<VerificationScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: dimens.paddingHorizontal,
           ),
-          decoration: mainDecorations(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

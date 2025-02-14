@@ -3,27 +3,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppImage {
-  static String appMainImage = 'assets/images/main_image.png';
-  static String appImageLogo = 'assets/images/logo.png';
-  static String splashImage = 'assets/images/splash_image.png';
-  static String personIcon = 'assets/images/person_image.png';
-  static String settingsIcon = 'assets/images/settings_image.png';
-  static String shieldPlusIcon = 'assets/images/shield_plus_image.png';
-  static String notificationIcon = 'assets/images/notification_image.png';
+  static String appMainImage = 'assets/image/main_image.png';
+  static String new_back_image2 = 'assets/image/new_back_image2.png';
+  static String appImageLogo = 'assets/image/logo.png';
+  static String splashImage = 'assets/image/splash_image.png';
+  static String personIcon = 'assets/image/person_image.png';
+  static String settingsIcon = 'assets/image/settings_image.png';
+  static String shieldPlusIcon = 'assets/image/shield_plus_image.png';
+  static String notificationIcon = 'assets/image/notification_image.png';
 
   // ? home_screen_image
 
-  static String homeBlueImage = 'assets/images/home/blue_image.png';
-  static String homeGreenImage = 'assets/images/home/green_image.png';
-  static String homeRedImage = 'assets/images/home/red_image.png';
-  static String kaskoImage = 'assets/images/home/kasko_image.png';
-  static String osagoImage = 'assets/images/home/osago_image.png';
-  static String travelImage = 'assets/images/home/travel_image.png';
-  static String serviseDecimage = 'assets/images/home/servise_decimage.png';
-  static String guarantDecimage = 'assets/images/home/guarant_image.png';
+  static String homeBlueImage = 'assets/image/home/blue_image.png';
+  static String homeGreenImage = 'assets/image/home/green_image.png';
+  static String homeRedImage = 'assets/image/home/red_image.png';
+  static String kaskoImage = 'assets/image/home/kasko_image.png';
+  static String osagoImage = 'assets/image/home/osago_image.png';
+  static String travelImage = 'assets/image/home/travel_image.png';
+  static String serviseDecimage = 'assets/image/home/servise_decimage.png';
+  static String guarantDecimage = 'assets/image/home/guarant_image.png';
 
-  static String guarantIcon = 'assets/images/home/guarant_icon.png';
-  static String serviseIcon = 'assets/images/home/servise_icon.png';
+  static String guarantIcon = 'assets/image/home/guarant_icon.png';
+  static String serviseIcon = 'assets/image/home/servise_icon.png';
 
   // ? home_screen icons
   static String additional_services_icon =
@@ -33,14 +34,14 @@ class AppImage {
   static String travel_icon = 'assets/icons/travel_icon.png';
   static String warranty_code_icon = 'assets/icons/warranty_code_icon.png';
 
-  static String travelHomeIcon = 'assets/images/home/icons/travel_icon.png';
-  static String kaskolHomeIcon = 'assets/images/home/icons/kasko_icon.png';
-  static String osagoHomeIcon = 'assets/images/home/icons/osago_icon.png';
-  static String settingslogoutIcon = 'assets/images/home/icons/logout_icon.png';
+  static String travelHomeIcon = 'assets/image/home/icons/travel_icon.png';
+  static String kaskolHomeIcon = 'assets/image/home/icons/kasko_icon.png';
+  static String osagoHomeIcon = 'assets/image/home/icons/osago_icon.png';
+  static String settingslogoutIcon = 'assets/image/home/icons/logout_icon.png';
   static String warrantyHomeIcon =
-      'assets/images/home/icons/warranty_code_icon.png';
+      'assets/image/home/icons/warranty_code_icon.png';
   static String emergencyservicesIcon =
-      'assets/images/home/icons/emergency_services_icon.png';
+      'assets/image/home/icons/emergency_services_icon.png';
 
   static IconData visibility = Icons.visibility;
   static IconData addIconData = Icons.add;
@@ -60,23 +61,23 @@ class AppImage {
   // ! Settings
 
   static String notificationSettingIcon =
-      'assets/images/home/icons/notification_icon.png';
+      'assets/image/home/icons/notification_icon.png';
   static String languageSettingIcon =
-      'assets/images/home/icons/language_icon.png';
+      'assets/image/home/icons/language_icon.png';
   static String helpdeskSettingIcon =
-      'assets/images/home/icons/helpdesk_icon.png';
+      'assets/image/home/icons/helpdesk_icon.png';
   static String questionsanswerSettingIcon =
-      'assets/images/home/icons/questionsanswer_icon.png';
+      'assets/image/home/icons/questionsanswer_icon.png';
   static String aboutapplicationSettingIcon =
-      'assets/images/home/icons/aboutapplication_icon.png';
+      'assets/image/home/icons/aboutapplication_icon.png';
 
   static String telegramIcon =
-      "assets/images/settings/icons/telegram_icons.png";
+      "assets/image/settings/icons/telegram_icons.png";
   static String callOperatorIcon =
-      "assets/images/settings/icons/call_operator.png";
-  static String sosCallIcon = "assets/images/home/sos/sos_call_icon.png";
+      "assets/image/settings/icons/call_operator.png";
+  static String sosCallIcon = "assets/image/home/sos/sos_call_icon.png";
   static String sosTelegramIoon =
-      "assets/images/home/sos/sos_telegram_icon.png";
+      "assets/image/home/sos/sos_telegram_icon.png";
 
   static Widget starWidget(BuildContext context) {
     return Text(
@@ -113,72 +114,74 @@ class AppImage {
   // ! Home TapBar image
 
   static String homeTabbarIcon =
-      'assets/images/home/tapbar/home_green_icon.png';
+      'assets/image/home/tapbar/home_green_icon.png';
   static String homeTabbarGreyIcon =
-      'assets/images/home/tapbar/home_grey_icon.png';
+      'assets/image/home/tapbar/home_grey_icon.png';
   static String kabinetTabbarIcon =
-      'assets/images/home/tapbar/kabinet_icon.png';
+      'assets/image/home/tapbar/kabinet_icon.png';
   static String kabinetTabbarGreenIcon =
-      'assets/images/home/tapbar/kabinet_green_icon.png';
-  static String sosTabbarIcon = 'assets/images/home/tapbar/sos_image.png';
+      'assets/image/home/tapbar/kabinet_green_icon.png';
+  static String sosTabbarIcon = 'assets/image/home/tapbar/sos_image.png';
   static String mypoliciesTabbarIcon =
-      'assets/images/home/tapbar/my_policies_icon.png';
+      'assets/image/home/tapbar/my_policies_icon.png';
   static String mypoliciesTabbarGreenIcon =
-      'assets/images/home/tapbar/my_policies_green.png';
+      'assets/image/home/tapbar/my_policies_green.png';
   static String partnersTabbarIcon =
-      'assets/images/home/tapbar/partners_icon.png';
+      'assets/image/home/tapbar/partners_icon.png';
   static String partnersTabbarGreenIcon =
-      'assets/images/home/tapbar/partners_green_icon.png';
+      'assets/image/home/tapbar/partners_green_icon.png';
 
   // ! svg image
 
   static String ingoUzbSvg = 'assets/svg/ingo_uzb_image_scg.svg';
   static String capitalSugurtaSvg = 'assets/svg/capital_sugurta_image_svg.svg';
-  static String epolisCardLogo = 'assets/images/epolis_card_logo.png';
+  static String epolisCardLogo = 'assets/image/epolis_card_logo.png';
 
   // ! partners
   static String partnersOsagoIcon =
-      'assets/images/partners/images/osago_grey_icon.png';
+      'assets/image/partners/images/osago_grey_icon.png';
   static String partnersKaskoIcon =
-      'assets/images/partners/images/kasko_grey_icon.png';
+      'assets/image/partners/images/kasko_grey_icon.png';
   static String partnersTravelIcon =
-      'assets/images/partners/images/travel_grey_icon.png';
+      'assets/image/partners/images/travel_grey_icon.png';
   static String partnersCallOpercon =
-      'assets/images/partners/images/call_opertator_icon.png';
+      'assets/image/partners/images/call_opertator_icon.png';
   static String partnersVebSaytcon =
-      'assets/images/partners/images/veb_sayt_icon.png';
+      'assets/image/partners/images/veb_sayt_icon.png';
 
   // ! kabinet
-  static String cabinetEditIcon = 'assets/images/kabinet/icons/edit_icon.png';
-  static String deleteEditIcon = 'assets/images/kabinet/icons/delete_icon.png';
-  static String carNotIcon = 'assets/images/kabinet/icons/car_not_icon.png';
-  static String addIcon = 'assets/images/kabinet/icons/add_icon.png';
-  static String searchIcon = 'assets/images/search_icon.png';
-  static String creditCardIcon = 'assets/images/card_icon.png';
-  static String paswordCardImage = 'assets/images/password_card_image.png';
-  static String uzbFlagIcon = 'assets/images/flag_uzb.png';
-  static String activateWIcon = 'assets/images/activate_w_icon.png';
-  static String codeIcon = 'assets/images/code_icon.png';
-  static String noInternet = 'assets/images/no_internet.png';
-  static String updateInternetIcon = 'assets/images/update_internet_icon.png';
-  static String splashPoliciesIcon = 'assets/images/splash_policies_icon.png';
-  static String loadingPageLogo = 'assets/images/loading_page_logo.png';
-  static String closeIcon = 'assets/images/close_icon.png';
-  static String selectIcon = 'assets/images/select_icon.png';
-  static String deleteRedIcon = 'assets/images/delete_icon.png';
-  static String whiteDeleteIcon = 'assets/images/white_delete_icon.png';
-  static String cartiresIcon = 'assets/images/car_tires_icon.png';
-  static String cartiresgreyIcon = 'assets/images/car_tires_grey_icon.png';
-  static String phoneGreyIcon = 'assets/images/phone_grey_icon.png';
-  static String phoneIcon = 'assets/images/phone_icon.png';
-  static String fridgeIcon = 'assets/images/fridge_icon.png';
-  static String refrigeratorgreyIcon = 'assets/images/refrigerator_grey_icon.png';
-  static String amoutCoinIcon = 'assets/images/amout_pint_icon.png';
+  static String cabinetEditIcon = 'assets/image/kabinet/icons/edit_icon.png';
+  static String deleteEditIcon = 'assets/image/kabinet/icons/delete_icon.png';
+  static String carNotIcon = 'assets/image/kabinet/icons/car_not_icon.png';
+  static String addIcon = 'assets/image/kabinet/icons/add_icon.png';
+  static String searchIcon = 'assets/image/search_icon.png';
+  static String creditCardIcon = 'assets/image/card_icon.png';
+  static String paswordCardImage = 'assets/image/password_card_image.png';
+  static String uzbFlagIcon = 'assets/image/flag_uzb.png';
+  static String activateWIcon = 'assets/image/activate_w_icon.png';
+  static String codeIcon = 'assets/image/code_icon.png';
+  static String noInternet = 'assets/image/no_internet.png';
+  static String updateInternetIcon = 'assets/image/update_internet_icon.png';
+  static String splashPoliciesIcon = 'assets/image/splash_policies_icon.png';
+  static String loadingPageLogo = 'assets/image/loading_page_logo.png';
+  static String closeIcon = 'assets/image/close_icon.png';
+  static String selectIcon = 'assets/image/select_icon.png';
+  static String deleteRedIcon = 'assets/image/delete_icon.png';
+  static String whiteDeleteIcon = 'assets/image/white_delete_icon.png';
+  static String cartiresIcon = 'assets/image/car_tires_icon.png';
+  static String cartiresgreyIcon = 'assets/image/car_tires_grey_icon.png';
+  static String phoneGreyIcon = 'assets/image/phone_grey_icon.png';
+  static String phoneIcon = 'assets/image/phone_icon.png';
+  static String fridgeIcon = 'assets/image/fridge_icon.png';
+  static String refrigeratorgreyIcon = 'assets/image/refrigerator_grey_icon.png';
+  static String amoutCoinIcon = 'assets/image/amout_pint_icon.png';
   static String warrantycodewidgeticon =
-      'assets/images/warrantycode_widget_icon.png';
+      'assets/image/warrantycode_widget_icon.png';
 
   // ?  Gift
 
   static String progressBarGif = 'assets/gifs/progressbar.gif';
-  static String newLineImage = 'assets/images/new_line_image.png';
+  static String newLineImage = 'assets/image/new_line_image.png';
+  static String checksIcon = 'assets/icons/checks_icon.png';
+  static String carIcon = 'assets/icons/car_icon.png';
 }

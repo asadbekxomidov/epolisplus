@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/repository/profil/profil_repository.dart';
-import 'package:epolisplus/ui/screens/modul/addedcar/bloc/add_car_bloc.dart';
+import 'package:epolisplus/ui/screens/modul/vehicle/bloc/add_car_bloc.dart';
 import 'package:epolisplus/models/profil/profil_response/carinforesponse/car_information_response.dart';
 
 part 'my_car_event.dart';

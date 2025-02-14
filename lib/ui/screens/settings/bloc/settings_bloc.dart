@@ -38,7 +38,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   void onPushScreen(
       SettingsPushScreenEvent event, Emitter<SettingsState> emit) async {
     emit(SettingsLoadingState());
-    await Get.to(() => NotificationScreen());
+    await Get.to(() => NotiSettingsScreen());
     emit(SettingsSuccesState());
   }
 

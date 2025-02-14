@@ -6,3 +6,9 @@ abstract class PoliciesEvent extends Equatable {
 }
 
 class PoliciesGetEvent extends PoliciesEvent {}
+
+class SelectPolicyCategoryEvent extends PoliciesEvent {
+  int categoryId;
+
+  SelectPolicyCategoryEvent(this.categoryId);
+}

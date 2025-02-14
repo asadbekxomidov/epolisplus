@@ -27,19 +27,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: BlocProvider(
         create: (context) => RegisterBloc()
           ..add(RegisterSetPhoneNumberEvent(widget.phoneNumber)),
-        child: Stack(
-          children: [
-            ui(),
-            BlocBuilder<RegisterBloc, RegisterState>(
-              builder: (context, state) {
-                return LoadingIndicator(
-                  isLoading: state is RegisterLoadingState,
-                );
-              },
-            )
-          ],
+        child: Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          color: AppColors.bg_color,
+          child: Stack(
+            children: [
+              backImage(dimens),
+              ui(),
+              loading(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  loading() {
+    return BlocBuilder<RegisterBloc, RegisterState>(
+      builder: (context, state) {
+        return LoadingIndicator(
+          isLoading: state is RegisterLoadingState,
+        );
+      },
     );
   }
 
@@ -55,82 +65,82 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       builder: (context, state) {
         bloc = BlocProvider.of<RegisterBloc>(context);
-        return Container(
-          height: dimens.screenHeight,
-          padding: EdgeInsets.symmetric(
-            horizontal: dimens.paddingHorizontal,
-          ),
-          decoration: mainDecorations(),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gap(dimens.paddingVerticalItem69),
-                LeftBackIconBtn(
-                  appColors: AppColors.mainColor,
-                ),
-                Gap(dimens.paddingVerticalItem20),
-                // Gap(dimens.paddingVerticalItem27),
-                Text(
-                  AppStrings.createAccount,
-                  style: dimens.titleStyle.copyWith(
-                    fontSize: dimens.font30,
+        return ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingWidth,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(dimens.paddingVerticalItem69),
+                  LeftBackIconBtn(
+                    appColors: AppColors.mainColor,
                   ),
-                ),
-                Gap(dimens.paddingVerticalItem27),
-                // Gap(dimens.paddingVerticalItem40),
-                UserNameWidget(
-                  titleText: AppStrings.yourname,
-                  controller: bloc.fullNameController,
-                  hintText: AppStrings.theName,
-                  screenHeight: dimens.screenHeight,
-                  screenWidth: dimens.screenWidth,
-                  showStar: true,
-                ),
-                Gap(dimens.paddingVerticalItem20),
-                PhoneWidget(
-                  controller: bloc.phoneController,
-                  showStar: true,
-                  isActive: false,
-                ),
-                Gap(dimens.paddingVerticalItem20),
-                PasswordWidget(
-                  controller: bloc.passwordController,
-                  hintText: AppStrings.passwordHint,
-                  text: AppStrings.passwordHintP,
-                ),
-                Gap(dimens.paddingVerticalItem20),
-                PasswordWidget(
-                  text: AppStrings.confirmPassword,
-                  controller: bloc.confirmPasswordController,
-                  hintText: AppStrings.confirmPasswordHint,
-                ),
-                Gap(dimens.paddingVerticalItem23),
-                IconsButtonWidget(
-                  onClickOferta: () {
-                    bloc.add(OfertaPushEvent());
-                  },
-                  onClick: () {
-                    bloc.add(ToggleAgreeEvent());
-                  },
-                  isAgreeChecked: bloc.isAgreeChecked,
-                  dimens: dimens,
-                ),
-                Gap(dimens.paddingVerticalItem23),
-                SizedBox(
-                  width: double.infinity,
-                  child: RegisterPushButton(
-                    isLoading: state is RegisterLoadingState,
-                    onClick: () {
-                      bloc.add(CheckRegisterEvent());
+                  Gap(dimens.paddingVerticalItem20),
+                  // Gap(dimens.paddingVerticalItem27),
+                  Text(
+                    AppStrings.createAccount,
+                    style: dimens.titleStyle.copyWith(
+                      fontSize: dimens.font30,
+                    ),
+                  ),
+                  Gap(dimens.paddingVerticalItem27),
+                  // Gap(dimens.paddingVerticalItem40),
+                  UserNameWidget(
+                    titleText: AppStrings.yourname,
+                    controller: bloc.fullNameController,
+                    hintText: AppStrings.theName,
+                    screenHeight: dimens.screenHeight,
+                    screenWidth: dimens.screenWidth,
+                    showStar: true,
+                  ),
+                  Gap(dimens.paddingVerticalItem20),
+                  PhoneWidget(
+                    controller: bloc.phoneController,
+                    showStar: true,
+                    isActive: false,
+                  ),
+                  Gap(dimens.paddingVerticalItem20),
+                  PasswordWidget(
+                    controller: bloc.passwordController,
+                    hintText: AppStrings.passwordHint,
+                    text: AppStrings.passwordHintP,
+                  ),
+                  Gap(dimens.paddingVerticalItem20),
+                  PasswordWidget(
+                    text: AppStrings.confirmPassword,
+                    controller: bloc.confirmPasswordController,
+                    hintText: AppStrings.confirmPasswordHint,
+                  ),
+                  Gap(dimens.paddingVerticalItem23),
+                  IconsButtonWidget(
+                    onClickOferta: () {
+                      bloc.add(OfertaPushEvent());
                     },
-                    text: AppStrings.signUpbutton,
+                    onClick: () {
+                      bloc.add(ToggleAgreeEvent());
+                    },
+                    isAgreeChecked: bloc.isAgreeChecked,
+                    dimens: dimens,
                   ),
-                ),
-                Gap(dimens.paddingVerticalItem23),
-              ],
+                  Gap(dimens.paddingVerticalItem23),
+                  SizedBox(
+                    width: double.infinity,
+                    child: RegisterPushButton(
+                      isLoading: state is RegisterLoadingState,
+                      onClick: () {
+                        bloc.add(CheckRegisterEvent());
+                      },
+                      text: AppStrings.signUpbutton,
+                    ),
+                  ),
+                  Gap(dimens.paddingVerticalItem16),
+                ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );

@@ -6,3 +6,7 @@ abstract class OsagoEvent extends Equatable {
 }
 
 class OsagoInfoGetEvent extends OsagoEvent {}
+
+class SelectButtonEvent extends OsagoEvent {}
+
+class ClearVehicleInfoEvent extends OsagoEvent {}

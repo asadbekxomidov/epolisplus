@@ -213,4 +213,22 @@ class AppStrings {
   static const String addCodeReferral = "Добавить код приглашения";
   static const String iAgree = "Ознакомлен(а) и согласен(а) с ";
   static const String insuranceConditions = "Условиями страхования";
+  static const String rateText = "Тариф";
+  static const String totalreimLimit = "Общий лимит возмещения";
+  static const String paymentAmount = "Сумма оплаты";
+  static const String readMore = "Подробнее";
+  static const String applyforPolicy = "Оформить полис";
+  // static const String insuranceConditions = "Условия страхования";
+  static const String order = "Оформить";
+  static const String insuranceCoverage = "Страховое покрытие";
+  static const String registrationCarInsur = "Оформление автострахования";
+
+
+
+
+
+  static const String generalInfo = "Общая информация";
+  static const String driverInformation = "Общая информация";
+  static const String contractinformation = "Информация о контракте";
+  static const String payment = "Оплата";
 }

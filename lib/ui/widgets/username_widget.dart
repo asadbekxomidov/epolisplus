@@ -45,7 +45,8 @@ class UserNameWidget extends StatelessWidget {
           padding: EdgeInsets.only(
             left: dimens.paddingHorizontal13,
           ),
-          decoration: inputDecorations(dimens),
+          decoration: newDecoration(dimens),
+          // decoration: inputDecorations(dimens),
           child: TextField(
             controller: controller,
             keyboardType: keyboardType,

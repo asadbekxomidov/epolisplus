@@ -20,6 +20,10 @@ class ApiConstanta {
   static const ACTIVATE_QRCODE = "v2/warranty/warranty-info";
   static const USER_GET_INFO = "v1/osgo/passport-birth-date";
   static const WARRANTY_TYPE_LIST = "v1/warranty/warranty-type-list";
+  static const LITRO_CALC = "v2/litro/litro-calculator";
+  static const GET_SETTING = "v1/notification/setting";
+  static const KASKO_SERVICE = "v1/kasko/kasko-service";
+  static const GET_ALL_NOTIFICATION = "v1/notification/get-notification-list";
 }
 
 
@@ -38,13 +42,12 @@ class ApiConstanta {
 //   static const ACTIVATE_QRCODE = "v2/warranty/warranty-info";
 //   static const SAVE_ACTIVATE_QRCODE = "v2/warranty/save";
 //   static const LATES_NEWS = "v1/references/get-latest-news";
-//   static const GET_ALL_NOTIFICATION = "v1/notification/get-notification-list";
 
 //   /*static const UNREAD_NOTIFICATION_COUNT =
 //       "v1/notification/unread-notifications-count";*/
-//   static const LITRO_CALC = "v2/litro/litro-calculator";
-//   static const GET_SETTING = "v1/notification/setting";
-//   static const KASKO_SERVICE = "v1/kasko/kasko-service";
+  // static const LITRO_CALC = "v2/litro/litro-calculator";
+  // static const GET_SETTING = "v1/notification/setting";
+  // static const KASKO_SERVICE = "v1/kasko/kasko-service";
 //   static const LITRO_CALL_SERVICE = "v1/litro/emergency-services";
 //   static const ORDER_KASKO_POLICY = "v1/kasko/order-premium";
 //   static const LITRO_CREATE_ANKETA = "v1/litro/litro-form";

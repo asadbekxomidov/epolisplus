@@ -35,111 +35,119 @@ class _PhoneRasswordScreenState extends State<PhoneRasswordScreen> {
 
     return BlocProvider(
       create: (context) => PhonePasswordBloc(widget.phoneNumber),
-      child: Stack(
-        children: [
-          ui(),
-          BlocBuilder<PhonePasswordBloc, PhonePasswordState>(
-            builder: (context, state) {
-              return LoadingIndicator(
-                isLoading: state is PhonePasswordLoadingState,
-              );
-            },
+      child: Scaffold(
+        body: Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          color: AppColors.bg_color,
+          child: Stack(
+            children: [
+              backImage(dimens),
+              ui(),
+              loading(),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
+  loading() {
+    return BlocBuilder<PhonePasswordBloc, PhonePasswordState>(
+      builder: (context, state) {
+        return LoadingIndicator(
+          isLoading: state is PhonePasswordLoadingState,
+        );
+      },
+    );
+  }
+
   ui() {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: Container(
-        decoration: mainDecorations(),
-        height: dimens.screenHeight,
-        child: BlocConsumer<PhonePasswordBloc, PhonePasswordState>(
-          listener: (context, state) {
-            if (state is PhonePasswordErrorState) {
-              showErrorMessageSnackBar(
-                context,
-                state.failure.getErrorMessage(context),
-              );
-            }
-          },
-          builder: (context, state) {
-            bloc = BlocProvider.of<PhonePasswordBloc>(context);
-            return LayoutBuilder(
-              builder: (context, constraints) {
-                return SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: dimens.paddingHorizontal,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gap(dimens.paddingVerticalItem69),
-                        LeftBackIconBtn(
-                          appColors: AppColors.mainColor,
-                        ),
-                        Gap(dimens.paddingVerticalItem10),
-                        Text(
-                          AppStrings.verification,
-                          style: dimens.titleStyle.copyWith(
-                            fontSize: dimens.font30,
-                          ),
-                        ),
-                        Gap(dimens.height10),
-                        Text(
-                          AppStrings.yourphonenumbernewpassword,
-                          style: dimens.textStyle,
-                        ),
-                        Gap(dimens.height24),
-                        PasswordWidget(
-                          text: AppStrings.passwordHintP,
-                          controller: bloc.passwordController,
-                          hintText: AppStrings.passwordHint,
-                          focusNode: passwordFocusNode,
-                        ),
-                        Text(
-                          AppStrings.minimumCharacters,
-                          style: dimens.hintStyle,
-                        ),
-                        Gap(dimens.height18),
-                        PasswordWidget(
-                          text: AppStrings.confirmPassword,
-                          controller: bloc.passwordConfirmController,
-                          hintText: AppStrings.passwordHint,
-                          focusNode: confirmPasswordFocusNode,
-                        ),
-                        Gap(dimens.height18),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            PhonecodeTextfieldWidget(
-                              controller: bloc.otpController,
-                            ),
-                          ],
-                        ),
-                        Gap(dimens.height16),
-                        SizedBox(
-                          width: double.infinity,
-                          child: RegisterPushButton(
-                            isLoading: state is PhonePasswordLoadingState,
-                            onClick: () {
-                              bloc.add(CheckPhonePasswordEvent());
-                            },
-                            text: AppStrings.verifyAndProceed,
-                          ),
-                        ),
-                        Gap(dimens.height20),
-                      ],
-                    ),
-                  ),
-                );
-              },
+    return Container(
+      height: dimens.screenHeight,
+      child: BlocConsumer<PhonePasswordBloc, PhonePasswordState>(
+        listener: (context, state) {
+          if (state is PhonePasswordErrorState) {
+            showErrorMessageSnackBar(
+              context,
+              state.failure.getErrorMessage(context),
             );
-          },
-        ),
+          }
+        },
+        builder: (context, state) {
+          bloc = BlocProvider.of<PhonePasswordBloc>(context);
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: dimens.paddingHorizontal,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Gap(dimens.paddingVerticalItem69),
+                      LeftBackIconBtn(
+                        appColors: AppColors.mainColor,
+                      ),
+                      Gap(dimens.paddingVerticalItem10),
+                      Text(
+                        AppStrings.verification,
+                        style: dimens.titleStyle.copyWith(
+                          fontSize: dimens.font30,
+                        ),
+                      ),
+                      Gap(dimens.height10),
+                      Text(
+                        AppStrings.yourphonenumbernewpassword,
+                        style: dimens.textStyle,
+                      ),
+                      Gap(dimens.height24),
+                      PasswordWidget(
+                        text: AppStrings.passwordHintP,
+                        controller: bloc.passwordController,
+                        hintText: AppStrings.passwordHint,
+                        focusNode: passwordFocusNode,
+                      ),
+                      Text(
+                        AppStrings.minimumCharacters,
+                        style: dimens.hintStyle,
+                      ),
+                      Gap(dimens.height18),
+                      PasswordWidget(
+                        text: AppStrings.confirmPassword,
+                        controller: bloc.passwordConfirmController,
+                        hintText: AppStrings.passwordHint,
+                        focusNode: confirmPasswordFocusNode,
+                      ),
+                      Gap(dimens.height18),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          PhonecodeTextfieldWidget(
+                            controller: bloc.otpController,
+                          ),
+                        ],
+                      ),
+                      Gap(dimens.height16),
+                      SizedBox(
+                        width: double.infinity,
+                        child: RegisterPushButton(
+                          isLoading: state is PhonePasswordLoadingState,
+                          onClick: () {
+                            bloc.add(CheckPhonePasswordEvent());
+                          },
+                          text: AppStrings.verifyAndProceed,
+                        ),
+                      ),
+                      Gap(dimens.height20),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

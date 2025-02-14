@@ -1,0 +1,81 @@
+class Resource {
+  static const String IMAGE_BACKGROUND = "assets/images/img_background.png";
+  static const String NEW_SOS = "assets/images/new_sos.svg";
+  static const String FLAG_UZBEKISTAN = "assets/images/uzb.png";
+
+
+  static const String NEW_BACK_IMAGE2 = "assets/images/new_back_image2.png";
+  static const String NEW_BACK_IMAGE4 = "assets/images/new_back_image4.svg";
+  static const String NEW_APP_LOGO = "assets/images/new_svg_logo.svg";
+  static const String NEW_BLOCK_IMAGE = "assets/images/new_bloc_image.svg";
+  static const String NEW_EDIT_ICON = "assets/images/ic_edit.svg";
+  static const String NEW_LINE_IMAGE = "assets/images/new_line_image.png";
+  static const String NEW_IC_DELETE = "assets/images/ic_delete.png";
+
+  static const String NEW_IC_HOME = "assets/images/ic_home_svg.svg";
+  static const String NEW_IC_MY_POLICY = "assets/images/new_ic_my_policy.svg";
+  static const String NEW_IC_PARTNERS = "assets/images/new_ic_partners.svg";
+  static const String NEW_IC_PERSON = "assets/images/new_ic_person.svg";
+  static const String NEW_NOT_CAR = "assets/images/new_not_car.svg";
+  static const String NEW_NOT_TRAVEL = "assets/images/new_ic_not_travel.svg";
+  static const String NEW_NOT_SERVICES = "assets/images/new_ic_not_services.svg";
+  static const String NEW_NOT_GARANTY = "assets/images/new_ic_not_garanty.svg";
+  static const String TECH_PASSPORT = "assets/images/img_tech_passport.png";
+  static const String NEW_IC_CREDIT_CARD = "assets/images/new_ic_card.svg";
+  static const String NEW_IC_CALL = "assets/images/new_ic_call.svg";
+  static const String NEW_IC_WEB = "assets/images/new_ic_web.svg";
+
+  static const String NEW_IC_OSAGO = "assets/images/new_ic_osago.svg";
+  static const String NEW_IC_KACKO = "assets/images/new_ic_kacko.svg";
+  static const String NEW_IC_TRAVEL = "assets/images/new_ic_travel.svg";
+
+  static const String NEW_POLICY_CATEGORY_ACTIVE = "assets/images/new_policy_category_active.svg";
+  static const String NEW_POLICY_CATEGORY_UNPAID = "assets/images/new_policy_category_unpaid.svg";
+  static const String NEW_POLICY_CATEGORY_ARCHIVE = "assets/images/new_policy_category_archive.svg";
+  static const String NEW_IC_GARANTY_PLUS = "assets/images/new_ic_garanty_plus.svg";
+  static const String NEW_IC_NOTIFICATION = "assets/images/new_ic_notification.svg";
+  static const String NEW_IC_SETTINGS = "assets/images/new_ic_settings.svg";
+  static const String NEW_IC_SERVICES = "assets/images/new_ic_services.svg";
+  static const String NEW_IC_BACK_GREEN = "assets/images/new_ic_back_green.svg";
+  static const String NEW_IC_BACK_BLUE = "assets/images/new_ic_back_blue.svg";
+  static const String NEW_IC_BACK_RED = "assets/images/new_ic_back_red.svg";
+  static const String NEW_MIDDLE_ICON = "assets/images/new_middle_icon.svg";
+  static const String NEW_IC_PAYMENT = "assets/images/new_ic_payment.svg";
+  static const String NEW_IC_TELEGRAM = "assets/images/new_ic_telegram.svg";
+  static const String NEW_IC_QUESTION_ANSWER = "assets/images/new_ic_question_answer.svg";
+  static const String NEW_IC_INFO = "assets/images/new_ic_info.svg";
+  static const String NEW_IC_INFO2 = "assets/images/new_ic_info2.svg";
+  static const String NEW_IC_LOGOUT = "assets/images/new_ic_logout.svg";
+  static const String NEW_UZB = "assets/images/new_uzb.svg";
+  static const String NEW_UZB_PNG = "assets/images/uzbek.png";
+  static const String NEW_RUS = "assets/images/new_rus.svg";
+  static const String NEW_RUS_PNG = "assets/images/russia.png";
+  static const String NEW_IC_ACTIVATE_CODE = "assets/images/new_ic_activate_code.svg";
+  static const String NEW_IC_SELECTOR = "assets/images/new_ic_selector.svg";
+  static const String NEW_IC_SALE = "assets/images/new_ic_sale.svg";
+  static const String NEW_IC_SOQQA = "assets/images/new_ic_soqqa.svg";
+  static const String NEW_IC_ALL_INFORMATION = "assets/images/new_ic_all_information.svg";
+  static const String NEW_IC_FILES = "assets/images/new_ic_files.svg";
+  static const String NEW_IC_CALENDAR = "assets/images/new_ic_calendar.svg";
+  static const String NEW_PAYME = "assets/images/payme.png";
+  static const String NEW_CLICK = "assets/images/click.png";
+  static const String NEW_UZUM = "assets/images/new_image_uzum.jpg";
+  static const String NEW_IC_CHECKING = "assets/images/new_ic_checking.svg";
+  static const String NEW_IC_NOT_CHECKING = "assets/images/new_ic_not_checking.svg";
+  static const String NEW_IC_ACTIVE = "assets/images/new_ic_active.svg";
+  static const String PROGRESS_BAR = "assets/images/progressbar.gif";
+  static const String NEW_IC_SETTING_WITH_CIRCLE = "assets/images/new_ic_setting.svg";
+  static const String NEW_IC_APP_UPDATE = "assets/images/new_ic_app_update.svg";
+  static const String NEW_IC_OFFLINE = "assets/images/new_ic_offline.svg";
+  static const String NOTIFICATION_TYPE_NOTIFICATION = "assets/images/new_ic_ring.svg";
+  static const String NOTIFICATION_TYPE_CHECK = "assets/images/new_ic_correct.svg";
+  static const String NOTIFICATION_TYPE_PAYMENT = "assets/images/new_ic_check.svg";
+  static const String NOTIFICATION_TYPE_DELETE = "assets/images/new_ic_x.svg";
+  static const String IC_WHERE_ACTIVITY1 = "assets/images/new_ic_where_activity_title1.svg";
+  static const String IC_WHERE_ACTIVITY2 = "assets/images/new_ic_where_activity_title2.svg";
+  static const String IC_WHERE_ACTIVITY3 = "assets/images/new_ic_where_activity_title3.svg";
+  static const String IC_SERVICE_BACK_IMAGE = "assets/images/new_ic_background_service.svg";
+  static const String IC_VARANTY_BACK_IMAGE = "assets/images/new_ic_background_varanty.svg";
+  static const String IC_SERVICE = "assets/images/new_ic_service.svg";
+  static const String IC_VARANTY= "assets/images/new_ic_varanty.svg";
+}

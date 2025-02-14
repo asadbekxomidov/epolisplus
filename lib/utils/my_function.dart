@@ -1,11 +1,11 @@
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:flutter/material.dart';
 
-backimage() {
-  return Container(
-    decoration: mainDecorations(),
-  );
-}
+// backimage() {
+//   return Container(
+//     decoration: mainDecorations(),
+//   );
+// }
 
 clearPhoneMask(String phoneNumber) {
   phoneNumber = phoneNumber.replaceAll("(", "");
@@ -44,3 +44,23 @@ dashed_line(Dimens dimens, {bool isLittle = false}) {
     ),
   );
 }
+
+// Widget backImage(Dimens dimens) {
+//   return Container(
+//     child: Image.asset(
+//       AppImage.new_back_image2,
+//       width: dimens.screenWidth * 0.75,
+//       fit: BoxFit.fitWidth,
+//     ),
+//   );
+// }
+
+// Widget backImage2(Dimens dimens) {
+//   return Container(
+//     child: Image.asset(
+//       AppImage.new_back_image2,
+//       width: dimens.screenWidth * 0.5,
+//       fit: BoxFit.fitWidth,
+//     ),
+//   );
+// }

@@ -10,7 +10,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/screens/screns_export.dart';
-import 'package:epolisplus/ui/screens/modul/addedcar/bloc/add_car_bloc.dart';
+import 'package:epolisplus/ui/screens/modul/vehicle/bloc/add_car_bloc.dart';
 import 'package:epolisplus/repository/warranty_code/warranty_code_repository.dart';
 
 part 'warrantycode_event.dart';

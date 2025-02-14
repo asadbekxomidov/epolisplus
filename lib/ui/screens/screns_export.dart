@@ -34,8 +34,8 @@ export 'settings/ui/screen/settings_screen.dart';
 export 'settings/bloc/settings_bloc.dart';
 
 // ? notification
+export 'notification/ui/screen/settings_notifications.dart';
 export 'notification/ui/screen/notification_screen.dart';
-export 'notification/bloc/notification_bloc.dart';
 
 // ? kabinet
 export 'kabinet/ui/screen/kabinet_screen.dart';
@@ -72,7 +72,7 @@ export 'add_car/ui/screen/registercertnumber_screen.dart';
 export 'warranty_pages/ui/screen/warrantycode_screen.dart';
 
 // ? modul
-export 'modul/addedcar/screen/vehicle_car_info.dart';
+export 'modul/vehicle/screen/vehicle_car_info.dart';
 export 'modul/user_info/ui/screen/user_info_screen.dart';
 export 'modul/add_code_referral/screen/add_referral_screen.dart';
 
@@ -87,6 +87,7 @@ export 'osago/ui/screen/osago_screen.dart';
 
 // ? casko
 export 'casko/ui/screen/casko_screen.dart';
+export 'casko/ui/screen/casko_product_screen.dart';
 
 // ? select_warranty
 export 'select_warranty/ui/screen/selectwarranty_codes.dart';

@@ -155,6 +155,7 @@ class NaviGatePopButton extends StatelessWidget {
               fontSize: dimens.height16,
               color: appColors,
               fontWeight: FontWeight.w400,
+              decoration: TextDecoration.none,
             ),
           ),
         ],
@@ -1517,6 +1518,128 @@ class MyGreenButton extends StatelessWidget {
   }
 }
 
+// ? CustomButton
+
+class CustomButton extends StatelessWidget {
+  final String text;
+  final IconData? iconData;
+  final Color? iconColor;
+  final bool isCheck;
+  final double? padding;
+
+  CustomButton({
+    required this.text,
+    this.iconData,
+    this.iconColor,
+    this.padding,
+    this.isCheck = false,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      width: dimens.screenWidth,
+      padding: EdgeInsets.symmetric(
+        vertical: dimens.height10,
+      ),
+      decoration:
+          isCheck ? greenDecorations(dimens) : newEditDecoration(dimens),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: isCheck
+                      ? dimens.font16Whitew400StyNeE
+                      : dimens.font16Blackw400StyNeE,
+                ),
+              ],
+            ),
+          ),
+          if (padding != null) Gap(padding!),
+          if (iconData != null)
+            Icon(
+              iconData,
+              size: dimens.height20,
+              color: iconColor,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomButton2 extends StatelessWidget {
+  final String text;
+  final IconData? iconData;
+  final Color? iconColor;
+  final bool isCheck;
+  final double? padding;
+
+  CustomButton2({
+    required this.text,
+    this.iconData,
+    this.iconColor,
+    this.padding,
+    this.isCheck = false,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      width: dimens.screenWidth,
+      padding: EdgeInsets.symmetric(
+        vertical: dimens.height10,
+      ),
+      decoration:
+          isCheck ? greenDecorations(dimens) : newEditDecoration(dimens),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (iconData != null)
+            Icon(
+              iconData,
+              size: dimens.height20,
+              color: iconColor,
+            ),
+          if (padding != null) Gap(padding!),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  style: isCheck
+                      ? dimens.font16Whitew400StyNeE
+                      : dimens.font16Blackw400StyNeE,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 // ? MyRichTextButton
 
 class MyRichTextButton extends StatelessWidget {
@@ -1727,6 +1850,52 @@ class RecButton extends StatelessWidget {
             Text(
               title!,
               style: dimens.govfont18Blackw600Sty,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+// ? RedButton
+
+class RedButtonSh1 extends StatelessWidget {
+  final String? image;
+  final String? text;
+
+  RedButtonSh1({
+    this.image,
+    this.text,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      height: dimens.height40,
+      decoration: BoxDecoration(
+          color: AppColors.redColorFill,
+          borderRadius: BorderRadius.circular(
+            dimens.radius8,
+          ),
+          border: Border.all(
+            color: AppColors.redColorStoke,
+          )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (image != null)
+            Image.asset(
+              image!,
+              height: dimens.height20,
+            ),
+          Gap(dimens.paddingHorizontal8),
+          if (text != null)
+            Text(
+              text!,
+              style: dimens.font14Red400Sty,
             ),
         ],
       ),

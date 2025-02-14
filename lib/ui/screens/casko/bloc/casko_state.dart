@@ -9,6 +9,10 @@ class LoadingState extends CaskoState {}
 
 class LoadedState extends CaskoState {}
 
-class ErrorState extends CaskoState {}
+class ErrorState extends CaskoState {
+  Failure failure;
+
+  ErrorState({required this.failure});
+}
 
 class SuccessState extends CaskoState {}

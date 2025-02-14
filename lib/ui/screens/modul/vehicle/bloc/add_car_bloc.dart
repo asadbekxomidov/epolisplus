@@ -11,7 +11,7 @@ import 'package:epolisplus/repository/profil/profil_repository.dart';
 part 'add_car_event.dart';
 part 'add_car_state.dart';
 
-class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
+class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   CarInformationResponse vehicleInformation;
   OnVehicleListener listener;
 
@@ -38,7 +38,7 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
   var techSeryFocus = FocusNode();
   var techNumberFocus = FocusNode();
 
-  AddedCarBloc({
+  VehicleBloc({
     required this.listener,
     required this.vehicleInformation,
   }) : super(CarInitialState()) {
@@ -47,7 +47,7 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
   }
 
   Future<void> onmyCarInformation(
-      GetInfromationCarEvent event, Emitter<AddedCarState> emit) async {
+      GetInfromationCarEvent event, Emitter<VehicleState> emit) async {
     emit(CarLoadingState());
 
     var carNumber = gowNumberController.text.trim();
@@ -91,7 +91,7 @@ class AddedCarBloc extends Bloc<AddedCarEvent, AddedCarState> {
   }
 
   Future<void> onpushScreen(
-      RegisterCertificateNumberEvent event, Emitter<AddedCarState> emit) async {
+      RegisterCertificateNumberEvent event, Emitter<VehicleState> emit) async {
     Get.to(() => RegisterCertnumberScreen());
   }
 }

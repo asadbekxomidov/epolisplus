@@ -28,18 +28,23 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
         body: SafeArea(
           child: Stack(
             children: [
+              // backImage(dimens),
               ui(),
-              BlocBuilder<SelectWarrantyBloc, SelectWarrantyState>(
-                builder: (context, state) {
-                  return LoadingIndicator2(
-                    isLoading: state is LoadingState,
-                  );
-                },
-              )
+              loading(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  loading() {
+    return BlocBuilder<SelectWarrantyBloc, SelectWarrantyState>(
+      builder: (context, state) {
+        return LoadingIndicator2(
+          isLoading: state is LoadingState,
+        );
+      },
     );
   }
 
@@ -53,100 +58,102 @@ class _SelectwarrantyCodesState extends State<SelectwarrantyCodes> {
           height: dimens.screenHeight,
           width: dimens.screenWidth,
           decoration: backgroundPagesDecorations(dimens),
-          padding: EdgeInsets.all(
-            dimens.paddingHorizontal16,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ContainerGreyWidget(),
-                ],
-              ),
-              Gap(dimens.paddingVerticalItem26),
-              LeftBackIconBtn(
-                appColors: AppColors.greenColorDefault,
-                onClick: () {
-                  Get.back();
-                },
-              ),
-              Gap(dimens.paddingVerticalItem16),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Text(
-                          AppStrings.activatewarrantyCode,
-                          style: dimens.pagesBlackTitleSty2,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Image.asset(
-                    AppImage.activateWIcon,
-                    height: dimens.height40,
-                  ),
-                ],
-              ),
-              Gap(dimens.paddingVerticalItem16),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisExtent: dimens.height100,
-                    crossAxisSpacing: dimens.paddingAll12,
-                    mainAxisSpacing: dimens.paddingAll12,
-                  ),
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: bloc.baseResponse.length,
-                  itemBuilder: (context, index) {
-                    final warranty = bloc.baseResponse[index];
-
-                    return GestureDetector(
-                      onTap: () {
-                        bloc.add(OpenWarrantyCodeEvent(warranty));
-                      },
-                      child: Container(
-                        height: dimens.height88,
-                        width: dimens.width172,
-                        padding: EdgeInsets.all(
-                          dimens.paddingAll12,
-                        ),
-                        decoration: mybuttonDeco(
-                          dimens,
-                          dimens.radius12,
-                          AppColors.redColorFill,
-                          AppColors.redColorStoke,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            warranty.icon.endsWith('.svg')
-                                ? SvgPicture.network(
-                                    "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${warranty.icon}",
-                                    height: dimens.height20,
-                                  )
-                                : Image.network(
-                                    "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${warranty.icon}",
-                                    height: dimens.height20,
-                                  ),
-                            Text(
-                              warranty.name,
-                              style: dimens.font16Blackw600Sty,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+          child: Padding(
+            padding: EdgeInsets.all(
+              dimens.paddingWidth,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ContainerGreyWidget(),
+                  ],
+                ),
+                Gap(dimens.paddingVerticalItem26),
+                LeftBackIconBtn(
+                  appColors: AppColors.greenColorDefault,
+                  onClick: () {
+                    Get.back();
                   },
                 ),
-              ),
-            ],
+                Gap(dimens.paddingVerticalItem16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            AppStrings.activatewarrantyCode,
+                            style: dimens.pagesBlackTitleSty2,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Image.asset(
+                      AppImage.activateWIcon,
+                      height: dimens.height40,
+                    ),
+                  ],
+                ),
+                Gap(dimens.paddingVerticalItem16),
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisExtent: dimens.height100,
+                      crossAxisSpacing: dimens.paddingAll12,
+                      mainAxisSpacing: dimens.paddingAll12,
+                    ),
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: bloc.baseResponse.length,
+                    itemBuilder: (context, index) {
+                      final warranty = bloc.baseResponse[index];
+
+                      return GestureDetector(
+                        onTap: () {
+                          bloc.add(OpenWarrantyCodeEvent(warranty));
+                        },
+                        child: Container(
+                          height: dimens.height88,
+                          width: dimens.width172,
+                          padding: EdgeInsets.all(
+                            dimens.paddingAll12,
+                          ),
+                          decoration: mybuttonDeco(
+                            dimens,
+                            dimens.radius12,
+                            AppColors.redColorFill,
+                            AppColors.redColorStoke,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              warranty.icon.endsWith('.svg')
+                                  ? SvgPicture.network(
+                                      "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${warranty.icon}",
+                                      height: dimens.height20,
+                                    )
+                                  : Image.network(
+                                      "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${warranty.icon}",
+                                      height: dimens.height20,
+                                    ),
+                              Text(
+                                warranty.name,
+                                style: dimens.font16Blackw600Sty,
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

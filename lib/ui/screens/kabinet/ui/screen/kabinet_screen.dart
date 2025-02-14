@@ -2,10 +2,9 @@ import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:epolisplus/ui/widgets/buttons.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/models/models_export.dart';
-import 'package:epolisplus/ui/widgets/greenbackground.dart';
+import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/kabinet/bloc/kabinet_bloc.dart';
 
 class CabinetScreen extends StatefulWidget {
@@ -22,31 +21,33 @@ class _CabinetScreenState extends State<CabinetScreen> {
     dimens = Dimens(context);
 
     return Scaffold(
-      body: GreenImageBackground(
-        child: BlocProvider(
-          create: (context) => KabinetBloc()..add(KabinetGetEvent()),
-          child: SafeArea(
-            child: Stack(
-              children: [
-                ui(),
-                BlocBuilder<KabinetBloc, KabinetState>(
-                  builder: (context, state) {
-                    return LoadingIndicator2(
-                      isLoading: state is KabinetLoadingState,
-                    );
-                  },
-                )
-              ],
-            ),
-          ),
+      body: BlocProvider(
+        create: (context) => KabinetBloc()..add(KabinetGetEvent()),
+        child: Stack(
+          children: [
+            green_gradient_widget(dimens),
+            ui(),
+            loading(),
+          ],
         ),
       ),
     );
   }
 
+  loading() {
+    return BlocBuilder<KabinetBloc, KabinetState>(
+      builder: (context, state) {
+        return LoadingIndicator2(
+          isLoading: state is KabinetLoadingState,
+        );
+      },
+    );
+  }
+
   ui() {
-    return BlocConsumer<KabinetBloc, KabinetState>(
-      listener: (context, state) {
+    return SafeArea(
+      child:
+          BlocConsumer<KabinetBloc, KabinetState>(listener: (context, state) {
         if (state is KabinetErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -56,79 +57,68 @@ class _CabinetScreenState extends State<CabinetScreen> {
             ),
           );
         }
-      },
-      builder: (context, state) {
+      }, builder: (context, state) {
         kabinetBloc = BlocProvider.of<KabinetBloc>(context);
 
-        if (state is KabinetInformationGetState) {
-          final profil = state.profilResponse;
-          final carInfoList = profil.carInfo;
+        final profil = kabinetBloc.profilResponse;
+        final carInfoList = profil.carInfo;
 
-          return Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: dimens.paddingHorizontal16,
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Gap(dimens.paddingVerticalItem8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppStrings.cabientText,
-                        style: dimens.pagesTitleSty,
+        return Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingHorizontal16,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gap(dimens.paddingVerticalItem8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppStrings.cabientText,
+                      style: dimens.pagesTitleSty,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        kabinetBloc.add(
+                          KabinetPushScreenEvent(profil.fullName),
+                        );
+                      },
+                      splashColor: AppColors.transparentColor,
+                      highlightColor: AppColors.transparentColor,
+                      child: Image.asset(
+                        AppImage.cabinetEditIcon,
+                        height: dimens.height24,
                       ),
-                      InkWell(
-                        onTap: () {
-                          kabinetBloc.add(
-                            KabinetPushScreenEvent(profil.fullName),
-                          );
-                        },
-                        splashColor: AppColors.transparentColor,
-                        highlightColor: AppColors.transparentColor,
-                        child: Image.asset(
-                          AppImage.cabinetEditIcon,
-                          height: dimens.height24,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Gap(dimens.paddingVerticalItem8),
-                  Text(
-                    AppStrings.yourname,
-                    style: dimens.pagesTextSty,
-                  ),
-                  Gap(dimens.paddingVerticalItem4),
-                  Text(
-                    profil.fullName,
-                    style: dimens.pagesYourNameSty,
-                  ),
-                  Gap(dimens.paddingVerticalItem8),
-                  Text(
-                    AppStrings.phoneNumberHint,
-                    style: dimens.pagesTextSty,
-                  ),
-                  Gap(dimens.paddingVerticalItem4),
-                  Text(
-                    profil.phone,
-                    style: dimens.pagesYourNameSty,
-                  ),
-                  Gap(dimens.paddingVerticalItem16),
-                  my_car_widget(profil, carInfoList),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Text(
+                  AppStrings.yourname,
+                  style: dimens.pagesTextSty,
+                ),
+                Text(
+                  kabinetBloc.isHaveUserName,
+                  style: dimens.pagesYourNameSty,
+                ),
+                Gap(dimens.paddingVerticalItem8),
+                Text(
+                  AppStrings.phoneNumberHint,
+                  style: dimens.pagesTextSty,
+                ),
+                Text(
+                  kabinetBloc.isHaveUserPhoneNumber,
+                  style: dimens.pagesYourNameSty,
+                ),
+                Gap(dimens.paddingVerticalItem16),
+                my_car_widget(profil, carInfoList),
+              ],
             ),
-          );
-        } else {
-          return Scaffold(
-            body: GreenImageBackground(
-              child: Container(),
-            ),
-          );
-        }
-      },
+          ),
+        );
+      }),
     );
   }
 
@@ -145,7 +135,8 @@ class _CabinetScreenState extends State<CabinetScreen> {
                 ),
                 height: dimens.height208,
                 width: dimens.screenWidth,
-                decoration: cardContainerDecoration(dimens),
+                decoration: newEditDecoration(dimens),
+                // decoration: cardContainerDecoration(dimens),
                 child: Column(
                   children: [
                     Image.asset(
@@ -173,7 +164,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
               car_list(carInfoList),
               Gap(dimens.paddingVerticalItem4),
               add_my_car_btn(),
-              Gap(dimens.paddingVerticalItem16),
+              Gap(dimens.paddingVerticalItem12),
             ],
           );
   }

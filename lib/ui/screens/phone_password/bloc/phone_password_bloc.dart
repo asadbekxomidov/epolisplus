@@ -1,10 +1,10 @@
-import 'package:epolisplus/repository/auth/auth_repository.dart';
-import 'package:epolisplus/ui/screens/home/ui/screen/home_screen.dart';
-import 'package:epolisplus/utils/errors.dart';
-import 'package:equatable/equatable.dart';
+import 'package:get/get.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:equatable/equatable.dart';
+import 'package:epolisplus/utils/errors.dart';
+import 'package:epolisplus/ui/screens/screns_export.dart';
+import 'package:epolisplus/repository/auth/auth_repository.dart';
 
 part 'phone_password_event.dart';
 part 'phone_password_state.dart';
@@ -40,7 +40,14 @@ class PhonePasswordBloc extends Bloc<PhonePasswordEvent, PhonePasswordState> {
           phoneNumber, phoneCode, password, passwordConfirm);
 
       if (baseResponse.status == 200) {
-        Get.to(() => HomeScreen());
+        var isAuthUser = baseResponse.response as bool;
+
+        if (isAuthUser) {
+          Get.offAll(() => BottomWidget());
+          emit(PhonePasswordSuccessState());
+        } else {
+          emit(PhonePasswordErrorState(PaaswordPhoneCodeFailure()));
+        }
         emit(PhonePasswordSuccessState());
       } else {
         emit(PhonePasswordErrorState(PaaswordPhoneCodeFailure()));

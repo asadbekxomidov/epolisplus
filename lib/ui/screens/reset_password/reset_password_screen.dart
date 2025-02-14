@@ -24,19 +24,29 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       resizeToAvoidBottomInset: true,
       body: BlocProvider(
         create: (context) => ResetPasswordBloc(),
-        child: Stack(
-          children: [
-            ui(),
-            BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
-              builder: (context, state) {
-                return LoadingIndicator(
-                  isLoading: state is ResetPasswordLoadingState,
-                );
-              },
-            )
-          ],
+        child: Container(
+          height: dimens.screenHeight,
+          width: dimens.screenWidth,
+          color: AppColors.bg_color,
+          child: Stack(
+            children: [
+              backImage(dimens),
+              ui(),
+              loading(),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  loading() {
+    return BlocBuilder<ResetPasswordBloc, ResetPasswordState>(
+      builder: (context, state) {
+        return LoadingIndicator(
+          isLoading: state is ResetPasswordLoadingState,
+        );
+      },
     );
   }
 
@@ -58,7 +68,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: dimens.paddingHorizontal,
           ),
-          decoration: mainDecorations(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

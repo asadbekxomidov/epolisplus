@@ -45,16 +45,24 @@ class PasswordWidget extends StatelessWidget {
                   dimens,
                   isActive: true,
                 ),
-                child: TextField(
-                  controller: controller,
-                  obscureText: isObscure,
-                  decoration: InputDecoration(
-                    hintText: hintText,
-                    hintStyle: dimens.hintStyle,
-                    filled: false,
-                    fillColor: AppColors.whiteColor,
-                    border: InputBorder.none,
-                    suffixIcon: IconButton(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: controller,
+                        obscureText: isObscure,
+                        decoration: InputDecoration(
+                          hintText: hintText,
+                          hintStyle: dimens.hintStyle,
+                          filled: false,
+                          fillColor: AppColors.whiteColor,
+                          border: InputBorder.none,
+                          // suffixIcon:
+                        ),
+                        style: dimens.myTextFieldStyle,
+                      ),
+                    ),
+                    IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       icon: Icon(
@@ -67,8 +75,7 @@ class PasswordWidget extends StatelessWidget {
                         passwordBloc.add(TogglePasswordVisibility());
                       },
                     ),
-                  ),
-                  style: dimens.myTextFieldStyle,
+                  ],
                 ),
               ),
             ],

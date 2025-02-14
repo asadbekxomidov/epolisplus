@@ -6,3 +6,11 @@ abstract class CaskoEvent extends Equatable {
 }
 
 class CaskoGetEvent extends CaskoEvent {}
+
+class OpenProductPageEvent extends CaskoEvent {
+  CaskoResponse caskoInfo;
+
+  OpenProductPageEvent({
+    required this.caskoInfo,
+  });
+}

@@ -23,6 +23,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<OpenOsagoEvent>(openOsago);
     on<OpenTravelEvent>(openTravel);
     on<OpenAddServisePEvent>(openaddServise);
+    on<OpenNotificationEvent>(openNotiPage);
   }
 
   Future<void> _handleLogout(LogoutEvent event, Emitter<HomeState> emit) async {
@@ -104,6 +105,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       OpenAddServisePEvent event, Emitter<HomeState> emit) async {
     // emit(HomeLoadingState());
     await Get.to(() => AddServiseScreen());
+    emit(HomeSuccessState());
+  }
+
+  Future<void> openNotiPage(
+      OpenNotificationEvent event, Emitter<HomeState> emit) async {
+    await Get.to(() => NotificationScreen());
     emit(HomeSuccessState());
   }
 }

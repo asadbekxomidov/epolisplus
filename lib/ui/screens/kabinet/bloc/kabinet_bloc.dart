@@ -12,6 +12,20 @@ part 'kabinet_event.dart';
 part 'kabinet_state.dart';
 
 class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
+  ProfilResponse profilResponse = ProfilResponse(
+    phone: '',
+    carInfo: [],
+    fullName: '',
+  );
+
+  String get isHaveUserName {
+    return profilResponse.fullName;
+  }
+
+  String get isHaveUserPhoneNumber {
+    return profilResponse.phone;
+  }
+
   KabinetBloc() : super(KabinetInitialState()) {
     on<KabinetGetEvent>(userGetInformation);
     on<KabinetPushScreenEvent>(editpushScreen);
@@ -69,6 +83,9 @@ class KabinetBloc extends Bloc<KabinetEvent, KabinetState> {
 
       if (response.status == 200 && response.response != null) {
         emit(KabinetInformationGetState(profilResponse: response.response!));
+        profilResponse = response.response!;
+        print('${profilResponse.fullName} GETDATA GETDATA GETDATA');
+        // emit(KabinetSuccesState());
       } else if (response.status == 401) {
         final prefsManager = SharedPreferencesManager();
         await prefsManager.clearUserInfo();

@@ -1139,9 +1139,29 @@ class Dimens {
     );
   }
 
+  TextStyle get font30Blackw600Sty {
+    return TextStyle(
+      color: AppColors.blackPagesTextColor,
+      fontWeight: FontWeight.w600,
+      fontSize: font30,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
   TextStyle get font24Blackw600Sty {
     return TextStyle(
       color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w600,
+      fontSize: font24,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
+  TextStyle get font24Redw600Sty {
+    return TextStyle(
+      color: AppColors.redColordefault,
       fontWeight: FontWeight.w600,
       fontSize: font24,
       decoration: TextDecoration.none,
@@ -1168,6 +1188,15 @@ class Dimens {
       decoration: TextDecoration.none,
       fontFamily: "GeistVF",
       // overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get gowNumber {
+    return TextStyle(
+      fontSize: fontGowNumber,
+      color: AppColors.black,
+      fontFamily: "Fe-Font",
+      decoration: TextDecoration.none,
     );
   }
 
@@ -1223,6 +1252,16 @@ class Dimens {
     );
   }
 
+  TextStyle get font12Greyw400Sty {
+    return TextStyle(
+      color: AppColors.textGreyColors,
+      fontWeight: FontWeight.w400,
+      fontSize: font12,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
   TextStyle get font14Greyw400Sty {
     return TextStyle(
       color: AppColors.textGreyColors,
@@ -1253,6 +1292,16 @@ class Dimens {
     );
   }
 
+  TextStyle get font14Red400Sty {
+    return TextStyle(
+      color: AppColors.redColordefault,
+      fontWeight: FontWeight.w400,
+      fontSize: font14,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+    );
+  }
+
   TextStyle get font16Redw400Sty {
     return TextStyle(
       color: AppColors.redColordefault,
@@ -1274,6 +1323,17 @@ class Dimens {
     );
   }
 
+  TextStyle get font16Blackw400StyNeE {
+    return TextStyle(
+      color: AppColors.textBlackColors,
+      fontWeight: FontWeight.w400,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get font16Blackw600Sty {
     return TextStyle(
       color: AppColors.textBlackColors,
@@ -1285,6 +1345,17 @@ class Dimens {
     );
   }
 
+  TextStyle get font16Yelloww600Sty {
+    return TextStyle(
+      color: AppColors.yellowDefaultColor,
+      fontWeight: FontWeight.w600,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      // overflow: TextOverflow.ellipsis,
+    );
+  }
+
   TextStyle get font16Whitew600Sty {
     return TextStyle(
       color: AppColors.whiteColor255,
@@ -1293,6 +1364,28 @@ class Dimens {
       decoration: TextDecoration.none,
       fontFamily: "GeistVF",
       overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font16Whitew400Sty {
+    return TextStyle(
+      color: AppColors.whiteColor255,
+      fontWeight: FontWeight.w400,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      overflow: TextOverflow.ellipsis,
+    );
+  }
+
+  TextStyle get font16Whitew400StyNeE {
+    return TextStyle(
+      color: AppColors.whiteColor255,
+      fontWeight: FontWeight.w400,
+      fontSize: font16,
+      decoration: TextDecoration.none,
+      fontFamily: "GeistVF",
+      // overflow: TextOverflow.ellipsis,
     );
   }
 

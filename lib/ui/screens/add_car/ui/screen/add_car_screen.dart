@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
 import 'package:epolisplus/ui/screens/add_car/bloc/my_car_bloc.dart';
-import 'package:epolisplus/ui/screens/modul/addedcar/screen/vehicle_car_info.dart';
+import 'package:epolisplus/ui/screens/modul/vehicle/screen/vehicle_car_info.dart';
 import 'package:get/get.dart';
 
 class AddCarScreen extends StatefulWidget {
@@ -33,6 +33,7 @@ class _AddCarScreenState extends State<AddCarScreen> {
         },
         builder: (context, state) {
           bloc = BlocProvider.of<MyCarBloc>(context);
+
           return Scaffold(
             resizeToAvoidBottomInset: true,
             body: Container(

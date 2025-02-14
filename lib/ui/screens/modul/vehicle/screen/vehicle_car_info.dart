@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/ui/widgets/widgets_export.dart';
-import 'package:epolisplus/ui/screens/modul/addedcar/bloc/add_car_bloc.dart';
+import 'package:epolisplus/ui/screens/modul/vehicle/bloc/add_car_bloc.dart';
 
 class VehicleCarInfo extends StatelessWidget {
   late Dimens dimens;
-  late AddedCarBloc bloc;
+  late VehicleBloc bloc;
   CarInformationResponse? vehicleInformation;
   OnVehicleListener? listener;
 
@@ -22,11 +22,11 @@ class VehicleCarInfo extends StatelessWidget {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => AddedCarBloc(
+      create: (context) => VehicleBloc(
         listener: listener!,
         vehicleInformation: vehicleInformation!,
       ),
-      child: BlocConsumer<AddedCarBloc, AddedCarState>(
+      child: BlocConsumer<VehicleBloc, VehicleState>(
         listener: (context, state) {
           print("📢 BlocConsumer listener: ${state.runtimeType}");
           if (state is CarErrorState) {
@@ -42,7 +42,7 @@ class VehicleCarInfo extends StatelessWidget {
           print("📌 Bloc builder state: ${state.runtimeType}");
           assert(listener != null, "❌ listener NULL bo'lishi mumkin!");
 
-          bloc = BlocProvider.of<AddedCarBloc>(context);
+          bloc = BlocProvider.of<VehicleBloc>(context);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

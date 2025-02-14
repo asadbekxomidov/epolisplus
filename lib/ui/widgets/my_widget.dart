@@ -531,7 +531,7 @@ class MyRowImageWidget extends StatelessWidget {
           Expanded(
             child: Text(
               '${formatNumber(text)} сум',
-              style: dimens.myTextFieldStyle,
+              style: dimens.font16Blackw600Sty,
             ),
           ),
         ],

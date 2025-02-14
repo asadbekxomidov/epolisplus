@@ -20,6 +20,8 @@ class CheckAuthBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
 
   Future<void> phonelogin(
       CheckAuthEvent event, Emitter<PhoneLoginState> emit) async {
+    emit(LoadingState());
+
     var phoneNumber = phoneController.text.trim();
     phoneNumber = clearPhoneMask(phoneNumber);
 
@@ -27,8 +29,6 @@ class CheckAuthBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
       emit(ErrorState(InputPhoneFailure()));
       return;
     }
-
-    emit(LoadingState());
 
     var authRepository = AuthRepository();
     var baseResponse = await authRepository.checkAuth(phoneNumber);
@@ -38,16 +38,16 @@ class CheckAuthBloc extends Bloc<PhoneLoginEvent, PhoneLoginState> {
 
       if (isAuthUser) {
         Get.to(() => LoginScreen(phoneNumber: phoneNumber));
+        emit(SuccessState());
       } else {
         Get.to(() => RegisterScreen(phoneNumber: phoneNumber));
+        emit(SuccessState());
       }
-      return;
+    } else {
+      emit(ErrorState(ServerFailure(message: baseResponse.message!)));
     }
 
     emit(SuccessState());
-
-    emit(ErrorState(ServerFailure(message: baseResponse.message!)));
-    return;
   }
 
   void onToggleActive(

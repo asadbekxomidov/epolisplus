@@ -11,3 +11,5 @@ export 'add_car_textfield.dart';
 export 'my_textfield_widget.dart';
 export 'showdialog_widget.dart';
 export 'my_widget_pages.dart';
+export 'step_select/widget/stp_button_widget.dart';
+export 'background/widget/background_widget.dart';

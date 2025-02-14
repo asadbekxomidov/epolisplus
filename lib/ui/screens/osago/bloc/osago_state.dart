@@ -1,5 +1,6 @@
 part of 'osago_bloc.dart';
 
+@immutable
 abstract class OsagoState extends Equatable {
   @override
   List<Object?> get props => [];

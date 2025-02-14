@@ -26,7 +26,9 @@ class _TravelScreenState extends State<TravelScreen> {
         body: SafeArea(
           child: Stack(
             children: [
+              // backImage2(dimens),
               ui(),
+              // backImage2(dimens),
               BlocBuilder<TravelBloc, TravelState>(
                 builder: (context, state) {
                   return LoadingIndicator2(
@@ -54,6 +56,7 @@ class _TravelScreenState extends State<TravelScreen> {
             horizontal: dimens.paddingWidth,
             vertical: dimens.paddingHeight,
           ),
+          // decoration: pagesDeco(dimens),
           decoration: backgroundPagesDecorations(dimens),
           child: Column(
             children: [

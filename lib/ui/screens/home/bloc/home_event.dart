@@ -25,3 +25,5 @@ class OpenOsagoEvent extends HomeEvent {}
 class OpenTravelEvent extends HomeEvent {}
 
 class OpenAddServisePEvent extends HomeEvent {}
+
+class OpenNotificationEvent extends HomeEvent {}
