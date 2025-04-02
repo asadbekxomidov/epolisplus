@@ -6,3 +6,5 @@ abstract class ProductEvent extends Equatable {
 }
 
 class ProductInfoEvent extends ProductEvent {}
+
+class OpenCaskoBuyEvent extends ProductEvent {}

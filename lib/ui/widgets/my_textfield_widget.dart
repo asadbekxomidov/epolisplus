@@ -39,7 +39,7 @@ class MyTextfieldWCode extends StatelessWidget {
     return Container(
       width: width,
       // height: height,
-      decoration: newDecoration(dimens, isActive: true),
+      decoration: newInputDecoration(dimens, isActive: true),
       // decoration: myContainerWidgets(dimens, myRadius!),
       child: Row(
         children: [
@@ -124,7 +124,7 @@ class _UserInFoWidgetState extends State<UserInFoWidget> {
             Container(
               // height: dimens.height40,
               width: dimens.width64,
-              decoration: newDecoration(
+              decoration: newInputDecoration(
                 dimens,
                 isActive: widget.isActive,
               ),
@@ -164,7 +164,7 @@ class _UserInFoWidgetState extends State<UserInFoWidget> {
                 alignment: Alignment.center,
                 // height: dimens.height40,
                 width: dimens.screenWidth,
-                decoration: newDecoration(
+                decoration: newInputDecoration(
                   dimens,
                   isActive: widget.isActive,
                 ),
@@ -210,7 +210,7 @@ class _UserInFoWidgetState extends State<UserInFoWidget> {
 class UserBirthDateWidget extends StatelessWidget {
   late Dimens dimens;
 
-  final String text;
+  final String? text;
   final String hintText;
   final bool showStar;
   final bool isActive;
@@ -219,7 +219,7 @@ class UserBirthDateWidget extends StatelessWidget {
   UserBirthDateWidget({
     this.isActive = true,
     this.showStar = false,
-    required this.text,
+    this.text,
     required this.hintText,
     required this.onClick,
   });
@@ -237,10 +237,11 @@ class UserBirthDateWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                text,
-                style: dimens.textStyleSecondary,
-              ),
+              if (text != '')
+                Text(
+                  text!,
+                  style: dimens.textStyleSecondary,
+                ),
               Gap(dimens.paddingHorizontalItem5),
               if (showStar) AppImage.starWidget(context),
             ],
@@ -248,7 +249,7 @@ class UserBirthDateWidget extends StatelessWidget {
           Container(
             height: dimens.height48,
             width: dimens.screenWidth,
-            decoration: newDecoration(
+            decoration: newInputDecoration(
               dimens,
               isActive: isActive,
             ),
@@ -369,7 +370,7 @@ class AmoutInputWidget extends StatelessWidget {
         Container(
           // height: dimens.height40,
           // width: dimens.width220,
-          decoration: newDecoration(
+          decoration: newInputDecoration(
             dimens,
             isActive: true,
           ),
@@ -426,8 +427,9 @@ class RefCodeTextField extends StatelessWidget {
             ),
           ],
         ),
+        // Gap(dimens.paddingHorizontal4),
         Container(
-          decoration: newDecoration(dimens),
+          decoration: newInputDecoration(dimens),
           child: Row(
             children: [
               Expanded(
@@ -452,6 +454,168 @@ class RefCodeTextField extends StatelessWidget {
                     )
                   : Container(),
               Gap(dimens.paddingHorizontal4),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class NewDyTextF extends StatelessWidget {
+  final String title;
+  final TextEditingController controller;
+  final String hintText;
+  final bool showStar;
+  final bool isActive;
+
+  NewDyTextF({
+    this.isActive = true,
+    this.showStar = false,
+    required this.title,
+    required this.hintText,
+    required this.controller,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              title,
+              style: dimens.textStyleSecondary,
+            ),
+            Gap(dimens.paddingHorizontalItem5),
+            if (showStar) AppImage.starWidget(context),
+          ],
+        ),
+        Container(
+          // height: dimens.height40,
+          width: dimens.screenWidth,
+          decoration: newInputDecoration(
+            dimens,
+            isActive: isActive,
+          ),
+
+          // decoration: BoxDecoration(
+          //   color: AppColors.whiteColor,
+          //   borderRadius: BorderRadius.circular(dimens.height10),
+          //   border: Border.all(
+          //     color: AppColors.lineColor,
+          //     width: dimens.width10 / 17,
+          //   ),
+          //   boxShadow: [
+          //     BoxShadow(
+          //       offset: Offset(0, 1),
+          //       blurRadius: dimens.height10 / 2,
+          //       color: AppColors.greys,
+          //     ),
+          //   ],
+          // ),
+          // // decoration: newDecoration(
+          // //   dimens,
+          // //   isActive: isActive,
+          // // ),
+          child: TextField(
+            controller: controller,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: hintText,
+              hintStyle: dimens.hintStyle,
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingHorizontal13,
+              ),
+            ),
+            cursorHeight: dimens.height20,
+            enabled: isActive,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ConuntiesTextF extends StatelessWidget {
+  final String title;
+  final TextEditingController controller;
+  final String hintText;
+  final bool showStar;
+  final bool isActive;
+  final Function onClick;
+
+  ConuntiesTextF({
+    this.isActive = true,
+    this.showStar = false,
+    required this.title,
+    required this.hintText,
+    required this.controller,
+    required this.onClick,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              title,
+              style: dimens.textStyleSecondary,
+            ),
+            Gap(dimens.paddingHorizontalItem5),
+            if (showStar) AppImage.starWidget(context),
+          ],
+        ),
+        Container(
+          // height: dimens.height40,
+          width: dimens.screenWidth,
+          decoration: newInputDecoration(
+            dimens,
+            isActive: isActive,
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: dimens.paddingHorizontal13,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: hintText,
+                    hintStyle: dimens.hintStyle,
+                    // contentPadding: EdgeInsets.symmetric(
+                    //   horizontal: dimens.paddingHorizontal13,
+                    // ),
+                  ),
+                  cursorHeight: dimens.height20,
+                  enabled: isActive,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  onClick();
+                },
+                child: Icon(
+                  Icons.search,
+                  size: dimens.height20,
+                ),
+              ),
+              // SvgPicture.asset(
+              //   Resource.NEW_IC_SETTINGS,
+              //   color: Colors.black,
+              // ),
             ],
           ),
         ),

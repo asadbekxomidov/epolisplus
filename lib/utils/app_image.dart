@@ -175,6 +175,8 @@ class AppImage {
   static String fridgeIcon = 'assets/image/fridge_icon.png';
   static String refrigeratorgreyIcon = 'assets/image/refrigerator_grey_icon.png';
   static String amoutCoinIcon = 'assets/image/amout_pint_icon.png';
+  static String containerWid = 'assets/image/container_images.png';
+  static String isCheckcontainerWid = 'assets/image/container_images_ischeck.png';
   static String warrantycodewidgeticon =
       'assets/image/warrantycode_widget_icon.png';
 

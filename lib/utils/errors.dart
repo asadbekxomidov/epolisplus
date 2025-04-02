@@ -5,6 +5,11 @@ abstract class LocalizedMessage {
   String getErrorMessage(BuildContext context);
 }
 
+abstract class LocalizedMessage2 {
+  String getLocalizedMessage(BuildContext context);
+}
+
+
 abstract class Failure implements LocalizedMessage {
   Failure();
 }

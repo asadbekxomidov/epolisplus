@@ -12,16 +12,34 @@ class RegisterCertnumberScreen extends StatelessWidget {
     dimens = Dimens(context);
 
     return Scaffold(
-      body: Container(
+      backgroundColor: AppColors.blackColor,
+      body: Stack(
+        children: [
+          ui(),
+        ],
+      ),
+    );
+  }
+
+  ui() {
+    return SafeArea(
+      child: Container(
         height: dimens.screenHeight,
-        decoration: mainDecorations(),
+        decoration: backgroundPagesDecorations(dimens),
         padding: EdgeInsets.symmetric(
           horizontal: dimens.paddingHorizontal16,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Gap(dimens.paddingVerticalItem59),
+            Gap(dimens.paddingVerticalItem10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ContainerGreyWidget(),
+              ],
+            ),
+            Gap(dimens.paddingVerticalItem10),
             MyTextIconButton(
               appColors: AppColors.mainColor,
               iconData: Icons.close,

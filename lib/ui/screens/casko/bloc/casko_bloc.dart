@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:get/get.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -23,6 +21,7 @@ class CaskoBloc extends Bloc<CaskoEvent, CaskoState> {
   CaskoBloc() : super(SuccessState()) {
     on<CaskoGetEvent>(getCaskoF);
     on<OpenProductPageEvent>(openPPage);
+    on<OpenBuyScreenEvent>(caskoBuy);
   }
 
   Future<void> getCaskoF(CaskoGetEvent event, Emitter<CaskoState> emit) async {
@@ -52,6 +51,12 @@ class CaskoBloc extends Bloc<CaskoEvent, CaskoState> {
   Future<void> openPPage(
       OpenProductPageEvent event, Emitter<CaskoState> emit) async {
     Get.to(() => CaskoProductScreen(caskoInfo: event.caskoInfo));
+    emit(SuccessState());
+  }
+
+  Future<void> caskoBuy(
+      OpenBuyScreenEvent event, Emitter<CaskoState> emit) async {
+    Get.to(() => CaskoBuyScreen(caskoResponse: event.caskoInfo));
     emit(SuccessState());
   }
 }

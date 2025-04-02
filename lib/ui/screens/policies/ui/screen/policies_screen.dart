@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:epolisplus/utils/resource.dart';
-import 'package:epolisplus/utils/constanta.dart';
 import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/ui/screens/policies/bloc/policies_bloc.dart';
 import 'package:epolisplus/ui/widgets/background/widget/background_widget.dart';
@@ -27,13 +26,13 @@ class _PoliciesScreenState extends State<PoliciesScreen> {
           final bloc = BlocProvider.of<PoliciesBloc>(context);
 
           // Gradientni dinamik tarzda tanlash
-          Widget background = green_gradient_widget(dimens);
+          Widget background = green_background(dimens);
           if (state is PoliciesCategoryChangedState) {
             background = state.categoryId == IConstanta.CATEGORY_ACTIVE
-                ? green_gradient_widget(dimens)
+                ? green_background(dimens)
                 : state.categoryId == IConstanta.CATEGORY_UNPAID
-                    ? blue_gradient_widget(dimens)
-                    : black_gradient_widget(dimens);
+                    ? blue_background(dimens)
+                    : black_background(dimens);
           }
 
           return Scaffold(

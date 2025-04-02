@@ -13,7 +13,7 @@ part 'notification_event.dart';
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   late List<NotificationResponse> data = [];
 
-   bool get isHaveNotificationInfoName {
+  bool get isHaveNotificationInfoName {
     bool hasEmptyName = data.any((item) => item.id != -1);
     print('WWWWWWWWWWWWWWWWWWWWWWWWw $hasEmptyName');
     return hasEmptyName;
@@ -21,6 +21,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
 
   NotificationBloc() : super(SuccesState()) {
     on<GetNotificationEvent>(getNotification);
+    on<AllNotificationEvent>(allNotifi);
   }
 
   Future<void> getNotification(
@@ -43,6 +44,30 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       }
     } catch (e) {
       emit(ErrorState(failure: ServerFailure(message: '')));
+    }
+  }
+
+  Future<void> allNotifi(
+      AllNotificationEvent event, Emitter<NotificationState> emit) async {
+    emit(LoadingState());
+
+    try {
+      final repository = NotificationRepository();
+      var response = await repository.allNotification();
+
+      if (response.status == 200) {
+        data = response.response!;
+        Get.back();
+        emit(SuccesState());
+      } else if (response.status == 401) {
+        final storage = SharedPreferencesManager();
+        await storage.clearUserInfo();
+        Get.offAll(() => CheckAuthScreen());
+      } else {
+        emit(ErrorState(failure: ServerFailure(message: response.message!)));
+      }
+    } catch (e) {
+      emit(ErrorState(failure: ServerFailure(message: '$e')));
     }
   }
 }

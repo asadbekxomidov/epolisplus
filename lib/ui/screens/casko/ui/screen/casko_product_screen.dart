@@ -11,6 +11,7 @@ import 'package:epolisplus/ui/screens/casko/product_bloc/bloc.dart';
 
 class CaskoProductScreen extends StatelessWidget {
   CaskoResponse caskoInfo;
+  late ProductBloc bloc;
 
   CaskoProductScreen({
     required this.caskoInfo,
@@ -22,7 +23,7 @@ class CaskoProductScreen extends StatelessWidget {
     dimens = Dimens(context);
 
     return BlocProvider(
-      create: (context) => ProductBloc(),
+      create: (context) => ProductBloc(caskoInfo),
       child: SafeArea(
         child: Stack(
           children: [
@@ -43,6 +44,8 @@ class CaskoProductScreen extends StatelessWidget {
   ui() {
     return BlocBuilder<ProductBloc, ProductState>(
       builder: (context, state) {
+        bloc = BlocProvider.of<ProductBloc>(context);
+
         if (state is ErrorState) {}
         return Container(
           width: dimens.screenWidth,
@@ -134,9 +137,14 @@ class CaskoProductScreen extends StatelessWidget {
                   image: AppImage.amoutCoinIcon,
                 ),
                 Gap(dimens.paddingVerticalItem16),
-                CustomButton(
-                  text: AppStrings.applyforPolicy,
-                  isCheck: true,
+                GestureDetector(
+                  onTap: () {
+                    bloc.add(OpenCaskoBuyEvent());
+                  },
+                  child: CustomButton(
+                    text: AppStrings.applyforPolicy,
+                    isCheck: true,
+                  ),
                 ),
                 Gap(dimens.paddingVerticalItem8),
                 CustomButton2(

@@ -1,19 +1,17 @@
 import 'package:dio/dio.dart';
-import 'package:epolisplus/models/base_models.dart';
-import 'package:epolisplus/services/api_service.dart';
+import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/services/api_constanta.dart';
-import 'package:epolisplus/utils/sharedPreferencesManager.dart';
-import 'package:epolisplus/repository/servises/addiontal/addiontal_ser_repository_iml.dart';
+import 'package:epolisplus/services/api_service.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 
-class AddiontalSerRepository extends AddiontalSerRepositoryIml {
+class AddReferallCodeRepository {
   late ApiService service;
 
-  AddiontalSerRepository() {
+  AddReferallCodeRepository() {
     service = ApiService(ApiConstanta.BASE_URL_EPOLIS_PLUS);
   }
 
-  @override
-  Future<BaseModels> getAddiSer() async {
+  Future<BaseModels> getRefCode(String refCode) async {
     final prefsManager = SharedPreferencesManager();
     final token = await prefsManager.getToken();
 
@@ -25,16 +23,20 @@ class AddiontalSerRepository extends AddiontalSerRepositoryIml {
       'Authorization': 'Bearer $token',
     };
 
-    var url = ApiConstanta.KASKO_SERVICE;
+    var data = {
+      'code': refCode,
+    };
+
+    var url = ApiConstanta.CHECK_REFERRAL;
     Response? response;
 
     try {
-      response = await service.getGetData(headers, url);
+      response = await service.getPostData(data, headers, url);
 
       if (response?.statusCode == 200) {
         return BaseModels(
+          response: response?.data,
           status: response?.statusCode,
-          response: response?.data['response'],
         );
       } else {
         return BaseModels(
@@ -43,10 +45,7 @@ class AddiontalSerRepository extends AddiontalSerRepositoryIml {
         );
       }
     } catch (e) {
-      return BaseModels(
-        status: 512,
-        message: '$e',
-      );
+      return SERVER_NOT_WORKING;
     }
   }
 }

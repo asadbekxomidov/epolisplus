@@ -9,3 +9,6 @@ export 'my_function.dart';
 export 'loading.dart';
 export 'masks.dart';
 export 'sharedPreferencesManager.dart';
+export 'repo.dart';
+export 'constanta.dart';
+export 'my_list.dart';

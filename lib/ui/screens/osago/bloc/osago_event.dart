@@ -10,3 +10,11 @@ class OsagoInfoGetEvent extends OsagoEvent {}
 class SelectButtonEvent extends OsagoEvent {}
 
 class ClearVehicleInfoEvent extends OsagoEvent {}
+
+// ? STEP 2 EVENT
+
+class SelectPolicyEvent extends OsagoEvent {}
+
+class StartTimeEvent extends OsagoEvent {}
+
+class EndTimeEvent extends OsagoEvent {}

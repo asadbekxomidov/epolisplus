@@ -1468,14 +1468,14 @@ class MyTextIconButton extends StatelessWidget {
 
 // ? MyGreenButton
 
-class MyGreenButton extends StatelessWidget {
+class DynamicBtn extends StatelessWidget {
   Function onClick;
   String text;
   IconData? iconData;
   Color? iconColor;
   bool isCheck;
 
-  MyGreenButton({
+  DynamicBtn({
     required this.onClick,
     required this.text,
     this.iconData,
@@ -1491,8 +1491,11 @@ class MyGreenButton extends StatelessWidget {
     return GestureDetector(
       onTap: isCheck ? onClick() : () {},
       child: Container(
-        height: dimens.height40,
+        // height: dimens.height40,
         width: dimens.screenWidth,
+        padding: EdgeInsets.symmetric(
+          vertical: dimens.paddingAll12,
+        ),
         decoration:
             isCheck ? greenDecorations(dimens) : newEditDecoration(dimens),
         child: Row(
@@ -1898,6 +1901,131 @@ class RedButtonSh1 extends StatelessWidget {
               style: dimens.font14Red400Sty,
             ),
         ],
+      ),
+    );
+  }
+}
+
+class UniversButton extends StatelessWidget {
+  final IconData? icon;
+  final String? text;
+  final bool isSelect;
+
+  UniversButton({
+    this.icon,
+    this.text,
+    this.isSelect = false,
+  });
+
+  late Dimens dimens;
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: dimens.paddingVerticalItem12,
+      ),
+      decoration: BoxDecoration(
+        color: isSelect ? AppColors.mainColor : AppColors.inactive_line_color,
+        borderRadius: BorderRadius.circular(
+          dimens.radius8,
+        ),
+        border: Border.all(
+          color: AppColors.greyColor221,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Gap(dimens.paddingHorizontal8),
+          if (text != null)
+            Text(
+              text!,
+              style: isSelect
+                  ? dimens.font16Whitew400Sty
+                  : dimens.font16Grey163w400Sty,
+            ),
+          Gap(dimens.paddingHorizontal8),
+          if (icon != null)
+            Icon(
+              icon!,
+              size: dimens.height20,
+              color:
+                  isSelect ? AppColors.whiteColor255 : AppColors.greyColor163,
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class PrimaryButton extends StatelessWidget {
+  String text;
+  bool isGreen;
+  bool isWhite;
+  IconData? icon;
+  IconData? icon2;
+  Function onClick;
+
+  PrimaryButton({
+    this.icon,
+    this.icon2,
+    required this.text,
+    required this.onClick,
+    required this.isGreen,
+    required this.isWhite,
+  });
+
+  late Dimens dimens;
+
+  @override
+  Widget build(BuildContext context) {
+    dimens = Dimens(context);
+
+    return GestureDetector(
+      onTap: () => onClick(),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: dimens.paddingVerticalItem12,
+        ),
+        decoration: newEditDecoration(
+          dimens,
+          isGreen: isGreen,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null)
+              Row(
+                children: [
+                  Icon(
+                    icon!,
+                    size: dimens.height20,
+                    color: isWhite ? AppColors.white : AppColors.textBlackColor,
+                  ),
+                  Gap(dimens.paddingHorizontal8),
+                ],
+              ),
+            Text(
+              text,
+              style: dimens.font16Blackw400Sty.copyWith(
+                color: isWhite ? AppColors.white : AppColors.textBlackColor,
+              ),
+            ),
+            if (icon2 != null)
+              Row(
+                children: [
+                  Gap(dimens.paddingHorizontal8),
+                  Icon(
+                    icon2!,
+                    size: dimens.height20,
+                    color: isWhite ? AppColors.white : AppColors.textBlackColor,
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }

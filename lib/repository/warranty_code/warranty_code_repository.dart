@@ -6,7 +6,6 @@ import 'package:epolisplus/services/api_service.dart';
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/services/api_constanta.dart';
 
-
 class WarrantyCodeRepository extends WarrantyCodeRepositoryIml {
   late ApiService service;
 
@@ -81,7 +80,6 @@ class WarrantyCodeRepository extends WarrantyCodeRepositoryIml {
 
     try {
       response = await service.getGetData(headers, url);
-      logger(response.toString(), error: 'Warranty repository');
 
       if (response?.statusCode == 200) {
         var warrantyList = (response?.data["response"] as List)

@@ -28,9 +28,9 @@ class VehicleCarInfo extends StatelessWidget {
       ),
       child: BlocConsumer<VehicleBloc, VehicleState>(
         listener: (context, state) {
-          print("📢 BlocConsumer listener: ${state.runtimeType}");
+          // print("📢 BlocConsumer listener: ${state.runtimeType}");
           if (state is CarErrorState) {
-            print("❌ Xatolik: ${state.failure.getErrorMessage(context)}");
+            // print("❌ Xatolik: ${state.failure.getErrorMessage(context)}");
             showErrorMessageSnackBar(
               context,
               state.failure.getErrorMessage(context),
@@ -38,9 +38,9 @@ class VehicleCarInfo extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          print('STATESTATESTATE ${state}');
-          print("📌 Bloc builder state: ${state.runtimeType}");
-          assert(listener != null, "❌ listener NULL bo'lishi mumkin!");
+          // print('STATESTATESTATE ${state}');
+          // print("📌 Bloc builder state: ${state.runtimeType}");
+          // assert(listener != null, "❌ listener NULL bo'lishi mumkin!");
 
           bloc = BlocProvider.of<VehicleBloc>(context);
           return Column(
@@ -110,6 +110,15 @@ class VehicleCarInfo extends StatelessWidget {
                           ],
                         ),
                         Gap(dimens.paddingVerticalItem16),
+                        GestureDetector(
+                          onTap: () {
+                            // vehicleOsago.add(ClearVehicleInfoEvent());
+                          },
+                          child: RedButtonSh1(
+                            image: AppImage.closeIcon,
+                            text: AppStrings.closeText,
+                          ),
+                        )
                       ],
                     )
                   : Column(

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:epolisplus/utils/utils_export.dart';
 import 'package:epolisplus/models/base_models.dart';
 import 'package:epolisplus/services/api_service.dart';
 import 'package:epolisplus/services/api_constanta.dart';
-import 'package:epolisplus/utils/sharedPreferencesManager.dart';
 import 'package:epolisplus/repository/servises/osago/osago_repository_iml.dart';
 
 class OsagoRepository extends OsagoRepositoryIml {
@@ -25,7 +25,7 @@ class OsagoRepository extends OsagoRepositoryIml {
       'Authorization': 'Bearer $token',
     };
 
-    var url = ApiConstanta.KASKO_SERVICE;
+    var url = ApiConstanta.GET_RELATION;
     Response? response;
 
     try {
@@ -44,10 +44,7 @@ class OsagoRepository extends OsagoRepositoryIml {
         );
       }
     } catch (e) {
-      return BaseModels(
-        status: 512,
-        message: '$e',
-      );
+      return SERVER_NOT_WORKING;
     }
   }
 }

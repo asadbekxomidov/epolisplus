@@ -15,7 +15,7 @@ class PartnersScreen extends StatefulWidget {
 
 class _PartnersScreenState extends State<PartnersScreen> {
   late Dimens dimens;
-  late PartnersBloc partnersBloc;
+  late PartnersBloc bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _PartnersScreenState extends State<PartnersScreen> {
         create: (context) => PartnersBloc()..add(PartnersGetEvent()),
         child: Stack(
           children: [
-            green_gradient_widget(dimens),
+            green_background(dimens),
             ui(),
             loading(),
           ],
@@ -47,134 +47,251 @@ class _PartnersScreenState extends State<PartnersScreen> {
           }
         },
         builder: (context, state) {
-          partnersBloc = BlocProvider.of<PartnersBloc>(context);
+          bloc = BlocProvider.of<PartnersBloc>(context);
 
-          if (state is PartnersLoadedState) {
-            return Container(
-              height: dimens.screenHeight,
-              width: dimens.screenWidth,
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: dimens.paddingWidth,
-                ),
-                child: Column(
-                  children: [
-                    Gap(dimens.paddingVerticalItem16),
-                    // Gap(dimens.paddingVerticalItem59),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppStrings.partnersaText,
-                          style: dimens.settingsStyle,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            partnersBloc.add(PartnerPushScreenEvent());
-                          },
-                          child: Icon(
-                            AppImage.infocircleIcon,
-                            size: dimens.height24,
-                            color: AppColors.whiteColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Gap(dimens.paddingVerticalItem16),
-                    Expanded(
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        primary: false,
-                        itemCount: state.partners.length,
-                        itemBuilder: (context, index) {
-                          final partner = state.partners[index];
-                          return Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                decoration: newEditDecoration(dimens),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: dimens.paddingWidth,
-                                  vertical: dimens.paddingHeight,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Gap(dimens.paddingHorizontal8),
-                                    partner.image.endsWith('.svg')
-                                        ? SvgPicture.network(
-                                            "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
-                                            height: dimens.height28,
-                                          )
-                                        : Image.network(
-                                            "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
-                                            height: dimens.height28,
-                                          ),
-                                    Gap(dimens.paddingHorizontal11),
-                                    Text(
-                                      AppStrings.servicesText,
-                                      style: dimens.partnersTextSty,
-                                    ),
-                                    Gap(dimens.paddingVerticalItem8),
-                                    // partner_product_list(),
-                                    partnerProductList(partner.productList),
-                                    dashed_line(dimens),
-                                    Gap(dimens.paddingVerticalItem8),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 5,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              partnersBloc.add(
-                                                PartnerPushPhoneEvent(
-                                                    partner.phone),
-                                              );
-                                            },
-                                            child: WhiteBtn(
-                                              image:
-                                                  AppImage.partnersCallOpercon,
-                                              text: AppStrings.languageText,
-                                            ),
-                                          ),
-                                        ),
-                                        Gap(dimens.paddingHorizontal16),
-                                        Expanded(
-                                          flex: 5,
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              partnersBloc.add(
-                                                PartnerPushWebEvent(
-                                                    partner.site),
-                                              );
-                                            },
-                                            child: WhiteBtn(
-                                              image:
-                                                  AppImage.partnersVebSaytcon,
-                                              text: AppStrings.languageText,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Gap(dimens.paddingVerticalItem8),
-                                  ],
-                                ),
-                              ),
-                              Gap(dimens.paddingVerticalItem16),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+          // if (state is PartnersLoadedState) {
+          //   return Container(
+          //     height: dimens.screenHeight,
+          //     width: dimens.screenWidth,
+          //     child: Container(
+          //       padding: EdgeInsets.symmetric(
+          //         horizontal: dimens.paddingWidth,
+          //       ),
+          //       child: Column(
+          //         children: [
+          //           Gap(dimens.paddingVerticalItem16),
+          //           // Gap(dimens.paddingVerticalItem59),
+          //           Row(
+          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //             children: [
+          //               Text(
+          //                 AppStrings.partnersaText,
+          //                 style: dimens.settingsStyle,
+          //               ),
+          //               InkWell(
+          //                 onTap: () {
+          //                   bloc.add(PartnerPushScreenEvent());
+          //                 },
+          //                 child: Icon(
+          //                   AppImage.infocircleIcon,
+          //                   size: dimens.height24,
+          //                   color: AppColors.whiteColor,
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //           Gap(dimens.paddingVerticalItem16),
+          //           Expanded(
+          //             child: ListView.builder(
+          //               shrinkWrap: true,
+          //               primary: false,
+          //               itemCount: state.partners.length,
+          //               itemBuilder: (context, index) {
+          //                 final partner = state.partners[index];
+
+          //                 return Column(
+          //                   mainAxisSize: MainAxisSize.min,
+          //                   children: [
+          //                     Container(
+          //                       decoration: newEditDecoration(dimens),
+          //                       padding: EdgeInsets.symmetric(
+          //                         horizontal: dimens.paddingWidth,
+          //                         vertical: dimens.paddingHeight,
+          //                       ),
+          //                       child: Column(
+          //                         crossAxisAlignment: CrossAxisAlignment.start,
+          //                         children: [
+          //                           Gap(dimens.paddingHorizontal8),
+          //                           partner.image.endsWith('.svg')
+          //                               ? SvgPicture.network(
+          //                                   "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
+          //                                   height: dimens.height28,
+          //                                 )
+          //                               : Image.network(
+          //                                   "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
+          //                                   height: dimens.height28,
+          //                                 ),
+          //                           Gap(dimens.paddingHorizontal11),
+          //                           Text(
+          //                             AppStrings.servicesText,
+          //                             style: dimens.partnersTextSty,
+          //                           ),
+          //                           Gap(dimens.paddingVerticalItem8),
+          //                           // partner_product_list(),
+          //                           partnerProductList(partner.productList),
+          //                           dashed_line(dimens),
+          //                           Gap(dimens.paddingVerticalItem8),
+          //                           Row(
+          //                             children: [
+          //                               Expanded(
+          //                                 flex: 5,
+          //                                 child: GestureDetector(
+          //                                   onTap: () {
+          //                                     bloc.add(
+          //                                       PartnerPushPhoneEvent(
+          //                                           partner.phone),
+          //                                     );
+          //                                   },
+          //                                   child: WhiteBtn(
+          //                                     image:
+          //                                         AppImage.partnersCallOpercon,
+          //                                     text: AppStrings.languageText,
+          //                                   ),
+          //                                 ),
+          //                               ),
+          //                               Gap(dimens.paddingHorizontal16),
+          //                               Expanded(
+          //                                 flex: 5,
+          //                                 child: GestureDetector(
+          //                                   onTap: () {
+          //                                     bloc.add(
+          //                                       PartnerPushWebEvent(
+          //                                           partner.site),
+          //                                     );
+          //                                   },
+          //                                   child: WhiteBtn(
+          //                                     image:
+          //                                         AppImage.partnersVebSaytcon,
+          //                                     text: AppStrings.languageText,
+          //                                   ),
+          //                                 ),
+          //                               ),
+          //                             ],
+          //                           ),
+          //                           Gap(dimens.paddingVerticalItem8),
+          //                         ],
+          //                       ),
+          //                     ),
+          //                     Gap(dimens.paddingVerticalItem16),
+          //                   ],
+          //                 );
+          //               },
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   );
+          // }
+
+          return Container(
+            height: dimens.screenHeight,
+            width: dimens.screenWidth,
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: dimens.paddingWidth,
               ),
-            );
-          }
+              child: Column(
+                children: [
+                  Gap(dimens.paddingVerticalItem16),
+                  // Gap(dimens.paddingVerticalItem59),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.partnersaText,
+                        style: dimens.settingsStyle,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          bloc.add(PartnerPushScreenEvent());
+                        },
+                        child: Icon(
+                          AppImage.infocircleIcon,
+                          size: dimens.height24,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Gap(dimens.paddingVerticalItem16),
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: bloc.partners.length,
+                      itemBuilder: (context, index) {
+                        var partner = bloc.partners[index];
 
-          return GreenImageBackground(
-            child: Container(),
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              decoration: newEditDecoration(dimens),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: dimens.paddingWidth,
+                                vertical: dimens.paddingHeight,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Gap(dimens.paddingHorizontal8),
+                                  partner.image.endsWith('.svg')
+                                      ? SvgPicture.network(
+                                          "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
+                                          height: dimens.height28,
+                                        )
+                                      : Image.network(
+                                          "${ApiConstanta.BASE_URL_EPOLIS_PLUS}${partner.image}",
+                                          height: dimens.height28,
+                                        ),
+                                  Gap(dimens.paddingHorizontal11),
+                                  Text(
+                                    AppStrings.servicesText,
+                                    style: dimens.partnersTextSty,
+                                  ),
+                                  Gap(dimens.paddingVerticalItem8),
+                                  // partner_product_list(),
+                                  partnerProductList(partner.productList),
+                                  dashed_line(dimens),
+                                  Gap(dimens.paddingVerticalItem8),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 5,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            bloc.add(
+                                              PartnerPushPhoneEvent(
+                                                  partner.phone),
+                                            );
+                                          },
+                                          child: WhiteBtn(
+                                            image: AppImage.partnersCallOpercon,
+                                            text: AppStrings.languageText,
+                                          ),
+                                        ),
+                                      ),
+                                      Gap(dimens.paddingHorizontal16),
+                                      Expanded(
+                                        flex: 5,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            bloc.add(
+                                              PartnerPushWebEvent(partner.site),
+                                            );
+                                          },
+                                          child: WhiteBtn(
+                                            image: AppImage.partnersVebSaytcon,
+                                            text: AppStrings.languageText,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Gap(dimens.paddingVerticalItem8),
+                                ],
+                              ),
+                            ),
+                            Gap(dimens.paddingVerticalItem16),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),
@@ -235,25 +352,4 @@ class _PartnersScreenState extends State<PartnersScreen> {
       },
     );
   }
-
-  // partner_product_list() {
-  //   return Column(
-  //     children: [
-  //       MyPartnersRowWidget(
-  //         image: AppImage.partnersKaskoIcon,
-  //         text: AppStrings.kasko,
-  //       ),
-  //       Gap(dimens.paddingVerticalItem8),
-  //       MyPartnersRowWidget(
-  //         image: AppImage.partnersOsagoIcon,
-  //         text: AppStrings.osago,
-  //       ),
-  //       Gap(dimens.paddingVerticalItem8),
-  //       MyPartnersRowWidget(
-  //         image: AppImage.partnersTravelIcon,
-  //         text: AppStrings.travel,
-  //       ),
-  //     ],
-  //   );
-  // }
 }

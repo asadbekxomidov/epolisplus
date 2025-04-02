@@ -30,18 +30,22 @@ class _CaskoScreenState extends State<CaskoScreen> {
             child: Stack(
               children: [
                 ui(),
-                BlocBuilder<CaskoBloc, CaskoState>(
-                  builder: (context, state) {
-                    return LoadingIndicator2(
-                      isLoading: state is LoadingState,
-                    );
-                  },
-                ),
+                loading(),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  loading() {
+    return BlocBuilder<CaskoBloc, CaskoState>(
+      builder: (context, state) {
+        return LoadingIndicator2(
+          isLoading: state is LoadingState,
+        );
+      },
     );
   }
 
@@ -166,9 +170,16 @@ class _CaskoScreenState extends State<CaskoScreen> {
                                         Gap(dimens.paddingHorizontal8),
                                         Expanded(
                                           flex: 5,
-                                          child: CustomButton(
-                                            text: AppStrings.order,
-                                            isCheck: true,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              bloc.add(OpenBuyScreenEvent(
+                                                caskoInfo: casko,
+                                              ));
+                                            },
+                                            child: CustomButton(
+                                              text: AppStrings.order,
+                                              isCheck: true,
+                                            ),
                                           ),
                                         ),
                                       ],

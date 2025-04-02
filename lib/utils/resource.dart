@@ -2,6 +2,7 @@ class Resource {
   static const String IMAGE_BACKGROUND = "assets/images/img_background.png";
   static const String NEW_SOS = "assets/images/new_sos.svg";
   static const String FLAG_UZBEKISTAN = "assets/images/uzb.png";
+  static const String DASHED_LINE = "assets/images/dashedline_icon.png";
 
 
   static const String NEW_BACK_IMAGE2 = "assets/images/new_back_image2.png";

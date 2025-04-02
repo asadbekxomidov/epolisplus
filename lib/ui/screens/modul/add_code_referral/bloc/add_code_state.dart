@@ -9,6 +9,10 @@ class LoadingState extends AddCodeState {}
 
 class LoadedState extends AddCodeState {}
 
-class ErrorState extends AddCodeState {}
+class ErrorState extends AddCodeState {
+  Failure failure;
+
+  ErrorState(this.failure);
+}
 
 class SuccessState extends AddCodeState {}

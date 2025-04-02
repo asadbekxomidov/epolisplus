@@ -27,3 +27,9 @@ class OpenTravelEvent extends HomeEvent {}
 class OpenAddServisePEvent extends HomeEvent {}
 
 class OpenNotificationEvent extends HomeEvent {}
+
+class SelectPolicyCategoryEvent extends HomeEvent {
+  int categoryId;
+
+  SelectPolicyCategoryEvent(this.categoryId);
+}

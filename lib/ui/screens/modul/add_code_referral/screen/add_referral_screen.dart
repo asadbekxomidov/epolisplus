@@ -18,14 +18,32 @@ class AddReferralScreen extends StatelessWidget {
       child: Stack(
         children: [
           ui(),
+          loading(),
         ],
       ),
     );
   }
 
+  loading() {
+    return BlocBuilder<AddCodeBloc, AddCodeState>(
+      builder: (context, state) {
+        return LoadingIndicator2(
+          isLoading: state is LoadingState,
+        );
+      },
+    );
+  }
+
   ui() {
     return BlocConsumer<AddCodeBloc, AddCodeState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is ErrorState) {
+          return showErrorMessageSnackBar(
+            context,
+            state.failure.getErrorMessage(context),
+          );
+        }
+      },
       builder: (context, state) {
         bloc = BlocProvider.of<AddCodeBloc>(context);
 
@@ -59,7 +77,7 @@ class AddReferralScreen extends StatelessWidget {
                         flex: 3,
                         child: GestureDetector(
                           onTap: () {
-                            bloc.add(CheckInputPolEvent());
+                            bloc.add(GetReferallEvent());
                           },
                           child: CheckTextButton(
                             text: bloc.isCheckInput ? 'otmentit' : 'premit',

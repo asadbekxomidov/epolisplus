@@ -41,7 +41,7 @@ class PasswordWidget extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: dimens.paddingHorizontal13,
                 ),
-                decoration: newDecoration(
+                decoration: newInputDecoration(
                   dimens,
                   isActive: true,
                 ),

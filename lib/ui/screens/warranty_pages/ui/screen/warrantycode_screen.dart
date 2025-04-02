@@ -34,17 +34,21 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
           child: Stack(
             children: [
               ui(),
-              BlocBuilder<WarrantycodeBloc, WarrantycodeState>(
-                builder: (context, state) {
-                  return LoadingIndicator2(
-                    isLoading: state is LoadingState,
-                  );
-                },
-              ),
+              loading(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  loading() {
+    return BlocBuilder<WarrantycodeBloc, WarrantycodeState>(
+      builder: (context, state) {
+        return LoadingIndicator2(
+          isLoading: state is LoadingState,
+        );
+      },
     );
   }
 
@@ -253,32 +257,11 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                           )
                         : Container(),
                     widget.response?.hasInput == false
-                        ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Gap(dimens.paddingVerticalItem16),
-                              Text(
-                                AppStrings.vehicleInformation,
-                                style: dimens.font20Blackw400Sty,
-                              ),
-                              Gap(dimens.paddingVerticalItem8),
-                              VehicleCarInfo(
-                                listener: bloc,
-                                vehicleInformation: bloc.vehicleInformation,
-                              ),
-                            ],
-                          )
-                        : Column(
-                            children: [
-                              // Gap(dimens.paddingVerticalItem16),
-                              UserInfoScreen(
-                                listener: bloc,
-                                userInfoResponse: bloc.userInformation,
-                              ),
-                            ],
-                          ),
+                        ? vehicle_info()
+                        : user_info(),
+
                     dashed_line(dimens),
-                    AddReferralScreen(),
+                    add_to_referall(),
                     dashed_line(dimens),
                     Gap(dimens.paddingVerticalItem12),
                     MyRichTextButton(
@@ -293,7 +276,7 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
                       isAgreeChecked: bloc.isAgreeChecked,
                     ),
                     Gap(dimens.paddingVerticalItem12),
-                    MyGreenButton(
+                    DynamicBtn(
                       isCheck: bloc.isAgreeChecked,
                       onClick: () {},
                       text: AppStrings.proceedtoPayment,
@@ -306,6 +289,43 @@ class _WarrantycodeScreenState extends State<WarrantycodeScreen> {
           ),
         );
       },
+    );
+  }
+
+  add_to_referall() {
+    return Column(
+      children: [
+        AddReferralScreen(),
+      ],
+    );
+  }
+
+  user_info() {
+    return Column(
+      children: [
+        UserInfoScreen(
+          title: '',
+          listener: bloc,
+          userInfoResponse: bloc.userInformation,
+        ),
+      ],
+    );
+  }
+
+  vehicle_info() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppStrings.vehicleInformation,
+          style: dimens.font20Blackw400Sty,
+        ),
+        Gap(dimens.paddingVerticalItem8),
+        VehicleCarInfo(
+          listener: bloc,
+          vehicleInformation: bloc.vehicleInformation,
+        ),
+      ],
     );
   }
 

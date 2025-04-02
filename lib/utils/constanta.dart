@@ -17,4 +17,12 @@ class IConstanta {
   static const CATEGORY_ACTIVE = 360;
   static const CATEGORY_UNPAID = 361;
   static const CATEGORY_ARCHIVE = 362;
+
+  // ? HOME
+
+  static const HOME_KASKO = 800;
+  static const HOME_OSAGO = 801;
+  static const HOME_TRAVEL = 802;
+  static const HOME_SERVICES = 803;
+  static const HOME_GARANTY = 804;
 }

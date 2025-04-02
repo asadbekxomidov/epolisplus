@@ -116,9 +116,10 @@ class MyContainerWidget extends StatelessWidget {
 
     return Container(
       // width: dimens.screenWidth,
-      height: dimens.height40,
-      padding: EdgeInsets.only(
-        left: dimens.paddingHorizontal13,
+      // height: dimens.height40,
+      padding: EdgeInsets.symmetric(
+        vertical: dimens.paddingVerticalItem12,
+        horizontal: dimens.paddingHorizontal13,
       ),
       decoration: myContainerGreyDEcoration(dimens),
       child: Row(
@@ -513,8 +514,6 @@ class MyRowImageWidget extends StatelessWidget {
     dimens = Dimens(context);
 
     return Container(
-      // width: dimens.screenWidth,
-      // height: dimens.height40,
       height: dimens.height48,
       padding: EdgeInsets.only(
         left: dimens.paddingHorizontal13,

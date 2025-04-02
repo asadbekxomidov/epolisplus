@@ -7,6 +7,4 @@ abstract class AddCodeEvent extends Equatable {
 
 class OpenInputPolEvent extends AddCodeEvent {}
 
-class CheckInputPolEvent extends AddCodeEvent {}
-
-class RefCodeGetState extends AddCodeEvent {}
+class GetReferallEvent extends AddCodeEvent {}

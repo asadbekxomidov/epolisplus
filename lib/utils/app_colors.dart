@@ -16,9 +16,9 @@ class AppColors {
   static Color carNumberLine = Color.fromRGBO(10, 10, 10, 1);
   static Color textColorsSecondary = Color(0xFF737373);
   static Color neActiveColor = Color(0xFFF3F3F3);
-   static Color inactive_line_color = Color(0xFFE9E9E9);
+  static Color inactive_line_color = Color(0xFFE9E9E9);
   static Color blackColor = Colors.black;
-  static Color textBlackColor = const Color.fromRGBO(10, 10, 10, 0);
+  static Color textBlackColor = const Color.fromRGBO(10, 10, 10, 1);
   static Color redColor = Color(0xFFE70101);
   static Color cardContainerColor = Color.fromARGB(252, 252, 252, 255);
 
@@ -68,13 +68,15 @@ class AppColors {
   static Color greenColorDefault = Color.fromRGBO(0, 160, 112, 1);
   static Color greyColor255 = Color.fromRGBO(255, 255, 255, 1);
   static Color greyColor239 = Color.fromRGBO(239, 239, 239, 1);
+  static Color greyColor221 = Color.fromRGBO(221, 221, 221, 1);
+  static Color greyColor163 = Color.fromRGBO(163, 163, 163, 1);
+  static Color greyColor115 = Color.fromRGBO(115, 115, 115, 1);
   static Color whiteColor255 = Color.fromRGBO(255, 255, 255, 1);
   static Color backgroundBlurColor0 = Color(0x2D2D2D);
   static Color backgroundWhiteColor = Color.fromRGBO(250, 250, 250, 1);
   static Color greyColorFillSecondary = Color.fromRGBO(10, 10, 10, 0.09);
   static Color yellowDefaultColor = Color.fromRGBO(237, 128, 0, 1);
   // static Color backgroundBlurColor0 = Color.fromRGBO(0, 0, 0, 0.8);
-
 
   // ? colors
 

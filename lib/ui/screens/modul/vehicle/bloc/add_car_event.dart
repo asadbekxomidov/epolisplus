@@ -9,4 +9,4 @@ class GetInfromationCarEvent extends VehicleEvent {}
 
 class RegisterCertificateNumberEvent extends VehicleEvent {}
 
-//class ClearVehicleEvent extends AddedCarEvent {}
+class ClearVehicleEvent extends VehicleEvent {}

@@ -34,9 +34,6 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   var gowNumberController = TextEditingController();
   var techSeriaController = TextEditingController();
   var techNumberController = TextEditingController();
-  var gowNumberFocus = FocusNode();
-  var techSeryFocus = FocusNode();
-  var techNumberFocus = FocusNode();
 
   VehicleBloc({
     required this.listener,
@@ -44,6 +41,7 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   }) : super(CarInitialState()) {
     on<GetInfromationCarEvent>(onmyCarInformation);
     on<RegisterCertificateNumberEvent>(onpushScreen);
+    on<ClearVehicleEvent>(clearVehicle);
   }
 
   Future<void> onmyCarInformation(
@@ -93,6 +91,11 @@ class VehicleBloc extends Bloc<VehicleEvent, VehicleState> {
   Future<void> onpushScreen(
       RegisterCertificateNumberEvent event, Emitter<VehicleState> emit) async {
     Get.to(() => RegisterCertnumberScreen());
+  }
+
+  Future<void> clearVehicle(
+      ClearVehicleEvent event, Emitter<VehicleState> emit) async {
+    emit(CarLoadingState());
   }
 }
 

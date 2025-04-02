@@ -104,7 +104,7 @@ gow_number_widget(
   );
 }
 
-green_gradient_widget(Dimens dimens) {
+green_background(Dimens dimens) {
   return Container(
     child: Column(
       children: [
@@ -136,7 +136,7 @@ green_gradient_widget(Dimens dimens) {
   );
 }
 
-blue_gradient_widget(Dimens dimens) {
+blue_background(Dimens dimens) {
   return Container(
     child: Column(
       children: [
@@ -168,7 +168,7 @@ blue_gradient_widget(Dimens dimens) {
   );
 }
 
-black_gradient_widget(Dimens dimens) {
+black_background(Dimens dimens) {
   return Container(
     child: Column(
       children: [
@@ -200,7 +200,7 @@ black_gradient_widget(Dimens dimens) {
   );
 }
 
-red_gradient_widget(Dimens dimens) {
+red_background(Dimens dimens) {
   return Container(
     child: Column(
       children: [

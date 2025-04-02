@@ -9,10 +9,12 @@ import 'package:gap/gap.dart';
 class UserInfoScreen extends StatelessWidget {
   late Dimens dimens;
   late UserInfoBloc bloc;
+  String? title;
   OnUserInforListener? listener;
   UserInfoResponse? userInfoResponse;
 
   UserInfoScreen({
+    this.title,
     required this.listener,
     required this.userInfoResponse,
   });
@@ -28,7 +30,12 @@ class UserInfoScreen extends StatelessWidget {
       ),
       child: BlocConsumer<UserInfoBloc, UserInfoState>(
         listener: (context, state) {
-          if (state is ErrorState) {}
+          if (state is ErrorState) {
+            return showErrorMessageSnackBar(
+              context,
+              state.failure.getErrorMessage(context),
+            );
+          }
         },
         builder: (context, state) {
           bloc = BlocProvider.of<UserInfoBloc>(context);
@@ -36,19 +43,20 @@ class UserInfoScreen extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                AppStrings.informationAboutapplicant,
-                style: dimens.font20Blackw400Sty,
-              ),
+              if (title == null)
+                Text(
+                  title == null ? AppStrings.informationAboutapplicant : title!,
+                  style: dimens.font20Blackw400Sty,
+                ),
               Gap(dimens.paddingVerticalItem16),
               UserInFoWidget(
-                isActive: !bloc.isHaveUserInformation,
                 showStar: true,
+                seriaHintText: AppStrings.seriaa,
+                pasportHintText: AppStrings.addcar00,
+                seriaController: bloc.seriaController,
+                isActive: !bloc.isHaveUserInformation,
                 text: AppStrings.seriesnumberPassportID,
                 pasportIdController: bloc.pasportIdController,
-                seriaController: bloc.seriaController,
-                pasportHintText: AppStrings.addcar00,
-                seriaHintText: AppStrings.seriaa,
               ),
               Gap(dimens.paddingVerticalItem16),
               UserBirthDateWidget(
@@ -89,7 +97,7 @@ class UserInfoScreen extends StatelessWidget {
                     )
                   : Column(
                       children: [
-                        Gap(dimens.paddingVerticalItem8),
+                        Gap(dimens.paddingVerticalItem16),
                         LoadDataButtons(
                           color: AppColors.lightGreenColor,
                           isLoading: state is LoadingState,

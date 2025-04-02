@@ -22,7 +22,7 @@ class PartnersErrorState extends PartnersState {
   final Failure failure;
 
   PartnersErrorState(this.failure);
-
-  @override
-  List<Object?> get props => [failure];
 }
+
+
+class SuccesState extends PartnersState {}

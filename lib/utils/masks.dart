@@ -8,7 +8,6 @@ class Masked {
       filter: {"#": RegExp(r'[0-9A-Z]')},
       type: MaskAutoCompletionType.lazy);
 
-
   static final maskPhone = MaskTextInputFormatter(
     mask: '(00) 000-00-00',
     filter: {"0": RegExp(r'[0-9]')},
@@ -154,7 +153,6 @@ class Masked {
 //   }
 // }
 
-
 class DualCarNumberInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -163,24 +161,58 @@ class DualCarNumberInputFormatter extends TextInputFormatter {
     String formattedText = '';
 
     if (text.length <= 2) {
-      // Format: 10
       formattedText = text;
-    } else if (text.length <= 5) {
-      // Format: 10 535
-      formattedText = text.substring(0, 2) + ' ' + text.substring(2, text.length);
+    } else if (text.length == 3) {
+      if (text[2].contains(RegExp(r'[A-Z]'))) {
+        // Agar uchinchi belgi harf bo‘lsa: "10 V"
+        formattedText = text.substring(0, 2) + ' ' + text.substring(2, 3);
+      } else {
+        // Agar uchinchi belgi raqam bo‘lsa: "10 5"
+        formattedText = text.substring(0, 2) + ' ' + text.substring(2, 3);
+      }
+    } else if (text.length == 4) {
+      if (text[2].contains(RegExp(r'[A-Z]'))) {
+        // Format: "10 V 5"
+        formattedText = text.substring(0, 2) +
+            ' ' +
+            text.substring(2, 3) +
+            ' ' +
+            text.substring(3, 4);
+      } else {
+        // Format: "10 53"
+        formattedText = text.substring(0, 2) + ' ' + text.substring(2, 4);
+      }
+    } else if (text.length == 5) {
+      if (text[2].contains(RegExp(r'[A-Z]'))) {
+        // Format: "10 V 53"
+        formattedText = text.substring(0, 2) +
+            ' ' +
+            text.substring(2, 3) +
+            ' ' +
+            text.substring(3, 5);
+      } else {
+        // Format: "10 535"
+        formattedText = text.substring(0, 2) + ' ' + text.substring(2, 5);
+      }
     } else if (text.length == 6) {
-      // 10 535 V
-      formattedText = text.substring(0, 2) + ' ' + text.substring(2, 5) + ' ' + text.substring(5, 6);
-    } else if (text.length > 6) {
-      if (text[5].contains(RegExp(r'[A-Z]'))) {
-        // Format: 10 535 VLA (agar 5-chi belgidan keyin harf bo‘lsa)
+      if (text[2].contains(RegExp(r'[A-Z]'))) {
+        // Format: "10 V 535"
+        formattedText = text.substring(0, 2) +
+            ' ' +
+            text.substring(2, 3) +
+            ' ' +
+            text.substring(3, 6);
+      } else {
+        // Format: "10 535 V"
         formattedText = text.substring(0, 2) +
             ' ' +
             text.substring(2, 5) +
             ' ' +
-            text.substring(5, text.length);
-      } else {
-        // Format: 10 V 535 LA (agar 3-chi belgi harf bo‘lsa)
+            text.substring(5, 6);
+      }
+    } else {
+      if (text[2].contains(RegExp(r'[A-Z]'))) {
+        // Format: "10 V 535 LA"
         formattedText = text.substring(0, 2) +
             ' ' +
             text.substring(2, 3) +
@@ -188,10 +220,16 @@ class DualCarNumberInputFormatter extends TextInputFormatter {
             text.substring(3, 6) +
             ' ' +
             text.substring(6, text.length);
+      } else {
+        // Format: "10 535 VLA"
+        formattedText = text.substring(0, 2) +
+            ' ' +
+            text.substring(2, 5) +
+            ' ' +
+            text.substring(5, text.length);
       }
     }
 
-    // Kiritilgan matn uzunligi va offsetni tekshirish
     int newOffset =
         newValue.selection.end + (formattedText.length - newValue.text.length);
     if (newOffset < 0 || newOffset > formattedText.length) {
@@ -205,6 +243,55 @@ class DualCarNumberInputFormatter extends TextInputFormatter {
   }
 }
 
+// class DualCarNumberInputFormatter extends TextInputFormatter {
+//   @override
+//   TextEditingValue formatEditUpdate(
+//       TextEditingValue oldValue, TextEditingValue newValue) {
+//     String text = newValue.text.replaceAll(RegExp(r'\s+'), '').toUpperCase();
+//     String formattedText = '';
+
+//     if (text.length <= 2) {
+//       // Format: 10
+//       formattedText = text;
+//     } else if (text.length <= 5) {
+//       // Format: 10 535
+//       formattedText = text.substring(0, 2) + ' ' + text.substring(2, text.length);
+//     } else if (text.length == 6) {
+//       // 10 535 V
+//       formattedText = text.substring(0, 2) + ' ' + text.substring(2, 5) + ' ' + text.substring(5, 6);
+//     } else if (text.length > 6) {
+//       if (text[5].contains(RegExp(r'[A-Z]'))) {
+//         // Format: 10 535 VLA (agar 5-chi belgidan keyin harf bo‘lsa)
+//         formattedText = text.substring(0, 2) +
+//             ' ' +
+//             text.substring(2, 5) +
+//             ' ' +
+//             text.substring(5, text.length);
+//       } else {
+//         // Format: 10 V 535 LA (agar 3-chi belgi harf bo‘lsa)
+//         formattedText = text.substring(0, 2) +
+//             ' ' +
+//             text.substring(2, 3) +
+//             ' ' +
+//             text.substring(3, 6) +
+//             ' ' +
+//             text.substring(6, text.length);
+//       }
+//     }
+
+//     // Kiritilgan matn uzunligi va offsetni tekshirish
+//     int newOffset =
+//         newValue.selection.end + (formattedText.length - newValue.text.length);
+//     if (newOffset < 0 || newOffset > formattedText.length) {
+//       newOffset = formattedText.length;
+//     }
+
+//     return TextEditingValue(
+//       text: formattedText,
+//       selection: TextSelection.collapsed(offset: newOffset),
+//     );
+//   }
+// }
 
 class UpperCaseFormatter extends TextInputFormatter {
   @override

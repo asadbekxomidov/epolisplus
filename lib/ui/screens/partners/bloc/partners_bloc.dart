@@ -12,10 +12,11 @@ part 'partners_state.dart';
 
 class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
   final PartnersRepository _partnersRepository;
+  List<PartnersResponse> partners = [];
 
   PartnersBloc()
       : _partnersRepository = PartnersRepository(),
-        super(PartnersInitialState()) {
+        super(SuccesState()) {
     on<PartnersGetEvent>(onPartnersGetEvent);
     on<PartnerPushWebEvent>(pushVeb);
     on<PartnerPushPhoneEvent>(pushPhone);
@@ -34,15 +35,16 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
       );
       if (response.status == 200 && response.response != null) {
         emit(PartnersLoadedState(partners: response.response!));
+        partners = response.response!;
+        emit(SuccesState());
       } else if (response.status == 401) {
         final token = SharedPreferencesManager();
-
-        token.clearToken();
-        token.clearPhone();
-        token.clearPassword();
+        await token.clearUserInfo();
         Get.offAll(() => CheckAuthScreen());
+        emit(SuccesState());
       } else {
         emit(PartnersErrorState(GetPartnersErrorclass()));
+        emit(SuccesState());
       }
     } catch (error) {
       emit(PartnersErrorState(GetPartnersErrorclass()));
@@ -63,9 +65,11 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
 
       if (!launched) {
         emit(PartnersErrorState(PartnersPushWebErrorclass()));
+        emit(SuccesState());
       } else {}
     } catch (e) {
       emit(PartnersErrorState(PartnersPushWebErrorclass()));
+      emit(SuccesState());
     }
   }
 
@@ -92,5 +96,6 @@ class PartnersBloc extends Bloc<PartnersEvent, PartnersState> {
   Future<void> pushScreen(
       PartnerPushScreenEvent event, Emitter<PartnersState> emit) async {
     Get.to(() => PartnersOferta());
+    emit(SuccesState());
   }
 }

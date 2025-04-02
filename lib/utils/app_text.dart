@@ -122,7 +122,10 @@ class AppStrings {
       "На какую сумму может быть заключен договор?";
   // ! Partners
 
+  // ! LitroText
+
   static const String servicesText = "Услуги";
+  static const String servicesText2 = "Дополнительные услуги";
   // ! Ploicies
 
   static const String myPolicies = "Мои полисы";
@@ -223,12 +226,57 @@ class AppStrings {
   static const String insuranceCoverage = "Страховое покрытие";
   static const String registrationCarInsur = "Оформление автострахования";
 
-
-
-
-
   static const String generalInfo = "Общая информация";
   static const String driverInformation = "Общая информация";
   static const String contractinformation = "Информация о контракте";
   static const String payment = "Оплата";
+  static const String descriptionText = "Описание";
+  static const String annual = "Годовые";
+  static const String emergency = "Экстренные";
+  static const String totalsubscriptionAmount = "Общая сумма подписки:";
+  static const String total = "Итого:";
+
+  // ! TRAVEL PAGE
+
+  static const String travelInsurance = "Страхование путешествий";
+  static const String travelDetails = "Детали путешествия";
+  static const String travelers = "Путишественники";
+  static const String countriesText = "Страны";
+  static const String selectCountryIES = "Выберите страну(ы)";
+  static const String policyType = "Тип полиса";
+  static const String onetime = "Однократное";
+  static const String multiple = "Многократное";
+  static const String policystartandendDates =
+      "Даты начала и окончания действий полиса";
+  static const String purposeofthetrip = "Цель поездки";
+  static const String selectTravelType = "Выберите цель поездки";
+  static const String continueText = "Продолжить";
+  static const String selectStayDays = "Выберите дни прибывания";
+  static const String policyHolder = "Страхователь";
+  static const String policyHolder2 = "2-Путешественник";
+  static const String alsoTraveler = "Я тоже путешественник";
+  static const String travelingwithFamily = "Путешествую с семьей";
+  static const String addAtraveler = "Добавить путешественника";
+  static const String choosingCompany = "Выбор страховой компании";
+  static const String confirmationInfo = "Подтверждение информации";
+  static const String totalLimit = "Общий лимит возмещения";
+  static const String insurancePremium = "Страховая премия";
+  static const String pricethePolicy = "Цена полиса";
+  static const String paymentMethod = "Способ оплаты";
+  static const String numberDrivers = "Количество водителей";
+  static const String upto5Drivers = "до 5 водителей";
+  static const String unlimitedText = "Неограниченно";
+  static const String oneDriver = "1-Водитель";
+  static const String oneDriver2 = "2-Водитель";
+  static const String oneDriver3 = "3-Водитель";
+  static const String levelkinship = "Уровень родства";
+  static const String father = "Отец";
+  static const String addDriver = "Добавить водителя";
+  static const String policyvalidityDates = "Даты действия полиса";
+  static const String selectDates = "Выберите даты";
+  static const String choosinginsuranceCompany = "Выбор страховой компании";
+  static const String payText = "Оплатить";
+  static const String registrationCarCasko = "Оформление КАСКО";
+  static const String customerDetails = "Данные клиента";
+  static const String havereadagreeWith = "Ознакомлен(а) и согласен(а) с";
 }

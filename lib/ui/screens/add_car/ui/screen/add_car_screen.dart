@@ -22,68 +22,86 @@ class _AddCarScreenState extends State<AddCarScreen> {
 
     return BlocProvider(
       create: (context) => MyCarBloc(),
-      child: BlocConsumer<MyCarBloc, MyCarState>(
-        listener: (context, state) {
-          if (state is MyCarErrorState) {
-            showErrorMessageSnackBar(
-              context,
-              state.failure.getErrorMessage(context),
-            );
-          }
-        },
-        builder: (context, state) {
-          bloc = BlocProvider.of<MyCarBloc>(context);
+      child: Scaffold(
+        backgroundColor: AppColors.blackColor,
+        resizeToAvoidBottomInset: true,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              ui(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-          return Scaffold(
-            resizeToAvoidBottomInset: true,
-            body: Container(
-              height: dimens.screenHeight,
-              decoration: mainDecorations(),
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: dimens.paddingHorizontal16,
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+  ui() {
+    return BlocConsumer<MyCarBloc, MyCarState>(
+      listener: (context, state) {
+        if (state is MyCarErrorState) {
+          showErrorMessageSnackBar(
+            context,
+            state.failure.getErrorMessage(context),
+          );
+        }
+      },
+      builder: (context, state) {
+        bloc = BlocProvider.of<MyCarBloc>(context);
+
+        return Container(
+          height: dimens.screenHeight,
+          decoration: backgroundPagesDecorations(dimens),
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: dimens.paddingHorizontal16,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(dimens.paddingVerticalItem10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Gap(dimens.paddingVerticalItem59),
-                      ButtonPagesBtn(
-                        appColors: AppColors.mainColor,
-                        iconData: Icons.close,
-                        text: AppStrings.closeText,
-                        onClick: () {
-                          Get.back();
-                        },
-                      ),
-                      Gap(dimens.paddingVerticalItem8),
-                      Text(
-                        AppStrings.addCatText,
-                        style: dimens.pagesBlackTitleSty,
-                      ),
-                      Gap(dimens.paddingVerticalItem8),
-                      VehicleCarInfo(
-                        listener: bloc,
-                        vehicleInformation: bloc.vehicleInformation,
-                      ),
-                      Gap(dimens.paddingVerticalItem12),
-                      bloc.isHaveCarInfor
-                          ? AddMyCarListBtn(
-                              isLoading: state is MyCarLodingState,
-                              onClick: () {
-                                bloc.add(AddCarEvent());
-                              },
-                              text: AppStrings.addCarButtonText,
-                            )
-                          : Container(),
+                      ContainerGreyWidget(),
                     ],
                   ),
-                ),
+                  Gap(dimens.paddingVerticalItem10),
+                  ButtonPagesBtn(
+                    appColors: AppColors.mainColor,
+                    iconData: Icons.close,
+                    text: AppStrings.closeText,
+                    onClick: () {
+                      Get.back();
+                    },
+                  ),
+                  Gap(dimens.paddingVerticalItem8),
+                  Text(
+                    AppStrings.addCatText,
+                    style: dimens.pagesBlackTitleSty,
+                  ),
+                  Gap(dimens.paddingVerticalItem8),
+                  VehicleCarInfo(
+                    listener: bloc,
+                    vehicleInformation: bloc.vehicleInformation,
+                  ),
+                  Gap(dimens.paddingVerticalItem12),
+                  bloc.isHaveCarInfor
+                      ? AddMyCarListBtn(
+                          isLoading: state is MyCarLodingState,
+                          onClick: () {
+                            bloc.add(AddCarEvent());
+                          },
+                          text: AppStrings.addCarButtonText,
+                        )
+                      : Container(),
+                ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

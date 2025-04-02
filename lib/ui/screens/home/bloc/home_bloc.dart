@@ -13,6 +13,7 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final SharedPreferencesManager _prefsManager = SharedPreferencesManager();
+  var policyCategoryId = IConstanta.CATEGORY_ACTIVE;
 
   HomeBloc() : super(HomeInitialState()) {
     on<LogoutEvent>(_handleLogout);
@@ -24,6 +25,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<OpenTravelEvent>(openTravel);
     on<OpenAddServisePEvent>(openaddServise);
     on<OpenNotificationEvent>(openNotiPage);
+    on<SelectPolicyCategoryEvent>((event, emit) {
+      policyCategoryId = event.categoryId;
+      emit(HomeSerCategoryChangedState(policyCategoryId));
+    });
   }
 
   Future<void> _handleLogout(LogoutEvent event, Emitter<HomeState> emit) async {
@@ -104,7 +109,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> openaddServise(
       OpenAddServisePEvent event, Emitter<HomeState> emit) async {
     // emit(HomeLoadingState());
-    await Get.to(() => AddServiseScreen());
+    await Get.to(() => LitroScreen());
     emit(HomeSuccessState());
   }
 

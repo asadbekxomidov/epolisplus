@@ -98,7 +98,7 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
               textAlign: TextAlign.center,
               textAlignVertical: TextAlignVertical.center,
               inputFormatters: [
-                LengthLimitingTextInputFormatter(11),
+                // LengthLimitingTextInputFormatter(11),
                 DualCarNumberInputFormatter(),
               ],
               cursorColor: AppColors.hintColor,
@@ -114,17 +114,25 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
               ),
               style: dimens.carTextfieldCursorSty,
               enabled: widget.isActive,
-
               onChanged: (value) {
-                print('${value.length} COUNT VALUE LENGHT');
-                print('${value.length.floor()} COUNT VALUE LENGHT 222222');
+                // Faqat raqamlar va harflarni ajratamiz
+                String numbers =
+                    value.replaceAll(RegExp(r'[^0-9]'), ''); // faqat raqamlar
+                String letters =
+                    value.replaceAll(RegExp(r'[^A-Z]'), ''); // faqat harflar
 
-                if (value.length == 11) {
-                  _seriaFocusNode.requestFocus();
-                } else if (value.length == '## ### ###') {
+                // Formatni tekshiramiz
+                bool isValidFormat = RegExp(r'^\d{2} [A-Z] \d{3} [A-Z]{2}$')
+                        .hasMatch(value) || // 10 V 535 LA
+                    RegExp(r'^\d{2} \d{3} [A-Z]{3}$')
+                        .hasMatch(value); // 10 535 VLA
+
+                // Agar format aniq mos kelsa, fokusni o‘zgartiramiz
+                if (isValidFormat) {
                   _seriaFocusNode.requestFocus();
                 }
               },
+
               onSubmitted: (_) {
                 _seriaFocusNode.requestFocus();
               },
@@ -157,7 +165,7 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
         Container(
           width: dimens.width64,
           // height: dimens.height40,
-          decoration: newDecoration(
+          decoration: newInputDecoration(
             dimens,
             isActive: widget.isActive,
           ),
@@ -195,7 +203,7 @@ class _CarInfoTextFieldState extends State<CarInfoTextField> {
         Container(
           width: dimens.width289,
           // height: dimens.height40,
-          decoration: newDecoration(
+          decoration: newInputDecoration(
             dimens,
             isActive: widget.isActive,
           ),

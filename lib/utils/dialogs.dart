@@ -1,3 +1,5 @@
+import 'package:epolisplus/utils/resource.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,6 +41,38 @@ void showErrorMessageSnackBar(BuildContext context, String message) {
   );
 
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+}
+
+void showMessage2(
+  context,
+  String message,
+) {
+  var dimens = Dimens(context);
+  ScaffoldMessenger.of(context).clearSnackBars();
+  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Row(
+        children: [
+          SvgPicture.asset(
+            Resource.NEW_IC_INFO2,
+            color: AppColors.red_color,
+          ),
+          Gap(dimens.paddingItems),
+          Expanded(
+            child: Text(
+              (message == SERVER_NOT_WORKING.message) as String,
+              style: dimens.textStyle.copyWith(
+                color: AppColors.red_color,
+              ),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: AppColors.red_line_color,
+      elevation: dimens.height20,
+    ),
+  );
 }
 
 // ? HelpdeskSelectDialog
@@ -462,5 +496,3 @@ class _LanguageOption extends StatelessWidget {
     );
   }
 }
-
-

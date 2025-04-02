@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:epolisplus/models/base_models.dart';
 import 'package:epolisplus/models/models_export.dart';
 import 'package:epolisplus/services/api_service.dart';
 import 'package:epolisplus/services/api_constanta.dart';
@@ -31,6 +30,53 @@ class NotificationRepository extends NotificationRepositoryIml {
 
     try {
       response = await service.getGetData(headers, url);
+
+      if (response?.statusCode == 200) {
+        List<NotificationResponse> list = [];
+        response?.data['response']
+            .map((e) => list.add(NotificationResponse.fromJson(e)))
+            .toList();
+
+        return BaseModels(
+          response: list,
+          status: response?.statusCode,
+        );
+      } else {
+        return BaseModels(
+          status: response?.statusCode,
+          message: response!.data['message'],
+        );
+      }
+    } catch (e) {
+      return BaseModels(
+        message: '$e',
+        status: 512,
+      );
+    }
+  }
+
+  @override
+  Future<BaseModels> allNotification() async {
+    final prefsManager = SharedPreferencesManager();
+    final token = await prefsManager.getToken();
+
+    var headers = {
+      'Content-Type': 'application/json',
+      'Content': 'application/json',
+      'Accept-Language': 'ru-RU',
+      'Accept-Encoding': 'UTF-8',
+      'Authorization': 'Bearer $token',
+    };
+
+    var data = {
+      'notification_id': 0,
+    };
+
+    var url = ApiConstanta.READ_ALL_NOTIFICATION;
+    Response? response;
+
+    try {
+      response = await service.getPostData(data, headers, url);
 
       if (response?.statusCode == 200) {
         List<NotificationResponse> list = [];

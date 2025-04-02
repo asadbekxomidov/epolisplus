@@ -25,7 +25,7 @@ class _CabinetScreenState extends State<CabinetScreen> {
         create: (context) => KabinetBloc()..add(KabinetGetEvent()),
         child: Stack(
           children: [
-            green_gradient_widget(dimens),
+            green_background(dimens),
             ui(),
             loading(),
           ],
